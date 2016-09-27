@@ -1,11 +1,11 @@
-package brainfuck;
+package net.brainfuck.common;
 
-class Reader{
-	
-	public interface Reader {
+
+import net.brainfuck.common.exception.IOException;
+
+public interface Reader {
 	    public char decode();
-	    public boolean hasNext();
-	    public String getNext();
-	    public void close();
-	}
+	    public boolean hasNext() throws IOException;
+	    public char getNext();
+	    public void close() throws IOException;
 }
