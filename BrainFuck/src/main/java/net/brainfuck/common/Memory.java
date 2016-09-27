@@ -1,7 +1,7 @@
 package brainfuck.common;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class Memory {
 
@@ -11,7 +11,7 @@ public class Memory {
 	private static final int ARRAY_SIZE = 1000;
 
 	private byte start[] = new byte[ARRAY_SIZE];
-	private ArrayList<Byte> end = new ArrayList<>(Collections.nCopies(MAX_CAPACITY - ARRAY_SIZE, (byte) 0));
+	private Map<Integer, Byte> end = new Hashtable<>();
 	int index = 0;
 	private static Memory instance = new Memory();
 
@@ -64,7 +64,7 @@ public class Memory {
 		checkIndex(index);
 		if (index < ARRAY_SIZE)
 			return start[index];
-		return end.get(index - ARRAY_SIZE);
+		return (end.get(index - ARRAY_SIZE) != null) ? end.get(index - ARRAY_SIZE) : (byte)0;
 	}
 
 	private Memory set(int index, int changeValue) throws Exception {
@@ -74,7 +74,7 @@ public class Memory {
 			start[index] += changeValue;
 			return this;
 		}
-		end.set(index - ARRAY_SIZE, (byte) (end.get(index - ARRAY_SIZE) + changeValue));
+		end.put(index - ARRAY_SIZE, (byte) (get(index) + changeValue));
 		return this;
 
 	}
