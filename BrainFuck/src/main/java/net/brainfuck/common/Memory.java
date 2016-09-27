@@ -1,4 +1,4 @@
-package main.java.net.brainfuck.common;
+package brainfuck.common;
 
 import java.util.ArrayList;
 import java.util.Collections;
