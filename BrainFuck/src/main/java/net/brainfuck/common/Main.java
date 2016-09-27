@@ -1,4 +1,4 @@
-package net.brainfuck.common;
+package main.java.net.brainfuck.common;
 
 public class Main {
 	

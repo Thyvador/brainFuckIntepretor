@@ -1,8 +1,9 @@
 package main.java.net.brainfuck.common;
 
 
-import net.brainfuck.common.exception.FileNotFoundException;
-import net.brainfuck.common.exception.IOException;
+
+import main.java.net.brainfuck.common.exception.FileNotFoundException;
+import main.java.net.brainfuck.common.exception.IOException;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -25,7 +26,7 @@ public class FileReader implements Reader{
 		return 0;
 	}
 
-	public boolean hasNext() throws IOException{
+	public boolean hasNext() throws IOException {
     	int nextVal  = reader.read();
     	if(nextVal == -1){
     		return false;
