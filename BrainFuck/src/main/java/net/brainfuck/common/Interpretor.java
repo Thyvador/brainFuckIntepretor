@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.brainfuck.common;
+package main.java.net.brainfuck.common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @author davidLANG
  */
 public class Interpretor {
-    private Map<String,InterpretorInterface> intrepretorExecuter = new HashMap<>();
+    private Map<String, InterpretorInterface> intrepretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
     
