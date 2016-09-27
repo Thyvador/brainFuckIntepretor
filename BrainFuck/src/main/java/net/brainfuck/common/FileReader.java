@@ -16,7 +16,7 @@ public class FileReader implements Reader{
     /*public char decode();
     public void close();*/
     private BufferedReader reader;
-	private FileReader(String filename) throws FileNotFoundException {
+	private FileReader(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
 		this.filename = filename;
 		reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename),Charset.forName("UTF-8")));
 	}
@@ -26,7 +26,7 @@ public class FileReader implements Reader{
 		return 0;
 	}
 
-	public boolean hasNext() throws IOException {
+	public boolean hasNext() throws IOException, java.io.IOException {
     	int nextVal  = reader.read();
     	if(nextVal == -1){
     		return false;
