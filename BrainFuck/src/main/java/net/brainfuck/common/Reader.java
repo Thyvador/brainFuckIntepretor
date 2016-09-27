@@ -1,4 +1,4 @@
-package main.java.net.brainfuck.common;
+package net.brainfuck.common;
 
 
 import main.java.net.brainfuck.common.exception.IOException;
