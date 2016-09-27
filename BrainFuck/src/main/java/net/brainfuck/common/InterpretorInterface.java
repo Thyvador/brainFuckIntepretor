@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
-package main.java.net.brainfuck.common;
+package brainfuck.common;
 
 /**
  *
  * @author davidLANG
  */
-/*
 public interface InterpretorInterface {
     public void execute(Memory machine);
 }
@@ -19,7 +17,11 @@ public interface InterpretorInterface {
 class IncremanteExecute implements InterpretorInterface { 
     @Override
     public void execute(Memory machine) {
-        machine.indent();
+        try {
+            machine.incr();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
@@ -29,4 +31,4 @@ class RightExecute implements InterpretorInterface {
     public void execute(Memory machine) {
         machine.right();
     }
-}*/
+}
