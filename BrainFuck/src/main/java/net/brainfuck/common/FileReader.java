@@ -26,7 +26,7 @@ public class FileReader implements Reader{
 		return 0;
 	}
 
-	public boolean hasNext() throws IOExc²eption {
+	public boolean hasNext() throws IOException {
     	int nextVal  = reader.read();
     	if(nextVal == -1){
     		return false;
