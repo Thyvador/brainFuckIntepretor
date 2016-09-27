@@ -12,6 +12,7 @@ import java.util.Map;
  *
  * @author davidLANG
  */
+/*
 public class Interpretor {
     private Map<String, InterpretorInterface> intrepretorExecuter = new HashMap<>();
     private Memory memory;
@@ -34,7 +35,7 @@ public class Interpretor {
     
     public void interprate() {
         while (reader.endOfFile() == false) {
-            String instruction = reader.readOneInstruction();
+            //String instruction = reader.readOneInstruction();
         
             InterpretorInterface interpretor = this.intrepretorExecuter.get(instruction);
             interpretor.execute(memory);
@@ -42,5 +43,4 @@ public class Interpretor {
     }
     
 }
-
-
+*/

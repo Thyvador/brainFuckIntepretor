@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
 package main.java.net.brainfuck.common;
 
 /**
  *
  * @author davidLANG
  */
+/*
 public interface InterpretorInterface {
     public void execute(Memory machine);
 }
@@ -27,4 +29,4 @@ class RightExecute implements InterpretorInterface {
     public void execute(Memory machine) {
         machine.right();
     }
-}
+}*/
