@@ -1,9 +1,9 @@
-package brainfuck.common;
+package net.brainfuck.common;
 
 
 
-import brainfuck.common.exception.FileNotFoundException;
-import brainfuck.common.exception.IOException;
+import net.brainfuck.common.exception.FileNotFoundException;
+import net.brainfuck.common.Reader;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
