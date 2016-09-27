@@ -1,5 +1,15 @@
 package net.brainfucktest.common;
 
-public class Test {
+import net.brainfuck.common.Memory;
 
+public class TestMemory {
+    public static void main(String[] args) {
+        Memory m = Memory.getInstance();
+        try {
+            m.decr();
+            System.out.println(m);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

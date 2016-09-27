@@ -1,4 +1,4 @@
-package net.brainfuck.common;
+package main.java.net.brainfuck.common;
 
 
 import net.brainfuck.common.exception.FileNotFoundException;
