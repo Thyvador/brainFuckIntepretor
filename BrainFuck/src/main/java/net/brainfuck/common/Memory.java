@@ -1,4 +1,4 @@
-package brainfuck.common;
+package net.brainfuck.common;
 
 import java.util.Hashtable;
 import java.util.Map;
