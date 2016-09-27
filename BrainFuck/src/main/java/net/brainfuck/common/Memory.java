@@ -1,4 +1,4 @@
-package net.brainfuck.common;
+package main.java.net.brainfuck.common;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -84,11 +84,13 @@ public class Memory {
 			throw new Exception("Yolo");
 	}
 
+	// TODO: 27/09/2016 Check if the memory limit is exceed
 	public Memory right() {
 		index++;
 		return this;
 	}
 
+	// TODO: 27/09/2016 Check if the memory limit is exceed
 	public Memory left() {
 		index--;
 		return this;

@@ -1,6 +1,7 @@
-package net.brainfucktest.common;
+package test.java.net.brainfucktest.common;
 
-import net.brainfuck.common.Memory;
+
+import main.java.net.brainfuck.common.Memory;
 
 public class TestMemory {
 	public static void main(String[] args) {

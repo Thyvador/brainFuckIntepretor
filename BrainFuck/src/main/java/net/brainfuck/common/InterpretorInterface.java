@@ -17,7 +17,11 @@ public interface InterpretorInterface {
 class IncremanteExecute implements InterpretorInterface { 
     @Override
     public void execute(Memory machine) {
-        machine.indent();
+        try {
+            machine.incr();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
