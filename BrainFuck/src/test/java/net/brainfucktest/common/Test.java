@@ -1,4 +1,4 @@
-package test.java.net.brainfucktest.common;
+package net.brainfucktest.common;
 
 public class Test {
 

@@ -1,7 +1,7 @@
 package net.brainfucktest.common;
 
 
-import brainfuck.common.Memory;
+import net.brainfuck.common.Memory;
 
 public class TestMemory {
 	public static void main(String[] args) {

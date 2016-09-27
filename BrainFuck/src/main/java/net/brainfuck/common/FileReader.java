@@ -3,7 +3,7 @@ package net.brainfuck.common;
 
 
 import net.brainfuck.common.exception.FileNotFoundException;
-import net.brainfuck.common.Reader;
+import net.brainfuck.common.exception.IOException;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -16,9 +16,13 @@ public class FileReader implements Reader{
     /*public char decode();
     public void close();*/
     private BufferedReader reader;
-	private FileReader(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
+	public FileReader(String filename) throws FileNotFoundException {
 		this.filename = filename;
-		reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename),Charset.forName("UTF-8")));
+		try {
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename),Charset.forName("UTF-8")));
+		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException();
+		}
 	}
 
 	@Override
@@ -34,8 +38,8 @@ public class FileReader implements Reader{
     	next = (char)nextVal;
     	return true;
     }
-    public char getNext(){
-    	return next;
+    public String getNext(){
+    	return Character.toString(next);
     }
 
     public void close() throws IOException{

@@ -1,6 +1,8 @@
 
 package net.brainfuck.common;
 
+import net.brainfuck.common.exception.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +10,7 @@ import java.util.Map;
  *
  * @author davidLANG
  */
-/*
+
 public class Interpretor {
     private Map<String, InterpretorInterface> intrepretorExecuter = new HashMap<>();
     private Memory memory;
@@ -29,9 +31,9 @@ public class Interpretor {
     }
     
     
-    public void interprate() {
-        while (reader.endOfFile() == false) {
-            //String instruction = reader.readOneInstruction();
+    public void interprate() throws IOException, java.io.IOException {
+        while (reader.hasNext()) {
+            String instruction = reader.getNext();
         
             InterpretorInterface interpretor = this.intrepretorExecuter.get(instruction);
             interpretor.execute(memory);
@@ -39,4 +41,4 @@ public class Interpretor {
     }
     
 }
-*/
+
