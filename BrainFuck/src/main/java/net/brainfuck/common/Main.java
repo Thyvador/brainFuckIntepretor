@@ -6,10 +6,10 @@ import java.io.IOException;
 
 public class Main {
 	
-	private Main() throws FileNotFoundException, java.io.FileNotFoundException {
+	private Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
 		System.out.println("penis");
 		Memory m = Memory.getInstance();
-		Reader r = new FileReader("C:\\Users\\user\\Desktop\\indianwomen.txt");
+		Reader r = new LineReader(filename);
 		Interpretor i = new Interpretor(m,r);
 
 		try {
@@ -19,12 +19,16 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		System.exit(0);
+        System.out.println(m);
+        System.exit(0);
 	}
-	
+	// prepare the executable jar
 	public static void main(String[] args) throws FileNotFoundException, java.io.FileNotFoundException {
-		new Main();
+        if(args.length == 2 && args[1].equals(("-p"))){
+            new Main(args[1]);
+        }else if(args.length == 0) {
+            new Main("C:\\Users\\user\\Desktop\\a.bf"); // On lance sur un fichier au hasard
+        }
 	}
 	
 }
