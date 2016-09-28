@@ -1,9 +1,9 @@
 
-package net.brainfuck.common.interpretor;
+package net.brainfuck.interpretor;
 
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
-import net.brainfuck.common.exception.IOException;
+import net.brainfuck.exception.IOException;
 
 import java.util.HashMap;
 import java.util.Map;

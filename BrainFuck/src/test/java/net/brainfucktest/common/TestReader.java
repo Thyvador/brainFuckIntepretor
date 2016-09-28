@@ -2,8 +2,8 @@ package net.brainfucktest.common;
 
 import net.brainfuck.common.LineReader;
 import net.brainfuck.common.Reader;
-import net.brainfuck.common.exception.FileNotFoundException;
-import net.brainfuck.common.exception.IOException;
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
 
 /**
  * Created by francoisMelkonian on 27/09/2016.

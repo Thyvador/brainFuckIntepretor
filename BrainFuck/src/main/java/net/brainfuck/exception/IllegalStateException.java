@@ -1,4 +1,4 @@
-package net.brainfuck.common.exception;
+package net.brainfuck.exception;
 
 /**
  * Created by Alexandre Hiltcher on 28/09/2016.

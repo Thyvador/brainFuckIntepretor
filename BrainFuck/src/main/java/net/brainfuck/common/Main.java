@@ -1,6 +1,6 @@
 package net.brainfuck.common;
 
-import net.brainfuck.common.exception.FileNotFoundException;
+import net.brainfuck.exception.FileNotFoundException;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ public class Main {
 
 		try {
 			i.interprate();
-		} catch (net.brainfuck.common.exception.IOException e) {
+		} catch (net.brainfuck.exception.IOException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();

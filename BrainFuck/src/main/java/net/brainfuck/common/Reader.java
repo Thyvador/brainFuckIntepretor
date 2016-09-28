@@ -1,7 +1,7 @@
 package net.brainfuck.common;
 
 
-import net.brainfuck.common.exception.IOException;
+import net.brainfuck.exception.IOException;
 
 public interface Reader {
 	    char decode();
