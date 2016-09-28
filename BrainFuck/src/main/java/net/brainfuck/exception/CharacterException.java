@@ -2,7 +2,7 @@ package net.brainfuck.exception;
 
 /**
  * Signal when a read character is incorrect is detected in the file.
- * This exception will be thrown by <code>Reader</code>.
+ * This exception will be thrown by <code>LineReader</code>.
  *
  * @author Alexandre Hiltcher
  */

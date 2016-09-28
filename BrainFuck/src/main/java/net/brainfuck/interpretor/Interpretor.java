@@ -1,11 +1,9 @@
 
 package net.brainfuck.interpretor;
 
+import net.brainfuck.common.LineReader;
 import net.brainfuck.common.Memory;
-import net.brainfuck.common.Reader;
-import net.brainfuck.exception.IOException;
-import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.exception.SynthaxeErrorException;
+import net.brainfuck.exception.*;
 import net.brainfuck.exception.SynthaxeErrorException;
 
 import java.util.HashMap;
@@ -19,7 +17,7 @@ import java.util.Map;
 public class Interpretor {
     private Map<String, InterpretorInterface> intrepretorExecuter = new HashMap<>();
     private Memory memory;
-    private Reader reader;
+    private LineReader reader;
 
     /**
      * Initiliaze the hashmap wich contains
@@ -27,9 +25,9 @@ public class Interpretor {
      * for example RightExecute is associate with >
      *
      * @param memory Memory
-     * @param reader Reader
+     * @param reader LineReader
      */
-    public Interpretor(Memory memory, Reader reader) {
+    public Interpretor(Memory memory, LineReader reader) {
         this.reader = reader;
         this.memory = memory;
 
@@ -55,9 +53,9 @@ public class Interpretor {
      * @throws SynthaxeErrorException {@link SynthaxeErrorException}
      * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException}
      * @throws IOException {@link IOException}
-     * @throws java.io.IOException {@link IOException}
+     * @throws MemoryOverFlowException {@link MemoryOverFlowException}
      */
-    public void interprate() throws IOException, java.io.IOException, SynthaxeErrorException, MemoryOutOfBoundsException {
+    public void interprate() throws IOException, SynthaxeErrorException, MemoryOutOfBoundsException, MemoryOverFlowException {
         while (reader.hasNext()) {
             String instruction = reader.getNext();
         

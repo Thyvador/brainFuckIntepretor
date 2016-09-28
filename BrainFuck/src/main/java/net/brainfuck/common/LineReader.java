@@ -7,7 +7,11 @@ import net.brainfuck.exception.IOException;
 import java.io.BufferedReader;
 
 
-public class LineReader implements Reader {
+/**
+ * Read a file with instruction on 1 line
+ * @author Francois Melkonian
+ */
+public class LineReader {
     private String filename;
     private String next;
     private BufferedReader reader;
@@ -22,7 +26,6 @@ public class LineReader implements Reader {
         }
     }
 
-    @Override
     public char decode() {
         return 0;
     }
