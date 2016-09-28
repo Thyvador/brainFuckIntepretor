@@ -1,6 +1,8 @@
 
-package net.brainfuck.common;
+package net.brainfuck.common.Interpretor;
 
+import net.brainfuck.common.Memory;
+import net.brainfuck.common.Reader;
 import net.brainfuck.common.exception.IOException;
 
 import java.util.HashMap;
@@ -22,10 +24,10 @@ public class Interpretor {
         this.memory = memory;
 
         // Initialisation du language
-        IncremanteExecute   incrExecute = new IncremanteExecute();
-        DecremanteExecute   decremanteExecute = new DecremanteExecute();
-        RightExecute        rightExecute = new RightExecute();
-        LeftExecute         leftExecute = new LeftExecute();
+        IncremanteExecute incrExecute = new IncremanteExecute();
+        DecremanteExecute decremanteExecute = new DecremanteExecute();
+        RightExecute rightExecute = new RightExecute();
+        LeftExecute leftExecute = new LeftExecute();
 
         this.intrepretorExecuter.put("INCR", incrExecute);
         this.intrepretorExecuter.put("+", incrExecute);
