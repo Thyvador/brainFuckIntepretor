@@ -7,7 +7,6 @@ import java.io.IOException;
 public class Main {
 	
 	private Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
-		System.out.println("penis");
 		Memory m = Memory.getInstance();
 		Reader r = new LineReader(filename);
 		Interpretor i = new Interpretor(m,r);

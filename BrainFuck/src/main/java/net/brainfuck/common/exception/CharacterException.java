@@ -9,15 +9,4 @@ public class CharacterException extends Exception {
         super();
     }
 
-    public CharacterException(String message){
-        super(message);
-    }
-
-    public CharacterException(String message, Throwable cause){
-        super(message, cause);
-    }
-
-    public CharacterException(Throwable cause){
-        super(cause);
-    }
 }

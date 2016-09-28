@@ -9,15 +9,4 @@ public class MemoryOutOfBoundsException extends Exception {
         super();
     }
 
-    public MemoryOutOfBoundsException(String message){
-        super(message);
-    }
-
-    public MemoryOutOfBoundsException(String message, Throwable cause){
-        super(message, cause);
-    }
-
-    public MemoryOutOfBoundsException(Throwable cause){
-        super(cause);
-    }
 }
