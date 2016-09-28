@@ -3,12 +3,16 @@ package net.brainfuck.interpretor;
 import net.brainfuck.common.Memory;
 
 /**
- * Created by davidLANG on 28/09/2016.
- */ // Concret class for indent
+ * @author davidLANG
+ */
 class IncremanteExecute implements InterpretorInterface {
+    /**
+     * Execute the "incr" method of Memory Class
+     * @param machine Memory machine
+     */
     @Override
     public void execute(Memory machine) {
-        try {
+        try {//J'aime les penis <3
             machine.incr();
         } catch (Exception e) {
             e.printStackTrace();
