@@ -10,19 +10,19 @@ public class Memory {
 
 	/** Max capacity */
 	public static final int MAX_CAPACITY = 30000;
-	/** Max value in the memory (127) */
-	public static final byte MAX_VALUE = Byte.MAX_VALUE;
+	/** Max value in the memory (255) */
+	public static final short MAX_VALUE = (short) 255;
 	/** Min value in the memory (0) */
-	public static final byte MIN_VALUE = 0;
+	public static final short MIN_VALUE = 0;
 	/** Size of the memory stocked in the array for direct accessing */
 	private static final int ARRAY_SIZE = 1000;
 
 	/** First cells of the memory in the array */
-	private byte start[] = new byte[ARRAY_SIZE];
+	private short start[] = new short[ARRAY_SIZE];
 	/**
 	 * Rest of the memory in this map. Key is the number of the cell and value is the value of the cell
 	 */
-	private Map<Integer, Byte> end = new Hashtable<>();
+	private Map<Integer, Short> end = new Hashtable<>();
 	/** Index of the current cell */
 	private int index = 0;
 
@@ -38,7 +38,7 @@ public class Memory {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		byte current;
+		short current;
 		try {
 			for (int i = 0; i < MAX_CAPACITY; i++) {
 				if ((current = get(i)) != 0) {
@@ -59,7 +59,7 @@ public class Memory {
 	 * @throws MemoryOutOfBoundsException
 	 *             if the index isn't valid
 	 */
-	public byte get() throws MemoryOutOfBoundsException {
+	public short get() throws MemoryOutOfBoundsException {
 		return get(index);
 	}
 
@@ -72,7 +72,7 @@ public class Memory {
 	 * @throws MemoryOutOfBoundsException
 	 *             if the index isn't valid
 	 */
-	private byte get(int index) throws MemoryOutOfBoundsException {
+	private short get(int index) throws MemoryOutOfBoundsException {
 		checkIndex(index);
 		if (index < ARRAY_SIZE)
 			return start[index];
@@ -98,7 +98,7 @@ public class Memory {
 				start[index] += changeValue;
 				return this;
 			}
-			end.put(index - ARRAY_SIZE, (byte) (get(index) + changeValue));
+			end.put(index - ARRAY_SIZE, (short) (get(index) + changeValue));
 		} catch (MemoryOutOfBoundsException e) {
 			e.printStackTrace();
 		}
@@ -173,7 +173,7 @@ public class Memory {
 	 * @return current object
 	 */
 	public Memory clean() {
-		start = new byte[ARRAY_SIZE];
+		start = new short[ARRAY_SIZE];
 		end = new Hashtable<>();
 		index = 0;
 		return this;
