@@ -8,7 +8,7 @@ public interface Reader {
     char decode();
 
     /**
-     * Read the file to see if there is an other instruction
+     * Read the file to check if there is an other instruction
      *
      * @return true if there is an other instruction, false in others case
      * @throws IOException
