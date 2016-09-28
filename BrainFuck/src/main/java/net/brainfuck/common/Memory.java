@@ -3,6 +3,8 @@ package net.brainfuck.common;
 import java.util.Hashtable;
 import java.util.Map;
 
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+
 public class Memory {
 
 	public static final int MAX_CAPACITY = 30000;
@@ -56,43 +58,47 @@ public class Memory {
 		return builder.toString();
 	}
 
-	public byte get() throws Exception {
+	public byte get() throws MemoryOutOfBoundsException {
 		return get(index);
 	}
 
-	private byte get(int index) throws Exception {
+	private byte get(int index) throws MemoryOutOfBoundsException {
 		checkIndex(index);
 		if (index < ARRAY_SIZE)
 			return start[index];
 		return (end.get(index - ARRAY_SIZE) != null) ? end.get(index - ARRAY_SIZE) : (byte)0;
 	}
 
-	private Memory set(int index, int changeValue) throws Exception {
-		if (get(index) > (MAX_VALUE - changeValue) || get(index) < (MIN_VALUE - changeValue))
-			throw new Exception("Yolo");
-		if (index < ARRAY_SIZE) {
-			start[index] += changeValue;
-			return this;
+	private Memory set(int index, int changeValue) throws MemoryOverFlowException {
+		try {
+			if (get(index) > (MAX_VALUE - changeValue) || get(index) < (MIN_VALUE - changeValue))
+				throw new MemoryOverFlowException();
+			if (index < ARRAY_SIZE) {
+				start[index] += changeValue;
+				return this;
+			}
+			end.put(index - ARRAY_SIZE, (byte) (get(index) + changeValue));
+		} catch (MemoryOutOfBoundsException e) {
+			e.printStackTrace();
 		}
-		end.put(index - ARRAY_SIZE, (byte) (get(index) + changeValue));
 		return this;
 
 	}
 
-	private void checkIndex(int index) throws Exception {
+	private void checkIndex(int index) throws MemoryOutOfBoundsException {
 		if (index < 0 || index >= MAX_CAPACITY)
-			throw new Exception("Yolo");
+			throw new MemoryOutOfBoundsException();
 	}
 
-	// TODO: 27/09/2016 Check if the memory limit is exceed
-	public Memory right() {
+	public Memory right() throws MemoryOutOfBoundsException {
 		index++;
+		checkIndex(index);
 		return this;
 	}
 
-	// TODO: 27/09/2016 Check if the memory limit is exceed
-	public Memory left() {
+	public Memory left() throws MemoryOutOfBoundsException {
 		index--;
+		checkIndex(index);
 		return this;
 	}
 
