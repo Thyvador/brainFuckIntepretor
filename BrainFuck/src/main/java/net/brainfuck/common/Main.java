@@ -1,20 +1,19 @@
 package net.brainfuck.common;
 
-import net.brainfuck.common.exception.FileNotFoundException;
+import net.brainfuck.exception.FileNotFoundException;
 
 import java.io.IOException;
 
 public class Main {
 	
 	private Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
-		System.out.println("penis");
 		Memory m = Memory.getInstance();
 		Reader r = new LineReader(filename);
 		Interpretor i = new Interpretor(m,r);
 
 		try {
 			i.interprate();
-		} catch (net.brainfuck.common.exception.IOException e) {
+		} catch (net.brainfuck.exception.IOException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-package net.brainfuck.common.Interpretor;
+package net.brainfuck.interpretor;
 
 import net.brainfuck.common.Memory;
 

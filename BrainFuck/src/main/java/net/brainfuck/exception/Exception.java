@@ -1,9 +1,11 @@
-package net.brainfuck.common.exception;
+package net.brainfuck.exception;
 
 /**
  * Created by Alexandre Hiltcher on 27/09/2016.
  */
-public class Exception extends Throwable{
+public class Exception extends java.lang.Exception{
+
+
 
     public Exception(){
         super();
