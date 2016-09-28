@@ -1,8 +1,9 @@
 package net.brainfuck.common;
 
-import net.brainfuck.exception.FileNotFoundException;
-
 import java.io.IOException;
+
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.interpretor.Interpretor;
 
 public class Main {
 	
