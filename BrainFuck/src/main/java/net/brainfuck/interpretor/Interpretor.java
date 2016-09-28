@@ -51,6 +51,7 @@ public class Interpretor {
             }
             interpretor.execute(memory);
         }
+        reader.close();
     }
     
 }

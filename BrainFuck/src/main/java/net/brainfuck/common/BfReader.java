@@ -6,24 +6,42 @@ import net.brainfuck.exception.IOException;
 import java.io.File;
 import java.io.FileReader;
 
+/**
+ * author : francois Melkonian
+ */
 public class BfReader implements Reader {
     private String filename;
     private char next;
     private java.io.FileReader reader;
 
+    /**
+     * Read 1-char-instruction file
+     * @param filename name of the file
+     * @throws FileNotFoundException
+     */
     public BfReader(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
         this.filename = filename;
         if (!((new File(filename)).exists())){
-            throw new FileNotFoundException();
+            throw new FileNotFoundException(filename);
         }
         reader = new FileReader(filename);
     }
 
+    /**
+     * Work in progress
+     * @return
+     */
     @Override
     public char decode() {
         return 0;
     }
 
+    /**
+     * Read the file to see if there is an other instruction
+     *
+     * @return true if there is an other instruction, false in others case
+     * @throws IOException
+     */
     public boolean hasNext() throws IOException {
         int nextVal = 0;
         try {
@@ -38,10 +56,18 @@ public class BfReader implements Reader {
         return true;
     }
 
+    /**
+     * Get the next instruction
+     * @return the next instruction
+     */
     public String getNext() {
         return Character.toString(next);
     }
 
+    /**
+     * Close the file when
+     * @throws IOException
+     */
     public void close() throws IOException {
         try {
             reader.close();

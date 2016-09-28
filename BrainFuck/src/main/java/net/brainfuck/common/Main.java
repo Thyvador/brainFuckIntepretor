@@ -5,6 +5,9 @@ import net.brainfuck.interpretor.Interpretor;
 
 import java.io.IOException;
 
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.interpretor.Interpretor;
+
 public class Main {
 	
 	private Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
