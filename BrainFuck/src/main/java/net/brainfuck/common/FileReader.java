@@ -5,21 +5,15 @@ package net.brainfuck.common;
 import net.brainfuck.common.exception.FileNotFoundException;
 import net.brainfuck.common.exception.IOException;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 
 public class FileReader implements Reader{
 	private String filename;
-	char next;
-    /*public char decode();
-    public void close();*/
-    private BufferedReader reader;
+	private char next;
+    private java.io.FileReader reader;
 	public FileReader(String filename) throws FileNotFoundException {
 		this.filename = filename;
 		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename),Charset.forName("UTF-8")));
+			reader = new java.io.FileReader(filename);
 		} catch (java.io.FileNotFoundException e) {
 			throw new FileNotFoundException();
 		}
