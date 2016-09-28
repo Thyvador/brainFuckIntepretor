@@ -26,9 +26,29 @@ class IncremanteExecute implements InterpretorInterface {
 }
 
 // Concret class for right
+class DecremanteExecute implements InterpretorInterface {
+    @Override
+    public void execute(Memory machine) {
+        try {
+            machine.decr();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// Concret class for right
 class RightExecute implements InterpretorInterface { 
     @Override
     public void execute(Memory machine) {
         machine.right();
+    }
+}
+
+// Concret class for right
+class LeftExecute implements InterpretorInterface {
+    @Override
+    public void execute(Memory machine) {
+        machine.left();
     }
 }
