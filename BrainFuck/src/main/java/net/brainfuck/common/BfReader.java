@@ -17,7 +17,7 @@ public class BfReader implements Reader {
     /**
      * Read 1-char-instruction file
      * @param filename name of the file
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException if the file doesn't exist
      */
     public BfReader(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
         this.filename = filename;
@@ -29,7 +29,7 @@ public class BfReader implements Reader {
 
     /**
      * Work in progress
-     * @return
+     * @return 0
      */
     @Override
     public char decode() {
@@ -40,7 +40,7 @@ public class BfReader implements Reader {
      * Read the file to see if there is an other instruction
      *
      * @return true if there is an other instruction, false in others case
-     * @throws IOException
+     * @throws IOException if IO errors
      */
     public boolean hasNext() throws IOException {
         int nextVal = 0;
@@ -65,8 +65,8 @@ public class BfReader implements Reader {
     }
 
     /**
-     * Close the file when
-     * @throws IOException
+     * Close the file when the reader finished him
+     * @throws IOException if file can't close
      */
     public void close() throws IOException {
         try {
