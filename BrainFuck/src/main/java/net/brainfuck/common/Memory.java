@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
 
 public class Memory {
 
