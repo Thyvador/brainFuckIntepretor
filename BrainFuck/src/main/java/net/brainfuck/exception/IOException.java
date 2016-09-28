@@ -1,16 +1,27 @@
 package net.brainfuck.exception;
 
 /**
- * Created by Alexandre Hiltcher on 27/09/2016.
+ * Signal when an error input or output is detected in the file.
+ * This exception will be thrown by <code>Reader</code>, <code>FileReader</code>.
+ *
+ * @author Alexandre Hiltcher
  */
 public class IOException extends Exception {
 
-    public IOException(){
+    /**
+     * Constructs a IOException with a default message.
+     */
+    public IOException() {
         super("IO Exception.");
     }
 
-    public IOException(String message){
-        super(message);
+    /**
+     * Constructs a IOException with a specified message.
+     *
+     * @param message the detail message.
+     */
+    public IOException(String message) {
+        super("IOException :" + message);
     }
 
 

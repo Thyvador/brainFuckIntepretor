@@ -1,15 +1,27 @@
 package net.brainfuck.exception;
 
 /**
- * Created by Alexandre Hiltcher on 27/09/2016.
+ * Signal when a read character is incorrect is detected in the file.
+ * This exception will be thrown by <code>Reader</code>.
+ *
+ * @author Alexandre Hiltcher
  */
 public class CharacterException extends Exception {
 
-    public CharacterException(){
+    /**
+     * Constructs a CharacterException with a default message.
+     */
+    public CharacterException() {
         super("Character exception.");
     }
-    public CharacterException(String message){
-        super(message);
+
+    /**
+     * Constructs a CharacterException with a specified message.
+     *
+     * @param message the detail message.
+     */
+    public CharacterException(String message) {
+        super("Character '" + message + "' is incorect.");
     }
 
 }

@@ -1,16 +1,27 @@
 package net.brainfuck.exception;
 
 /**
- * Created by Alexandre Hiltcher on 27/09/2016.
+ * Signal when a bound excess error is detected in the file.
+ * This exception will be thrown by <code>Memory</code>.
+ *
+ * @author Alexandre Hiltcher
  */
 public class MemoryOutOfBoundsException extends Exception {
 
-    public MemoryOutOfBoundsException(){
+    /**
+     * Constructs a MemoryOutOfBounds with a default message.
+     */
+    public MemoryOutOfBoundsException() {
         super("Memory out of bounds.");
     }
 
-    public MemoryOutOfBoundsException(String message){
-        super(message);
+    /**
+     * Constructs a MemoryOutOfBounds with a specified message.
+     *
+     * @param message the specified message.
+     */
+    public MemoryOutOfBoundsException(String message) {
+        super("Memory out of bounds : " + message);
     }
 
 }
