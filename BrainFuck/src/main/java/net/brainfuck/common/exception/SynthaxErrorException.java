@@ -5,8 +5,21 @@ package net.brainfuck.common.exception;
  */
 public class SynthaxErrorException extends Exception {
 
+
     public SynthaxErrorException(){
         super();
+    }
+
+    public SynthaxErrorException(String message){
+        super(message);
+    }
+
+    public SynthaxErrorException(String message, Throwable cause){
+        super(message, cause);
+    }
+
+    public SynthaxErrorException(Throwable cause){
+        super(cause);
     }
 
 }
