@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 
 /**
- * author : francois Melkonian
+ * @author francois Melkonian
  */
 public class BfReader implements Reader {
     private String filename;
@@ -37,9 +37,9 @@ public class BfReader implements Reader {
     }
 
     /**
-     * Read the file to see if there is an other instruction
+     * Read the file to ckeck if there is an other instruction.
      *
-     * @return true if there is an other instruction, false in others case
+     * @return true if there is an other instruction, false in otherwise.
      * @throws IOException
      */
     public boolean hasNext() throws IOException {
@@ -65,7 +65,7 @@ public class BfReader implements Reader {
     }
 
     /**
-     * Close the file when
+     * Close the file.
      * @throws IOException
      */
     public void close() throws IOException {
