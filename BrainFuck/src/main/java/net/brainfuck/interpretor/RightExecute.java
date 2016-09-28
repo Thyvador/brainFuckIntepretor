@@ -1,6 +1,7 @@
 package net.brainfuck.interpretor;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
 
 /**
  * Created by davidLANG on 28/09/2016.
@@ -8,6 +9,10 @@ import net.brainfuck.common.Memory;
 class RightExecute implements InterpretorInterface {
     @Override
     public void execute(Memory machine) {
-        machine.right();
+        try {
+            machine.right();
+        } catch (MemoryOutOfBoundsException e) {
+            new MemoryOutOfBoundsException();
+        }
     }
 }

@@ -4,6 +4,7 @@ package net.brainfuck.interpretor;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class Interpretor {
     }
     
     
-    public void interprate() throws IOException, java.io.IOException {
+    public void interprate() throws IOException, java.io.IOException, MemoryOutOfBoundsException {
         while (reader.hasNext()) {
             String instruction = reader.getNext();
         
