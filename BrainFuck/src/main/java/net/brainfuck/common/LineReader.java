@@ -17,7 +17,7 @@ public class LineReader implements Reader {
         try {
             reader = new BufferedReader(new java.io.FileReader(filename));
         } catch (java.io.FileNotFoundException e) {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException("file '"+filename+"' not found !");
         }
     }
 
@@ -30,7 +30,7 @@ public class LineReader implements Reader {
         try {
             next = reader.readLine();
         } catch (java.io.IOException e) {
-            throw new IOException();
+            throw new IOException("file closed while reading ");
         }
         if (next == null) {
             return false;
