@@ -19,7 +19,8 @@ public class Interpretor {
     
     public Interpretor(Memory memory, Reader reader) {
         this.reader = reader;
-                
+        this.memory = memory;
+
         // Initialisation du language
         IncremanteExecute incrExecute = new IncremanteExecute();
         RightExecute rightExecute = new RightExecute();
