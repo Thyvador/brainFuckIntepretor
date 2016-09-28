@@ -9,5 +9,19 @@ public class FileNotFoundException extends Exception{
         super();
     }
 
+    public FileNotFoundException(String message){
+        super("");
+        System.out.println(message);
+        System.exit(2);
+    }
+
+    public FileNotFoundException(String message, Throwable cause){
+        super(message, cause);
+    }
+
+    public FileNotFoundException(Throwable cause){
+        super(cause);
+    }
+
 
 }
