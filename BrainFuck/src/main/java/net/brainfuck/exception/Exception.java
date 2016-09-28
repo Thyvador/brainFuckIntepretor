@@ -8,11 +8,14 @@ public class Exception extends java.lang.Exception{
 
 
     public Exception(){
-        super();
+        super("");
+        System.exit(2);
     }
 
     public Exception(String message){
-        super(message);
+        super("");
+        System.err.println(message);
+        System.exit(2);
     }
 
     public Exception(String message, Throwable cause){

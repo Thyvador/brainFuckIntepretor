@@ -6,7 +6,10 @@ package net.brainfuck.exception;
 public class CharacterException extends Exception {
 
     public CharacterException(){
-        super();
+        super("Character exception.");
+    }
+    public CharacterException(String message){
+        super(message);
     }
 
 }

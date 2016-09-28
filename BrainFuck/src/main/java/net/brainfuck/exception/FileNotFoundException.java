@@ -6,22 +6,11 @@ package net.brainfuck.exception;
 public class FileNotFoundException extends Exception{
 
     public FileNotFoundException(){
-        super();
+        super("File not found.");
     }
 
     public FileNotFoundException(String message){
-        super("");
-        System.out.println(message);
-        System.exit(2);
+        super(message);
     }
-
-    public FileNotFoundException(String message, Throwable cause){
-        super(message, cause);
-    }
-
-    public FileNotFoundException(Throwable cause){
-        super(cause);
-    }
-
 
 }
