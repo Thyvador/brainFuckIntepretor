@@ -7,8 +7,7 @@ public class TestMemory {
 	public static void main(String[] args) {
 		Memory m = Memory.getInstance();
 		try {
-			m.decr();
-			System.out.println(m);
+			m.left();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
