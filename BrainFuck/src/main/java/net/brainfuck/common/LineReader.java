@@ -12,6 +12,7 @@ public class LineReader implements Reader {
     private String next;
     private BufferedReader reader;
 
+
     public LineReader(String filename) throws FileNotFoundException {
         this.filename = filename;
         try {
@@ -26,22 +27,34 @@ public class LineReader implements Reader {
         return 0;
     }
 
+
+    /**
+     * Read the file to see if there is an other instruction
+     *
+     * @return true if there is an other instruction, false in others case
+     * @throws IOException if file close during reading
+     */
     public boolean hasNext() throws IOException {
         try {
             next = reader.readLine();
         } catch (java.io.IOException e) {
             throw new IOException("file closed while reading ");
         }
-        if (next == null) {
-            return false;
-        }
-        return true;
+        return next != null;
     }
 
+    /**
+     * Get the next instruction
+     * @return the next instruction
+     */
     public String getNext() {
         return next;
     }
 
+    /**
+     * Close the file when the reader finished him
+     * @throws IOException if file can't close
+     */
     public void close() throws IOException {
         try {
             reader.close();
