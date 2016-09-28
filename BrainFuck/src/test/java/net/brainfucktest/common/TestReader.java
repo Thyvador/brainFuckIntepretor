@@ -1,6 +1,6 @@
 package net.brainfucktest.common;
 
-import net.brainfuck.common.FileReader;
+import net.brainfuck.common.LineReader;
 import net.brainfuck.common.Reader;
 import net.brainfuck.common.exception.FileNotFoundException;
 import net.brainfuck.common.exception.IOException;
@@ -12,7 +12,7 @@ public class TestReader {
     public static void main(String[] args) throws FileNotFoundException, java.io.IOException, IOException {
 
         Reader r;
-        r = new FileReader("C:\\Users\\user\\Desktop\\indianwomen.txt");
+        r = new LineReader("C:\\Users\\user\\Desktop\\indianwomen.txt");
         while (r.hasNext()) {
             System.out.println(r.getNext());
         }
