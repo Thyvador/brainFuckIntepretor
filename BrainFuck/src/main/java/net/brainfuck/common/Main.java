@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main {
 	
 	private Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
-		Memory m = Memory.getInstance();
+		Memory m = new Memory();
 		Reader r = new LineReader(filename);
 		Interpretor i = new Interpretor(m,r);
 

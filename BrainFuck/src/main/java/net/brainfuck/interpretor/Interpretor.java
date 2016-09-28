@@ -1,15 +1,14 @@
 
 package net.brainfuck.interpretor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.SynthaxeErrorException;
-import net.brainfuck.exception.SynthaxeErrorException;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author davidLANG

@@ -9,6 +9,11 @@ package net.brainfuck.exception;
 public class MemoryOutOfBoundsException extends Exception {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1814144013450333089L;
+
+	/**
      * Constructs a MemoryOutOfBounds with a default message.
      */
     public MemoryOutOfBoundsException() {

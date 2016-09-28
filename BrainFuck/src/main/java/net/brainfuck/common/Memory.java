@@ -6,6 +6,12 @@ import java.util.Map;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 
+/**
+ * The <code>Memory</code> class represents the memory of the BrainFuck interpreter
+ * 
+ * @author Jeremy Junac
+ *
+ */
 public class Memory {
 
 	/** Max capacity */

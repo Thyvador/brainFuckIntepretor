@@ -8,7 +8,8 @@ import java.io.BufferedReader;
 
 
 public class LineReader implements Reader {
-    private String filename;
+    @SuppressWarnings("unused")
+	private String filename;
     private String next;
     private BufferedReader reader;
 
