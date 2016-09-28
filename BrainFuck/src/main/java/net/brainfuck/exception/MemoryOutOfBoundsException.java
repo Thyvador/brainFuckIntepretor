@@ -6,7 +6,11 @@ package net.brainfuck.exception;
 public class MemoryOutOfBoundsException extends Exception {
 
     public MemoryOutOfBoundsException(){
-        super();
+        super("Memory out of bounds.");
+    }
+
+    public MemoryOutOfBoundsException(String message){
+        super(message);
     }
 
 }
