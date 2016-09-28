@@ -6,12 +6,17 @@
 package net.brainfuck.interpretor;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
 
 /**
  *
  * @author davidLANG
  */
-public interface InterpretorInterface {
-    public void execute(Memory machine);
+interface InterpretorInterface {
+    /**
+     * Execute a method of Memory Class
+     * @param machine Memory machine
+     */
+    void execute(Memory machine) throws MemoryOutOfBoundsException;
 }
 

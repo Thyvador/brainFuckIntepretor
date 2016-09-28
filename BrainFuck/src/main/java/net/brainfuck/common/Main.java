@@ -1,6 +1,8 @@
 package net.brainfuck.common;
 
 import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.SynthaxeErrorException;
 import net.brainfuck.interpretor.Interpretor;
 
 import java.io.IOException;
@@ -16,10 +18,14 @@ public class Main {
 			i.interprate();
 		} catch (net.brainfuck.exception.IOException e) {
 			e.printStackTrace();
+		} catch (SynthaxeErrorException e) {
+            e.printStackTrace();
+        } catch (MemoryOutOfBoundsException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        System.out.println(m);
+		System.out.println(m);
         System.exit(0);
 	}
 	// prepare the executable jar
@@ -27,7 +33,7 @@ public class Main {
         if(args.length == 2 && args[1].equals(("-p"))){
             new Main(args[1]);
         }else if(args.length == 0) {
-            new Main("C:\\Users\\user\\Desktop\\a.bf"); // On lance sur un fichier au hasard
+            new Main("C:\\Users\\davidLANG\\Desktop\\a.bf"); // On lance sur un fichier au hasard
         }
 	}
 	
