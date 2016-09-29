@@ -7,7 +7,12 @@ public class Exception extends java.lang.Exception{
 
 
 
-    public Exception(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8989405289648758681L;
+
+	public Exception(){
         super("");
         System.exit(2);
     }

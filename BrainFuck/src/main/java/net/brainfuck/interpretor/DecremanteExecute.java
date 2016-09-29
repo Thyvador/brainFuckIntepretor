@@ -3,9 +3,13 @@ package net.brainfuck.interpretor;
 import net.brainfuck.common.Memory;
 
 /**
- * Created by davidLANG on 28/09/2016.
- */ // Concret class for right
+ * @author davidLANG
+ */
 class DecremanteExecute implements InterpretorInterface {
+    /**
+     * Execute "decr" method from class Memory
+     * @param machine Memory machine
+     */
     @Override
     public void execute(Memory machine) {
         try {

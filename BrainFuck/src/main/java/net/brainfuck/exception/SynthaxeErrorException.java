@@ -10,6 +10,11 @@ package net.brainfuck.exception;
 public class SynthaxeErrorException extends Exception {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3281162005406034048L;
+
+	/**
      * Constructs a SynthaxeErrorException with a default message.
      */
     public SynthaxeErrorException() {

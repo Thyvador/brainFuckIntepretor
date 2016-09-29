@@ -4,15 +4,15 @@ import net.brainfuck.common.Memory;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 
 /**
- * Created by davidLANG on 28/09/2016.
- */ // Concret class for right
+ * @author davidLANG
+ */
 class RightExecute implements InterpretorInterface {
+    /**
+     * Execute the "right" method of Memory Class
+     * @param machine Memory machine
+     */
     @Override
-    public void execute(Memory machine) {
-        try {
-            machine.right();
-        } catch (MemoryOutOfBoundsException e) {
-            new MemoryOutOfBoundsException();
-        }
+    public void execute(Memory machine) throws MemoryOutOfBoundsException {
+        machine.right();
     }
 }

@@ -10,7 +10,8 @@ import java.io.FileReader;
  * author : francois Melkonian
  */
 public class BfReader implements Reader {
-    private String filename;
+    @SuppressWarnings("unused")
+	private String filename;
     private char next;
     private java.io.FileReader reader;
 

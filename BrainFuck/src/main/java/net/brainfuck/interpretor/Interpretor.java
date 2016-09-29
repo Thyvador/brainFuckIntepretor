@@ -1,25 +1,33 @@
 
 package net.brainfuck.interpretor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.brainfuck.exception.SynthaxeErrorException;
 
 /**
- *
  * @author davidLANG
+ *
  */
 
 public class Interpretor {
     private Map<String, InterpretorInterface> intrepretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
-    
-    
+
+    /**
+     * Initiliaze the hashmap wich contains
+     * class which implements InterpretorInterface associate with  syntaxe
+     * for example RightExecute is associate with >
+     *
+     * @param memory Memory
+     * @param reader Reader
+     */
     public Interpretor(Memory memory, Reader reader) {
         this.reader = reader;
         this.memory = memory;
@@ -39,16 +47,22 @@ public class Interpretor {
         this.intrepretorExecuter.put("-", decremanteExecute);
         this.intrepretorExecuter.put("DECR", decremanteExecute);
     }
-    
-    
-    public void interprate() throws IOException, java.io.IOException, MemoryOutOfBoundsException {
+
+    /**
+     * Interprate all characters wich can be read with the attribute reader
+     *
+     * @throws SynthaxeErrorException {@link SynthaxeErrorException}
+     * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException}
+     * @throws IOException {@link IOException}
+     * @throws java.io.IOException {@link IOException}
+     */
+    public void interprate() throws IOException, java.io.IOException, SynthaxeErrorException, MemoryOutOfBoundsException {
         while (reader.hasNext()) {
             String instruction = reader.getNext();
         
             InterpretorInterface interpretor = this.intrepretorExecuter.get(instruction);
             if (interpretor == null) {
-                // TO DO
-                // Le cas ou le token n'existe pas dans le language
+                throw new SynthaxeErrorException(instruction);
             }
             interpretor.execute(memory);
         }
