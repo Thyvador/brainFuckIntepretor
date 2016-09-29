@@ -9,9 +9,9 @@ import java.io.IOException;
 
 public class Main {
 	
-	private Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
+	public Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
 		Memory m = new Memory();
-		Reader r = new LineReader(filename);
+		Reader r = new BfReader(filename);
 		Interpretor i = new Interpretor(m,r);
 
 		try {
@@ -33,7 +33,8 @@ public class Main {
         if(args.length == 2 && args[1].equals(("-p"))){
             new Main(args[1]);
         }else if(args.length == 0) {
-            new Main("C:\\Users\\davidLANG\\Desktop\\a.bf"); // On lance sur un fichier au hasard
+
+            new Main("BrainFuck\\src\\main\\resources\\assets\\brainfuck\\common\\res.bf");// On lance sur un fichier au hasard
         }
 	}
 	

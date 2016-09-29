@@ -1,5 +1,13 @@
 package net.brainfucktest.common;
 
-public class Test {
+import net.brainfuck.exception.FileNotFoundException;
 
+public class Test {
+    public static void main(String[] args) throws FileNotFoundException, java.io.FileNotFoundException {
+        testFileNotfound();
+    }
+    public static void testFileNotfound() throws FileNotFoundException, java.io.FileNotFoundException {
+       // new Main("nofile");
+    }
+    
 }

@@ -59,7 +59,6 @@ public class Interpretor {
     public void interprate() throws IOException, java.io.IOException, SynthaxeErrorException, MemoryOutOfBoundsException {
         while (reader.hasNext()) {
             String instruction = reader.getNext();
-        
             InterpretorInterface interpretor = this.intrepretorExecuter.get(instruction);
             if (interpretor == null) {
                 throw new SynthaxeErrorException(instruction);
