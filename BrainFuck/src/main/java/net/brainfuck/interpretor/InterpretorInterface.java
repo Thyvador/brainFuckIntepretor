@@ -7,6 +7,7 @@ package net.brainfuck.interpretor;
 
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
 
 /**
  *
@@ -17,6 +18,6 @@ interface InterpretorInterface {
      * Execute a method of Memory Class
      * @param machine Memory machine
      */
-    void execute(Memory machine) throws MemoryOutOfBoundsException;
+    void execute(Memory machine) throws MemoryOutOfBoundsException, MemoryOverFlowException;
 }
 

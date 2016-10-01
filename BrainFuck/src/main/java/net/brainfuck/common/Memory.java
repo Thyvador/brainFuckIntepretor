@@ -8,10 +8,13 @@ import net.brainfuck.exception.MemoryOverFlowException;
 
 /**
  * The <code>Memory</code> class represents the memory of the BrainFuck interpreter
- * 
+ *
  * @author Jeremy Junac
  *
  */
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+
 public class Memory {
 
 	/** Max capacity */
@@ -60,7 +63,7 @@ public class Memory {
 
 	/**
 	 * Read the current memory cell
-	 * 
+	 *
 	 * @return the value of the current memory cell
 	 * @throws MemoryOutOfBoundsException
 	 *             if the index isn't valid
@@ -71,7 +74,7 @@ public class Memory {
 
 	/**
 	 * Read the specified memory cell
-	 * 
+	 *
 	 * @param index
 	 *            the index of the memory cell to read
 	 * @return the value of the current memory cell
@@ -87,7 +90,7 @@ public class Memory {
 
 	/**
 	 * Set the value of the specified memory cell
-	 * 
+	 *
 	 * @param index
 	 *            the index of the memory cell to set
 	 * @param changeValue
@@ -114,7 +117,7 @@ public class Memory {
 
 	/**
 	 * Check the specified index
-	 * 
+	 *
 	 * @param index
 	 *            the index to check
 	 * @throws MemoryOutOfBoundsException
@@ -127,7 +130,7 @@ public class Memory {
 
 	/**
 	 * Move the pointer to the memory cell to the right
-	 * 
+	 *
 	 * @return current object
 	 * @throws MemoryOutOfBoundsException
 	 *             if the pointer move out of the memory
@@ -140,7 +143,7 @@ public class Memory {
 
 	/**
 	 * Move the pointer to the memory cell to the left
-	 * 
+	 *
 	 * @return current object
 	 * @throws MemoryOutOfBoundsException
 	 *             if the pointer move out of the memory
@@ -153,7 +156,7 @@ public class Memory {
 
 	/**
 	 * Increase by one the value of the current memory cell
-	 * 
+	 *
 	 * @return current object
 	 * @throws MemoryOverFlowException
 	 *             if the value exceed the capacity of the cell
@@ -164,7 +167,7 @@ public class Memory {
 
 	/**
 	 * Decrease by one the value of the current memory cell
-	 * 
+	 *
 	 * @return current object
 	 * @throws MemoryOverFlowException
 	 *             if the value exceed the capacity of the cell
@@ -175,7 +178,7 @@ public class Memory {
 
 	/**
 	 * Clean all the memory
-	 * 
+	 *
 	 * @return current object
 	 */
 	public Memory clean() {
