@@ -8,7 +8,6 @@ package net.brainfuck.exception;
  */
 public class FileNotFoundException extends Exception {
 
-    private static final long serialVersionUID = -4105585133694610831L;
 
     /**
 	 * 

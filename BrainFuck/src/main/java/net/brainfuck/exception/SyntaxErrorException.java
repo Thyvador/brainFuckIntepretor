@@ -2,15 +2,12 @@ package net.brainfuck.exception;
 
 
 /**
- * Signal when an error of synthaxe is detected in the file.
+ * Signal when an error of syntax is detected in the file.
  * This exception will be thrown by <code>Interpretor</code>.
  *
  * @author Alexandre Hiltcher
  */
-public class SynthaxeErrorException extends Exception {
-
-
-    private static final long serialVersionUID = 3281162005406034048L;
+public class SyntaxErrorException extends Exception {
 
     /**
 	 * 
@@ -18,9 +15,9 @@ public class SynthaxeErrorException extends Exception {
 	private static final long serialVersionUID = 3281162005406034048L;
 
 	/**
-     * Constructs a SynthaxeErrorException with a default message.
+     * Constructs a SyntaxErrorException with a default message.
      */
-    public SynthaxeErrorException() {
+    public SyntaxErrorException() {
         super("Synthaxe error.");
     }
 
@@ -29,7 +26,7 @@ public class SynthaxeErrorException extends Exception {
      *
      * @param message the detail message.
      */
-    public SynthaxeErrorException(String message) {
+    public SyntaxErrorException(String message) {
         super("Synthaxe error : " + message);
     }
 

@@ -1,7 +1,8 @@
 package net.brainfuck;
 
-import net.brainfuck.common.LineReader;
+import net.brainfuck.common.BfReader;
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
@@ -10,24 +11,21 @@ import net.brainfuck.interpretor.Interpretor;
 
 public class Main {
 	
-	private Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
+	public Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
 
 		try {
-			Memory m = Memory.getInstance();
-			LineReader r = new LineReader(filename);
+			Memory m = new Memory();
+			Reader r = new BfReader(filename);
 			Interpretor i = new Interpretor(m,r);
 			i.interprate();
 			System.out.println(m);
-		} catch (IOException e) {
-			System.exit(3);
-		} catch (SynthaxeErrorException e) {
+		} catch (IOException | SyntaxErrorException | FileNotFoundException e) {
+			// Exit code not set
 			System.exit(3);
 		} catch (MemoryOutOfBoundsException e) {
 			System.exit(1);
 		} catch (MemoryOverFlowException e){
 			System.exit(2);
-		} catch (FileNotFoundException e){
-			System.exit(3);
 		}
 		System.exit(0);
 	}

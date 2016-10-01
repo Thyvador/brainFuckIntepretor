@@ -36,10 +36,10 @@ public class BfReader implements Reader {
     }
 
     /**
-     * Read the file to see if there is an other instruction
+     * Read the line just after the pointer on the file
      *
-     * @return true if there is an other instruction, false in others case
-     * @throws IOException if IO errors
+     * @return the line read
+     * @throws IOException if IO error, it will be catch in hasNext()
      */
     private String readUntilEndOfLine() throws java.io.IOException {
         String line ="";
@@ -51,6 +51,11 @@ public class BfReader implements Reader {
         return line;
     }
 
+    /**
+     * Skip new line character(s)
+     * End of line character change according OS.
+     * @return The first character of the line
+     */
     private int ignoreNewLineChar() {
         int c = 0;
         try {

@@ -8,7 +8,8 @@ import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.exception.SynthaxeErrorException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SyntaxErrorException;
 
 /**
  * @author davidLANG
@@ -51,17 +52,17 @@ public class Interpretor {
     /**
      * Interprate all characters wich can be read with the attribute reader
      *
-     * @throws SynthaxeErrorException {@link SynthaxeErrorException}
+     * @throws SyntaxErrorException {@link SyntaxErrorException}
      * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException}
      * @throws IOException {@link IOException}
      * @throws java.io.IOException {@link IOException}
      */
-    public void interprate() throws IOException, java.io.IOException, SynthaxeErrorException, MemoryOutOfBoundsException {
+    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
         while (reader.hasNext()) {
             String instruction = reader.getNext();
             InterpretorInterface interpretor = this.intrepretorExecuter.get(instruction);
             if (interpretor == null) {
-                throw new SynthaxeErrorException(instruction);
+                throw new SyntaxErrorException(instruction);
             }
             interpretor.execute(memory);
         }

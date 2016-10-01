@@ -8,7 +8,6 @@ package net.brainfuck.exception;
  */
 public class CharacterException extends Exception {
 
-    private static final long serialVersionUID = 7123817596132293186L;
 
     /**
 	 * 
