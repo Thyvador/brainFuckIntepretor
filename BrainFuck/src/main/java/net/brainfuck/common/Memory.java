@@ -1,6 +1,6 @@
 package net.brainfuck.common;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -24,18 +24,19 @@ public class Memory {
 	private static final int ARRAY_SIZE = 1000;
 
 	/** First cells of the memory in the array */
-	private short start[] = new short[ARRAY_SIZE];
+	private short start[];
 	/**
 	 * Rest of the memory in this map. Key is the number of the cell and value is the value of the cell
 	 */
-	private Map<Integer, Short> end = new Hashtable<>();
+	private Map<Integer, Short> end;
 	/** Index of the current cell */
-	private int index = 0;
+	private int index;
 
 	/**
 	 * Default constructor
 	 */
 	public Memory() {
+		clean();
 	}
 
 	/**
@@ -180,7 +181,7 @@ public class Memory {
 	 */
 	public Memory clean() {
 		start = new short[ARRAY_SIZE];
-		end = new Hashtable<>();
+		end = new HashMap<>();
 		index = 0;
 		return this;
 	}
