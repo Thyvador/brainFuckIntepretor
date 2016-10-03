@@ -6,7 +6,7 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
-import net.brainfuck.interpretor.Interpretor;
+import net.brainfuck.interpretor.Interpreter;
 
 
 public class Main {
@@ -16,7 +16,7 @@ public class Main {
 		try {
 			Memory m = new Memory();
 			Reader r = new BfReader(getClass().getResource(filename).getPath());
-			Interpretor i = new Interpretor(m,r);
+			Interpreter i = new Interpreter(m,r);
 			i.interprate();
 			System.out.println(m);
 		} catch (IOException | SyntaxErrorException | FileNotFoundException e) {

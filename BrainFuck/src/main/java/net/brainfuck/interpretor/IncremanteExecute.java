@@ -7,7 +7,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
 /**
  * @author davidLANG
  */
-class IncremanteExecute implements InterpretorInterface {
+class IncremanteExecute implements InterpreterInterface {
 
     /**
      * Execute the "incr" method of Memory Class

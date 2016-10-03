@@ -16,20 +16,20 @@ import net.brainfuck.exception.SyntaxErrorException;
  *
  */
 
-public class Interpretor {
-    private Map<String, InterpretorInterface> intrepretorExecuter = new HashMap<>();
+public class Interpreter {
+    private Map<String, InterpreterInterface> intrepretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
 
     /**
      * Initiliaze the hashmap wich contains
-     * class which implements InterpretorInterface associate with  syntaxe
+     * class which implements InterpreterInterface associate with  syntaxe
      * for example RightExecute is associate with >
      *
      * @param memory Memory
      * @param reader Reader
      */
-    public Interpretor(Memory memory, Reader reader) {
+    public Interpreter(Memory memory, Reader reader) {
         this.reader = reader;
         this.memory = memory;
 
@@ -40,27 +40,22 @@ public class Interpretor {
         LeftExecute leftExecute = new LeftExecute();
 
         this.intrepretorExecuter.put("INCR", incrExecute);
-        this.intrepretorExecuter.put("+", incrExecute);
         this.intrepretorExecuter.put("RIGHT", rightExecute);
-        this.intrepretorExecuter.put(">", rightExecute);
-        this.intrepretorExecuter.put("<", leftExecute);
         this.intrepretorExecuter.put("LEFT", leftExecute);
-        this.intrepretorExecuter.put("-", decremanteExecute);
         this.intrepretorExecuter.put("DECR", decremanteExecute);
     }
 
     /**
      * Interprate all characters wich can be read with the attribute reader
      *
-     * @throws SyntaxErrorException {@link SyntaxErrorException}
-     * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException}
-     * @throws IOException {@link IOException}
-     * @throws java.io.IOException {@link IOException}
+     * @throws SyntaxErrorException {@link SyntaxErrorException} if an error of syntax is found
+     * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception
+     * @throws IOException {@link IOException}  if reader throw an exception
      */
     public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
         while (reader.hasNext()) {
             String instruction = reader.getNext();
-            InterpretorInterface interpretor = this.intrepretorExecuter.get(instruction);
+            InterpreterInterface interpretor = this.intrepretorExecuter.get(instruction);
             if (interpretor == null) {
                 throw new SyntaxErrorException(instruction);
             }

@@ -6,7 +6,7 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 /**
  * @author davidLANG
  */
-class RightExecute implements InterpretorInterface {
+class RightExecute implements InterpreterInterface {
     /**
      * Execute the "right" method of Memory Class
      * @param machine Memory machine

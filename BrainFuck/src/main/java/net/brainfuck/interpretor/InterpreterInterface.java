@@ -13,7 +13,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
  *
  * @author davidLANG
  */
-interface InterpretorInterface {
+interface InterpreterInterface {
     /**
      * Execute a method of Memory Class
      * @param machine Memory machine

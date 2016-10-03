@@ -7,7 +7,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
 /**
  * @author davidLANG
  */
-class DecremanteExecute implements InterpretorInterface {
+class DecremanteExecute implements InterpreterInterface {
 
     /**
      * Execute "decr" method from class Memory

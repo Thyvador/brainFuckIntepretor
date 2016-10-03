@@ -3,7 +3,7 @@ package net.brainfuck.exception;
 
 /**
  * Signal when an error of syntax is detected in the file.
- * This exception will be thrown by <code>Interpretor</code>.
+ * This exception will be thrown by <code>Interpreter</code>.
  *
  * @author Alexandre Hiltcher
  */
