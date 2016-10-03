@@ -12,9 +12,6 @@ import net.brainfuck.exception.MemoryOverFlowException;
  * @author Jeremy Junac
  *
  */
-import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.exception.MemoryOverFlowException;
-
 public class Memory {
 
 	/** Max capacity */

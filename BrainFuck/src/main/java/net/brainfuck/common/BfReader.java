@@ -1,11 +1,10 @@
 package net.brainfuck.common;
 
-import net.brainfuck.exception.FileNotFoundException;
-import net.brainfuck.exception.IOException;
-
 import java.io.File;
 import java.io.FileReader;
-import java.io.StringReader;
+
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
 
 /**
  * author : francois Melkonian

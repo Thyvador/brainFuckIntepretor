@@ -15,7 +15,7 @@ public class Main {
 
 		try {
 			Memory m = new Memory();
-			Reader r = new BfReader(filename);
+			Reader r = new BfReader(getClass().getResource(filename).getPath());
 			Interpretor i = new Interpretor(m,r);
 			i.interprate();
 			System.out.println(m);
@@ -31,7 +31,7 @@ public class Main {
 	}
 
 	private Main() throws FileNotFoundException, java.io.FileNotFoundException {
-		new Main("BrainFuck\\src\\main\\resources\\assets\\brainfuck\\common\\res.bf"); // On lance sur un fichier au hasard
+		new Main(getClass().getResource("/assets/brainfuck/common/res.bf").getPath()); // On lance sur un fichier au hasard
 	}
 
 	// prepare the executable jar
