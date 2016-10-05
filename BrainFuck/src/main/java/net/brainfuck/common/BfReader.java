@@ -17,26 +17,23 @@ public class BfReader implements Reader {
 
     /**
      * Read 1-char-instruction file
+     * Support long and short syntax
      *
      * @param filename name of the file
      * @throws FileNotFoundException if the file doesn't exist
      */
-    public BfReader(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
-        if (!((new File(filename)).exists())) {
+    public BfReader(String filename) throws FileNotFoundException {
+
+        try {
+            if (!((new File(filename)).exists())) {
+                throw new FileNotFoundException(filename);
+            }
+            reader = new FileReader(filename);
+        } catch (java.io.FileNotFoundException e) {
             throw new FileNotFoundException(filename);
         }
-        reader = new FileReader(filename);
     }
 
-    /**
-     * Work in progress
-     *
-     * @return 0
-     */
-    @Override
-    public char decode() {
-        return 0;
-    }
 
     /**
      * Read the line just after the pointer on the file

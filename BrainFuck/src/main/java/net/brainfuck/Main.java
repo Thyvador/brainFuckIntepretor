@@ -10,8 +10,8 @@ import net.brainfuck.interpretor.Interpretor;
 
 
 public class Main {
-	
-	public Main(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
+
+	public Main(String filename) throws FileNotFoundException{
 
 		try {
 			Memory m = new Memory();
@@ -30,17 +30,17 @@ public class Main {
 		System.exit(0);
 	}
 
-	private Main() throws FileNotFoundException, java.io.FileNotFoundException {
+	private Main() throws FileNotFoundException {
 		new Main("/assets/brainfuck/common/OutOfBoundLeft.bf"); // On lance sur un fichier au hasard
 	}
 
 	// prepare the executable jar
-	public static void main(String[] args) throws FileNotFoundException, java.io.FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException {
         if(args.length == 2 && args[1].equals(("-p"))){
             new Main(args[1]);
         }else if(args.length == 0) {
             new Main(); // On lance sur un fichier au hasard
         }
 	}
-	
+
 }
