@@ -6,7 +6,7 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
-import net.brainfuck.interpretor.Interpreter;
+import net.brainfuck.interpreter.Interpreter;
 
 
 public class Main {
