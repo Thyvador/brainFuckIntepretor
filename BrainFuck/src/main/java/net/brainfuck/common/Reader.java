@@ -6,13 +6,12 @@ import net.brainfuck.exception.IOException;
  * Reader interface used to read bf instruction in "short" , "long" and picture format.
  */
 public interface Reader {
-    char decode();
 
     /**
      * Read the file to see if there is an other instruction
      *
      * @return true if there is an other instruction, false in others case
-     * @throws IOException
+     * @throws IOException if the file close while we read it, this exception may not happens.
      */
     boolean hasNext() throws IOException;
 
