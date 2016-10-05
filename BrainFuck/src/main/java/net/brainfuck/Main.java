@@ -31,7 +31,7 @@ public class Main {
 	}
 
 	private Main() throws FileNotFoundException, java.io.FileNotFoundException {
-		new Main(getClass().getResource("/assets/brainfuck/common/res.bf").getPath()); // On lance sur un fichier au hasard
+		new Main("/assets/brainfuck/common/OutOfBoundLeft.bf"); // On lance sur un fichier au hasard
 	}
 
 	// prepare the executable jar

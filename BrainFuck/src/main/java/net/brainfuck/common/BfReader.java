@@ -12,14 +12,17 @@ import net.brainfuck.exception.IOException;
 public class BfReader implements Reader {
     private String next;
     private java.io.FileReader reader;
+    private static final int CR = 13;
+    private static final int LF = 10;
 
     /**
      * Read 1-char-instruction file
+     *
      * @param filename name of the file
      * @throws FileNotFoundException if the file doesn't exist
      */
     public BfReader(String filename) throws FileNotFoundException, java.io.FileNotFoundException {
-        if (!((new File(filename)).exists())){
+        if (!((new File(filename)).exists())) {
             throw new FileNotFoundException(filename);
         }
         reader = new FileReader(filename);
@@ -27,6 +30,7 @@ public class BfReader implements Reader {
 
     /**
      * Work in progress
+     *
      * @return 0
      */
     @Override
@@ -38,14 +42,14 @@ public class BfReader implements Reader {
      * Read the line just after the pointer on the file
      *
      * @return the line read
-     * @throws IOException if IO error, it will be catch in hasNext()
+     * @throws java.io.IOException if IO error, it will be catch in hasNext()
      */
     private String readUntilEndOfLine() throws java.io.IOException {
-        String line ="";
+        String line = "";
         int c = reader.read();
-        while(c!=13){
-            line += Character.toString((char)c);
-            c=reader.read();
+        while (c != CR) {
+            line += Character.toString((char) c);
+            c = reader.read();
         }
         return line;
     }
@@ -53,23 +57,21 @@ public class BfReader implements Reader {
     /**
      * Skip new line character(s)
      * End of line character change according OS.
+     *
      * @return The first character of the line
      */
-    private int ignoreNewLineChar() {
-        int c = 0;
-        try {
+    private int ignoreNewLineChar() throws java.io.IOException {
+        int c;
+        c = reader.read();
+        if (c == CR) {
             c = reader.read();
-            if(c == 13){
-                c = reader.read();
-            }
-            if(c == 10){
-                c = reader.read();
-            }
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
+        }
+        if (c == LF) {
+            c = reader.read();
         }
         return c;
     }
+
     /**
      * Read the file to see if there is an other instruction.
      *
@@ -77,13 +79,13 @@ public class BfReader implements Reader {
      * @throws IOException if file close during reading
      */
     public boolean hasNext() throws IOException {
-        int nextVal = 0;
+        int nextVal;
         try {
             nextVal = reader.read();
-            if(nextVal == 13||nextVal==10){
+            if (nextVal == CR || nextVal == LF) {
                 nextVal = ignoreNewLineChar();
-                next = Character.toString((char)nextVal) ;
-                if(nextVal>='B'&&nextVal<='R'){// Line command detected
+                next = Character.toString((char) nextVal);
+                if (nextVal >= 'B' && nextVal <= 'R') {// Line command detected
                     next += readUntilEndOfLine();
                 }
                 return true;
@@ -94,12 +96,13 @@ public class BfReader implements Reader {
         if (nextVal == -1) {
             return false;
         }
-        next = Character.toString((char)nextVal);
+        next = Character.toString((char) nextVal);
         return true;
     }
 
     /**
      * Get the next instruction
+     *
      * @return the next instruction
      */
     public String getNext() {
@@ -108,6 +111,7 @@ public class BfReader implements Reader {
 
     /**
      * Close the file when the reader finished him
+     *
      * @throws IOException if file can't close
      */
     public void close() throws IOException {
