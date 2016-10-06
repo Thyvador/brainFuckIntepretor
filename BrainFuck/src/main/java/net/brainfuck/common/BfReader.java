@@ -86,6 +86,9 @@ public class BfReader implements Reader {
                     next += readUntilEndOfLine();
                 }
                 return true;
+            }else if (nextVal >= 'B' && nextVal <= 'R') {// Line command detected
+                next = Character.toString((char) nextVal)+readUntilEndOfLine();
+                return true;
             }
         } catch (java.io.IOException e) {
             throw new IOException();
