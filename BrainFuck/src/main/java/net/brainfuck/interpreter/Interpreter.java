@@ -36,13 +36,13 @@ public class Interpreter {
         this.reader = reader;
         this.memory = memory;
 
-        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
+        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT,IN,OUT};
         // Initialisation du language
         for (int i=0; i < languages.length; i++) {
             InterpreterInterface interpreter = languages[i].getInterpreter();
             String[] aliases = languages[i].getAliases();
-
-            for (int cpt=0; cpt < aliases.length; i++) {
+            System.out.println(i);
+            for (int cpt=0; cpt < aliases.length; cpt++) {
                 this.interpretorExecuter.put(aliases[i], interpreter);
             }
         }
