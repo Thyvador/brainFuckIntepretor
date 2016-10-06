@@ -19,7 +19,7 @@ import static net.brainfuck.interpreter.Language.*;
  *
  */
 
-public class Interpreter {
+public class  Interpreter {
     private Map<String, InterpreterInterface> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
@@ -36,14 +36,14 @@ public class Interpreter {
         this.reader = reader;
         this.memory = memory;
 
-        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT,IN,OUT};
+        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
         // Initialisation du language
         for (int i=0; i < languages.length; i++) {
             InterpreterInterface interpreter = languages[i].getInterpreter();
             String[] aliases = languages[i].getAliases();
             System.out.println(i);
-            for (int cpt=0; cpt < aliases.length; cpt++) {
-                this.interpretorExecuter.put(aliases[i], interpreter);
+            for (String aliase : aliases) {
+                this.interpretorExecuter.put(aliase, interpreter);
             }
         }
     }
