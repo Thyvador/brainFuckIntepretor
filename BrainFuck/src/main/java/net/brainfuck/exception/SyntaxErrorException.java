@@ -18,7 +18,7 @@ public class SyntaxErrorException extends Exception {
      * Constructs a SyntaxErrorException with a default message.
      */
     public SyntaxErrorException() {
-        super("Synthaxe error.");
+        super("Syntax error.");
     }
 
     /**
@@ -27,7 +27,8 @@ public class SyntaxErrorException extends Exception {
      * @param message the detail message.
      */
     public SyntaxErrorException(String message) {
-        super("Synthaxe error : " + message);
+        super("Syntax error : " + message);
+
     }
 
 }

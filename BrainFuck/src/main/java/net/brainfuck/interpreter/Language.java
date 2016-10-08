@@ -7,9 +7,11 @@ import java.util.Map;
  */
 enum Language {
     INCR(new IncremanteExecute(), "INCR", "+"),
-    DECR(new DecremanteExecute(), "DECR"),
-    RIGHT(new RightExecute(), "RIGHT"),
-    LEFT(new LeftExecute(), "LEFT");
+    DECR(new DecremanteExecute(), "DECR","-"),
+    RIGHT(new RightExecute(), "RIGHT",">"),
+    LEFT(new LeftExecute(), "LEFT","<"),
+    OUT(new OutExecute(), "OUT","."),
+    IN(new InExecute(), "IN",",");
 
     private InterpreterInterface interpreter;
     private String[] aliases;
