@@ -1,6 +1,7 @@
 
 package net.brainfuck.interpreter;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,13 +12,15 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.exception.SyntaxErrorException;
 
+import static net.brainfuck.interpreter.Language.*;
+
 /**
  * @author davidLANG
  *
  */
 
-public class Interpreter {
-    private Map<String, InterpreterInterface> intrepretorExecuter = new HashMap<>();
+public class  Interpreter {
+    private Map<String, InterpreterInterface> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
 
@@ -33,16 +36,16 @@ public class Interpreter {
         this.reader = reader;
         this.memory = memory;
 
+        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
         // Initialisation du language
-        IncremanteExecute incrExecute = new IncremanteExecute();
-        DecremanteExecute decremanteExecute = new DecremanteExecute();
-        RightExecute rightExecute = new RightExecute();
-        LeftExecute leftExecute = new LeftExecute();
-
-        this.intrepretorExecuter.put("INCR", incrExecute);
-        this.intrepretorExecuter.put("RIGHT", rightExecute);
-        this.intrepretorExecuter.put("LEFT", leftExecute);
-        this.intrepretorExecuter.put("DECR", decremanteExecute);
+        for (int i=0; i < languages.length; i++) {
+            InterpreterInterface interpreter = languages[i].getInterpreter();
+            String[] aliases = languages[i].getAliases();
+            System.out.println(i);
+            for (String aliase : aliases) {
+                this.interpretorExecuter.put(aliase, interpreter);
+            }
+        }
     }
 
     /**
@@ -55,7 +58,7 @@ public class Interpreter {
     public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
         while (reader.hasNext()) {
             String instruction = reader.getNext();
-            InterpreterInterface interpretor = this.intrepretorExecuter.get(instruction);
+            InterpreterInterface interpretor = this.interpretorExecuter.get(instruction);
             if (interpretor == null) {
                 throw new SyntaxErrorException(instruction);
             }

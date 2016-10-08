@@ -39,7 +39,8 @@ public class Main {
         if(args.length == 2 && args[1].equals(("-p"))){
             new Main(args[1]);
         }else if(args.length == 0) {
-            new Main(); // On lance sur un fichier au hasard
+			System.out.println("Usage : - p [FILE]");
+			System.exit(0);
         }
 	}
 
