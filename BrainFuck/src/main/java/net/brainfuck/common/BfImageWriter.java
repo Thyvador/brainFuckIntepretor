@@ -56,10 +56,18 @@ public class BfImageWriter implements Writer {
 			write(0x000000);
 		}
 		tmpOs.close();
+		square *= 3;
 		BufferedImage bi = new BufferedImage((int)square, (int)square, BufferedImage.TYPE_INT_RGB);
-		for (int y = 0; y < square; y++) {
-			for (int x = 0; x < square; x++) {
-				bi.setRGB(x, y, tmpIs.readInt());
+		int color;
+		for (int y = 0; y < square; y+=3) {
+			for (int x = 0; x < square; x+=3) {
+				color = tmpIs.readInt();
+				System.out.println(color);
+				for (int i = 0; i < 3; i++) {
+					for (int j = 0; j < 3; j++) {
+						bi.setRGB(x+j, y+i, color);
+					}
+				}
 			}
 		}
 		tmpIs.close();
