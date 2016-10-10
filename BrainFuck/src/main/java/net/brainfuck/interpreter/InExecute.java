@@ -3,8 +3,8 @@ package net.brainfuck.interpreter;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.IOException;
 
-import java.io.IOException;
 
 /**
  * @author  François Melkonian
@@ -18,14 +18,13 @@ class InExecute implements InterpreterInterface {
      * @param machine Memory machine
      */
     @Override
-    public void execute(Memory machine) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+    public void execute(Memory machine) throws MemoryOverFlowException, MemoryOutOfBoundsException, IOException {
+
         try {
             int value = System.in.read();
             machine.set(value);
-        } catch (IOException e) {
-           e.printStackTrace();
-            System.err.println("La lecture de caractère a échouée"); // ne devrait jamais arriver
-            // throw new net.brainfuck.exception.IOException("La lecture de caractère a échouée");
+        } catch (java.io.IOException e) {
+            throw new net.brainfuck.exception.IOException("IN : La lecture de caractère a échouée");
         }
     }
 }
