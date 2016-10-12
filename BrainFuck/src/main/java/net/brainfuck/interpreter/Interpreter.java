@@ -46,10 +46,11 @@ public class  Interpreter {
      * @throws IOException {@link IOException}  if reader throw an exception
      */
     public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
-        while (reader.hasNext()) {
-            String instruction = reader.getNext();
-            InterpreterInterface interpretor = this.interpretorExecuter.get(instruction);
-            if (interpretor == null) {
+        String instruction;
+        InterpreterInterface interpretor;
+
+        while ((instruction = reader.getNext()) != null) {
+            if ((interpretor = this.interpretorExecuter.get(instruction)) == null) {
                 throw new SyntaxErrorException(instruction);
             }
             if (!flags[ArgumentConstante.CHECK]) {
