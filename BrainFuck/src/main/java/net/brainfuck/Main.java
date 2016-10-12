@@ -23,16 +23,13 @@ public class Main {
 			Interpreter i = new Interpreter(m,r, a.getFlags());
 			i.interprate();
 			System.out.println(m);
-		} catch (IOException | SyntaxErrorException | FileNotFoundException e) {
+		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
 			// Exit code not set
-			System.exit(3);
+			System.exit(4);
 		} catch (MemoryOutOfBoundsException e) {
 			System.exit(1);
 		} catch (MemoryOverFlowException e){
 			System.exit(2);
-		} catch (Exception e) {
-			// Ajouter par argumentAnalizer il faut une nouvelle exception pour les arguments
-			e.printStackTrace();
 		}
 		System.exit(0);
 	}
