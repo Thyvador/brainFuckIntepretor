@@ -1,6 +1,5 @@
 package net.brainfuck.common;
 
-import java.io.File;
 import java.io.FileReader;
 
 import net.brainfuck.exception.FileNotFoundException;
@@ -25,9 +24,6 @@ public class BfReader implements Reader {
     public BfReader(String filename) throws FileNotFoundException {
 
         try {
-            if (!((new File(filename)).exists())) {
-                throw new FileNotFoundException(filename);
-            }
             reader = new FileReader(filename);
         } catch (java.io.FileNotFoundException e) {
             throw new FileNotFoundException(filename);
@@ -73,28 +69,28 @@ public class BfReader implements Reader {
      * @return true if there is an other instruction, false in others case
      * @throws IOException if file close during reading
      */
-    public boolean hasNext() throws IOException {
+    public String getNext() throws IOException {
         int nextVal;
         try {
             nextVal = reader.read();
             if(next==null&&isLong(nextVal)){
                 readUntilEndOfLine(nextVal);
-                return true;
+                return next;
             }else if(isNewLine(nextVal)){
                 nextVal=ignoreNewLineChar();
                 if(isLong(nextVal)){
                     readUntilEndOfLine(nextVal);
-                    return true;
+                    return next;
                 }
             }
         } catch (java.io.IOException e) {
             throw new IOException();
         }
         if (nextVal == -1) {
-            return false;
+            return null;
         }
         next = Character.toString((char) nextVal);
-        return true;
+        return next;
     }
 
     private boolean isNewLine(int nextVal) {
@@ -105,14 +101,6 @@ public class BfReader implements Reader {
         return nextVal >= 'B' && nextVal <= 'R';
     }
 
-    /**
-     * Get the next instruction
-     *
-     * @return the next instruction
-     */
-    public String getNext() {
-        return next;
-    }
 
     /**
      * Close the file when the reader finished him

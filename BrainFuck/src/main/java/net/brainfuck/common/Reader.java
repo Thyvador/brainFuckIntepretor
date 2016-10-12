@@ -13,13 +13,8 @@ public interface Reader {
      * @return true if there is an other instruction, false in others case
      * @throws IOException if the file close while we read it, this exception may not happens.
      */
-    boolean hasNext() throws IOException;
+    String getNext() throws IOException;
 
-    /**
-     * Get the next instruction
-     * @return the next instruction
-     */
-    String getNext();
 
     void close() throws IOException;
 }
