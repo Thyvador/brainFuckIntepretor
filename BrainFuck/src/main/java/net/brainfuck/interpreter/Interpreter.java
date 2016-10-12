@@ -1,6 +1,8 @@
 
 package net.brainfuck.interpreter;
 
+import java.io.FileInputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,11 +10,9 @@ import net.brainfuck.ArgumentAnalyzer;
 import net.brainfuck.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
-import net.brainfuck.exception.IOException;
-import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.exception.SyntaxErrorException;
+import net.brainfuck.exception.*;
 
+import static net.brainfuck.ArgumentConstante.*;
 import static net.brainfuck.interpreter.Language.*;
 
 /**
@@ -31,13 +31,34 @@ public class  Interpreter {
      * @param memory Memory
      * @param reader Reader
      */
-    public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer a) {
+    public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer arg) throws FileNotFoundException {
         this.reader = reader;
         this.memory = memory;
-        this.flags = a.getFlags();
+        this.flags = arg.getFlags();
         this.initLanguages();
+        setIO(arg);
     }
 
+
+    private void setIO(ArgumentAnalyzer arg) throws FileNotFoundException{
+        String inPath = arg.getArgument(IN_PATH);
+        if(inPath != null){
+            try {
+                System.setIn(new FileInputStream(inPath));
+            } catch (java.io.FileNotFoundException e) {
+                throw new FileNotFoundException(inPath);
+            }
+        }
+        String outPath = arg.getArgument(OUT_PATH);
+        if(outPath != null){
+            try {
+                PrintStream printStream = new PrintStream(outPath);
+                System.setOut(printStream);
+            } catch (java.io.FileNotFoundException e) {
+                throw new FileNotFoundException(outPath);
+            }
+        }
+    }
     /**
      * Interprate all characters wich can be read with the attribute reader
      *
@@ -45,7 +66,7 @@ public class  Interpreter {
      * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception
      * @throws IOException {@link IOException}  if reader throw an exception
      */
-    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
+    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException,FileNotFoundIn {
         String instruction;
         InterpreterInterface interpretor;
 
@@ -69,7 +90,7 @@ public class  Interpreter {
      * for example RightExecute is associate with >
      */
     private void initLanguages() {
-        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
+        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT, IN, OUT};
         for (Language language : languages) {
             InterpreterInterface interpreter = language.getInterpreter();
             String[] aliases = language.getAliases();

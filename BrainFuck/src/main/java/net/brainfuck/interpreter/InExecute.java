@@ -1,14 +1,15 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.exception.IOException;
 
 
 /**
- * @author  François Melkonian
- * IN
+ * @author François Melkonian
+ *         IN_PATH
  */
 class InExecute implements InterpreterInterface {
 
@@ -18,18 +19,23 @@ class InExecute implements InterpreterInterface {
      * @param machine Memory machine
      */
     @Override
-    public void execute(Memory machine) throws MemoryOverFlowException, MemoryOutOfBoundsException, IOException {
+    public void execute(Memory machine) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {
 
+        int value;
         try {
-            int value = System.in.read();
-            machine.set(value);
+            value = System.in.read();
         } catch (java.io.IOException e) {
-            throw new net.brainfuck.exception.IOException("IN : La lecture de caractère a échouée");
+            throw new net.brainfuck.exception.FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
         }
+        if (value == -1) {
+            throw new net.brainfuck.exception.FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
+        }
+        machine.set(value);
+
     }
 
     @Override
     public void rewrite() {
-            System.out.println(Language.IN.getShortSyntax());
+        System.out.println(Language.IN.getShortSyntax());
     }
 }

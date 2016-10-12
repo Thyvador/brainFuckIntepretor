@@ -8,7 +8,7 @@ import java.io.PrintStream;
 /**
  * @author François Melkonian
  *
- * Test about OUT instruction
+ * Test about OUT_PATH instruction
  */
 public class TestOut {
     public static void main(String[] args) throws FileNotFoundException {
