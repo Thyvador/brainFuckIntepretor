@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.brainfuck.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.IOException;
@@ -23,29 +24,18 @@ public class  Interpreter {
     private Map<String, InterpreterInterface> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
+    private boolean[]   flags;
 
     /**
-     * Initiliaze the hashmap wich contains
-     * class which implements InterpreterInterface associate with  syntaxe
-     * for example RightExecute is associate with >
-     *
+     * Constructor wich initialize atribut
      * @param memory Memory
      * @param reader Reader
      */
-    public Interpreter(Memory memory, Reader reader) {
+    public Interpreter(Memory memory, Reader reader, boolean[]  flags) {
         this.reader = reader;
         this.memory = memory;
-
-        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
-        // Initialisation du language
-        for (int i=0; i < languages.length; i++) {
-            InterpreterInterface interpreter = languages[i].getInterpreter();
-            String[] aliases = languages[i].getAliases();
-            System.out.println(i);
-            for (String aliase : aliases) {
-                this.interpretorExecuter.put(aliase, interpreter);
-            }
-        }
+        this.flags = flags;
+        this.initLanguages();
     }
 
     /**
@@ -62,9 +52,30 @@ public class  Interpreter {
             if (interpretor == null) {
                 throw new SyntaxErrorException(instruction);
             }
-            interpretor.execute(memory);
+            if (!flags[ArgumentConstante.CHECK]) {
+                interpretor.execute(memory);
+            }
+            if (flags[ArgumentConstante.REWRITE]) {
+                interpretor.rewrite();
+            }
         }
         reader.close();
+    }
+
+    /**
+     * Initiliaze the hashmap wich contains
+     * class which implements InterpreterInterface associate with  syntaxe
+     * for example RightExecute is associate with >
+     */
+    private void initLanguages() {
+        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
+        for (int i=0; i < languages.length; i++) {
+            InterpreterInterface interpreter = languages[i].getInterpreter();
+            String[] aliases = languages[i].getAliases();
+            for (String aliase : aliases) {
+                this.interpretorExecuter.put(aliase, interpreter);
+            }
+        }
     }
     
 }

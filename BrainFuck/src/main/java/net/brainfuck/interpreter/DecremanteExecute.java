@@ -8,14 +8,18 @@ import net.brainfuck.exception.MemoryOverFlowException;
  * @author davidLANG
  */
 class DecremanteExecute implements InterpreterInterface {
-
     /**
      * Execute "decr" method from class Memory
      *
-     * @param machine Memory machine
+     * @param memory Memory machine
      */
     @Override
-    public void execute(Memory machine) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-        machine.decr();
+    public void execute(Memory memory) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+        memory.decr();
+    }
+
+    @Override
+    public void rewrite() {
+        System.out.println(Language.DECR.getShortSyntax());
     }
 }

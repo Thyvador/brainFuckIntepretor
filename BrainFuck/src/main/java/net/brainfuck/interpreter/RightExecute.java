@@ -9,10 +9,15 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 class RightExecute implements InterpreterInterface {
     /**
      * Execute the "right" method of Memory Class
-     * @param machine Memory machine
+     * @param memory Memory machine
      */
     @Override
-    public void execute(Memory machine) throws MemoryOutOfBoundsException {
-        machine.right();
+    public void execute(Memory memory) throws MemoryOutOfBoundsException {
+        memory.right();
+    }
+
+    @Override
+    public void rewrite() {
+        System.out.println(Language.RIGHT.getShortSyntax());
     }
 }

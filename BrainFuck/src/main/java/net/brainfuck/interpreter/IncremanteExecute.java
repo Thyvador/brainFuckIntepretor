@@ -12,10 +12,15 @@ class IncremanteExecute implements InterpreterInterface {
     /**
      * Execute the "incr" method of Memory Class
      *
-     * @param machine Memory machine
+     * @param memory Memory machine
      */
     @Override
-    public void execute(Memory machine) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-        machine.incr();
+    public void execute(Memory memory) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+        memory.incr();
+    }
+
+    @Override
+    public void rewrite() {
+        System.out.println(Language.INCR.getShortSyntax());
     }
 }

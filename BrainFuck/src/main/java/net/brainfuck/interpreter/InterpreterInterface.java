@@ -16,8 +16,10 @@ import net.brainfuck.exception.MemoryOverFlowException;
 interface InterpreterInterface {
     /**
      * Execute a method of Memory Class
-     * @param machine Memory machine
+     * @param memory Memory machine
      */
-    void execute(Memory machine) throws MemoryOutOfBoundsException, MemoryOverFlowException;
+    void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException;
+
+    void rewrite();
 }
 
