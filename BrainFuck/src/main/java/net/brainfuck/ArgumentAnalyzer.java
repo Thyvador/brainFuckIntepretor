@@ -14,7 +14,7 @@ public class ArgumentAnalyzer {
     private String[] arguments = {null, null, null};
     private String[]    args = null;
 
-    public ArgumentAnalyzer(String[] args) throws Exception {
+    public ArgumentAnalyzer(String[] args) throws IncorrectArgumentException{
         this.args = args;
         this.analyze();
     }
