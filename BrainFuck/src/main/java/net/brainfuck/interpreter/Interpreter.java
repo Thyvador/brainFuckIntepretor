@@ -17,17 +17,17 @@ import static net.brainfuck.interpreter.Language.*;
 
 /**
  * @author davidLANG
- *
  */
 
-public class  Interpreter {
+public class Interpreter {
     private Map<String, InterpreterInterface> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
-    private boolean[]   flags;
+    private boolean[] flags;
 
     /**
      * Constructor wich initialize atribut
+     *
      * @param memory Memory
      * @param reader Reader
      */
@@ -41,11 +41,11 @@ public class  Interpreter {
     /**
      * Interprate all characters wich can be read with the attribute reader
      *
-     * @throws SyntaxErrorException {@link SyntaxErrorException} if an error of syntax is found
+     * @throws SyntaxErrorException       {@link SyntaxErrorException} if an error of syntax is found
      * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception
-     * @throws IOException {@link IOException}  if reader throw an exception
+     * @throws IOException                {@link IOException}  if reader throw an exception
      */
-    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
+    public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException, MemoryOverFlowException {
         while (reader.hasNext()) {
             String instruction = reader.getNext();
             InterpreterInterface interpretor = this.interpretorExecuter.get(instruction);
@@ -77,6 +77,6 @@ public class  Interpreter {
             }
         }
     }
-    
+
 }
 
