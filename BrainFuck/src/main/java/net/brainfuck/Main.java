@@ -14,7 +14,7 @@ import static net.brainfuck.ArgumentConstante.PATH;
 
 public class Main {
 
-	public Main(String[] args) throws FileNotFoundException{
+	public Main(String[] args){
 
 		try {
 			ArgumentAnalizer a = new ArgumentAnalizer(args);
@@ -37,13 +37,13 @@ public class Main {
 		System.exit(0);
 	}
 
-	private Main() throws FileNotFoundException {
+	private Main() {
 //		String[] args = {"-p", "/assets/brainfuck/common/OutOfBoundLeft.bf"};
 //		new Main(args); // On lance sur un fichier au hasard
 	}
 
 	// prepare the executable jar
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 		System.out.println("Working Directory = " +
 				System.getProperty("user.dir"));
 		String[] args2 = {"-p", "Brainfuck/src/main/resources/assets/brainfuck/common/res.bf", "--rewrite"};
