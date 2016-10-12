@@ -2,6 +2,7 @@ package net.brainfuck;
 
 
 import net.brainfuck.exception.Exception;
+import net.brainfuck.exception.IncorrectArgumentException;
 
 import static net.brainfuck.ArgumentConstante.*;
 
@@ -13,7 +14,7 @@ public class ArgumentAnalyzer {
     private String[] arguments = {null, null, null};
     private String[]    args = null;
 
-    public ArgumentAnalyzer(String[] args) throws Exception {
+    public ArgumentAnalyzer(String[] args) throws IncorrectArgumentException{
         this.args = args;
         this.analyze();
     }
@@ -22,7 +23,7 @@ public class ArgumentAnalyzer {
 
     public boolean[] getFlags() {return this.flags;}
 
-    private void analyze() throws Exception {
+    private void analyze() throws IncorrectArgumentException{
         int length = args.length;
         for (int i=0; i < length; i++) {
             switch (args[i]) {
@@ -48,17 +49,17 @@ public class ArgumentAnalyzer {
                     i += 1;
                     break;
                 default:
-                    throw new Exception("bad arguments");
+                    throw new IncorrectArgumentException("bad arguments");
             }
         }
     }
 
-    private void getDoubleArgument(String[] args, int i, int position) throws Exception {
+    private void getDoubleArgument(String[] args, int i, int position) throws IncorrectArgumentException {
         if (i + 1 > args.length) {
             // TO DOO
             // TO DOO
             // TO DOO
-            throw new Exception("bad arguments");
+            throw new IncorrectArgumentException("bad arguments");
         }
         this.arguments[position] = args[i+1];
     }
