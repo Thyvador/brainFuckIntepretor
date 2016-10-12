@@ -9,12 +9,12 @@ import static net.brainfuck.ArgumentConstante.*;
 /**
  * @author davidLANG
  */
-public class ArgumentAnalizer {
+public class ArgumentAnalyzer {
     private boolean[] flags = {false, false, false};
     private String[] arguments = {null, null, null};
     private String[]    args = null;
 
-    public ArgumentAnalizer(String[] args) throws IncorrectArgumentException{
+    public ArgumentAnalyzer(String[] args) throws Exception {
         this.args = args;
         this.analyze();
     }

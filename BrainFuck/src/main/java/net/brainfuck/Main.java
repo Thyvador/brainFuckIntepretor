@@ -17,10 +17,11 @@ public class Main {
 	public Main(String[] args){
 
 		try {
-			ArgumentAnalizer a = new ArgumentAnalizer(args);
+			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
-			Interpreter i = new Interpreter(m,r, a.getFlags());
+
+			Interpreter i = new Interpreter(m,r, a);
 			i.interprate();
 			System.out.println(m);
 		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
@@ -33,6 +34,7 @@ public class Main {
 		}
 		System.exit(0);
 	}
+
 
 	private Main() {
 //		String[] args = {"-p", "/assets/brainfuck/common/OutOfBoundLeft.bf"};

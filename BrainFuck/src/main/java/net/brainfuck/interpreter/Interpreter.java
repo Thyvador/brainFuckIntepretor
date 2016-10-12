@@ -1,10 +1,10 @@
 
 package net.brainfuck.interpreter;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.brainfuck.ArgumentAnalyzer;
 import net.brainfuck.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
@@ -31,10 +31,10 @@ public class  Interpreter {
      * @param memory Memory
      * @param reader Reader
      */
-    public Interpreter(Memory memory, Reader reader, boolean[]  flags) {
+    public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer a) {
         this.reader = reader;
         this.memory = memory;
-        this.flags = flags;
+        this.flags = a.getFlags();
         this.initLanguages();
     }
 
@@ -69,9 +69,9 @@ public class  Interpreter {
      */
     private void initLanguages() {
         Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
-        for (int i=0; i < languages.length; i++) {
-            InterpreterInterface interpreter = languages[i].getInterpreter();
-            String[] aliases = languages[i].getAliases();
+        for (Language language : languages) {
+            InterpreterInterface interpreter = language.getInterpreter();
+            String[] aliases = language.getAliases();
             for (String aliase : aliases) {
                 this.interpretorExecuter.put(aliase, interpreter);
             }
