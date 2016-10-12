@@ -1,11 +1,10 @@
 
 package net.brainfuck.interpreter;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.brainfuck.ArgumentAnalizer;
+import net.brainfuck.ArgumentAnalyzer;
 import net.brainfuck.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
@@ -32,7 +31,7 @@ public class  Interpreter {
      * @param memory Memory
      * @param reader Reader
      */
-    public Interpreter(Memory memory, Reader reader, ArgumentAnalizer a) {
+    public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer a) {
         this.reader = reader;
         this.memory = memory;
         this.flags = a.getFlags();

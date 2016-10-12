@@ -9,8 +9,6 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.Interpreter;
 
-import static net.brainfuck.ArgumentConstante.IN;
-import static net.brainfuck.ArgumentConstante.OUT;
 import static net.brainfuck.ArgumentConstante.PATH;
 
 
@@ -19,7 +17,7 @@ public class Main {
 	public Main(String[] args){
 
 		try {
-			ArgumentAnalizer a = new ArgumentAnalizer(args);
+			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
 
