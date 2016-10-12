@@ -11,8 +11,8 @@ enum Language {
     DECR(new DecremanteExecute(), "-", "DECR"),
     RIGHT(new RightExecute(), ">", "RIGHT"),
     LEFT(new LeftExecute(), "<", "LEFT"),
-    IN(new RightExecute(), ",", "IN"),
-    OUT(new LeftExecute(), ".", "OUT");
+    IN(new InExecute(), ",", "IN"),
+    OUT(new OutExecute(), ".", "OUT");
 
     private InterpreterInterface interpreter;
     private String[] aliases;

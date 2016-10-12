@@ -13,8 +13,8 @@ public class ArgumentConstante {
     public final static String CHECK_SYNTAX  = "--check";
 
     public final static int PATH = 0;
-    public final static int IN = 1;
-    public final static int OUT = 2;
+    public final static int IN_PATH = 1;
+    public final static int OUT_PATH = 2;
     public final static int REWRITE = 0;
     public final static int TRANSLATE = 1;
     public final static int CHECK = 2;

@@ -1,7 +1,6 @@
 package net.brainfuck;
 
 
-import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.IncorrectArgumentException;
 
 import static net.brainfuck.ArgumentConstante.*;
@@ -37,11 +36,11 @@ public class ArgumentAnalyzer {
                     flags[TRANSLATE] = true;
                     break;
                 case IN_SYNTAX:
-                    this.getDoubleArgument(args, i, IN);
+                    this.getDoubleArgument(args, i, IN_PATH);
                     i += 1;
                     break;
                 case OUT_SYNTAX:
-                    this.getDoubleArgument(args, i, OUT);
+                    this.getDoubleArgument(args, i, OUT_PATH);
                     i += 1;
                     break;
                 case PATH_SYNTAX:

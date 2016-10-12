@@ -10,7 +10,7 @@ import java.io.PrintStream;
 /**
  * @author François Melkonian
  *
- * Test about IN instruction
+ * Test about IN_PATH instruction
  */
 public class TestIn {
     public static void main(String[] args) throws FileNotFoundException {
