@@ -86,6 +86,11 @@ public class Memory {
 		return (end.get(index - ARRAY_SIZE) != null) ? end.get(index - ARRAY_SIZE) : (byte) 0;
 	}
 
+	public Memory set(int changeValue) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+
+		return set(index,changeValue-get());
+
+	}
 	/**
 	 * Set the value of the specified memory cell
 	 *

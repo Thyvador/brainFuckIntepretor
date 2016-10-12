@@ -7,11 +7,11 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
 /**
- * author : francois Melkonian
+ * @author : Francois Melkonian
  */
 public class BfReader implements Reader {
-    private String next;
-    private java.io.FileReader reader;
+    private String next=null;
+    private java.io.Reader reader;
     private static final int CR = 13;
     private static final int LF = 10;
 
@@ -37,18 +37,16 @@ public class BfReader implements Reader {
 
     /**
      * Read the line just after the pointer on the file
-     *
-     * @return the line read
+     * and put it on "next" string
      * @throws java.io.IOException if IO error, it will be catch in hasNext()
      */
-    private String readUntilEndOfLine() throws java.io.IOException {
-        String line = "";
+    private void readUntilEndOfLine(int val) throws java.io.IOException {
+        next = Character.toString((char) val);
         int c = reader.read();
-        while (c != CR) {
-            line += Character.toString((char) c);
+        while (c != CR && c!= -1) {
+            next += Character.toString((char) c);
             c = reader.read();
         }
-        return line;
     }
 
     /**
@@ -79,16 +77,15 @@ public class BfReader implements Reader {
         int nextVal;
         try {
             nextVal = reader.read();
-            if (nextVal == CR || nextVal == LF) {
-                nextVal = ignoreNewLineChar();
-                next = Character.toString((char) nextVal);
-                if (nextVal >= 'B' && nextVal <= 'R') {// Line command detected
-                    next += readUntilEndOfLine();
+            if(next==null&&isLong(nextVal)){
+                readUntilEndOfLine(nextVal);
+                return true;
+            }else if(isNewLine(nextVal)){
+                nextVal=ignoreNewLineChar();
+                if(isLong(nextVal)){
+                    readUntilEndOfLine(nextVal);
+                    return true;
                 }
-                return true;
-            }else if (nextVal >= 'B' && nextVal <= 'R') {// Line command detected
-                next = Character.toString((char) nextVal)+readUntilEndOfLine();
-                return true;
             }
         } catch (java.io.IOException e) {
             throw new IOException();
@@ -98,6 +95,14 @@ public class BfReader implements Reader {
         }
         next = Character.toString((char) nextVal);
         return true;
+    }
+
+    private boolean isNewLine(int nextVal) {
+        return nextVal == CR || nextVal == LF;
+    }
+
+    private boolean isLong(int nextVal) {
+        return nextVal >= 'B' && nextVal <= 'R';
     }
 
     /**
