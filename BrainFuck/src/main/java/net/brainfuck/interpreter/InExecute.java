@@ -27,4 +27,9 @@ class InExecute implements InterpreterInterface {
             throw new net.brainfuck.exception.IOException("IN : La lecture de caractère a échouée");
         }
     }
+
+    @Override
+    public void rewrite() {
+            System.out.println(Language.IN.getShortSyntax());
+    }
 }

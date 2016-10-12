@@ -14,6 +14,6 @@ public class TestOut {
     public static void main(String[] args) throws FileNotFoundException {
         //PrintStream printStream = new PrintStream("Brainfuck/src/test/resources/assets/brainfucktest/common/temp");
         //System.setOut(printStream);
-        new Main("Brainfuck/src/test/resources/assets/brainfucktest/common/TestOut.bf");
+       // new Main("Brainfuck/src/test/resources/assets/brainfucktest/common/TestOut.bf");
     }
 }

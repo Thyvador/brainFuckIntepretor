@@ -21,4 +21,9 @@ public class OutExecute implements InterpreterInterface {
     public void execute(Memory machine) throws MemoryOverFlowException, MemoryOutOfBoundsException {
         System.out.print( (char)machine.get());
     }
+
+    @Override
+    public void rewrite() {
+            System.out.println(Language.OUT.getShortSyntax());
+    }
 }
