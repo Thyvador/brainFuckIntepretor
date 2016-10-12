@@ -4,14 +4,14 @@ package net.brainfuck.common;
 import loci.formats.FormatException;
 import loci.formats.in.BMPReader;
 import net.brainfuck.exception.IOException;
-
-import java.awt.image.BufferedImage;
+import net.brainfuck.exception.SyntaxErrorException;
 
 /**
  * Created by Alexandre Hiltcher on 05/10/2016.
  */
 public class BfImageReader extends BMPReader implements Reader{
     private int x, y;
+    private int width, height;
     private byte[] buffer;
 
     public BfImageReader(String path) throws IOException {
@@ -20,7 +20,9 @@ public class BfImageReader extends BMPReader implements Reader{
             initFile(path);
             x = 0;
             y = 0;
-            buffer = new byte[9];
+            width = getSizeX();
+            height = getSizeY();
+            buffer = new byte[27];
         } catch (FormatException e) {
             e.printStackTrace();
         } catch (java.io.IOException e) {
@@ -30,6 +32,9 @@ public class BfImageReader extends BMPReader implements Reader{
 
     @Override
     public String getNext() throws IOException {
+        if (y >= height){
+            return null;
+        }
         try {
             buffer = openBytes(0, buffer, x, y, 3, 3);
         } catch (FormatException e) {
@@ -37,17 +42,21 @@ public class BfImageReader extends BMPReader implements Reader{
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
-
-        for (byte q :
-                buffer) {
-            System.out.println(q);
+        x+=3;
+        if ( x >= width){
+            x = 0;
+            y += 3;
         }
-
-        return null;
+        for (int i = 0; i < 24; i++) {
+            if(buffer[i]!=buffer[i+3]){
+                //throw new SyntaxErrorException("Image incorect");
+            }
+        }
+        return String.valueOf(String.format("%02x%02x%02x", buffer[0], buffer[1], buffer[2]));
     }
 
     @Override
     public void close(){
-        close();
+//        close();
     }
 }
