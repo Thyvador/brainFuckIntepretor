@@ -7,13 +7,14 @@ import java.util.Map;
  */
 enum Language {
     // Declaration de l'enum
-    INCR(new IncremanteExecute(), "+", "INCR"),
-    DECR(new DecremanteExecute(), "-", "DECR"),
-    RIGHT(new RightExecute(), ">", "RIGHT"),
-    LEFT(new LeftExecute(), "<", "LEFT"),
-    IN(new InExecute(), ",", "IN"),
-    OUT(new OutExecute(), ".", "OUT");
-
+    INCR(new IncremanteExecute(), "+", "INCR", "ffffff"),
+    DECR(new DecremanteExecute(), "-", "DECR", "4b0082"),
+    RIGHT(new RightExecute(), ">", "RIGHT", "0000ff"),
+    LEFT(new LeftExecute(), "<", "LEFT", "9400d3"),
+    IN(new InExecute(), ",", "IN", "ffff00"),
+    OUT(new OutExecute(), ".", "OUT", "ffff00");
+    //JUMP(new JumpExecute(), "[", "JUMP", "ff7f00"),
+    //BACK(new backExecute(), "]", "BACK", "ff0000");
     private InterpreterInterface interpreter;
     private String[] aliases;
 
