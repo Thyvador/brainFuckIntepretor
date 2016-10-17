@@ -27,7 +27,7 @@ public class  Interpreter {
     private boolean[]   flags;
 
     /**
-     * Constructor wich initialize atribut
+     * Constructor which initialize attribute.
      * @param memory Memory
      * @param reader Reader
      */
@@ -60,11 +60,11 @@ public class  Interpreter {
         }
     }
     /**
-     * Interprate all characters wich can be read with the attribute reader
+     * Interpret all characters which can be read with the attribute reader.
      *
-     * @throws SyntaxErrorException {@link SyntaxErrorException} if an error of syntax is found
-     * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception
-     * @throws IOException {@link IOException}  if reader throw an exception
+     * @throws SyntaxErrorException {@link SyntaxErrorException} if an error of syntax is found.
+     * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception.
+     * @throws IOException {@link IOException}  if reader throw an exception.
      */
     public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
         String instruction;
@@ -85,7 +85,7 @@ public class  Interpreter {
     }
 
     /**
-     * Initiliaze the hashmap wich contains
+     * Initialize the Hashmap which contains
      * class which implements InterpreterInterface associate with  syntaxe
      * for example RightExecute is associate with >
      */

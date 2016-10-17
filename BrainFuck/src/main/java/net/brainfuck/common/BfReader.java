@@ -6,19 +6,21 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
 /**
- * Read file with long and short syntax melted.
+ * Read file with long and short syntax blended.
+ *
  * @author : Francois Melkonian
  */
 public class BfReader implements Reader {
-    private String next=null;
+    private String next = null;
     private java.io.Reader reader;
     private static final int CR = 13;
     private static final int LF = 10;
 
     /**
+     * Constructs a BfReader from file name.
      * Support long and short syntax
      *
-     * @param filename name of the file
+     * @param filename name of the file.
      * @throws FileNotFoundException if the file doesn't exist
      */
     public BfReader(String filename) throws FileNotFoundException {
@@ -33,23 +35,24 @@ public class BfReader implements Reader {
 
     /**
      * Read the line just after the pointer on the file
-     * and put it on "next" string
-     * @throws java.io.IOException if IO error, it will be catch in hasNext()
+     * and put it on "next" string.
+     *
+     * @throws java.io.IOException if IO error, it will be catch in hasNext().
      */
     private void readUntilEndOfLine(int val) throws java.io.IOException {
         next = Character.toString((char) val);
         int c = reader.read();
-        while (c != CR && c!= -1) {
+        while (c != CR && c != -1) {
             next += Character.toString((char) c);
             c = reader.read();
         }
     }
 
     /**
-     * Skip new line character(s)
+     * Skip new line character(s).
      * End of line character change according OS.
      *
-     * @return The first character of the line
+     * @return The first character of the line.
      */
     private int ignoreNewLineChar() throws java.io.IOException {
         int c;
@@ -64,21 +67,21 @@ public class BfReader implements Reader {
     }
 
     /**
-     * Get the next instruction
+     * Get the next instruction.
      *
-     * @return the next
-     * @throws IOException if file close during reading
+     * @return the next instruction.
+     * @throws IOException if file close during reading.
      */
     public String getNext() throws IOException {
         int nextVal;
         try {
             nextVal = reader.read();
-            if(next==null&&isLong(nextVal)){
+            if (next == null && isLong(nextVal)) {
                 readUntilEndOfLine(nextVal);
                 return next;
-            }else if(isNewLine(nextVal)){
-                nextVal=ignoreNewLineChar();
-                if(isLong(nextVal)){
+            } else if (isNewLine(nextVal)) {
+                nextVal = ignoreNewLineChar();
+                if (isLong(nextVal)) {
                     readUntilEndOfLine(nextVal);
                     return next;
                 }
@@ -94,8 +97,9 @@ public class BfReader implements Reader {
     }
 
     /**
-     *  check if a character is a '\n' or '\r'
-     * @param nextVal the character to test
+     * Check if a character is a '\n' or '\r'.
+     *
+     * @param nextVal the character to test.
      * @return true if the char is an end of line char, else false.
      */
     private boolean isNewLine(int nextVal) {
@@ -104,8 +108,9 @@ public class BfReader implements Reader {
 
     /**
      * Check if the character start a "long" syntax or not.
-     * @param nextVal the first character of a line
-     * @return true if the line may contain a "long" syntax
+     *
+     * @param nextVal the first character of a line.
+     * @return true if the line may contain a "long" syntax.
      */
     private boolean isLong(int nextVal) {
         return nextVal >= 'B' && nextVal <= 'R';
@@ -113,9 +118,9 @@ public class BfReader implements Reader {
 
 
     /**
-     * Close the file when the reader finished him
+     * Close the file when the reader finished him.
      *
-     * @throws IOException if file can't close
+     * @throws IOException if file can't close.
      */
     public void close() throws IOException {
         try {
