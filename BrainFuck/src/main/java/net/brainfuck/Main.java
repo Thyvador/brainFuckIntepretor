@@ -45,7 +45,7 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Working Directory = " +
 				System.getProperty("user.dir"));
-		String[] args2 = {"-p", "Brainfuck/src/main/resources/assets/brainfuck/common/res.bf", "--rewrite","-i",};
+		String[] args2 = {"-p", "Brainfuck/src/main/resources/assets/brainfuck/common/res.bf", "--rewrite"};
 		new Main(args2); // On lance sur un fichier au hasard
 		//new Main(args);
 	}
