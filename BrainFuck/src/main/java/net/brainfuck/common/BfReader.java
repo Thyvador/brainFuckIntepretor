@@ -6,6 +6,7 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
 /**
+ * Read file with long and short syntax melted.
  * @author : Francois Melkonian
  */
 public class BfReader implements Reader {
@@ -15,7 +16,6 @@ public class BfReader implements Reader {
     private static final int LF = 10;
 
     /**
-     * Read 1-char-instruction file
      * Support long and short syntax
      *
      * @param filename name of the file
@@ -64,9 +64,9 @@ public class BfReader implements Reader {
     }
 
     /**
-     * Read the file to see if there is an other instruction.
+     * Get the next instruction
      *
-     * @return true if there is an other instruction, false in others case
+     * @return the next
      * @throws IOException if file close during reading
      */
     public String getNext() throws IOException {
@@ -93,10 +93,20 @@ public class BfReader implements Reader {
         return next;
     }
 
+    /**
+     *  check if a character is a '\n' or '\r'
+     * @param nextVal the character to test
+     * @return true if the char is an end of line char, else false.
+     */
     private boolean isNewLine(int nextVal) {
         return nextVal == CR || nextVal == LF;
     }
 
+    /**
+     * Check if the character start a "long" syntax or not.
+     * @param nextVal the first character of a line
+     * @return true if the line may contain a "long" syntax
+     */
     private boolean isLong(int nextVal) {
         return nextVal >= 'B' && nextVal <= 'R';
     }
