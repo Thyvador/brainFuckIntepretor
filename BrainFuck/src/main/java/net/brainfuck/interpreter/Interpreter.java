@@ -24,7 +24,7 @@ public class  Interpreter {
     private Map<String, InterpreterInterface> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
-    private boolean[]   flags;
+    private boolean[] flags;
 
     /**
      * Constructor wich initialize atribut
@@ -36,29 +36,10 @@ public class  Interpreter {
         this.memory = memory;
         this.flags = arg.getFlags();
         this.initLanguages();
-        setIO(arg);
     }
 
 
-    private void setIO(ArgumentAnalyzer arg) throws FileNotFoundException{
-        String inPath = arg.getArgument(IN_PATH);
-        if(inPath != null){
-            try {
-                System.setIn(new FileInputStream(inPath));
-            } catch (java.io.FileNotFoundException e) {
-                throw new FileNotFoundException(inPath);
-            }
-        }
-        String outPath = arg.getArgument(OUT_PATH);
-        if(outPath != null){
-            try {
-                PrintStream printStream = new PrintStream(outPath);
-                System.setOut(printStream);
-            } catch (java.io.FileNotFoundException e) {
-                throw new FileNotFoundException(outPath);
-            }
-        }
-    }
+
     /**
      * Interprate all characters wich can be read with the attribute reader
      *

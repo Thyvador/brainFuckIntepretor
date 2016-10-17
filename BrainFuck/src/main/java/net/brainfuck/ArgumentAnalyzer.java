@@ -35,14 +35,6 @@ public class ArgumentAnalyzer {
                 case TRANSLATE_SYNTAX:
                     flags[TRANSLATE] = true;
                     break;
-                case IN_SYNTAX:
-                    this.getDoubleArgument(args, i, IN_PATH);
-                    i += 1;
-                    break;
-                case OUT_SYNTAX:
-                    this.getDoubleArgument(args, i, OUT_PATH);
-                    i += 1;
-                    break;
                 case PATH_SYNTAX:
                     this.getDoubleArgument(args, i, PATH);
                     i += 1;
