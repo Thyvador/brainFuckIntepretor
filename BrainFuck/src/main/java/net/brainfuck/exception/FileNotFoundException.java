@@ -2,16 +2,12 @@ package net.brainfuck.exception;
 
 /**
  * Signal when a file to read is not found is detected in the file.
- * This exception will be thrown by <code>LineReader</code>.
+ * This exception will be thrown by <code>BfReader</code>.
  *
  * @author Alexandre Hiltcher
  */
 public class FileNotFoundException extends Exception {
 
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -4105585133694610831L;
 
 	/**
