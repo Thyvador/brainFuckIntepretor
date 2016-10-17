@@ -1,8 +1,5 @@
 package net.brainfuck.common;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 
@@ -20,15 +17,9 @@ public class Memory {
 	public static final short MAX_VALUE = (short) 255;
 	/** Min value in the memory (0) */
 	public static final short MIN_VALUE = 0;
-	/** Size of the memory stocked in the array for direct accessing */
-	private static final int ARRAY_SIZE = 1000;
 
 	/** First cells of the memory in the array */
 	private short start[];
-	/**
-	 * Rest of the memory in this map. Key is the number of the cell and value is the value of the cell
-	 */
-	private Map<Integer, Short> end;
 	/** Index of the current cell */
 	private int index;
 
@@ -81,16 +72,9 @@ public class Memory {
 	 */
 	private short get(int index) throws MemoryOutOfBoundsException {
 		checkIndex(index);
-		if (index < ARRAY_SIZE)
-			return start[index];
-		return (end.get(index - ARRAY_SIZE) != null) ? end.get(index - ARRAY_SIZE) : (byte) 0;
+		return start[index];
 	}
 
-	public Memory set(int changeValue) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-
-		return set(index,changeValue-get());
-
-	}
 	/**
 	 * Set the value of the specified memory cell
 	 *
@@ -106,16 +90,13 @@ public class Memory {
 		try {
 			if (get(index) > (MAX_VALUE - changeValue) || get(index) < (MIN_VALUE - changeValue))
 				throw new MemoryOverFlowException();
-			if (index < ARRAY_SIZE) {
-				start[index] += changeValue;
-				return this;
-			}
-			end.put(index - ARRAY_SIZE, (short) (get(index) + changeValue));
+			start[index] += changeValue;
+			return this;
 		} catch (MemoryOutOfBoundsException e) {
+			// Might not append because has been made before
 			e.printStackTrace();
 		}
 		return this;
-
 	}
 
 	/**
@@ -185,8 +166,7 @@ public class Memory {
 	 * @return current object
 	 */
 	public Memory clean() {
-		start = new short[ARRAY_SIZE];
-		end = new HashMap<>();
+		start = new short[MAX_CAPACITY];
 		index = 0;
 		return this;
 	}
