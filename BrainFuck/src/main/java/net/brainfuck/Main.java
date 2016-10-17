@@ -31,8 +31,6 @@ public class Main {
 			System.exit(1);
 		} catch (MemoryOverFlowException e){
 			System.exit(2);
-		} catch (FileNotFoundIn e) {
-			System.exit(3);
 		}
 		System.exit(0);
 	}

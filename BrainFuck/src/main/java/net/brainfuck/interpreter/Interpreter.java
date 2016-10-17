@@ -66,7 +66,7 @@ public class  Interpreter {
      * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception
      * @throws IOException {@link IOException}  if reader throw an exception
      */
-    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException,FileNotFoundIn {
+    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
         String instruction;
         InterpreterInterface interpretor;
 
@@ -90,7 +90,7 @@ public class  Interpreter {
      * for example RightExecute is associate with >
      */
     private void initLanguages() {
-        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT, IN, OUT};
+        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
         for (Language language : languages) {
             InterpreterInterface interpreter = language.getInterpreter();
             String[] aliases = language.getAliases();

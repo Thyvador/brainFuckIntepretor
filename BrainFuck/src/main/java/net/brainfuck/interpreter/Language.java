@@ -10,9 +10,7 @@ enum Language {
     INCR(new IncremanteExecute(), "+", "INCR", "ffffff"),
     DECR(new DecremanteExecute(), "-", "DECR", "4b0082"),
     RIGHT(new RightExecute(), ">", "RIGHT", "0000ff"),
-    LEFT(new LeftExecute(), "<", "LEFT", "9400d3"),
-    IN(new InExecute(), ",", "IN", "ffff00"),
-    OUT(new OutExecute(), ".", "OUT", "ffff00");
+    LEFT(new LeftExecute(), "<", "LEFT", "9400d3");
     //JUMP(new JumpExecute(), "[", "JUMP", "ff7f00"),
     //BACK(new backExecute(), "]", "BACK", "ff0000");
     private InterpreterInterface interpreter;

@@ -6,7 +6,6 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.common.Memory;
-import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
@@ -20,7 +19,7 @@ interface InterpreterInterface {
      * Execute a method of Memory Class
      * @param memory Memory machine
      */
-    void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn;
+    void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException;
 
     void rewrite();
 }
