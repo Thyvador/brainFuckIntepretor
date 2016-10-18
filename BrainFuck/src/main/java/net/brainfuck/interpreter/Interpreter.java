@@ -6,13 +6,13 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.brainfuck.ArgumentAnalyzer;
-import net.brainfuck.ArgumentConstante;
+import net.brainfuck.common.ArgumentAnalyzer;
+import net.brainfuck.common.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 
-import static net.brainfuck.ArgumentConstante.*;
+import static net.brainfuck.common.ArgumentConstante.*;
 import static net.brainfuck.interpreter.Language.*;
 
 /**
