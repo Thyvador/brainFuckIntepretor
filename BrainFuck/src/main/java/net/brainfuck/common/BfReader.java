@@ -69,7 +69,8 @@ public class BfReader implements Reader {
      * @return the next
      * @throws IOException if file close during reading
      */
-    public String getNext() throws IOException {
+    @Override
+	public String getNext() throws IOException {
         int nextVal;
         try {
             nextVal = reader.read();
@@ -117,7 +118,8 @@ public class BfReader implements Reader {
      *
      * @throws IOException if file can't close
      */
-    public void close() throws IOException {
+    @Override
+	public void close() throws IOException {
         try {
             reader.close();
         } catch (java.io.IOException e) {
