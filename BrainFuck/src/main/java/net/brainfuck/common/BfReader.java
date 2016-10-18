@@ -12,8 +12,8 @@ import net.brainfuck.exception.IOException;
 public class BfReader implements Reader {
     private String next=null;
     private java.io.Reader reader;
-    private static final int CR = 13;
-    private static final int LF = 10;
+    private static final int CR = '\r';
+    private static final int LF = '\n';
 
     /**
      * Support long and short syntax
