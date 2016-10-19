@@ -2,6 +2,9 @@ package net.brainfuck;
 
 import static net.brainfuck.common.ArgumentConstante.PATH;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
+import java.util.List;
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.BfReader;
 import net.brainfuck.common.Memory;
@@ -16,10 +19,17 @@ import net.brainfuck.interpreter.Interpreter;
 public class Main {
 
 	public Main(String[] args){
-
 		try {
+			for (String z:arguments ) {
+				System.out.println(z);
+			}
 			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
 			Memory m = new Memory();
+			for (String z :
+					args) {
+				System.out.println(z);
+			}
+			System.out.println("get arg : "+args);
 			Reader r = new BfReader(a.getArgument(PATH));
 
 			Interpreter i = new Interpreter(m,r, a);
@@ -42,12 +52,17 @@ public class Main {
 //		new Main(args); // On lance sur un fichier au hasard
 	}
 
+	static RuntimeMXBean runtimeMxBean;
+	static List<String> arguments;
 	// prepare the executable jar
 	public static void main(String[] args) {
-		System.out.println("Working Directory = " +
-				System.getProperty("user.dir"));
-		String[] args2 = {"-p", "Brainfuck/src/main/resources/assets/brainfuck/common/res.bf", "--rewrite"};
-		new Main(args2); // On lance sur un fichier au hasard
+		runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+		arguments = runtimeMxBean.getInputArguments();
+		String[] s = new String[arguments.size()];
+		for (int i = 0; i < arguments.size(); i++) {
+			s[i]=arguments.get(i);
+		}
+		new Main(s); // On lance sur un fichier au hasard
 		//new Main(args);
 	}
 
