@@ -1,10 +1,12 @@
 package net.brainfuck;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
+import java.util.List;
 
 import net.brainfuck.common.BfReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
-import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.Interpreter;
@@ -13,11 +15,16 @@ import static net.brainfuck.ArgumentConstante.PATH;
 
 
 public class Main {
+	RuntimeMXBean runtimeMxBean;
+	List<String> arguments;
+
 
 	public Main(String[] args){
 
 		try {
-			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
+			runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+			arguments = runtimeMxBean.getInputArguments();
+			ArgumentAnalyzer a = new ArgumentAnalyzer((String[]) arguments.toArray());
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
 

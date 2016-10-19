@@ -11,7 +11,7 @@ import static net.brainfuck.ArgumentConstante.*;
 public class ArgumentAnalyzer {
     private boolean[] flags = {false, false, false};
     private String[] arguments = {null, null, null};
-    private String[]    args = null;
+    private String[]args = null;
 
     public ArgumentAnalyzer(String[] args) throws IncorrectArgumentException{
         this.args = args;
