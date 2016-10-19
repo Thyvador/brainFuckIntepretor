@@ -3,6 +3,9 @@ package net.brainfuck.interpreter;
 import java.util.Map;
 
 /**
+ * Represent the language with his syntax and his corresponding InterpreterInterface
+ * (wich implements the corresponding method to the syntax)
+ *
  * @author davidLANG
  */
 enum Language {

@@ -16,6 +16,9 @@ class RightExecute implements InterpreterInterface {
         memory.right();
     }
 
+    /**
+     * Print the short syntax of "right" command
+     */
     @Override
     public void rewrite() {
         System.out.println(Language.RIGHT.getShortSyntax());
