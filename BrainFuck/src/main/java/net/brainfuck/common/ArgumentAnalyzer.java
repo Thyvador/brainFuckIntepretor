@@ -11,7 +11,7 @@ import net.brainfuck.exception.IncorrectArgumentException;
  * @author davidLANG
  */
 public class ArgumentAnalyzer {
-    private boolean[] flags = new int[3];
+    private boolean[] flags = new boolean[3];
     private String[] arguments = new String[3];
     private String[]args = null;
 
