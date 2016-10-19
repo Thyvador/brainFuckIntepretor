@@ -1,5 +1,8 @@
 package net.brainfuck;
 
+import static net.brainfuck.common.ArgumentConstante.PATH;
+
+import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.BfReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
@@ -8,8 +11,6 @@ import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.Interpreter;
-
-import static net.brainfuck.ArgumentConstante.PATH;
 
 
 public class Main {

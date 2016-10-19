@@ -6,13 +6,13 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.brainfuck.ArgumentAnalyzer;
-import net.brainfuck.ArgumentConstante;
+import net.brainfuck.common.ArgumentAnalyzer;
+import net.brainfuck.common.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 
-import static net.brainfuck.ArgumentConstante.*;
+import static net.brainfuck.common.ArgumentConstante.*;
 import static net.brainfuck.interpreter.Language.*;
 
 /**
@@ -24,7 +24,7 @@ public class  Interpreter {
     private Map<String, InterpreterInterface> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
-    private boolean[]   flags;
+    private boolean[] flags;
 
     /**
      * Constructor which initialize attribute.
@@ -36,29 +36,10 @@ public class  Interpreter {
         this.memory = memory;
         this.flags = arg.getFlags();
         this.initLanguages();
-        setIO(arg);
     }
 
 
-    private void setIO(ArgumentAnalyzer arg) throws FileNotFoundException{
-        String inPath = arg.getArgument(IN_PATH);
-        if(inPath != null){
-            try {
-                System.setIn(new FileInputStream(inPath));
-            } catch (java.io.FileNotFoundException e) {
-                throw new FileNotFoundException(inPath);
-            }
-        }
-        String outPath = arg.getArgument(OUT_PATH);
-        if(outPath != null){
-            try {
-                PrintStream printStream = new PrintStream(outPath);
-                System.setOut(printStream);
-            } catch (java.io.FileNotFoundException e) {
-                throw new FileNotFoundException(outPath);
-            }
-        }
-    }
+
     /**
      * Interpret all characters which can be read with the attribute reader.
      *

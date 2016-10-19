@@ -1,9 +1,9 @@
-package net.brainfuck;
+package net.brainfuck.common;
 
+
+import static net.brainfuck.common.ArgumentConstante.*;
 
 import net.brainfuck.exception.IncorrectArgumentException;
-
-import static net.brainfuck.ArgumentConstante.*;
 
 /**
  * @author davidLANG
@@ -34,14 +34,6 @@ public class ArgumentAnalyzer {
                     break;
                 case TRANSLATE_SYNTAX:
                     flags[TRANSLATE] = true;
-                    break;
-                case IN_SYNTAX:
-                    this.getDoubleArgument(args, i, IN_PATH);
-                    i += 1;
-                    break;
-                case OUT_SYNTAX:
-                    this.getDoubleArgument(args, i, OUT_PATH);
-                    i += 1;
                     break;
                 case PATH_SYNTAX:
                     this.getDoubleArgument(args, i, PATH);

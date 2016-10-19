@@ -13,8 +13,8 @@ import net.brainfuck.exception.IOException;
 public class BfReader implements Reader {
     private String next = null;
     private java.io.Reader reader;
-    private static final int CR = 13;
-    private static final int LF = 10;
+    private static final int CR = '\r';
+    private static final int LF = '\n';
 
     /**
      * Constructs a BfReader from file name.
@@ -72,7 +72,8 @@ public class BfReader implements Reader {
      * @return the next instruction.
      * @throws IOException if file close during reading.
      */
-    public String getNext() throws IOException {
+    @Override
+	public String getNext() throws IOException {
         int nextVal;
         try {
             nextVal = reader.read();
@@ -122,7 +123,8 @@ public class BfReader implements Reader {
      *
      * @throws IOException if file can't close.
      */
-    public void close() throws IOException {
+    @Override
+	public void close() throws IOException {
         try {
             reader.close();
         } catch (java.io.IOException e) {
