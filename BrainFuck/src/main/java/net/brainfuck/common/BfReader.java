@@ -24,7 +24,6 @@ public class BfReader implements Reader {
      * @throws FileNotFoundException if the file doesn't exist
      */
     public BfReader(String filename) throws FileNotFoundException {
-
         try {
             reader = new FileReader(filename);
         } catch (java.io.FileNotFoundException e) {
