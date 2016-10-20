@@ -4,6 +4,7 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.util.Arrays;
 import java.util.List;
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.BfReader;
@@ -20,9 +21,9 @@ public class Main {
 
 	public Main(String[] args){
 		try {
-			for (String z:arguments ) {
+			/*for (String z:arguments) {
 				System.out.println(z);
-			}
+			}*/
 			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
 			Memory m = new Memory();
 			for (String z :
@@ -58,11 +59,13 @@ public class Main {
 	public static void main(String[] args) {
 		runtimeMxBean = ManagementFactory.getRuntimeMXBean();
 		arguments = runtimeMxBean.getInputArguments();
-		String[] s = new String[arguments.size()];
+		/*String[] s = new String[arguments.size()];
 		for (int i = 0; i < arguments.size(); i++) {
 			s[i]=arguments.get(i);
-		}
-		new Main(s); // On lance sur un fichier au hasard
+		}*/
+		System.out.println(Arrays.toString(args));
+		System.out.println(arguments);
+		new Main(args); // On lance sur un fichier au hasard
 		//new Main(args);
 	}
 
