@@ -21,23 +21,13 @@ public class Main {
 
 	public Main(String[] args){
 		try {
-			/*for (String z:arguments) {
-				System.out.println(z);
-			}*/
 			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
 			Memory m = new Memory();
-			for (String z :
-					args) {
-				System.out.println(z);
-			}
-			System.out.println("get arg : "+args);
 			Reader r = new BfReader(a.getArgument(PATH));
-
 			Interpreter i = new Interpreter(m,r, a);
 			i.interprate();
 			System.out.println(m);
 		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
-			// Exit code not set
 			System.exit(4);
 		} catch (MemoryOutOfBoundsException e) {
 			System.exit(1);
@@ -57,14 +47,7 @@ public class Main {
 	static List<String> arguments;
 	// prepare the executable jar
 	public static void main(String[] args) {
-		runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-		arguments = runtimeMxBean.getInputArguments();
-		/*String[] s = new String[arguments.size()];
-		for (int i = 0; i < arguments.size(); i++) {
-			s[i]=arguments.get(i);
-		}*/
-		System.out.println(Arrays.toString(args));
-		System.out.println(arguments);
+		System.out.println(args);
 		new Main(args); // On lance sur un fichier au hasard
 		//new Main(args);
 	}
