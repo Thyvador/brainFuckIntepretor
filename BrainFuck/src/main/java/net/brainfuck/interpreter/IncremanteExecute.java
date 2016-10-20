@@ -24,6 +24,6 @@ class IncremanteExecute implements InterpreterInterface {
      */
     @Override
     public void rewrite() {
-        System.out.println(Language.INCR.getShortSyntax());
+        System.out.print(Language.INCR.getShortSyntax());
     }
 }

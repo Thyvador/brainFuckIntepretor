@@ -21,6 +21,6 @@ class RightExecute implements InterpreterInterface {
      */
     @Override
     public void rewrite() {
-        System.out.println(Language.RIGHT.getShortSyntax());
+        System.out.print(Language.RIGHT.getShortSyntax());
     }
 }

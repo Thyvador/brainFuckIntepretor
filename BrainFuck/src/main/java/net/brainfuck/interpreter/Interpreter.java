@@ -55,11 +55,11 @@ public class  Interpreter {
             if ((interpretor = this.interpretorExecuter.get(instruction)) == null) {
                 throw new SyntaxErrorException(instruction);
             }
-            if (!flags[ArgumentConstante.CHECK]) {
-                interpretor.execute(memory);
-            }
+
             if (flags[ArgumentConstante.REWRITE]) {
                 interpretor.rewrite();
+            }else if (flags[ArgumentConstante.CHECK]) {
+                interpretor.execute(memory);
             }
         }
         reader.close();
