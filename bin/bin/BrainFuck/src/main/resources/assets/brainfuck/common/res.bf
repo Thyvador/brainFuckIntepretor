@@ -1,3 +1,0 @@
-INCR
-INCR
-RIGHT
