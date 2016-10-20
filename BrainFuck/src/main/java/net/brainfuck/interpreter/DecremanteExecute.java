@@ -23,6 +23,6 @@ class DecremanteExecute implements InterpreterInterface {
      */
     @Override
     public void rewrite() {
-        System.out.println(Language.DECR.getShortSyntax());
+        System.out.print(Language.DECR.getShortSyntax());
     }
 }

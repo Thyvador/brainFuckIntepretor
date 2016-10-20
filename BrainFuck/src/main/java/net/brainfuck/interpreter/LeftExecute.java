@@ -21,6 +21,6 @@ class LeftExecute implements InterpreterInterface {
      */
     @Override
     public void rewrite() {
-        System.out.println(Language.LEFT.getShortSyntax());
+        System.out.print(Language.LEFT.getShortSyntax());
     }
 }
