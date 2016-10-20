@@ -1,8 +1,11 @@
 
 package net.brainfuck.interpreter;
 
-import java.io.FileInputStream;
-import java.io.PrintStream;
+import static net.brainfuck.interpreter.Language.DECR;
+import static net.brainfuck.interpreter.Language.INCR;
+import static net.brainfuck.interpreter.Language.LEFT;
+import static net.brainfuck.interpreter.Language.RIGHT;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,10 +13,11 @@ import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
-import net.brainfuck.exception.*;
-
-import static net.brainfuck.common.ArgumentConstante.*;
-import static net.brainfuck.interpreter.Language.*;
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SyntaxErrorException;
 
 /**
  * @author davidLANG
