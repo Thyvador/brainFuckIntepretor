@@ -1,7 +1,5 @@
 package net.brainfuck.interpreter;
 
-import java.util.Map;
-
 /**
  * Represent the language with his syntax and his corresponding InterpreterInterface
  * (wich implements the corresponding method to the syntax)
@@ -14,8 +12,6 @@ enum Language {
     DECR(new DecremanteExecute(), "-", "DECR", "4b0082"),
     RIGHT(new RightExecute(), ">", "RIGHT", "0000ff"),
     LEFT(new LeftExecute(), "<", "LEFT", "9400d3");
-    //JUMP(new JumpExecute(), "[", "JUMP", "ff7f00"),
-    //BACK(new backExecute(), "]", "BACK", "ff0000");
     private InterpreterInterface interpreter;
     private String[] aliases;
 
