@@ -16,5 +16,10 @@ public interface Reader {
     String getNext() throws IOException;
 
 
+    /**
+     * Close the file when the reader finished him.
+     *
+     * @throws IOException if file can't close.
+     */
     void close() throws IOException;
 }

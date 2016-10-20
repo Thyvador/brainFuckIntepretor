@@ -25,14 +25,25 @@ enum Language {
         this.aliases = aliases;
     }
 
+    /**
+     * @return the aliases
+     */
     public String[] getAliases() {
         return aliases;
     }
 
+    /**
+     * 
+     * @return the interpreter
+     */
     public InterpreterInterface getInterpreter() {
         return interpreter;
     }
 
+    /**
+     * 
+     * @return the short syntax
+     */
     public String   getShortSyntax() {
         return this.aliases[0];
     }

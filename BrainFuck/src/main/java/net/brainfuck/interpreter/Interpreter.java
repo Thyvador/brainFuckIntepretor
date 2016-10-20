@@ -13,7 +13,6 @@ import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
-import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
@@ -34,8 +33,9 @@ public class  Interpreter {
      * Constructor which initialize attribute.
      * @param memory Memory
      * @param reader Reader
+     * @param arg ArgumentAnalyzer use to get arguments
      */
-    public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer arg) throws FileNotFoundException {
+    public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer arg) {
         this.reader = reader;
         this.memory = memory;
         this.flags = arg.getFlags();
@@ -50,6 +50,7 @@ public class  Interpreter {
      * @throws SyntaxErrorException {@link SyntaxErrorException} if an error of syntax is found.
      * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception.
      * @throws IOException {@link IOException}  if reader throw an exception.
+     * @throws MemoryOverFlowException throw by memory
      */
     public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
         String instruction;

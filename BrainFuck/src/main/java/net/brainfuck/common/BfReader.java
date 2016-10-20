@@ -35,8 +35,9 @@ public class BfReader implements Reader {
     /**
      * Read the line just after the pointer on the file
      * and put it on "next" string.
+     * @param val the current value
      *
-     * @throws java.io.IOException if IO error, it will be catch in hasNext().
+     * @throws java.io.IOException if IO error, it will be catch in getNext().
      */
     private void readUntilEndOfLine(int val) throws java.io.IOException {
         next = Character.toString((char) val);
@@ -52,6 +53,7 @@ public class BfReader implements Reader {
      * End of line character change according OS.
      *
      * @return The first character of the line.
+     * @throws java.io.IOException if IO error, it will be catch in getNext().
      */
     private int ignoreNewLineChar() throws java.io.IOException {
         int c;

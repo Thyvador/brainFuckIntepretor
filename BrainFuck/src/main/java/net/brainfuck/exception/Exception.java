@@ -26,10 +26,20 @@ public class Exception extends Throwable{
         System.err.println(message);
     }
 
+    /**
+     * Constructs a new Exception from a cause and with a detailed message.
+     * 
+     * @param message the message of the exception.
+     * @param cause the cause of the exception.
+     */
     public Exception(String message, Throwable cause){
         super(message, cause);
     }
 
+    /**
+     * Constructs a new Exception from a cause.
+     * @param cause the cause of the exception.
+     */
     public Exception(Throwable cause){
         super(cause);
     }
