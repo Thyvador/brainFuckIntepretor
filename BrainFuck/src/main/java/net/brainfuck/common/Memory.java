@@ -19,7 +19,7 @@ public class Memory {
 	private static final short MIN_VALUE = 0;
 
 	/** First cells of the memory in the array */
-	private short start[];
+	private short memory[];
 	/** Index of the current cell */
 	private int index;
 
@@ -72,7 +72,7 @@ public class Memory {
 	 */
 	private short get(int index) throws MemoryOutOfBoundsException {
 		checkIndex(index);
-		return start[index];
+		return memory[index];
 	}
 
 	/**
@@ -89,8 +89,8 @@ public class Memory {
 	private Memory set(int index, int changeValue) throws MemoryOverFlowException {
 		try {
 			if (get(index) > (MAX_VALUE - changeValue) || get(index) < (MIN_VALUE - changeValue))
-				throw new MemoryOverFlowException();
-			start[index] += changeValue;
+				throw new MemoryOverFlowException("Invalid value "+(memory[index]+changeValue)+" at index "+index);
+			memory[index] += changeValue;
 			return this;
 		} catch (MemoryOutOfBoundsException e) {
 			// Might not append because has been made before
@@ -109,7 +109,7 @@ public class Memory {
 	 */
 	private void checkIndex(int index) throws MemoryOutOfBoundsException {
 		if (index < 0 || index >= MAX_CAPACITY)
-			throw new MemoryOutOfBoundsException();
+			throw new MemoryOutOfBoundsException("Invalid index "+index);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class Memory {
 	 * @return current object
 	 */
     private Memory clean() {
-		start = new short[MAX_CAPACITY];
+		memory = new short[MAX_CAPACITY];
 		index = 0;
 		return this;
 	}

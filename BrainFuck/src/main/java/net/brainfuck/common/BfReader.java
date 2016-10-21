@@ -46,7 +46,7 @@ public class BfReader implements Reader {
     private void readUntilEndOfLine(int val) throws java.io.IOException {
         next = Character.toString((char) val);
         int c = reader.read();
-        while (c != CR && c != -1) {
+        while (c != LF && c != CR && c != -1) {
             next += Character.toString((char) c);
             c = reader.read();
         }
@@ -62,18 +62,7 @@ public class BfReader implements Reader {
      */
     private int ignoreNewLineChar() throws java.io.IOException {
         int c;
-        while (isNewLine(c = reader.read())) {
-
-        }
-        ;
-            /*
-        c = reader.read();
-        if (c == CR) {
-            c = reader.read();
-        }
-        if (c == LF) {
-            c = reader.read();
-        }*/
+        while (isNewLine(c = reader.read())) ;
         return c;
     }
 
@@ -90,43 +79,35 @@ public class BfReader implements Reader {
             nextVal = reader.read();
             if (isNewLine(nextVal)) {
                 nextVal = ignoreNewLineChar();
-                oldvar = CR;
-
+                oldvar = LF;
             }
-            if(nextVal==-1){
+            if (nextVal == -1) {
                 return null;
             }
-                if (isLong(nextVal)) {
+            if (isLong(nextVal)) {
                 if (firstLine) {
+                    firstLine = false;
                     readUntilEndOfLine(nextVal);
-                    oldvar = CR;
+                    oldvar = LF;
                     return next;
-                } else if (oldvar == CR) {
+                } else if (oldvar == LF) {
                     readUntilEndOfLine(nextVal);
-                    oldvar = CR;
+                    oldvar = LF;
+                    return next;
                 } else {
-                    nextVal = ignoreNewLineChar();
                     oldvar = nextVal;
                     return Character.toString((char) nextVal);
                 }
-
-            }else{
-                    oldvar = nextVal;
-                    return Character.toString((char) nextVal);
+            } else {
+                if(firstLine){
+                    firstLine = false;
                 }
-
-
-            if(firstLine) firstLine = false;
+                oldvar = nextVal;
+                return Character.toString((char) nextVal);
+            }
         } catch (java.io.IOException e) {
             throw new IOException();
         }
-        if (nextVal == -1) {
-            return null;
-        }
-
-
-        next = Character.toString((char) nextVal);
-        return next;
     }
 
     /**
@@ -163,6 +144,4 @@ public class BfReader implements Reader {
             throw new IOException();
         }
     }
-
-
 }
