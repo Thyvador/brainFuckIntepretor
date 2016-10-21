@@ -46,7 +46,7 @@ public class BfReader implements Reader {
     private void readUntilEndOfLine(int val) throws java.io.IOException {
         next = Character.toString((char) val);
         int c = reader.read();
-        while (c != CR && c != -1) {
+        while (c != CR &&c != LF && c != -1) {
             next += Character.toString((char) c);
             c = reader.read();
         }
@@ -102,13 +102,6 @@ public class BfReader implements Reader {
                     return Character.toString((char) nextVal);
                 }
 
-            } else if (isNewLine(nextVal) || isLine) {
-                isLine = false;
-                nextVal = ignoreNewLineChar();
-                if (isLong(nextVal)) {
-                    readUntilEndOfLine(nextVal);
-                    return next;
-                }
             }
             if(firstLine) firstLine = false;
         } catch (java.io.IOException e) {
