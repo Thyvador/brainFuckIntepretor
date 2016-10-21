@@ -6,7 +6,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-            String[] args2 = {"-p", "Brainfuck/src/test/resources/assets/brainfucktest/common/TestIn.bf","-i","Brainfuck/src/test/resources/assets/brainfucktest/common/temp"};
+            String[] args2 = {"-p", "Brainfuck/src/test/resources/assets/brainfucktest/common/Example.bf"};
         new Main(args2); // On lance sur un fichier au hasard
       //  new Main("Brainfuck/src/test/resources/assets/brainfucktest/common/syntax/allInOneLine.bf");
     }
