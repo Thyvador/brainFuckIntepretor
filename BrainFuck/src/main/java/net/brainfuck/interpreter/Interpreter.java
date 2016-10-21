@@ -63,7 +63,7 @@ public class  Interpreter {
 
             if (flags[ArgumentConstante.REWRITE]) {
                 interpretor.rewrite();
-            }else if (flags[ArgumentConstante.CHECK]) {
+            }else if (!flags[ArgumentConstante.CHECK]) {
                 interpretor.execute(memory);
             }
         }
@@ -76,7 +76,7 @@ public class  Interpreter {
      * for example RightExecute is associate with >
      */
     private void initLanguages() {
-        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT};
+        Language[] languages = Language.values();
         for (Language language : languages) {
             InterpreterInterface interpreter = language.getInterpreter();
             String[] aliases = language.getAliases();

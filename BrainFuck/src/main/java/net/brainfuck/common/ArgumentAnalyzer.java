@@ -62,7 +62,7 @@ public class ArgumentAnalyzer {
                     i += 1;
                     break;
                 default:
-                    throw new IncorrectArgumentException("bad arguments");
+                    throw new IncorrectArgumentException(args[i]);
             }
         }
     }
@@ -77,7 +77,7 @@ public class ArgumentAnalyzer {
      * @throws IncorrectArgumentException missing argument
      */
     private void getDoubleArgument(String[] args, int i, int position) throws IncorrectArgumentException {
-        if (i + 1 > args.length) {
+        if (i + 1 >= args.length) {
             throw new IncorrectArgumentException("missing argument after " + args[i]);
         }
         this.arguments[position] = args[i+1];
