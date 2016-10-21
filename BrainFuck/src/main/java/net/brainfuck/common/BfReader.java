@@ -2,6 +2,7 @@ package net.brainfuck.common;
 
 import java.io.FileReader;
 
+import net.brainfuck.exception.CharacterException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
@@ -14,9 +15,10 @@ public class BfReader implements Reader {
     private String next = null;
     private java.io.Reader reader;
     private boolean firstLine = true;
+    private boolean isLine  = false;
     private static final int CR = '\r';
     private static final int LF = '\n';
-    private int prevVal;
+    private int oldvar;
 
     /**
      * Constructs a BfReader from file name.
@@ -48,7 +50,7 @@ public class BfReader implements Reader {
             next += Character.toString((char) c);
             c = reader.read();
         }
-        prevVal = c;
+        oldvar = c;
     }
 
     /**
@@ -60,13 +62,17 @@ public class BfReader implements Reader {
      */
     private int ignoreNewLineChar() throws java.io.IOException {
         int c;
+        while (isNewLine(c=reader.read())){
+
+        };
+            /*
         c = reader.read();
         if (c == CR) {
             c = reader.read();
         }
         if (c == LF) {
             c = reader.read();
-        }
+        }*/
         return c;
     }
 
@@ -81,10 +87,28 @@ public class BfReader implements Reader {
         int nextVal;
         try {
             nextVal = reader.read();
-            if (firstLine && isLong(nextVal)) {
-                firstLine = false;
-                readUntilEndOfLine(nextVal);
-            } else if (isNewLine(prevVal)) {
+            if (isLong(nextVal)) {
+                if (firstLine){
+                    firstLine = false;
+                    readUntilEndOfLine(nextVal);
+                    oldvar = CR;
+                    return next;
+                }else if(oldvar == CR){
+                    readUntilEndOfLine(nextVal);
+                    oldvar =CR;
+                }else{
+                    nextVal = ignoreNewLineChar();
+                    oldvar=nextVal;
+                    return Character.toString((char)nextVal);
+                }
+
+            }
+
+
+
+
+ else if (isNewLine(nextVal)||isLine) {
+                isLine = false;
                 nextVal = ignoreNewLineChar();
                 if (isLong(nextVal)) {
                     readUntilEndOfLine(nextVal);
