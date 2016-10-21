@@ -63,7 +63,7 @@ public class  Interpreter {
 
             if (flags[ArgumentConstante.REWRITE]) {
                 interpretor.rewrite();
-            }else if (flags[ArgumentConstante.CHECK]) {
+            }else if (!flags[ArgumentConstante.CHECK]) {
                 interpretor.execute(memory);
             }
         }
