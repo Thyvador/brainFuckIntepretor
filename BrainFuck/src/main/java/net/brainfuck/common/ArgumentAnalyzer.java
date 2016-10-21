@@ -34,6 +34,10 @@ public class ArgumentAnalyzer {
      */
     public String getArgument(int argument) {return this.arguments[argument];}
 
+    /**
+     * Returns the flags "--something" for example "--translate"
+     * @return the flags
+     */
     public boolean[] getFlags() {return this.flags;}
 
     /**

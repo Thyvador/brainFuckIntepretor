@@ -18,6 +18,9 @@ interface InterpreterInterface {
     /**
      * Execute a method of Memory Class
      * @param memory Memory machine
+     * @throws MemoryOutOfBoundsException throw by memory
+     * @throws MemoryOverFlowException  throw by memory
+     * @throws IOException throw by memory
      */
     void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException;
 

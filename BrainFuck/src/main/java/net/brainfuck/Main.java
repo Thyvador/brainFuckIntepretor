@@ -9,14 +9,25 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.Interpreter;
 
-
+/**
+ * @author user
+ *
+ */
 public class Main {
 
+	/**
+	 * Print the usage
+	 */
 	private void printUsage() {
 		System.out.println("Usage : bfck.sh -p FILE [--rewrite]");
 	}
 
-	public Main(String[] args){
+	/**
+	 * Default constructor
+	 * 
+	 * @param args
+	 */
+	public Main(String[] args) {
 		if (args.length == 0) {
 			this.printUsage();
 			System.exit(0);
@@ -29,7 +40,7 @@ public class Main {
 			}
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
-			Interpreter i = new Interpreter(m,r, a);
+			Interpreter i = new Interpreter(m, r, a);
 			i.interprate();
 			System.out.println(m);
 		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
@@ -37,13 +48,16 @@ public class Main {
 			System.exit(4);
 		} catch (MemoryOutOfBoundsException e) {
 			System.exit(1);
-		} catch (MemoryOverFlowException e){
+		} catch (MemoryOverFlowException e) {
 			System.exit(2);
 		}
 		System.exit(0);
 	}
 
-
+	/**
+	 * @param args
+	 *            command-line args
+	 */
 	public static void main(String[] args) {
 		new Main(args);
 	}
