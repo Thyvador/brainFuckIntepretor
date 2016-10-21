@@ -14,7 +14,7 @@ public class BfReader implements Reader {
     private String next = null;
     private java.io.Reader reader;
     private boolean firstLine = true;
-    private boolean isLine  = false;
+    private char oldval;
     private static final int CR = '\r';
     private static final int LF = '\n';
 
@@ -81,6 +81,7 @@ public class BfReader implements Reader {
         int nextVal;
         try {
             nextVal = reader.read();
+            System.out.println( isLong(nextVal));
             if (firstLine && isLong(nextVal)) {
                 firstLine = false;
                 readUntilEndOfLine(nextVal);
