@@ -123,6 +123,8 @@ public class BfReader implements Reader {
         if (nextVal == -1) {
             return null;
         }
+
+
         next = Character.toString((char) nextVal);
         return next;
     }
