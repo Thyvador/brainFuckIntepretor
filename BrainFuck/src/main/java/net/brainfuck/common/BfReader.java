@@ -15,7 +15,7 @@ public class BfReader implements Reader {
     private String next = null;
     private java.io.Reader reader;
     private boolean firstLine = true;
-    private boolean isLine  = false;
+    private boolean isLine = false;
     private static final int CR = '\r';
     private static final int LF = '\n';
     private int oldvar;
@@ -39,14 +39,14 @@ public class BfReader implements Reader {
     /**
      * Read the line just after the pointer on the file
      * and put it on "next" string.
-     * @param val the current value
      *
+     * @param val the current value
      * @throws java.io.IOException if IO error, it will be catch in getNext().
      */
     private void readUntilEndOfLine(int val) throws java.io.IOException {
         next = Character.toString((char) val);
         int c = reader.read();
-        while (c != CR && c != -1) {
+        while (c != CR && c != LF && c != -1) {
             next += Character.toString((char) c);
             c = reader.read();
         }
@@ -62,17 +62,7 @@ public class BfReader implements Reader {
      */
     private int ignoreNewLineChar() throws java.io.IOException {
         int c;
-        while (isNewLine(c=reader.read())){
-
-        };
-            /*
-        c = reader.read();
-        if (c == CR) {
-            c = reader.read();
-        }
-        if (c == LF) {
-            c = reader.read();
-        }*/
+        while (isNewLine(c = reader.read())) ;
         return c;
     }
 
@@ -83,31 +73,26 @@ public class BfReader implements Reader {
      * @throws IOException if file close during reading.
      */
     @Override
-	public String getNext() throws IOException {
+    public String getNext() throws IOException {
         int nextVal;
         try {
             nextVal = reader.read();
             if (isLong(nextVal)) {
-                if (firstLine){
+                if (firstLine) {
                     firstLine = false;
                     readUntilEndOfLine(nextVal);
                     oldvar = CR;
                     return next;
-                }else if(oldvar == CR){
+                } else if (oldvar == CR) {
                     readUntilEndOfLine(nextVal);
-                    oldvar =CR;
-                }else{
+                    oldvar = CR;
+                } else {
                     nextVal = ignoreNewLineChar();
-                    oldvar=nextVal;
-                    return Character.toString((char)nextVal);
+                    oldvar = nextVal;
+                    return Character.toString((char) nextVal);
                 }
 
-            }
-
-
-
-
- else if (isNewLine(nextVal)||isLine) {
+            } else if (isNewLine(nextVal) || isLine) {
                 isLine = false;
                 nextVal = ignoreNewLineChar();
                 if (isLong(nextVal)) {
@@ -152,7 +137,7 @@ public class BfReader implements Reader {
      * @throws IOException if file can't close.
      */
     @Override
-	public void close() throws IOException {
+    public void close() throws IOException {
         try {
             reader.close();
         } catch (java.io.IOException e) {
