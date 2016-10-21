@@ -12,11 +12,11 @@ import net.brainfuck.exception.MemoryOverFlowException;
 public class Memory {
 
 	/** Max capacity */
-	public static final int MAX_CAPACITY = 30000;
+	private static final int MAX_CAPACITY = 30000;
 	/** Max value in the memory (255) */
-	public static final short MAX_VALUE = (short) 255;
+	private static final short MAX_VALUE = (short) 255;
 	/** Min value in the memory (0) */
-	public static final short MIN_VALUE = 0;
+	private static final short MIN_VALUE = 0;
 
 	/** First cells of the memory in the array */
 	private short start[];
@@ -40,7 +40,7 @@ public class Memory {
 		try {
 			for (int i = 0; i < MAX_CAPACITY; i++) {
 				if ((current = get(i)) != 0) {
-					builder.append("C" + i + ": " + current + "\n");
+					builder.append("C").append(i).append(": ").append(current).append("\n");
 				}
 			}
 		} catch (MemoryOutOfBoundsException e) {
@@ -165,7 +165,7 @@ public class Memory {
 	 *
 	 * @return current object
 	 */
-	public Memory clean() {
+    private Memory clean() {
 		start = new short[MAX_CAPACITY];
 		index = 0;
 		return this;
