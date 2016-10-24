@@ -8,17 +8,13 @@ package net.brainfuck.exception;
  */
 public class MemoryOverFlowException extends Exception {
 
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 4693880786737657317L;
 
 	/**
      * Constructs a MemoryOverFlowException with a default message.
      */
     public MemoryOverFlowException() {
-        super("Illegal state exception.");
+        super("Memory overflow exception");
     }
 
     /**
@@ -27,7 +23,7 @@ public class MemoryOverFlowException extends Exception {
      * @param message the detail message.
      */
     public MemoryOverFlowException(String message) {
-        super("Memory over flow exception : " + message);
+        super("Memory overflow exception : " + message);
     }
 
 }

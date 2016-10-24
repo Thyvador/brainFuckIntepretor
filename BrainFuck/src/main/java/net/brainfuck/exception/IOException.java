@@ -2,16 +2,12 @@ package net.brainfuck.exception;
 
 /**
  * Signal when an error input or output is detected in the file.
- * This exception will be thrown by <code>LineReader</code>, <code>FileReader</code>.
+ * This exception will be thrown by <code>BfReader</code>.
  *
  * @author Alexandre Hiltcher
  */
 public class IOException extends Exception {
 
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 5444607441404760156L;
 
 	/**

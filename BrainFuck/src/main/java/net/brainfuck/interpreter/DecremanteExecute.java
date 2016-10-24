@@ -18,8 +18,11 @@ class DecremanteExecute implements InterpreterInterface {
         memory.decr();
     }
 
+    /**
+     * Print the short syntax of "decremente" command
+     */
     @Override
     public void rewrite() {
-        System.out.println(Language.DECR.getShortSyntax());
+        System.out.print(Language.DECR.getShortSyntax());
     }
 }
