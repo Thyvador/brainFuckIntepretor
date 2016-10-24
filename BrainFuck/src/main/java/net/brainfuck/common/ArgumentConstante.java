@@ -1,4 +1,4 @@
-package net.brainfuck;
+package net.brainfuck.common;
 
 
 /**

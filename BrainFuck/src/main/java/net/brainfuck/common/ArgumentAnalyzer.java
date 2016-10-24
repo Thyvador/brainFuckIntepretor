@@ -1,9 +1,9 @@
-package net.brainfuck;
+package net.brainfuck.common;
 
+
+import static net.brainfuck.common.ArgumentConstante.*;
 
 import net.brainfuck.exception.IncorrectArgumentException;
-
-import static net.brainfuck.ArgumentConstante.*;
 
 /**
  * @author davidLANG
