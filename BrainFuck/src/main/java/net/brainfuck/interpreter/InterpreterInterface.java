@@ -6,6 +6,7 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
@@ -22,7 +23,7 @@ interface InterpreterInterface {
      * @throws MemoryOverFlowException  throw by memory
      * @throws IOException throw by memory
      */
-    void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException;
+    void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn;
 
     /**
      * Print the short syntax of the command wich implement this interface

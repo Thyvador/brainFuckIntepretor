@@ -1,27 +1,21 @@
 package net.brainfuck;
-import static net.brainfuck.common.ArgumentConstante.PATH;
-
-import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
-import java.util.List;
 
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.BfReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
+import net.brainfuck.exception.Exception;
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.Interpreter;
 
-/**
- * @author user
- *
- */
+import static net.brainfuck.common.ArgumentConstante.PATH;
+
+
 public class Main {
-	RuntimeMXBean runtimeMxBean;
-	List<String> arguments;
 
-
-	/**
+		/**
 	 * Print the usage
 	 */
 	private void printUsage() {
@@ -39,16 +33,15 @@ public class Main {
 			System.exit(0);
 		}
 		try {
-			runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-			arguments = runtimeMxBean.getInputArguments();
-			ArgumentAnalyzer a = new ArgumentAnalyzer((String[]) arguments.toArray());
+			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
 			if (a.getArgument(PATH) == null) {
 				this.printUsage();
 				System.exit(0);
 			}
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
-			Interpreter i = new Interpreter(m, r, a);
+
+			Interpreter i = new Interpreter(m,r, a);
 			i.interprate();
 			System.out.println(m);
 		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
@@ -56,8 +49,10 @@ public class Main {
 			System.exit(4);
 		} catch (MemoryOutOfBoundsException e) {
 			System.exit(1);
-		} catch (MemoryOverFlowException e) {
+		} catch (MemoryOverFlowException e){
 			System.exit(2);
+		} catch (FileNotFoundIn e) {
+			System.exit(3);
 		}
 		System.exit(0);
 	}
@@ -67,7 +62,10 @@ public class Main {
 	 *            command-line args
 	 */
 	public static void main(String[] args) {
+		System.out.println("Working Directory = " +
+				System.getProperty("user.dir"));
 		new Main(args);
+		//new Main(args);
 	}
 
 }

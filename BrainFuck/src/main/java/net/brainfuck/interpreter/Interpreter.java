@@ -1,11 +1,8 @@
 
 package net.brainfuck.interpreter;
 
-import static net.brainfuck.interpreter.Language.DECR;
-import static net.brainfuck.interpreter.Language.INCR;
-import static net.brainfuck.interpreter.Language.LEFT;
-import static net.brainfuck.interpreter.Language.RIGHT;
-
+import java.io.FileInputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,10 +10,10 @@ import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.ArgumentConstante;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
-import net.brainfuck.exception.IOException;
-import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.exception.SyntaxErrorException;
+import net.brainfuck.exception.*;
+
+import static net.brainfuck.common.ArgumentConstante.*;
+import static net.brainfuck.interpreter.Language.*;
 
 /**
  * @author davidLANG
@@ -35,15 +32,34 @@ public class  Interpreter {
      * @param reader Reader
      * @param arg ArgumentAnalyzer use to get arguments
      */
-    public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer arg) {
+    public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer arg) throws FileNotFoundException {
         this.reader = reader;
         this.memory = memory;
         this.flags = arg.getFlags();
         this.initLanguages();
+        setIO(arg);
     }
 
 
-
+    private void setIO(ArgumentAnalyzer arg) throws FileNotFoundException{
+        String inPath = arg.getArgument(IN_PATH);
+        if(inPath != null){
+            try {
+                System.setIn(new FileInputStream(inPath));
+            } catch (java.io.FileNotFoundException e) {
+                throw new FileNotFoundException(inPath);
+            }
+        }
+        String outPath = arg.getArgument(OUT_PATH);
+        if(outPath != null){
+            try {
+                PrintStream printStream = new PrintStream(outPath);
+                System.setOut(printStream);
+            } catch (java.io.FileNotFoundException e) {
+                throw new FileNotFoundException(outPath);
+            }
+        }
+    }
     /**
      * Interpret all characters which can be read with the attribute reader.
      *
@@ -52,7 +68,7 @@ public class  Interpreter {
      * @throws IOException {@link IOException}  if reader throw an exception.
      * @throws MemoryOverFlowException throw by memory
      */
-    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException {
+    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException,FileNotFoundIn {
         String instruction;
         InterpreterInterface interpretor;
 
@@ -60,11 +76,11 @@ public class  Interpreter {
             if ((interpretor = this.interpretorExecuter.get(instruction)) == null) {
                 throw new SyntaxErrorException(instruction);
             }
-
+            if (!flags[ArgumentConstante.CHECK]) {
+                interpretor.execute(memory);
+            }
             if (flags[ArgumentConstante.REWRITE]) {
                 interpretor.rewrite();
-            }else if (!flags[ArgumentConstante.CHECK]) {
-                interpretor.execute(memory);
             }
         }
         reader.close();

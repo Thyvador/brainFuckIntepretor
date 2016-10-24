@@ -98,6 +98,10 @@ public class Memory {
 		}
 		return this;
 	}
+	
+	public Memory set(int changeValue) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+		return set(index,changeValue-get());
+	}
 
 	/**
 	 * Check the specified index

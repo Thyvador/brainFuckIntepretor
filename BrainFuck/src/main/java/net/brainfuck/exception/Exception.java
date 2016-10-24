@@ -6,7 +6,8 @@ package net.brainfuck.exception;
  *
  * @author Alexandre Hiltcher
  */
-public class Exception extends Throwable{
+public class Exception extends java.lang.Exception{
+
 
     private static final long serialVersionUID = -8989405289648758681L;
 
@@ -14,7 +15,7 @@ public class Exception extends Throwable{
      * Construct a new Exception with a null message.
      */
     public Exception(){
-        super();
+        super("");
     }
 
     /**
@@ -22,7 +23,7 @@ public class Exception extends Throwable{
      * @param message the detailed message.
      */
     public Exception(String message){
-        super();
+        super("");
         System.err.println(message);
     }
 
