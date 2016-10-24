@@ -2,6 +2,7 @@ package net.brainfuck.common;
 
 
 /**
+ * Usefull constant for argumentAnalyzer
  * @author davidLANG
  */
 public class ArgumentConstante {

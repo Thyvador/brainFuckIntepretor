@@ -16,8 +16,11 @@ class LeftExecute implements InterpreterInterface {
         memory.left();
     }
 
+    /**
+     * Print the short syntax of "left" command
+     */
     @Override
     public void rewrite() {
-        System.out.println(Language.LEFT.getShortSyntax());
+        System.out.print(Language.LEFT.getShortSyntax());
     }
 }

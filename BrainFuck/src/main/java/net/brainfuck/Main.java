@@ -15,10 +15,29 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
 
 public class Main {
 
-	public Main(String[] args){
+		/**
+	 * Print the usage
+	 */
+	private void printUsage() {
+		System.out.println("Usage : bfck.sh -p FILE [--rewrite]");
+	}
 
+	/**
+	 * Default constructor
+	 * 
+	 * @param args
+	 */
+	public Main(String[] args) {
+		if (args.length == 0) {
+			this.printUsage();
+			System.exit(0);
+		}
 		try {
 			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
+			if (a.getArgument(PATH) == null) {
+				this.printUsage();
+				System.exit(0);
+			}
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
 
@@ -38,18 +57,14 @@ public class Main {
 		System.exit(0);
 	}
 
-
-	private Main() {
-//		String[] args = {"-p", "/assets/brainfuck/common/OutOfBoundLeft.bf"};
-//		new Main(args); // On lance sur un fichier au hasard
-	}
-
-	// prepare the executable jar
+	/**
+	 * @param args
+	 *            command-line args
+	 */
 	public static void main(String[] args) {
 		System.out.println("Working Directory = " +
 				System.getProperty("user.dir"));
-		String[] args2 = {"-p", "Brainfuck/src/main/resources/assets/brainfuck/common/res.bf", "--rewrite","-i",};
-		new Main(args2); // On lance sur un fichier au hasard
+		new Main(args);
 		//new Main(args);
 	}
 

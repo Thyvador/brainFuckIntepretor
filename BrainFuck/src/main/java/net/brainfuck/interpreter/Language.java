@@ -3,6 +3,9 @@ package net.brainfuck.interpreter;
 import java.util.Map;
 
 /**
+ * Represent the language with his syntax and his corresponding InterpreterInterface
+ * (wich implements the corresponding method to the syntax)
+ *
  * @author davidLANG
  */
 enum Language {
@@ -28,14 +31,25 @@ enum Language {
         this.aliases = aliases;
     }
 
+    /**
+     * @return the aliases
+     */
     public String[] getAliases() {
         return aliases;
     }
 
+    /**
+     * 
+     * @return the interpreter
+     */
     public InterpreterInterface getInterpreter() {
         return interpreter;
     }
 
+    /**
+     * 
+     * @return the short syntax
+     */
     public String   getShortSyntax() {
         return this.aliases[0];
     }

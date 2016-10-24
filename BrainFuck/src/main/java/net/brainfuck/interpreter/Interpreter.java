@@ -24,12 +24,13 @@ public class  Interpreter {
     private Map<String, InterpreterInterface> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
-    private boolean[]   flags;
+    private boolean[] flags;
 
     /**
-     * Constructor wich initialize atribut
+     * Constructor which initialize attribute.
      * @param memory Memory
      * @param reader Reader
+     * @param arg ArgumentAnalyzer use to get arguments
      */
     public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer arg) throws FileNotFoundException {
         this.reader = reader;
@@ -60,11 +61,12 @@ public class  Interpreter {
         }
     }
     /**
-     * Interprate all characters wich can be read with the attribute reader
+     * Interpret all characters which can be read with the attribute reader.
      *
-     * @throws SyntaxErrorException {@link SyntaxErrorException} if an error of syntax is found
-     * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception
-     * @throws IOException {@link IOException}  if reader throw an exception
+     * @throws SyntaxErrorException {@link SyntaxErrorException} if an error of syntax is found.
+     * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception.
+     * @throws IOException {@link IOException}  if reader throw an exception.
+     * @throws MemoryOverFlowException throw by memory
      */
     public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException,FileNotFoundIn {
         String instruction;
@@ -85,12 +87,12 @@ public class  Interpreter {
     }
 
     /**
-     * Initiliaze the hashmap wich contains
+     * Initialize the Hashmap which contains
      * class which implements InterpreterInterface associate with  syntaxe
      * for example RightExecute is associate with >
      */
     private void initLanguages() {
-        Language[] languages = new Language[]{INCR, DECR, RIGHT, LEFT, IN, OUT};
+        Language[] languages = Language.values();
         for (Language language : languages) {
             InterpreterInterface interpreter = language.getInterpreter();
             String[] aliases = language.getAliases();
