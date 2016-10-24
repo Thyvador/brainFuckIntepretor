@@ -7,7 +7,7 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 
 /**
- * The <code>Memory</code> class represents the memory of the BrainFuck interpreter
+ * The <code>Memory</code> class represents the memory of the BrainFuck interpreter.
  *
  * @author Jeremy Junac
  *
@@ -26,7 +26,7 @@ public class Memory {
 	/** First cells of the memory in the array */
 	private short start[];
 	/**
-	 * Rest of the memory in this map. Key is the number of the cell and value is the value of the cell
+	 * Rest of the memory in this map. Key is the number of the cell and value is the value of the cell.
 	 */
 	private Map<Integer, Short> end;
 	/** Index of the current cell */
