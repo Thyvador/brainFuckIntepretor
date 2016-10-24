@@ -19,8 +19,11 @@ class IncremanteExecute implements InterpreterInterface {
         memory.incr();
     }
 
+    /**
+     * Print the short syntax of "incremante" command
+     */
     @Override
     public void rewrite() {
-        System.out.println(Language.INCR.getShortSyntax());
+        System.out.print(Language.INCR.getShortSyntax());
     }
 }

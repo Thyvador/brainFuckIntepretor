@@ -1,13 +1,10 @@
 package net.brainfuck.common;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 
 /**
- * The <code>Memory</code> class represents the memory of the BrainFuck interpreter.
+ * The <code>Memory</code> class represents the memory of the BrainFuck interpreter
  *
  * @author Jeremy Junac
  *
@@ -15,20 +12,14 @@ import net.brainfuck.exception.MemoryOverFlowException;
 public class Memory {
 
 	/** Max capacity */
-	public static final int MAX_CAPACITY = 30000;
+	private static final int MAX_CAPACITY = 30000;
 	/** Max value in the memory (255) */
-	public static final short MAX_VALUE = (short) 255;
+	private static final short MAX_VALUE = (short) 255;
 	/** Min value in the memory (0) */
-	public static final short MIN_VALUE = 0;
-	/** Size of the memory stocked in the array for direct accessing */
-	private static final int ARRAY_SIZE = 1000;
+	private static final short MIN_VALUE = 0;
 
 	/** First cells of the memory in the array */
-	private short start[];
-	/**
-	 * Rest of the memory in this map. Key is the number of the cell and value is the value of the cell.
-	 */
-	private Map<Integer, Short> end;
+	private short memory[];
 	/** Index of the current cell */
 	private int index;
 
@@ -49,7 +40,7 @@ public class Memory {
 		try {
 			for (int i = 0; i < MAX_CAPACITY; i++) {
 				if ((current = get(i)) != 0) {
-					builder.append("C" + i + ": " + current + "\n");
+					builder.append("C").append(i).append(": ").append(current).append("\n");
 				}
 			}
 		} catch (MemoryOutOfBoundsException e) {
@@ -81,16 +72,9 @@ public class Memory {
 	 */
 	private short get(int index) throws MemoryOutOfBoundsException {
 		checkIndex(index);
-		if (index < ARRAY_SIZE)
-			return start[index];
-		return (end.get(index - ARRAY_SIZE) != null) ? end.get(index - ARRAY_SIZE) : (byte) 0;
+		return memory[index];
 	}
 
-	public Memory set(int changeValue) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-
-		return set(index,changeValue-get());
-
-	}
 	/**
 	 * Set the value of the specified memory cell
 	 *
@@ -105,17 +89,14 @@ public class Memory {
 	private Memory set(int index, int changeValue) throws MemoryOverFlowException {
 		try {
 			if (get(index) > (MAX_VALUE - changeValue) || get(index) < (MIN_VALUE - changeValue))
-				throw new MemoryOverFlowException();
-			if (index < ARRAY_SIZE) {
-				start[index] += changeValue;
-				return this;
-			}
-			end.put(index - ARRAY_SIZE, (short) (get(index) + changeValue));
+				throw new MemoryOverFlowException("Invalid value "+(memory[index]+changeValue)+" at index "+index);
+			memory[index] += changeValue;
+			return this;
 		} catch (MemoryOutOfBoundsException e) {
+			// Might not append because has been made before
 			e.printStackTrace();
 		}
 		return this;
-
 	}
 
 	/**
@@ -128,7 +109,7 @@ public class Memory {
 	 */
 	private void checkIndex(int index) throws MemoryOutOfBoundsException {
 		if (index < 0 || index >= MAX_CAPACITY)
-			throw new MemoryOutOfBoundsException();
+			throw new MemoryOutOfBoundsException("Invalid index "+index);
 	}
 
 	/**
@@ -184,9 +165,8 @@ public class Memory {
 	 *
 	 * @return current object
 	 */
-	public Memory clean() {
-		start = new short[ARRAY_SIZE];
-		end = new HashMap<>();
+    private Memory clean() {
+		memory = new short[MAX_CAPACITY];
 		index = 0;
 		return this;
 	}
