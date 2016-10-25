@@ -15,8 +15,8 @@ abstract class AbstractExecute implements InterpreterInterface {
     	System.out.print(languageInstr.getShortSyntax());
     }
     
-    final void translate() {
-    	System.out.println(languageInstr.getColorSyntax());
+    final String translate() {
+    	return languageInstr.getColorSyntax();
     }
     
 }
