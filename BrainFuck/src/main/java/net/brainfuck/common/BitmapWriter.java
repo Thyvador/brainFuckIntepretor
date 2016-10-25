@@ -10,6 +10,7 @@ import java.awt.image.*;
  * http://www.javaworld.com/article/2077561/learn-java/java-tip-60--saving-bitmap-files-in-java.html</a>
  * 
  * Some fields and methods visibilities have been changed for our uses.
+ * FileOutputStream has been change to OututStream because we have to wirte on stdout
  * 
  * @author Jean-Pierre Dubé
  *
@@ -44,7 +45,7 @@ public class BitmapWriter {
 	// --- Bitmap raw data
 	protected int bitmap[];
 	// --- File section
-	protected FileOutputStream fo;
+	protected OutputStream out;
 
 	// --- Default constructor
 	public BitmapWriter() {
@@ -52,9 +53,9 @@ public class BitmapWriter {
 
 	public void saveBitmap(String parFilename, Image parImage, int parWidth, int parHeight) {
 		try {
-			fo = new FileOutputStream(parFilename);
+			out = new FileOutputStream(parFilename);
 			save(parImage, parWidth, parHeight);
-			fo.close();
+			out.close();
 		} catch (Exception saveEx) {
 			saveEx.printStackTrace();
 		}
@@ -130,11 +131,11 @@ public class BitmapWriter {
 				rgb[0] = (byte) (value & 0xFF);
 				rgb[1] = (byte) ((value >> 8) & 0xFF);
 				rgb[2] = (byte) ((value >> 16) & 0xFF);
-				fo.write(rgb);
+				out.write(rgb);
 				if (rowCount == biWidth) {
 					padCount += pad;
 					for (i = 1; i <= pad; i++) {
-						fo.write(0x00);
+						out.write(0x00);
 					}
 					rowCount = 1;
 					rowIndex = lastRowIndex - biWidth;
@@ -158,11 +159,11 @@ public class BitmapWriter {
 	 */
 	protected void writeBitmapFileHeader() {
 		try {
-			fo.write(bfType);
-			fo.write(intToDWord(bfSize));
-			fo.write(intToWord(bfReserved1));
-			fo.write(intToWord(bfReserved2));
-			fo.write(intToDWord(bfOffBits));
+			out.write(bfType);
+			out.write(intToDWord(bfSize));
+			out.write(intToWord(bfReserved1));
+			out.write(intToWord(bfReserved2));
+			out.write(intToDWord(bfOffBits));
 		} catch (Exception wbfh) {
 			wbfh.printStackTrace();
 		}
@@ -175,17 +176,17 @@ public class BitmapWriter {
 	 */
 	protected void writeBitmapInfoHeader() {
 		try {
-			fo.write(intToDWord(biSize));
-			fo.write(intToDWord(biWidth));
-			fo.write(intToDWord(biHeight));
-			fo.write(intToWord(biPlanes));
-			fo.write(intToWord(biBitCount));
-			fo.write(intToDWord(biCompression));
-			fo.write(intToDWord(biSizeImage));
-			fo.write(intToDWord(biXPelsPerMeter));
-			fo.write(intToDWord(biYPelsPerMeter));
-			fo.write(intToDWord(biClrUsed));
-			fo.write(intToDWord(biClrImportant));
+			out.write(intToDWord(biSize));
+			out.write(intToDWord(biWidth));
+			out.write(intToDWord(biHeight));
+			out.write(intToWord(biPlanes));
+			out.write(intToWord(biBitCount));
+			out.write(intToDWord(biCompression));
+			out.write(intToDWord(biSizeImage));
+			out.write(intToDWord(biXPelsPerMeter));
+			out.write(intToDWord(biYPelsPerMeter));
+			out.write(intToDWord(biClrUsed));
+			out.write(intToDWord(biClrImportant));
 		} catch (Exception wbih) {
 			wbih.printStackTrace();
 		}

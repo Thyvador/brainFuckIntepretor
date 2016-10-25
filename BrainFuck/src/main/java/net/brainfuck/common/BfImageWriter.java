@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * The BfImageWriter class write a bitmap image.  It can handle huge image.
@@ -35,6 +36,10 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	/** The count of instruction after the last flush */
 	private int count = 0;
 
+	public BfImageWriter() throws IOException {
+		this(System.out);
+	}
+	
 	/**
 	 * Instantiates a new bf image writer.
 	 *
@@ -43,6 +48,7 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
+	@Deprecated
 	public BfImageWriter(String path) throws IOException {
 		this(new File(path));
 	}
@@ -55,6 +61,7 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
+	@Deprecated
 	public BfImageWriter(File outputFile) throws IOException {
 		this(new FileOutputStream(outputFile));
 	}
@@ -67,8 +74,8 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public BfImageWriter(FileOutputStream out) throws IOException {
-		super.fo = out;
+	public BfImageWriter(OutputStream out) throws IOException {
+		super.out = out;
 		tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
 		tmpFile.deleteOnExit();
 		tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
@@ -182,11 +189,11 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 				rgb[0] = (byte) (value & 0xFF);
 				rgb[1] = (byte) ((value >> 8) & 0xFF);
 				rgb[2] = (byte) ((value >> 16) & 0xFF);
-				fo.write(rgb);
+				out.write(rgb);
 				if (rowCount == biWidth) {
 					padCount += pad;
 					for (i = 1; i <= pad; i++) {
-						fo.write(0x00);
+						out.write(0x00);
 					}
 					rowCount = 1;
 					rowIndex = lastRowIndex - biWidth;
