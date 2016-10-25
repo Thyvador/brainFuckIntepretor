@@ -10,14 +10,24 @@ import java.util.Map;
  */
 enum Language {
     // Declaration de l'enum
-    INCR(new IncremanteExecute(), "+", "INCR", "ffffff"),
-    DECR(new DecremanteExecute(), "-", "DECR", "4b0082"),
-    RIGHT(new RightExecute(), ">", "RIGHT", "0000ff"),
-    LEFT(new LeftExecute(), "<", "LEFT", "9400d3"),
-    IN(new InExecute(), ",", "IN", "ffff00"),
-    OUT(new OutExecute(), ".", "OUT", "ffff00");
+    INCR(null, "+", "INCR", "ffffff"),
+    DECR(null, "-", "DECR", "4b0082"),
+    RIGHT(null, ">", "RIGHT", "0000ff"),
+    LEFT(null, "<", "LEFT", "9400d3"),
+    IN(null, ",", "IN", "ffff00"),
+    OUT(null, ".", "OUT", "ffff00");
     //JUMP(new JumpExecute(), "[", "JUMP", "ff7f00"),
     //BACK(new backExecute(), "]", "BACK", "ff0000");
+	
+	static {
+		INCR.setInterpreter(new IncremanteExecute());
+		DECR.setInterpreter(new DecremanteExecute());
+		RIGHT.setInterpreter(new RightExecute());
+		LEFT.setInterpreter(new LeftExecute());
+		IN.setInterpreter(new InExecute());
+		OUT.setInterpreter(new OutExecute());
+	}
+	
     private AbstractExecute interpreter;
     private String[] aliases;
 
@@ -46,6 +56,10 @@ enum Language {
         return interpreter;
     }
 
+    public void setInterpreter(AbstractExecute interpreter) {
+    	this.interpreter = interpreter;
+    }
+    
     /**
      * 
      * @return the short syntax
@@ -53,5 +67,9 @@ enum Language {
     public String   getShortSyntax() {
         return this.aliases[0];
     }
+
+	public String getColorSyntax() {
+		return aliases[2];
+	}
     
 }

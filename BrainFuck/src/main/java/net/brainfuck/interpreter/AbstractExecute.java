@@ -9,10 +9,14 @@ abstract class AbstractExecute implements InterpreterInterface {
 	}
 	
 	/**
-     * Print the short syntax of the command wich implement this interface
+     * Print the short syntax of the command which implement this interface
      */
     final void rewrite() {
     	System.out.print(languageInstr.getShortSyntax());
+    }
+    
+    final void translate() {
+    	System.out.println(languageInstr.getColorSyntax());
     }
     
 }

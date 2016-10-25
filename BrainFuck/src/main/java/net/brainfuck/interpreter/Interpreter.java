@@ -71,16 +71,26 @@ public class  Interpreter {
     public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException,FileNotFoundIn {
         String instruction;
         AbstractExecute interpretor;
+        boolean execution = true;
 
         while ((instruction = reader.getNext()) != null) {
             if ((interpretor = this.interpretorExecuter.get(instruction)) == null) {
                 throw new SyntaxErrorException(instruction);
             }
-            if (!flags[ArgumentConstante.CHECK]) {
-                interpretor.execute(memory);
+            if (flags[ArgumentConstante.CHECK]) {
+                execution = false;
             }
             if (flags[ArgumentConstante.REWRITE]) {
                 interpretor.rewrite();
+                execution = false;
+            }
+            if (flags[ArgumentConstante.TRANSLATE]) {
+            	System.out.println(instruction);
+                interpretor.translate();
+                execution = false;
+            }
+            if (execution) {
+            	interpretor.execute(memory);
             }
         }
         reader.close();
