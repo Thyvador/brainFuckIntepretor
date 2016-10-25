@@ -40,7 +40,6 @@ public class  Interpreter {
         this.reader = reader;
         this.memory = memory;
         this.flags = arg.getFlags();
-        this.initLanguages();
         
         if(flags[ArgumentConstante.TRANSLATE]) {
         	String output = arg.getArgument(PATH).replace(".bf", ".bmp");
@@ -90,7 +89,7 @@ public class  Interpreter {
         boolean execution = true;
         
         while ((instruction = reader.getNext()) != null) {
-            if ((interpretor = this.interpretorExecuter.get(instruction).getInterpreter()) == null) {
+            if ((interpretor = Language.languageMap.get(instruction).getInterpreter()) == null) {
                 throw new SyntaxErrorException(instruction);
             }
             if (flags[ArgumentConstante.CHECK]) {
@@ -127,7 +126,7 @@ public class  Interpreter {
      * class which implements InterpreterInterface associate with  syntaxe
      * for example RightExecute is associate with >
      */
-    private void initLanguages() {
+    /*private void initLanguages() {
         Language[] languages = Language.values();
         for (Language language : languages) {
         	//AbstractExecute interpreter = language.getInterpreter();
@@ -136,7 +135,7 @@ public class  Interpreter {
                 this.interpretorExecuter.put(alias, language);
             }
         }
-    }
+    }*/
     
     void markReader() throws IOException {
     	reader.mark();
