@@ -82,6 +82,10 @@ public class  Interpreter {
             if (flags[ArgumentConstante.REWRITE]) {
                 interpretor.rewrite();
             }
+            if (flags[ArgumentConstante.TRANSLATE]) {
+            	System.out.println(instruction);
+                interpretor.translate();
+            }
         }
         reader.close();
     }
