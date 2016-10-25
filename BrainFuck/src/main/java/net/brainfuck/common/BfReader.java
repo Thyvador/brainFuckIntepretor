@@ -138,11 +138,14 @@ public class BfReader implements Reader {
      * Close the file when the reader finished him.
      *
      * @throws IOException if file can't close.
+     * @throws BracketsParseException 
      */
     @Override
-    public void close() throws IOException {
+    public void close() throws IOException, BracketsParseException {
         try {
             reader.close();
+            if (!marks.isEmpty())
+            	throw new BracketsParseException("]");
         } catch (java.io.IOException e) {
             throw new IOException();
         }
