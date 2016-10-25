@@ -11,8 +11,8 @@ import java.util.Arrays;
 
 public class BfImageWriter extends BitmapWriter implements Writer {
 
-	public static final int BANK_SIZE = (int) 1E6;
-	public static final int BUFFER_SIZE = (int) 1E6;
+	public static final int BANK_SIZE = 4096;
+	public static final int BUFFER_SIZE = 4096;
 
 	private DataOutputStream tmpOs;
 	private File tmpFile;
