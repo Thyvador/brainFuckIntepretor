@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.Reader;
 import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
@@ -23,7 +24,7 @@ class InExecute extends AbstractExecute {
      * @param machine Memory machine
      */
     @Override
-    public void execute(Memory machine) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {
+    public void execute(Memory machine, Reader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {
 
         int value;
         try {

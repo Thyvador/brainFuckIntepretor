@@ -7,34 +7,87 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
+import java.io.OutputStream;
 
+/**
+ * The BfImageWriter class write a bitmap image.  It can handle huge image.
+ * 
+ * It store all instruction in a temp file, squared the image with black pixel, and binary
+ * write the image.
+ * 
+ * @author Jeremy Junac
+ *
+ */
 public class BfImageWriter extends BitmapWriter implements Writer {
 
-	public static final int BANK_SIZE = (int) 1E6;
-	public static final int BUFFER_SIZE = (int) 1E6;
+	/** The size of the DataBuffer bank */
+	public static final int BANK_SIZE = 4096;
+	/** The size of the buffer for write the temp file */
+	public static final int BUFFER_SIZE = 4096;
 
+	/** The DataOutputStream of the temp file */
 	private DataOutputStream tmpOs;
+	/** The temp file use for store instructions */
 	private File tmpFile;
+	/** The buffered bitmap data array */
 	private DataBufferInt bitmapBuffer;
+	/** the size of the bitmap data array */
 	private int entireBufferSize;
+	/** The count of instruction after the last flush */
 	private int count = 0;
 
+	public BfImageWriter() throws IOException {
+		this(System.out);
+	}
+	
+	/**
+	 * Instantiates a new bf image writer.
+	 *
+	 * @param path
+	 *            the path of the output file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Deprecated
 	public BfImageWriter(String path) throws IOException {
 		this(new File(path));
 	}
 
+	/**
+	 * Instantiates a new bf image writer.
+	 *
+	 * @param outputFile
+	 *            the output file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@Deprecated
 	public BfImageWriter(File outputFile) throws IOException {
 		this(new FileOutputStream(outputFile));
 	}
 
-	public BfImageWriter(FileOutputStream out) throws IOException {
-		super.fo = out;
+	/**
+	 * Instantiates a new bf image writer.
+	 *
+	 * @param out
+	 *            the output stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public BfImageWriter(OutputStream out) throws IOException {
+		super.out = out;
 		tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
 		tmpFile.deleteOnExit();
 		tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
 	}
 
+	/**
+	 * Write the pixel in the temp file
+	 * 
+	 * @param pixel the pixel to write
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Override
 	public void write(int pixel) throws IOException {
 		tmpOs.writeInt(pixel);
@@ -45,11 +98,23 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 		}
 	}
 
+	/**
+	 * Write the pixel in the temp file
+	 * 
+	 * @param hexaChain the hexaCode of the pixel to write
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Override
 	public void write(String hexaChain) throws IOException {
 		write(Integer.parseInt(hexaChain, 16));
 	}
 
+	/**
+	 * Add black pixel for squared the image, wirte the image and close all I/O streams
+	 * 
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Override
 	public void close() throws IOException {
 		DataInputStream tmpIs = new DataInputStream(new FileInputStream(tmpFile));
@@ -92,10 +157,12 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 		writeBitmapFileHeader();
 		writeBitmapInfoHeader();
 		writeBitmap();
-		
-		
+
 	}
-	
+
+	/**
+	 * Binary write the image using the data buffer field
+	 */
 	@Override
 	protected void writeBitmap() {
 		int size;
@@ -118,15 +185,15 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 		lastRowIndex = rowIndex;
 		try {
 			for (j = 0; j < size; j++) {
-				value = bitmapBuffer.getElem(rowIndex/BANK_SIZE, rowIndex%BANK_SIZE);
+				value = bitmapBuffer.getElem(rowIndex / BANK_SIZE, rowIndex % BANK_SIZE);
 				rgb[0] = (byte) (value & 0xFF);
 				rgb[1] = (byte) ((value >> 8) & 0xFF);
 				rgb[2] = (byte) ((value >> 16) & 0xFF);
-				fo.write(rgb);
+				out.write(rgb);
 				if (rowCount == biWidth) {
 					padCount += pad;
 					for (i = 1; i <= pad; i++) {
-						fo.write(0x00);
+						out.write(0x00);
 					}
 					rowCount = 1;
 					rowIndex = lastRowIndex - biWidth;
@@ -144,6 +211,4 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 		}
 	}
 
-	
-	
 }

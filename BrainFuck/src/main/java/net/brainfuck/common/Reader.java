@@ -1,4 +1,5 @@
 package net.brainfuck.common;
+import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 
 /**
@@ -20,6 +21,13 @@ public interface Reader {
      * Close the file when the reader finished him.
      *
      * @throws IOException if file can't close.
+     * @throws BracketsParseException 
      */
-    void close() throws IOException;
+    void close() throws IOException, BracketsParseException;
+    
+    void mark() throws IOException;
+    
+    void reset() throws IOException, BracketsParseException;
+    
+    void unmark() throws BracketsParseException;
 }
