@@ -27,4 +27,6 @@ public interface Reader {
     void mark() throws IOException;
     
     void reset() throws IOException, BracketsParseException;
+    
+    void unmark() throws BracketsParseException;
 }

@@ -162,11 +162,19 @@ public class BfReader implements Reader {
 	@Override
 	public void reset() throws IOException, BracketsParseException {
 		if (marks.isEmpty())
-			throw new BracketsParseException("]");
+			throw new BracketsParseException("[");
 		try {
-			reader.seek(marks.pop());
+			reader.seek(marks.peek());
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
+	}
+
+
+	@Override
+	public void unmark() throws BracketsParseException {
+		if (marks.isEmpty())
+			throw new BracketsParseException("[");
+		marks.pop();
 	}
 }
