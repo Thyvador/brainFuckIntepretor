@@ -6,6 +6,8 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.Reader;
+import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -22,8 +24,9 @@ interface InterpreterInterface {
      * @throws MemoryOutOfBoundsException throw by memory
      * @throws MemoryOverFlowException  throw by memory
      * @throws IOException throw by memory
+     * @throws BracketsParseException 
      */
-    void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn;
+    void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 
 }
 

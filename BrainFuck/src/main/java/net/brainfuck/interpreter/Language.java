@@ -15,9 +15,9 @@ enum Language {
     RIGHT(null, ">", "RIGHT", "0000ff"),
     LEFT(null, "<", "LEFT", "9400d3"),
     IN(null, ",", "IN", "ffff00"),
-    OUT(null, ".", "OUT", "ffff00");
-    //JUMP(new JumpExecute(), "[", "JUMP", "ff7f00"),
-    //BACK(new backExecute(), "]", "BACK", "ff0000");
+    OUT(null, ".", "OUT", "ffff00"),
+    JUMP(null, "[", "JUMP", "ff7f00"),
+    BACK(null, "]", "BACK", "ff0000");
 	
 	static {
 		INCR.setInterpreter(new IncremanteExecute());
@@ -26,6 +26,8 @@ enum Language {
 		LEFT.setInterpreter(new LeftExecute());
 		IN.setInterpreter(new InExecute());
 		OUT.setInterpreter(new OutExecute());
+		JUMP.setInterpreter(new JumpExecute());
+		BACK.setInterpreter(new BackExecute());
 	}
 	
     private AbstractExecute interpreter;
@@ -71,5 +73,5 @@ enum Language {
 	public String getColorSyntax() {
 		return aliases[2];
 	}
-    
+	
 }

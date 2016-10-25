@@ -23,7 +23,7 @@ import static net.brainfuck.interpreter.Language.*;
  */
 
 public class  Interpreter {
-    private Map<String, AbstractExecute> interpretorExecuter = new HashMap<>();
+    private Map<String, Language> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
     private boolean[] flags;
@@ -82,14 +82,15 @@ public class  Interpreter {
      * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception.
      * @throws IOException {@link IOException}  if reader throw an exception.
      * @throws MemoryOverFlowException throw by memory
+     * @throws BracketsParseException 
      */
-    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException,FileNotFoundIn {
+    public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException,FileNotFoundIn, BracketsParseException {
         String instruction;
         AbstractExecute interpretor;
         boolean execution = true;
         
         while ((instruction = reader.getNext()) != null) {
-            if ((interpretor = this.interpretorExecuter.get(instruction)) == null) {
+            if ((interpretor = this.interpretorExecuter.get(instruction).getInterpreter()) == null) {
                 throw new SyntaxErrorException(instruction);
             }
             if (flags[ArgumentConstante.CHECK]) {
@@ -108,7 +109,7 @@ public class  Interpreter {
                 execution = false;
             }
             if (execution) {
-            	interpretor.execute(memory);
+            	interpretor.execute(memory, reader);
             }
         }
         reader.close();
@@ -129,12 +130,20 @@ public class  Interpreter {
     private void initLanguages() {
         Language[] languages = Language.values();
         for (Language language : languages) {
-        	AbstractExecute interpreter = language.getInterpreter();
+        	//AbstractExecute interpreter = language.getInterpreter();
             String[] aliases = language.getAliases();
             for (String alias : aliases) {
-                this.interpretorExecuter.put(alias, interpreter);
+                this.interpretorExecuter.put(alias, language);
             }
         }
+    }
+    
+    void markReader() throws IOException {
+    	reader.mark();
+    }
+    
+    void resetReader() throws IOException, BracketsParseException {
+    	reader.reset();
     }
     
 }

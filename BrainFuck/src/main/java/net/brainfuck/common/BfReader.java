@@ -1,8 +1,9 @@
 package net.brainfuck.common;
 
-import java.io.FileReader;
+import java.io.RandomAccessFile;
+import java.util.Stack;
 
-import net.brainfuck.exception.CharacterException;
+import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
@@ -13,7 +14,8 @@ import net.brainfuck.exception.IOException;
  */
 public class BfReader implements Reader {
     private String next = null;
-    private java.io.Reader reader;
+    private RandomAccessFile reader;
+    private Stack<Long> marks;
     private boolean firstLine = true;
     private boolean isLine = false;
     private static final int CR = '\r';
@@ -29,7 +31,8 @@ public class BfReader implements Reader {
      */
     public BfReader(String filename) throws FileNotFoundException {
         try {
-            reader = new FileReader(filename);
+            reader = new RandomAccessFile(filename, "r");
+            marks = new Stack<>();
         } catch (java.io.FileNotFoundException e) {
             throw new FileNotFoundException(filename);
         }
@@ -144,4 +147,26 @@ public class BfReader implements Reader {
             throw new IOException();
         }
     }
+
+
+	@Override
+	public void mark() throws IOException {
+		try {
+			marks.push(reader.getFilePointer());
+		} catch (java.io.IOException e) {
+			throw new IOException();
+		}
+	}
+
+
+	@Override
+	public void reset() throws IOException, BracketsParseException {
+		if (marks.isEmpty())
+			throw new BracketsParseException("]");
+		try {
+			reader.seek(marks.pop());
+		} catch (java.io.IOException e) {
+			throw new IOException();
+		}
+	}
 }

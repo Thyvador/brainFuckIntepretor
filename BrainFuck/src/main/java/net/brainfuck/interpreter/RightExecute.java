@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 
 /**
@@ -17,7 +18,7 @@ class RightExecute  extends AbstractExecute {
      * @param memory Memory machine
      */
     @Override
-    public void execute(Memory memory) throws MemoryOutOfBoundsException {
+    public void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException {
         memory.right();
     }
 

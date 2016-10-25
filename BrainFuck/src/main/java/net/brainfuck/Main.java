@@ -6,8 +6,6 @@ import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.Exception;
-import net.brainfuck.exception.FileNotFoundException;
-import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.Interpreter;
 
 import static net.brainfuck.common.ArgumentConstante.PATH;
@@ -46,13 +44,15 @@ public class Main {
 			System.out.println(m);
 		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
 			// Exit code not set
-			System.exit(4);
+			System.exit(5);
 		} catch (MemoryOutOfBoundsException e) {
 			System.exit(1);
 		} catch (MemoryOverFlowException e){
 			System.exit(2);
 		} catch (FileNotFoundIn e) {
 			System.exit(3);
+		} catch (BracketsParseException e) {
+			System.exit(4);
 		}
 		System.exit(0);
 	}
