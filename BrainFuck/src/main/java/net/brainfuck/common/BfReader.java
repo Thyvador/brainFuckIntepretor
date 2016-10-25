@@ -39,6 +39,7 @@ public class BfReader implements Reader {
      * Read the line just after the pointer on the file
      * and put it on "next" string.
      *
+     *
      * @param val the current value
      * @throws java.io.IOException if IO error, it will be catch in getNext().
      */
