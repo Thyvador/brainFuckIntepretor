@@ -7,8 +7,13 @@ import net.brainfuck.exception.MemoryOverFlowException;
 /**
  * @author davidLANG
  */
-class DecremanteExecute implements InterpreterInterface {
-    /**
+class DecremanteExecute extends AbstractExecute {
+	
+    DecremanteExecute() {
+		super(Language.DECR);
+	}
+
+	/**
      * Execute "decr" method from class Memory
      *
      * @param memory Memory machine
@@ -18,11 +23,4 @@ class DecremanteExecute implements InterpreterInterface {
         memory.decr();
     }
 
-    /**
-     * Print the short syntax of "decremente" command
-     */
-    @Override
-    public void rewrite() {
-        System.out.print(Language.DECR.getShortSyntax());
-    }
 }

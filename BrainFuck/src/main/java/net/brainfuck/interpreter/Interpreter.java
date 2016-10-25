@@ -21,7 +21,7 @@ import static net.brainfuck.interpreter.Language.*;
  */
 
 public class  Interpreter {
-    private Map<String, InterpreterInterface> interpretorExecuter = new HashMap<>();
+    private Map<String, AbstractExecute> interpretorExecuter = new HashMap<>();
     private Memory memory;
     private Reader reader;
     private boolean[] flags;
@@ -70,7 +70,7 @@ public class  Interpreter {
      */
     public void interprate() throws IOException, SyntaxErrorException , MemoryOutOfBoundsException, MemoryOverFlowException,FileNotFoundIn {
         String instruction;
-        InterpreterInterface interpretor;
+        AbstractExecute interpretor;
 
         while ((instruction = reader.getNext()) != null) {
             if ((interpretor = this.interpretorExecuter.get(instruction)) == null) {
@@ -94,10 +94,10 @@ public class  Interpreter {
     private void initLanguages() {
         Language[] languages = Language.values();
         for (Language language : languages) {
-            InterpreterInterface interpreter = language.getInterpreter();
+        	AbstractExecute interpreter = language.getInterpreter();
             String[] aliases = language.getAliases();
-            for (String aliase : aliases) {
-                this.interpretorExecuter.put(aliase, interpreter);
+            for (String alias : aliases) {
+                this.interpretorExecuter.put(alias, interpreter);
             }
         }
     }

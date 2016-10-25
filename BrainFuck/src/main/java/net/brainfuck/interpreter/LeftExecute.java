@@ -6,8 +6,13 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 /**
  * @author davidLANG
  */
-class LeftExecute implements InterpreterInterface {
-    /**
+class LeftExecute extends AbstractExecute {
+	
+    LeftExecute() {
+		super(Language.LEFT);
+	}
+
+	/**
      * Execute the "left" method of Memory Class
      * @param memory Memory machine
      */
@@ -16,11 +21,4 @@ class LeftExecute implements InterpreterInterface {
         memory.left();
     }
 
-    /**
-     * Print the short syntax of "left" command
-     */
-    @Override
-    public void rewrite() {
-        System.out.print(Language.LEFT.getShortSyntax());
-    }
 }

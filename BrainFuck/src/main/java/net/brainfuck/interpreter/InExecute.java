@@ -11,7 +11,11 @@ import net.brainfuck.exception.IOException;
  * @author François Melkonian
  *         IN_PATH
  */
-class InExecute implements InterpreterInterface {
+class InExecute extends AbstractExecute {
+
+	InExecute() {
+		super(Language.IN);
+	}
 
     /**
      * Execute "" method from class Memory
@@ -34,8 +38,4 @@ class InExecute implements InterpreterInterface {
 
     }
 
-    @Override
-    public void rewrite() {
-        System.out.print(Language.IN.getShortSyntax());
-    }
 }

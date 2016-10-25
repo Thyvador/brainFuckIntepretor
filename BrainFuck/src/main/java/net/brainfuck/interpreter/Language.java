@@ -18,7 +18,7 @@ enum Language {
     OUT(new OutExecute(), ".", "OUT", "ffff00");
     //JUMP(new JumpExecute(), "[", "JUMP", "ff7f00"),
     //BACK(new backExecute(), "]", "BACK", "ff0000");
-    private InterpreterInterface interpreter;
+    private AbstractExecute interpreter;
     private String[] aliases;
 
     /**
@@ -26,7 +26,7 @@ enum Language {
      * @param interpreter InterpreterInterface corresponding to syntax
      * @param aliases au moins 2 string : {String shortSyntax, String longSyntax}
      */
-    Language(InterpreterInterface interpreter, String ... aliases) {
+    Language(AbstractExecute interpreter, String ... aliases) {
         this.interpreter = interpreter;
         this.aliases = aliases;
     }
@@ -42,7 +42,7 @@ enum Language {
      * 
      * @return the interpreter
      */
-    public InterpreterInterface getInterpreter() {
+    public AbstractExecute getInterpreter() {
         return interpreter;
     }
 
@@ -53,4 +53,5 @@ enum Language {
     public String   getShortSyntax() {
         return this.aliases[0];
     }
+    
 }

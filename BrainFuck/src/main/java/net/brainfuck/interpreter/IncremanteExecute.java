@@ -7,9 +7,13 @@ import net.brainfuck.exception.MemoryOverFlowException;
 /**
  * @author davidLANG
  */
-class IncremanteExecute implements InterpreterInterface {
+class IncremanteExecute extends AbstractExecute {
 
-    /**
+    IncremanteExecute() {
+		super(Language.INCR);
+	}
+
+	/**
      * Execute the "incr" method of Memory Class
      *
      * @param memory Memory machine
@@ -19,11 +23,4 @@ class IncremanteExecute implements InterpreterInterface {
         memory.incr();
     }
 
-    /**
-     * Print the short syntax of "incremante" command
-     */
-    @Override
-    public void rewrite() {
-        System.out.print(Language.INCR.getShortSyntax());
-    }
 }
