@@ -10,9 +10,13 @@ import java.io.IOException;
  * @author François Melkonian
  *
  */
-public class OutExecute implements InterpreterInterface {
+class OutExecute  extends AbstractExecute {
 
-    /**
+    OutExecute() {
+		super(Language.OUT);
+	}
+
+	/**
      * Print the value on current index, call "get" method from class Memory
      *
      * @param machine Memory machine
@@ -22,8 +26,4 @@ public class OutExecute implements InterpreterInterface {
         System.out.print( (char)machine.get());
     }
 
-    @Override
-    public void rewrite() {
-            System.out.println(Language.OUT.getShortSyntax());
-    }
 }

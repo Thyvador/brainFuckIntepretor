@@ -6,8 +6,13 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 /**
  * @author davidLANG
  */
-class RightExecute implements InterpreterInterface {
-    /**
+class RightExecute  extends AbstractExecute {
+	
+    RightExecute() {
+		super(Language.RIGHT);
+	}
+
+	/**
      * Execute the "right" method of Memory Class
      * @param memory Memory machine
      */
@@ -16,11 +21,4 @@ class RightExecute implements InterpreterInterface {
         memory.right();
     }
 
-    /**
-     * Print the short syntax of "right" command
-     */
-    @Override
-    public void rewrite() {
-        System.out.print(Language.RIGHT.getShortSyntax());
-    }
 }

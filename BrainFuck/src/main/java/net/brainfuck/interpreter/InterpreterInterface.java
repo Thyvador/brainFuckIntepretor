@@ -25,9 +25,5 @@ interface InterpreterInterface {
      */
     void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn;
 
-    /**
-     * Print the short syntax of the command wich implement this interface
-     */
-    void rewrite();
 }
 
