@@ -15,7 +15,6 @@ public class BfReader implements Reader {
     private String next = null;
     private java.io.Reader reader;
     private boolean firstLine = true;
-    private boolean isLine = false;
     private static final int CR = '\r';
     private static final int LF = '\n';
     private int oldvar;

@@ -25,10 +25,10 @@ class InExecute implements InterpreterInterface {
         try {
             value = System.in.read();
         } catch (java.io.IOException e) {
-            throw new net.brainfuck.exception.FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
+            throw new FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
         }
         if (value == -1) {
-            throw new net.brainfuck.exception.FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
+            throw new FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
         }
         machine.set(value);
 
@@ -36,6 +36,6 @@ class InExecute implements InterpreterInterface {
 
     @Override
     public void rewrite() {
-        System.out.println(Language.IN.getShortSyntax());
+        System.out.print(Language.IN.getShortSyntax());
     }
 }
