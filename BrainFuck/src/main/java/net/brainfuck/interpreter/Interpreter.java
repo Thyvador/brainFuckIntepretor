@@ -1,7 +1,6 @@
 
 package net.brainfuck.interpreter;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 
 import static net.brainfuck.common.ArgumentConstante.*;
-import static net.brainfuck.interpreter.Language.*;
 
 /**
  * @author davidLANG
@@ -89,6 +87,7 @@ public class  Interpreter {
         boolean execution = true;
         
         while ((instruction = reader.getNext()) != null) {
+            System.out.println(instruction);
             if ((interpretor = Language.languageMap.get(instruction).getInterpreter()) == null) {
                 throw new SyntaxErrorException(instruction);
             }
@@ -111,7 +110,7 @@ public class  Interpreter {
             	interpretor.execute(memory, reader);
             }
         }
-        reader.close();
+        reader.closeReader();
         if (flags[ArgumentConstante.TRANSLATE]) {
         	try {
 				imgWrt.close();

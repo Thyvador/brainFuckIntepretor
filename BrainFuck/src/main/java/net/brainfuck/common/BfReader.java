@@ -73,7 +73,7 @@ public class BfReader implements Reader {
      * Get the next instruction.
      *
      * @return the next instruction.
-     * @throws IOException if file close during reading.
+     * @throws IOException if file closeReader during reading.
      */
     @Override
     public String getNext() throws IOException {
@@ -137,11 +137,11 @@ public class BfReader implements Reader {
     /**
      * Close the file when the reader finished him.
      *
-     * @throws IOException if file can't close.
+     * @throws IOException if file can't closeReader.
      * @throws BracketsParseException 
      */
     @Override
-    public void close() throws IOException, BracketsParseException {
+    public void closeReader() throws IOException, BracketsParseException {
         try {
             reader.close();
             if (!marks.isEmpty())

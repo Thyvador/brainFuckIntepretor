@@ -111,7 +111,7 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	}
 
 	/**
-	 * Add black pixel for squared the image, wirte the image and close all I/O streams
+	 * Add black pixel for squared the image, wirte the image and closeReader all I/O streams
 	 * 
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
