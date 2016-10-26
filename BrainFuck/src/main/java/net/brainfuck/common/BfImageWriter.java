@@ -6,8 +6,10 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
+
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
 
 /**
  * The BfImageWriter class write a bitmap image.  It can handle huge image.
@@ -36,7 +38,7 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	/** The count of instruction after the last flush */
 	private int count = 0;
 
-	public BfImageWriter() throws IOException {
+	public BfImageWriter() throws IOException, FileNotFoundException {
 		this(System.out);
 	}
 	
@@ -47,9 +49,11 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	 *            the path of the output file
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * @throws java.io.FileNotFoundException 
+	 * @throws FileNotFoundException 
 	 */
 	@Deprecated
-	public BfImageWriter(String path) throws IOException {
+	public BfImageWriter(String path) throws IOException, FileNotFoundException, java.io.FileNotFoundException {
 		this(new File(path));
 	}
 
@@ -60,9 +64,11 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	 *            the output file
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException 
+	 * @throws java.io.FileNotFoundException 
 	 */
 	@Deprecated
-	public BfImageWriter(File outputFile) throws IOException {
+	public BfImageWriter(File outputFile) throws IOException, FileNotFoundException, java.io.FileNotFoundException {
 		this(new FileOutputStream(outputFile));
 	}
 
@@ -73,12 +79,19 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	 *            the output stream
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException 
 	 */
-	public BfImageWriter(OutputStream out) throws IOException {
-		super.out = out;
-		tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
-		tmpFile.deleteOnExit();
-		tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
+	public BfImageWriter(OutputStream out) throws IOException, FileNotFoundException {
+		try {
+			super.out = out;
+			tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
+			tmpFile.deleteOnExit();
+			tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
+		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException();
+		} catch (java.io.IOException e) {
+			throw new IOException();
+		}
 	}
 
 	/**
@@ -90,11 +103,15 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	 */
 	@Override
 	public void write(int pixel) throws IOException {
-		tmpOs.writeInt(pixel);
-		count++;
-		if (count == BUFFER_SIZE) {
-			tmpOs.flush();
-			count = 0;
+		try {
+			tmpOs.writeInt(pixel);
+			count++;
+			if (count == BUFFER_SIZE) {
+				tmpOs.flush();
+				count = 0;
+			}
+		} catch (java.io.IOException e) {
+			throw new IOException();
 		}
 	}
 
@@ -116,48 +133,53 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Override
-	public void close() throws IOException {
-		DataInputStream tmpIs = new DataInputStream(new FileInputStream(tmpFile));
-		double square;
-		while ((square = Math.sqrt(tmpIs.available() / 4)) != (int) square) {
-			write(0x000000);
-		}
-		tmpOs.close();
-		square *= 3;
-		entireBufferSize = (int) Math.pow(square * 3, 2);
-		bitmapBuffer = new DataBufferInt(BANK_SIZE, entireBufferSize / BANK_SIZE + 1);
-		DataBufferInt line = new DataBufferInt(BANK_SIZE, (int) square / BANK_SIZE + 1);
-		int color;
-		// For all the line, set the global buffer
-		for (int lineNumber = 0; lineNumber < square; lineNumber += 3) {
-			// Set the line
-			for (int indexInLine = 0; indexInLine < square; indexInLine += 3) {
-				color = tmpIs.readInt();
-				for (int j = 0; j < 3; j++) {
-					int postion = indexInLine + j;
-					line.setElem(postion / BANK_SIZE, postion % BANK_SIZE, color);
+	public void close() throws IOException, FileNotFoundException {
+		try {
+			DataInputStream tmpIs = new DataInputStream(new FileInputStream(tmpFile));
+			double square;
+			while ((square = Math.sqrt(tmpIs.available() / 4)) != (int) square) {
+				write(0x000000);
+			}
+			tmpOs.close();
+			square *= 3;
+			entireBufferSize = (int) Math.pow(square * 3, 2);
+			bitmapBuffer = new DataBufferInt(BANK_SIZE, entireBufferSize / BANK_SIZE + 1);
+			DataBufferInt line = new DataBufferInt(BANK_SIZE, (int) square / BANK_SIZE + 1);
+			int color;
+			// For all the line, set the global buffer
+			for (int lineNumber = 0; lineNumber < square; lineNumber += 3) {
+				// Set the line
+				for (int indexInLine = 0; indexInLine < square; indexInLine += 3) {
+					color = tmpIs.readInt();
+					for (int j = 0; j < 3; j++) {
+						int postion = indexInLine + j;
+						line.setElem(postion / BANK_SIZE, postion % BANK_SIZE, color);
+					}
+				}
+				// Write 3 times the line in the global buffer
+				for (int i = 0; i < 3; i++) {
+					for (int indexInLine = 0; indexInLine < square; indexInLine++) {
+						int position = ((lineNumber + i) * (int) square) + indexInLine;
+						bitmapBuffer.setElem(position / BANK_SIZE, position % BANK_SIZE,
+								line.getElem(indexInLine / BANK_SIZE, indexInLine % BANK_SIZE));
+					}
 				}
 			}
-			// Write 3 times the line in the global buffer
-			for (int i = 0; i < 3; i++) {
-				for (int indexInLine = 0; indexInLine < square; indexInLine++) {
-					int position = ((lineNumber + i) * (int) square) + indexInLine;
-					bitmapBuffer.setElem(position / BANK_SIZE, position % BANK_SIZE,
-							line.getElem(indexInLine / BANK_SIZE, indexInLine % BANK_SIZE));
-				}
-			}
+			tmpIs.close();
+			// Count new line code
+			biWidth = (int) square;
+			biHeight = (int) square;
+			int pad = (4 - ((biWidth * 3) % 4)) * biHeight;
+			biSizeImage = ((biWidth * biHeight) * 3) + pad;
+			bfSize = biSizeImage + BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE;
+			writeBitmapFileHeader();
+			writeBitmapInfoHeader();
+			writeBitmap();
+		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException();
+		} catch (java.io.IOException e) {
+			throw new IOException();
 		}
-		tmpIs.close();
-		// Count new line code
-		biWidth = (int) square;
-		biHeight = (int) square;
-		int pad = (4 - ((biWidth * 3) % 4)) * biHeight;
-		biSizeImage = ((biWidth * biHeight) * 3) + pad;
-		bfSize = biSizeImage + BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE;
-		writeBitmapFileHeader();
-		writeBitmapInfoHeader();
-		writeBitmap();
-
 	}
 
 	/**

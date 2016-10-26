@@ -1,6 +1,8 @@
 package net.brainfuck.common;
 
-import java.io.IOException;
+
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
 
 /**
  * The Writer interface represents a writer
@@ -33,7 +35,9 @@ public interface Writer {
 	 * 
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
+	 * @throws net.brainfuck.exception.IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void close() throws IOException;
+	public void close() throws net.brainfuck.exception.IOException, FileNotFoundException;
 
 }

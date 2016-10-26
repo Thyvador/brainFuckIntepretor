@@ -13,7 +13,7 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
 
 public class Main {
 
-		/**
+	/**
 	 * Print the usage
 	 */
 	private void printUsage() {
@@ -22,7 +22,7 @@ public class Main {
 
 	/**
 	 * Default constructor
-	 * 
+	 *
 	 * @param args
 	 */
 	public Main(String[] args) {
@@ -38,8 +38,7 @@ public class Main {
 			}
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
-
-			Interpreter i = new Interpreter(m,r, a);
+			Interpreter i = new Interpreter(m, r, a);
 			i.interprate();
 			System.out.println(m);
 		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
@@ -47,7 +46,7 @@ public class Main {
 			System.exit(5);
 		} catch (MemoryOutOfBoundsException e) {
 			System.exit(1);
-		} catch (MemoryOverFlowException e){
+		} catch (MemoryOverFlowException e) {
 			System.exit(2);
 		} catch (FileNotFoundIn e) {
 			System.exit(3);
@@ -58,14 +57,10 @@ public class Main {
 	}
 
 	/**
-	 * @param args
-	 *            command-line args
+	 * @param args command-line args
 	 */
 	public static void main(String[] args) {
-		System.out.println("Working Directory = " +
-				System.getProperty("user.dir"));
 		new Main(args);
-		//new Main(args);
 	}
 
 }

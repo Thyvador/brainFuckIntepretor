@@ -17,7 +17,7 @@ class InExecute extends AbstractExecute {
 	InExecute() {
 		super(Language.IN);
 	}
-	
+
     /**
      * Execute "" method from class Memory
      *
@@ -30,10 +30,10 @@ class InExecute extends AbstractExecute {
         try {
             value = System.in.read();
         } catch (java.io.IOException e) {
-            throw new net.brainfuck.exception.FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
+            throw new FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
         }
         if (value == -1) {
-            throw new net.brainfuck.exception.FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
+            throw new FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
         }
         machine.set(value);
 
