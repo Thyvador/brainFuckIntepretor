@@ -17,7 +17,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
  *
  * @author davidLANG
  */
-interface InterpreterInterface {
+public interface InterpreterInterface {
     /**
      * Execute a method of Memory Class
      * @param memory Memory machine
@@ -27,6 +27,5 @@ interface InterpreterInterface {
      * @throws BracketsParseException 
      */
     void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
-
 }
 

@@ -5,6 +5,10 @@ package net.brainfuck.common;
 import static net.brainfuck.common.ArgumentConstante.*;
 
 import net.brainfuck.exception.IncorrectArgumentException;
+import net.brainfuck.executer.Context;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Analyze the JVM arguments and stock the analyze result
@@ -12,8 +16,8 @@ import net.brainfuck.exception.IncorrectArgumentException;
  * @author davidLANG
  */
 public class ArgumentAnalyzer {
-    private boolean[] flags = new boolean[3];
     private String[] arguments = new String[3];
+    private List<String> flags = new ArrayList<>();
     private String[]args = null;
 
     /**
@@ -39,7 +43,7 @@ public class ArgumentAnalyzer {
      * Returns the flags "--something" for example "--translate"
      * @return the flags
      */
-    public boolean[] getFlags() {return this.flags;}
+    public List<String> getFlags() {return this.flags;}
 
     /**
      * Loop all argument and set the array flags and the array arguments
@@ -49,21 +53,21 @@ public class ArgumentAnalyzer {
         int length = args.length;
         for (int i=0; i < length; i++) {
             switch (args[i]) {
-                case CHECK_SYNTAX:
-                    flags[CHECK] = true;
-                    break;
-                case REWRITE_SYNTAX:
-                    flags[REWRITE] = true;
-                    break;
-                case TRANSLATE_SYNTAX:
-                    flags[TRANSLATE] = true;
-                    break;
                 case PATH_SYNTAX:
                     this.getDoubleArgument(args, i, PATH);
                     i += 1;
                     break;
                 default:
-                    throw new IncorrectArgumentException(args[i]);
+                    boolean error = true;
+                    for (Context c: Context.values()) {
+                        if (c.getSyntax().equals(args[i])) {
+                            flags.add(c.getSyntax());
+                            error = false;
+                        }
+                    }
+                    if (error) {
+                        throw new IncorrectArgumentException(args[i]);
+                    }
             }
         }
     }

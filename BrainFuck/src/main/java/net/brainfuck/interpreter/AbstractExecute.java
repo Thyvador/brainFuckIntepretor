@@ -1,6 +1,6 @@
 package net.brainfuck.interpreter;
 
-abstract class AbstractExecute implements InterpreterInterface {
+public abstract class AbstractExecute implements InterpreterInterface {
 
 	private Language languageInstr;
 
@@ -11,11 +11,11 @@ abstract class AbstractExecute implements InterpreterInterface {
 	/**
      * Print the short syntax of the command which implement this interface
      */
-    final void rewrite() {
+    public final void rewrite() {
     	System.out.print(languageInstr.getShortSyntax());
     }
     
-    final String translate() {
+    public final String translate() {
     	return languageInstr.getColorSyntax();
     }
     

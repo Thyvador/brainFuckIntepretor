@@ -6,6 +6,7 @@ import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.Exception;
+import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.Interpreter;
 
 import static net.brainfuck.common.ArgumentConstante.PATH;
@@ -38,7 +39,9 @@ public class Main {
 			}
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
-			Interpreter i = new Interpreter(m, r, a);
+
+			Executer e = new Executer(m, a.getFlags(), r);
+			Interpreter i = new Interpreter(r, a, e);
 			i.interprate();
 			System.out.println(m);
 		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
