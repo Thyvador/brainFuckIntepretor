@@ -117,7 +117,7 @@ public class Interpreter {
 				interpretor.execute(memory, reader);
 			}
 		}
-		reader.close();
+		reader.closeReader();
 		if (flags[ArgumentConstante.TRANSLATE]) {
 			imgWrt.close();
 		}
