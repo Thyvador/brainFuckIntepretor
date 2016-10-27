@@ -58,19 +58,30 @@ public class ArgumentAnalyzer {
                     i += 1;
                     break;
                 default:
-                    boolean error = true;
-                    for (Context c: Context.values()) {
-                        if (c.getSyntax().equals(args[i])) {
-                            flags.add(c.getSyntax());
-                            error = false;
-                        }
-                    }
-                    if (error) {
-                        throw new IncorrectArgumentException(args[i]);
-                    }
+                    this.analyzeLongArgument(args[i]);
+                    break;
             }
         }
     }
+
+    /**
+     * Check if the argument is an existing long argument. If it is add it to List<String> flags
+     * @param longArgment the current argument in analyze loop
+     * @throws IncorrectArgumentException Throw when the argument is incorrect
+     */
+    private void analyzeLongArgument(String longArgment) throws IncorrectArgumentException {
+        boolean error = true;
+        for (Context c: Context.values()) {
+            if (c.getSyntax().equals(longArgment)) {
+                flags.add(c.getSyntax());
+                error = false;
+            }
+        }
+        if (error) {
+            throw new IncorrectArgumentException(longArgment);
+        }
+    }
+
 
     /**
      * Get the argument corresponding to a "--something" for exemple "--path"
