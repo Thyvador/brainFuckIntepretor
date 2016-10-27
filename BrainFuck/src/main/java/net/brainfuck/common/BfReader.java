@@ -137,7 +137,7 @@ public class BfReader implements Reader {
 	 * @throws BracketsParseException
 	 */
 	@Override
-	public void close() throws IOException, BracketsParseException {
+	public void closeReader() throws IOException, BracketsParseException {
 		try {
 			reader.close();
 			if (!marks.isEmpty())
