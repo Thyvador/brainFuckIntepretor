@@ -64,12 +64,12 @@ public class BfImageReader extends BMPReader implements Reader {
      */
     @Override
     public String getNext() throws IOException {
-        if (offY >= height) {
-            return null;
-        }
         if (offX >= width) {
             offX = 0;
             offY += 3;
+        }
+        if (offY >= height) {
+            return null;
         }
         try {
             buffer = openBytes(0, buffer, offX, offY, 3, 3);
@@ -80,15 +80,15 @@ public class BfImageReader extends BMPReader implements Reader {
         }
         offX += 3;
 
-        if (buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0) return null;
-        for (int i = 0; i < 8; i++) {
-            if (buffer[i * 3] != buffer[i * 3 + 3] || buffer[i * 3 + 1] != buffer[i * 3 + 4] || buffer[i * 3 + 2] != buffer[i * 3 + 5]) {
-                // TODO: 26/10/2016 Probleme avec cette exception.
-//                throw new SyntaxErrorException("Image incorect at index("+offX+","+offY+")");
-                System.out.println("TA MERE");
-            }
+        byte r = buffer[0], g = buffer[1], b = buffer[2];
+        for (int i = 1; i < 9; i++) {
+            r = (byte) (r & buffer[3 * i]);
+            g = (byte) (g & buffer[3 * i + 1]);
+            b = (byte) (b & buffer[3 * i + 2]);
         }
-        return String.format("%02x%02x%02x", buffer[0], buffer[1], buffer[2]);
+        System.out.println(r+","+g+","+b);
+        if (r == 0 && g == 0 && b == 0) return null;
+        return String.format("%02x%02x%02x", r, g, b);
     }
 
     /**
