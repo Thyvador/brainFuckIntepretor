@@ -23,7 +23,7 @@ public class IOException extends Exception {
      * @param message the detail message.
      */
     public IOException(String message) {
-        super("IOException :" + message);
+        super("IOException : " + message);
     }
 
 
