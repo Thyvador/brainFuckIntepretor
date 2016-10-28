@@ -9,9 +9,20 @@ import net.brainfuck.interpreter.AbstractExecute;
 import net.brainfuck.interpreter.InterpreterInterface;
 
 /**
- * Created by davidLANG on 12/10/2016.
+ * @author davidLANG
  */
-public class TranslateExecuter implements ContextExecuter {
+class TranslateExecuter implements ContextExecuter {
+
+    /**
+     * Execute the AbstractExecute command according to the "--translate" context.
+     *
+     * @param i the AbstractCommand to execute
+     * @param m the memory representation
+     * @param r the reader
+     * @throws MemoryOverFlowException throw by memory
+     * @throws IOException throw by reader
+     * @throws MemoryOutOfBoundsException throw by memory
+     */
     @Override
     public void execute(AbstractExecute i, Memory m, Reader r) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException {
         i.translate();

@@ -1,23 +1,19 @@
 
 package net.brainfuck.interpreter;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import net.brainfuck.common.ArgumentAnalyzer;
-import net.brainfuck.common.ArgumentConstante;
 import net.brainfuck.common.BfImageWriter;
-import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
 
+import java.io.FileInputStream;
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
+
 import static net.brainfuck.common.ArgumentConstante.*;
-import static net.brainfuck.interpreter.Language.*;
 
 /**
  * @author davidLANG
@@ -45,19 +41,18 @@ public class Interpreter {
         if(arg.getFlags().contains(Context.TRANSLATE.getSyntax()) == true) {
         	String output = arg.getArgument(PATH).replace(".bf", ".bmp");
         	System.out.println(output);
-        	try {
-				imgWrt = new BfImageWriter(output);
-			} catch (java.io.IOException e) {
-				throw new IOException();
-			}
+	        imgWrt = new BfImageWriter(output);
         }
-        
-        setIO(arg);
+        setIO();
     }
 
-
-    private void setIO(ArgumentAnalyzer arg) throws FileNotFoundException{
-        String inPath = arg.getArgument(IN_PATH);
+	/**
+	 * Set Input and output files depending of args "-i" and "-o"
+	 *
+	 * @throws FileNotFoundException if the path entered isn't valide, the file is missing and can't be open
+	 */
+    private void setIO() throws FileNotFoundException{
+        String inPath = argumentAnalyzer.getArgument(IN_PATH);
         if(inPath != null){
             try {
                 System.setIn(new FileInputStream(inPath));
@@ -65,7 +60,7 @@ public class Interpreter {
                 throw new FileNotFoundException(inPath);
             }
         }
-        String outPath = arg.getArgument(OUT_PATH);
+        String outPath = argumentAnalyzer.getArgument(OUT_PATH);
         if(outPath != null){
             try {
                 PrintStream printStream = new PrintStream(outPath);

@@ -86,7 +86,6 @@ public class BfImageReader extends BMPReader implements Reader {
             g = (byte) (g & buffer[3 * i + 1]);
             b = (byte) (b & buffer[3 * i + 2]);
         }
-        System.out.println(r+","+g+","+b);
         if (r == 0 && g == 0 && b == 0) return null;
         return String.format("%02x%02x%02x", r, g, b);
     }
