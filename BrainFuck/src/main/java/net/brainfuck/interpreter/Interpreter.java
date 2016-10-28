@@ -19,7 +19,6 @@ import static net.brainfuck.interpreter.Language.*;
 
 /**
  * @author davidLANG
- *
  */
 
 public class Interpreter {
@@ -31,28 +30,20 @@ public class Interpreter {
 
 	/**
 	 * Constructor which initialize attribute.
-	 * 
-	 * @param memory
-	 *            Memory
-	 * @param reader
-	 *            Reader
-	 * @param arg
-	 *            ArgumentAnalyzer use to get arguments
+	 *
+	 * @param memory Memory
+	 * @param reader Reader
+	 * @param arg    ArgumentAnalyzer use to get arguments
 	 * @throws IOException
 	 */
 	public Interpreter(Memory memory, Reader reader, ArgumentAnalyzer arg) throws FileNotFoundException, IOException {
 		this.reader = reader;
 		this.memory = memory;
 		this.flags = arg.getFlags();
-
 		if (flags[ArgumentConstante.TRANSLATE]) {
 			String output = arg.getArgument(PATH).replace(".bf", ".bmp");
 			System.out.println(output);
-			try {
-				imgWrt = new BfImageWriter(output);
-			} catch (java.io.IOException e) {
-				throw new IOException();
-			}
+			imgWrt = new BfImageWriter(output);
 		}
 
 		setIO(arg);
@@ -81,14 +72,10 @@ public class Interpreter {
 	/**
 	 * Interpret all characters which can be read with the attribute reader.
 	 *
-	 * @throws SyntaxErrorException
-	 *             {@link SyntaxErrorException} if an error of syntax is found.
-	 * @throws MemoryOutOfBoundsException
-	 *             {@link MemoryOutOfBoundsException} if memory throw an exception.
-	 * @throws IOException
-	 *             {@link IOException} if reader throw an exception.
-	 * @throws MemoryOverFlowException
-	 *             throw by memory
+	 * @throws SyntaxErrorException       {@link SyntaxErrorException} if an error of syntax is found.
+	 * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception.
+	 * @throws IOException                {@link IOException} if reader throw an exception.
+	 * @throws MemoryOverFlowException    throw by memory
 	 * @throws BracketsParseException
 	 * @throws FileNotFoundException
 	 */
@@ -117,7 +104,7 @@ public class Interpreter {
 				interpretor.execute(memory, reader);
 			}
 		}
-		reader.close();
+		reader.closeReader();
 		if (flags[ArgumentConstante.TRANSLATE]) {
 			imgWrt.close();
 		}

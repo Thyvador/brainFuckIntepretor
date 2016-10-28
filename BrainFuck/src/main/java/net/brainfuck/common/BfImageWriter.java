@@ -38,52 +38,19 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	/** The count of instruction after the last flush */
 	private int count = 0;
 
-	public BfImageWriter() throws IOException, FileNotFoundException {
-		this(System.out);
-	}
-	
 	/**
 	 * Instantiates a new bf image writer.
 	 *
 	 * @param path
-	 *            the path of the output file
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws java.io.FileNotFoundException 
-	 * @throws FileNotFoundException 
-	 */
-	@Deprecated
-	public BfImageWriter(String path) throws IOException, FileNotFoundException, java.io.FileNotFoundException {
-		this(new File(path));
-	}
-
-	/**
-	 * Instantiates a new bf image writer.
-	 *
-	 * @param outputFile
-	 *            the output file
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws FileNotFoundException 
-	 * @throws java.io.FileNotFoundException 
-	 */
-	@Deprecated
-	public BfImageWriter(File outputFile) throws IOException, FileNotFoundException, java.io.FileNotFoundException {
-		this(new FileOutputStream(outputFile));
-	}
-
-	/**
-	 * Instantiates a new bf image writer.
-	 *
-	 * @param out
 	 *            the output stream
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws FileNotFoundException 
 	 */
-	public BfImageWriter(OutputStream out) throws IOException, FileNotFoundException {
+	public BfImageWriter(String path) throws IOException, FileNotFoundException {
 		try {
-			super.out = out;
+			File file = new File(path);
+			super.out = new FileOutputStream(file);
 			tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
 			tmpFile.deleteOnExit();
 			tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));

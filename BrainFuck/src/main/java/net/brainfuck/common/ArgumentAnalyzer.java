@@ -62,6 +62,14 @@ public class ArgumentAnalyzer {
                     this.getDoubleArgument(args, i, PATH);
                     i += 1;
                     break;
+                case IN_SYNTAX:
+                    this.getDoubleArgument(args, i, IN_PATH);
+                    i += 1;
+                    break;
+                case OUT_SYNTAX:
+                    this.getDoubleArgument(args, i, OUT_PATH);
+                    i += 1;
+                    break;
                 default:
                     throw new IncorrectArgumentException(args[i]);
             }
