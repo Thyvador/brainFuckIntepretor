@@ -67,19 +67,18 @@ public class BfImageReader extends BMPReader implements Reader {
         if (offY >= height) {
             return null;
         }
-        if (offX >= width) {
-            offX = 0;
-            offY += 3;
-        }
         try {
             buffer = openBytes(0, buffer, offX, offY, 3, 3);
         } catch (FormatException e) {
-            throw new IOException("Image size incorrect.");
+            e.printStackTrace();
         } catch (java.io.IOException e) {
             throw new IOException();
         }
         offX += 3;
-
+        if (offX >= width) {
+            offX = 0;
+            offY += 3;
+        }
         if (buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0) return null;
         for (int i = 0; i < 8; i++) {
             if (buffer[i * 3] != buffer[i * 3 + 3] || buffer[i * 3 + 1] != buffer[i * 3 + 4] || buffer[i * 3 + 2] != buffer[i * 3 + 5]) {

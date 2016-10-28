@@ -39,7 +39,6 @@ public class Main {
 			}
 			Memory m = new Memory();
 			Reader r = new BfReader(a.getArgument(PATH));
-
 			Executer e = new Executer(m, a.getFlags(), r);
 			Interpreter i = new Interpreter(r, a, e);
 			i.interprate();
