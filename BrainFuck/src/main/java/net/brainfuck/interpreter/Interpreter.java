@@ -85,7 +85,7 @@ public class Interpreter {
         AbstractExecute interpretor;
         
         while ((instruction = reader.getNext()) != null) {
-            if (languageMap.get(instruction) == null || (interpretor = Language.languageMap.get(instruction).getInterpreter()) == null) {
+            if (!Language.languageMap.containsKey (instruction) || (interpretor = Language.languageMap.get(instruction).getInterpreter()) == null) {
                 throw new SyntaxErrorException(instruction);
             }
             executer.execute(interpretor);
