@@ -36,6 +36,12 @@ class CheckExecuter implements ContextExecuter{
                 }
             }
         }
+
+        int getCpt() {
+            return cpt;
+        }
     }
+
+
 
 

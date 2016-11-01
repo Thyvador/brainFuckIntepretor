@@ -57,5 +57,15 @@ public class Executer {
         }
     }
 
+    public void end() throws BracketsParseException {
+        int index;
+        if ((index = this.contextExecuters.indexOf(Context.contextMap.get(Context.CHECK.getSyntax()))) >= 0) {
+            CheckExecuter checkExecuter = (CheckExecuter)this.contextExecuters.get(index);
+            if (checkExecuter.getCpt() > 0) {
+                throw new BracketsParseException();
+            }
+        }
+    }
+
 
 }
