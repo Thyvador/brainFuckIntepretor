@@ -12,7 +12,7 @@ public class TestBfImageWriter {
 
 	public static void main(String[] args) {
 		try {
-			test1();
+			test2();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
