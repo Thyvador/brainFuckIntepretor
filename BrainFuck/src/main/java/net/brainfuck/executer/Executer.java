@@ -32,12 +32,11 @@ public class Executer {
 
         // Initialize context executer
         this.contextExecuters.add(Context.contextMap.get(Context.UNCHECK.getSyntax()));
+        if (arguments.size() > 0) {
+            this.contextExecuters.remove(Context.contextMap.get(Context.UNCHECK.getSyntax()));
+        }
         for (String argument : arguments) {
-            if (argument.equals(Context.UNCHECK.getSyntax())) {
-                this.contextExecuters.remove(Context.contextMap.get(Context.UNCHECK.getSyntax()));
-            } else {
-                this.contextExecuters.add(Context.contextMap.get(argument));
-            }
+            this.contextExecuters.add(Context.contextMap.get(argument));
         }
     }
 
