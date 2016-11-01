@@ -31,14 +31,14 @@ public class Interpreter {
      * Constructor which initialize attribute.
      * @param reader Reader
      * @param arg ArgumentAnalyzer use to get arguments
-     * @throws IOException 
+     * @throws IOException throw bt BfImageWriter
      */
     public Interpreter(Reader reader, ArgumentAnalyzer arg, Executer executer) throws FileNotFoundException, IOException {
         this.reader = reader;
         this.argumentAnalyzer = arg;
         this.executer = executer;
 
-        if(arg.getFlags().contains(Context.TRANSLATE.getSyntax()) == true) {
+        if(arg.getFlags().contains(Context.TRANSLATE.getSyntax())) {
         	String output = arg.getArgument(PATH).replace(".bf", ".bmp");
         	System.out.println(output);
 	        imgWrt = new BfImageWriter(output);
@@ -77,7 +77,7 @@ public class Interpreter {
      * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception.
      * @throws IOException {@link IOException}  if reader throw an exception.
      * @throws MemoryOverFlowException throw by memory
-     * @throws BracketsParseException 
+     * @throws BracketsParseException throw by executer
      */
     public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
             MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException {
@@ -90,6 +90,7 @@ public class Interpreter {
             }
             executer.execute(interpretor);
         }
+        executer.end();
         this.closeIO();
     }
 
