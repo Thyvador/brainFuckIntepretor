@@ -1,6 +1,7 @@
 package net.brainfuck.common;
 
 
+import ch.qos.logback.classic.Logger;
 import loci.formats.FormatException;
 import loci.formats.in.BMPReader;
 import net.brainfuck.exception.BracketsParseException;
