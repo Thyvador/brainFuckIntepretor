@@ -55,8 +55,11 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 			tmpFile.deleteOnExit();
 			tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
 		} catch (java.io.FileNotFoundException e) {
+
+			tmpFile.deleteOnExit();
 			throw new FileNotFoundException();
 		} catch (java.io.IOException e) {
+			tmpFile.deleteOnExit();
 			throw new IOException();
 		}
 	}
