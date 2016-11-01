@@ -5,7 +5,6 @@ import loci.formats.FormatException;
 import loci.formats.in.BMPReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
-import net.brainfuck.exception.SyntaxErrorException;
 
 import java.util.Stack;
 
@@ -37,8 +36,7 @@ public class BfImageReader extends BMPReader implements Reader {
      * @param path the path of the file to read.
      * @throws IOException {@link IOException} if an IOException occur.
      */
-    public BfImageReader(String path) throws IOException {
-        super();
+    public BfImageReader(String path) throws IOException{
         marks = new Stack<>();
         markIndex = new Stack<>();
         try {

@@ -35,9 +35,9 @@ public class Main {
                 System.exit(0);
             }
             Memory m = new Memory();
-            Reader r;
+            Reader r = null;
             if (a.getArgument(PATH).endsWith(".bmp")) {
-                r = new BfImageReader(a.getArgument(PATH));
+                    r = new BfImageReader(a.getArgument(PATH));
             } else {
                 r = new BfReader(a.getArgument(PATH));
             }
