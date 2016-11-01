@@ -7,13 +7,15 @@ import java.util.Map;
  * @author davidLANG
  */
 public enum Context {
-    UNCHECK("--check"),
+    CHECK("--check"),
+    UNCHECK("--uncheck"),
     TRANSLATE("--translate"),
     REWRITE("--rewrite");
 
     static Map<String, ContextExecuter> contextMap = new HashMap<>();
 
     static {
+        CHECK.setContextExecuter(new CheckExecuter());
         UNCHECK.setContextExecuter(new UncheckExecuter());
         TRANSLATE.setContextExecuter(new TranslateExecuter());
         REWRITE.setContextExecuter(new RewriteExecuter());
@@ -36,3 +38,4 @@ public enum Context {
 
     public void setContextExecuter(ContextExecuter c) { this.c = c; }
 }
+
