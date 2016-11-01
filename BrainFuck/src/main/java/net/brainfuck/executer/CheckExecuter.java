@@ -1,5 +1,6 @@
 package net.brainfuck.executer;
 
+import net.brainfuck.common.BfImageWriter;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
@@ -25,7 +26,7 @@ class CheckExecuter implements ContextExecuter{
          * @throws BracketsParseException throw by JumpExecute or by BackExecute
          */
         @Override
-        public void execute(AbstractExecute i, Memory m, Reader r) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
+        public void execute(AbstractExecute i, Memory m, Reader r, BfImageWriter imageWriter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
             if (i instanceof JumpExecute) {
                 cpt++;
             }

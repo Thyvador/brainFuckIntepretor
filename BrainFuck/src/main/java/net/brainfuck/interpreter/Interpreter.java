@@ -24,7 +24,6 @@ public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
     private Executer executer;
 	private Reader reader;
-	private BfImageWriter imgWrt;
     private ArgumentAnalyzer argumentAnalyzer;
 
     /**
@@ -41,7 +40,7 @@ public class Interpreter {
         if(arg.getFlags().contains(Context.TRANSLATE.getSyntax())) {
         	String output = arg.getArgument(PATH).replace(".bf", ".bmp");
         	System.out.println(output);
-	        imgWrt = new BfImageWriter(output);
+	        executer.setImageWriter(new BfImageWriter(output));
         }
         setIO();
     }
@@ -91,22 +90,7 @@ public class Interpreter {
             executer.execute(interpretor);
         }
         executer.end();
-        this.closeIO();
     }
-
-    /**
-     * Close reader and close imgWrt when the context need it
-     *
-     * @throws IOException could be throw by closing closing image writer
-     * @throws BracketsParseException throw by reader.close()
-     */
-    private void closeIO() throws IOException, BracketsParseException, FileNotFoundException {
-        reader.closeReader();
-        if (this.argumentAnalyzer.getFlags().contains(Context.TRANSLATE.getSyntax())) {
-            imgWrt.close();
-        }
-    }
-
 
     
     void markReader() throws IOException {
