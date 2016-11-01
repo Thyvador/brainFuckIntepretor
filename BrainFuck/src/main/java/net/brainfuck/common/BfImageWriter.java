@@ -51,7 +51,7 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 		try {
 			File file = new File(path);
 			super.out = new FileOutputStream(file);
-			tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
+			tmpFile = File.createTempFile("tmp-", null, new File("Brainfuck/src/test/resources/assets/brainfucktest/common/"));
 			tmpFile.deleteOnExit();
 			tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
 		} catch (java.io.FileNotFoundException e) {

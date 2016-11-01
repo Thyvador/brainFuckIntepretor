@@ -24,15 +24,15 @@ public class TestBfImageWriter {
 
 	private static void test1() throws IOException, net.brainfuck.exception.IOException, FileNotFoundException {
 		BfImageWriter wrt = new BfImageWriter("c:/Users/Alexandre/Desktop/test.bmp");
-		wrt.write("ff0000");
-		wrt.write("00FF00");
 		wrt.write("0000FF");
+		wrt.write("FFFFFF");
+		wrt.write("FFFFFF");
 		wrt.close();		
 	}
 	
 	private static void test2() throws IOException, net.brainfuck.exception.IOException, FileNotFoundException {
-		BfImageWriter wrt = new BfImageWriter("c:/Users/user/Desktop/test.bmp");
-		for (int i = 0; i < 1E8; i++) {
+		BfImageWriter wrt = new BfImageWriter("c:/Users/Alexandre/Desktop/test.bmp");
+		for (int i = 0; i < 200; i++) {
 			wrt.write(rnd.nextInt(0xFFFFFF+1));
 		}
 		wrt.close();

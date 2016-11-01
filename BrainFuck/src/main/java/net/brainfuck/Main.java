@@ -1,9 +1,6 @@
 package net.brainfuck;
 
-import net.brainfuck.common.ArgumentAnalyzer;
-import net.brainfuck.common.BfReader;
-import net.brainfuck.common.Memory;
-import net.brainfuck.common.Reader;
+import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.executer.Executer;
@@ -14,55 +11,60 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
 
 public class Main {
 
-	/**
-	 * Print the usage
-	 */
-	private void printUsage() {
-		System.out.println("Usage : bfck.sh -p FILE [--rewrite]");
-	}
+    /**
+     * Print the usage
+     */
+    private void printUsage() {
+        System.out.println("Usage : bfck.sh -p FILE [--rewrite]");
+    }
 
-	/**
-	 * Default constructor
-	 *
-	 * @param args
-	 */
-	public Main(String[] args) {
-		if (args.length == 0) {
-			this.printUsage();
-			System.exit(0);
-		}
-		try {
-			ArgumentAnalyzer a = new ArgumentAnalyzer(args);
-			if (a.getArgument(PATH) == null) {
-				this.printUsage();
-				System.exit(0);
-			}
-			Memory m = new Memory();
-			Reader r = new BfReader(a.getArgument(PATH));
-			Executer e = new Executer(m, a.getFlags(), r);
-			Interpreter i = new Interpreter(r, a, e);
-			i.interprate();
-			System.out.println(m);
-		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
-			// Exit code not set
-			System.exit(5);
-		} catch (MemoryOutOfBoundsException e) {
-			System.exit(1);
-		} catch (MemoryOverFlowException e) {
-			System.exit(2);
-		} catch (FileNotFoundIn e) {
-			System.exit(3);
-		} catch (BracketsParseException e) {
-			System.exit(4);
-		}
-		System.exit(0);
-	}
+    /**
+     * Default constructor
+     *
+     * @param args
+     */
+    public Main(String[] args) {
+        if (args.length == 0) {
+            this.printUsage();
+            System.exit(0);
+        }
+        try {
+            ArgumentAnalyzer a = new ArgumentAnalyzer(args);
+            if (a.getArgument(PATH) == null) {
+                this.printUsage();
+                System.exit(0);
+            }
+            Memory m = new Memory();
+            Reader r = null;
+            if (a.getArgument(PATH).endsWith(".bmp")) {
+                    r = new BfImageReader(a.getArgument(PATH));
+            } else {
+                r = new BfReader(a.getArgument(PATH));
+            }
+            Executer e = new Executer(m, a.getFlags(), r);
+            Interpreter i = new Interpreter(r, a, e);
+            i.interprate();
+            System.out.println(m);
+        } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
+            // Exit code not set
+            System.exit(5);
+        } catch (MemoryOutOfBoundsException e) {
+            System.exit(1);
+        } catch (MemoryOverFlowException e) {
+            System.exit(2);
+        } catch (FileNotFoundIn e) {
+            System.exit(3);
+        } catch (BracketsParseException e) {
+            System.exit(4);
+        }
+        System.exit(0);
+    }
 
-	/**
-	 * @param args command-line args
-	 */
-	public static void main(String[] args) {
-		new Main(args);
-	}
+    /**
+     * @param args command-line args
+     */
+    public static void main(String[] args) {
+        new Main(args);
+    }
 
 }

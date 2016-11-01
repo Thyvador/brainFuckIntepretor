@@ -1,13 +1,15 @@
 package net.brainfuck.common;
 
 
+import loci.common.DebugTools;
 import loci.formats.FormatException;
 import loci.formats.in.BMPReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
-import net.brainfuck.exception.SyntaxErrorException;
 
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The <code>BfImageReader</code> class is used to read BitMap files.
@@ -37,10 +39,10 @@ public class BfImageReader extends BMPReader implements Reader {
      * @param path the path of the file to read.
      * @throws IOException {@link IOException} if an IOException occur.
      */
-    public BfImageReader(String path) throws IOException {
-        super();
+    public BfImageReader(String path) throws IOException{
         marks = new Stack<>();
         markIndex = new Stack<>();
+        DebugTools.enableLogging("OFF");
         try {
             initFile(path);
             offX = 0;
