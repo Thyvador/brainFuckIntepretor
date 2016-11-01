@@ -12,7 +12,7 @@ public class TestBfImageWriter {
 
 	public static void main(String[] args) {
 		try {
-			test1();
+			test2();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -31,8 +31,8 @@ public class TestBfImageWriter {
 	}
 	
 	private static void test2() throws IOException, net.brainfuck.exception.IOException, FileNotFoundException {
-		BfImageWriter wrt = new BfImageWriter("c:/Users/user/Desktop/test.bmp");
-		for (int i = 0; i < 1E8; i++) {
+		BfImageWriter wrt = new BfImageWriter("c:/Users/Alexandre/Desktop/test.bmp");
+		for (int i = 0; i < 200; i++) {
 			wrt.write(rnd.nextInt(0xFFFFFF+1));
 		}
 		wrt.close();
