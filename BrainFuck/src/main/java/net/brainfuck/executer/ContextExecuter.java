@@ -24,3 +24,4 @@ interface ContextExecuter {
      */
     void execute(AbstractExecute i, Memory m, Reader r) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException;
 }
+

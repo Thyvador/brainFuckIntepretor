@@ -38,3 +38,4 @@ public enum Context {
 
     public void setContextExecuter(ContextExecuter c) { this.c = c; }
 }
+
