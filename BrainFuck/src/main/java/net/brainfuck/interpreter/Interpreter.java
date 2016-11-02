@@ -109,14 +109,5 @@ public class Interpreter {
         executer.end();
     }
 
-    
-    void markReader() throws IOException {
-    	reader.mark();
-    }
-    
-    void resetReader() throws IOException, BracketsParseException {
-    	reader.reset();
-    }
-    
 }
 

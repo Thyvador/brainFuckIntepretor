@@ -31,9 +31,9 @@ public class TestBfImageWriter {
 	}
 	
 	private static void test2() throws IOException, net.brainfuck.exception.IOException, FileNotFoundException {
-		BfImageWriter wrt = new BfImageWriter("c:/Users/user/Desktop/test.bmp");
-		for (int i = 0; i < 200; i++) {
-			wrt.write(rnd.nextInt(0xFFFFFF+1));
+		BfImageWriter wrt = new BfImageWriter("./test144.bmp");
+		for (int i = 0; i < 2000; i++) {
+			wrt.write("FFFFFF");
 		}
 		wrt.close();
 		
