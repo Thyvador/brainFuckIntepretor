@@ -24,7 +24,6 @@ public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
     private Executer executer;
 	private Reader reader;
-	private BfImageWriter imgWrt;
     private ArgumentAnalyzer argumentAnalyzer;
 
     /**
@@ -41,7 +40,7 @@ public class Interpreter {
         if(arg.getFlags().contains(Context.TRANSLATE.getSyntax())) {
         	String output = arg.getArgument(PATH).replace(".bf", ".bmp");
         	System.out.println(output);
-	        imgWrt = new BfImageWriter(output);
+	        executer.setImageWriter(new BfImageWriter(output));
         }
         setIO();
     }
@@ -52,6 +51,11 @@ public class Interpreter {
 	 * @throws FileNotFoundException if the path entered isn't valide, the file is missing and can't be open
 	 */
     private void setIO() throws FileNotFoundException{
+        this.setIn();
+        this.setOut();
+    }
+
+    private void setIn() throws FileNotFoundException {
         String inPath = argumentAnalyzer.getArgument(IN_PATH);
         if(inPath != null){
             try {
@@ -60,6 +64,9 @@ public class Interpreter {
                 throw new FileNotFoundException(inPath);
             }
         }
+    }
+
+    private void setOut() throws FileNotFoundException {
         String outPath = argumentAnalyzer.getArgument(OUT_PATH);
         if(outPath != null){
             try {
@@ -70,6 +77,7 @@ public class Interpreter {
             }
         }
     }
+
     /**
      * Interpret all characters which can be read with the attribute reader.
      *
@@ -82,31 +90,16 @@ public class Interpreter {
     public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
             MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException {
         String instruction;
-        AbstractExecute interpretor;
-        
+        Language currentInstruction;
+
         while ((instruction = reader.getNext()) != null) {
-            if (!   Language.languageMap.containsKey (instruction) || (interpretor = Language.languageMap.get(instruction).getInterpreter()) == null) {
+            if ((currentInstruction = Language.languageMap.get(instruction)) == null) {
                 throw new SyntaxErrorException(instruction);
             }
-            executer.execute(interpretor);
+            executer.execute(currentInstruction.getInterpreter());
         }
         executer.end();
-        this.closeIO();
     }
-
-    /**
-     * Close reader and close imgWrt when the context need it
-     *
-     * @throws IOException could be throw by closing closing image writer
-     * @throws BracketsParseException throw by reader.close()
-     */
-    private void closeIO() throws IOException, BracketsParseException, FileNotFoundException {
-        reader.closeReader();
-        if (this.argumentAnalyzer.getFlags().contains(Context.TRANSLATE.getSyntax())) {
-            imgWrt.close();
-        }
-    }
-
 
     
     void markReader() throws IOException {

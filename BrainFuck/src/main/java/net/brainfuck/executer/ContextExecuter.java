@@ -1,5 +1,6 @@
 package net.brainfuck.executer;
 
+import net.brainfuck.common.BfImageWriter;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
@@ -22,6 +23,6 @@ interface ContextExecuter {
      * @throws FileNotFoundIn throw by reader
      * @throws BracketsParseException throw by JumpExecute or by BackExecute
      */
-    void execute(AbstractExecute i, Memory m, Reader r) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException;
+    void execute(AbstractExecute i, Memory m, Reader r, BfImageWriter imageWriter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException;
 }
 
