@@ -39,8 +39,6 @@ public class Interpreter {
         this.executer = executer;
         setIO();
         if(arg.getFlags().contains(Context.TRANSLATE.getSyntax())) {
-        	String output = arg.getArgument(PATH).replace(".bf", ".bmp");
-        	System.out.println(output);
 	        executer.setImageWriter(new BfImageWriter());
         }
     }
