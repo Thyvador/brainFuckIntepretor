@@ -30,6 +30,7 @@ public class Interpreter {
      * Constructor which initialize attribute.
      * @param reader Reader
      * @param arg ArgumentAnalyzer use to get arguments
+     * @throws FileNotFoundException 
      * @throws IOException throw bt BfImageWriter
      */
     public Interpreter(Reader reader, ArgumentAnalyzer arg, Executer executer) throws FileNotFoundException, IOException {
@@ -40,7 +41,7 @@ public class Interpreter {
         if(arg.getFlags().contains(Context.TRANSLATE.getSyntax())) {
         	String output = arg.getArgument(PATH).replace(".bf", ".bmp");
         	System.out.println(output);
-	        executer.setImageWriter(new BfImageWriter(output));
+	        executer.setImageWriter(new BfImageWriter());
         }
         setIO();
     }
