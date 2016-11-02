@@ -59,6 +59,16 @@ public class Executer {
         }
     }
 
+    /**
+     * This function must be called when all instruction have been read and execute
+     * She throw an error if the program has no enought parenthesis
+     * She close the Reader.*
+     * She close the imageWriter if the long argument "--translate" have been passed
+     *
+     * @throws BracketsParseException throw if the program have more "[" than "]"
+     * @throws IOException throw by reader.closeReader() and imageWrite.close()
+     * @throws FileNotFoundException throw by reader.closeReader() and imageWrite.close()
+     */
     public void end() throws BracketsParseException, IOException, FileNotFoundException {
         reader.closeReader();
 
@@ -74,7 +84,10 @@ public class Executer {
         }
     }
 
-
+    /**
+     * Set imageWriter parameter
+     * @param i imageWriter
+     */
     public void setImageWriter(BfImageWriter i) {
         this.imageWriter = i;
     }
