@@ -19,7 +19,7 @@ import java.awt.image.*;
 public class BitmapWriter {
 	// --- Private constants
 	
-	protected final static int BITMAPFILEHEADER_SIZE = 14;
+	final static int BITMAPFILEHEADER_SIZE = 14;
 	protected final static int BITMAPINFOHEADER_SIZE = 40;
 	// --- Private variable declaration
 	// --- Bitmap file header

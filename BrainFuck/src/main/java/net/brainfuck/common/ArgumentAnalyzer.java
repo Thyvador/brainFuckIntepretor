@@ -74,19 +74,19 @@ public class ArgumentAnalyzer {
 
     /**
      * Check if the argument is an existing long argument. If it is add it to List<String> flags
-     * @param longArgment the current argument in analyze loop
+     * @param longArgument the current argument in analyze loop
      * @throws IncorrectArgumentException Throw when the argument is incorrect
      */
-    private void analyzeLongArgument(String longArgment) throws IncorrectArgumentException {
+    private void analyzeLongArgument(String longArgument) throws IncorrectArgumentException {
         boolean error = true;
         for (Context c: Context.values()) {
-            if (c.getSyntax().equals(longArgment)) {
+            if (c.getSyntax().equals(longArgument)) {
                 flags.add(c.getSyntax());
                 error = false;
             }
         }
         if (error) {
-            throw new IncorrectArgumentException(longArgment);
+            throw new IncorrectArgumentException(longArgument);
         }
     }
 
