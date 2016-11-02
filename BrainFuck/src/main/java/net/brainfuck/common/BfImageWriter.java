@@ -90,7 +90,7 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	public BfImageWriter(OutputStream out) throws IOException, FileNotFoundException {
 		try {
 			super.out = out;
-			tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
+			tmpFile = File.createTempFile("tmp-", null, new File("."));
 			tmpFile.deleteOnExit();
 			tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
 		} catch (java.io.FileNotFoundException e) {
