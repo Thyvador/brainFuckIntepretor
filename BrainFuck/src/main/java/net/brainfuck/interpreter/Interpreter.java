@@ -30,7 +30,7 @@ public class Interpreter {
      * Constructor which initialize attribute.
      * @param reader Reader
      * @param arg ArgumentAnalyzer use to get arguments
-     * @throws FileNotFoundException 
+     * @throws FileNotFoundException throw by setIo()
      * @throws IOException throw bt BfImageWriter
      */
     public Interpreter(Reader reader, ArgumentAnalyzer arg, Executer executer) throws FileNotFoundException, IOException {
@@ -44,7 +44,7 @@ public class Interpreter {
     }
 
 	/**
-	 * Set Input and output files depending of args "-i" and "-o"
+	 * Set default Input and output files depending of args "-i" and "-o"
 	 *
 	 * @throws FileNotFoundException if the path entered isn't valide, the file is missing and can't be open
 	 */
@@ -53,6 +53,11 @@ public class Interpreter {
         this.setOut();
     }
 
+    /**
+     * Set the default input to a files depending of args "-i"
+     *
+     * @throws FileNotFoundException throw by System.setIn()
+     */
     private void setIn() throws FileNotFoundException {
         String inPath = argumentAnalyzer.getArgument(IN_PATH);
         if(inPath != null){
@@ -64,6 +69,11 @@ public class Interpreter {
         }
     }
 
+    /**
+     * Set the default output to a files depending of args "-i"
+     *
+     * @throws FileNotFoundException throw by System.setOut()
+     */
     private void setOut() throws FileNotFoundException {
         String outPath = argumentAnalyzer.getArgument(OUT_PATH);
         if(outPath != null){
