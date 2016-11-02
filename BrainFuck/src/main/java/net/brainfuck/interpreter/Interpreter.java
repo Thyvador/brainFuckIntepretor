@@ -37,13 +37,12 @@ public class Interpreter {
         this.reader = reader;
         this.argumentAnalyzer = arg;
         this.executer = executer;
-
+        setIO();
         if(arg.getFlags().contains(Context.TRANSLATE.getSyntax())) {
         	String output = arg.getArgument(PATH).replace(".bf", ".bmp");
         	System.out.println(output);
 	        executer.setImageWriter(new BfImageWriter());
         }
-        setIO();
     }
 
 	/**

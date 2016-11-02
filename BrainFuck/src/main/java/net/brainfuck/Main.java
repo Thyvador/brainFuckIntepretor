@@ -44,6 +44,7 @@ public class Main {
             Executer e = new Executer(m, a.getFlags(), r);
             Interpreter i = new Interpreter(r, a, e);
             i.interprate();
+            System.out.println("yolo");
             System.out.println(m);
         } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
             // Exit code not set
