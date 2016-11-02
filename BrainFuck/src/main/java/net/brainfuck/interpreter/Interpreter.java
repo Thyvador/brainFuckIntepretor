@@ -51,6 +51,11 @@ public class Interpreter {
 	 * @throws FileNotFoundException if the path entered isn't valide, the file is missing and can't be open
 	 */
     private void setIO() throws FileNotFoundException{
+        this.setIn();
+        this.setOut();
+    }
+
+    private void setIn() throws FileNotFoundException {
         String inPath = argumentAnalyzer.getArgument(IN_PATH);
         if(inPath != null){
             try {
@@ -59,6 +64,9 @@ public class Interpreter {
                 throw new FileNotFoundException(inPath);
             }
         }
+    }
+
+    private void setOut() throws FileNotFoundException {
         String outPath = argumentAnalyzer.getArgument(OUT_PATH);
         if(outPath != null){
             try {
@@ -69,6 +77,7 @@ public class Interpreter {
             }
         }
     }
+
     /**
      * Interpret all characters which can be read with the attribute reader.
      *
@@ -81,13 +90,13 @@ public class Interpreter {
     public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
             MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException {
         String instruction;
-        AbstractExecute interpretor;
-        
+        Language currentInstruction;
+
         while ((instruction = reader.getNext()) != null) {
-            if (!   Language.languageMap.containsKey (instruction) || (interpretor = Language.languageMap.get(instruction).getInterpreter()) == null) {
+            if ((currentInstruction = Language.languageMap.get(instruction)) == null) {
                 throw new SyntaxErrorException(instruction);
             }
-            executer.execute(interpretor);
+            executer.execute(currentInstruction.getInterpreter());
         }
         executer.end();
     }
