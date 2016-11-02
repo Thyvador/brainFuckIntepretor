@@ -5,6 +5,7 @@ import loci.common.DebugTools;
 import loci.formats.FormatException;
 import loci.formats.in.BMPReader;
 import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
 import java.util.Stack;
@@ -39,7 +40,7 @@ public class BfImageReader extends BMPReader implements Reader {
      * @param path the path of the file to read.
      * @throws IOException {@link IOException} if an IOException occur.
      */
-    public BfImageReader(String path) throws IOException{
+    public BfImageReader(String path) throws IOException, FileNotFoundException {
         marks = new Stack<>();
         markIndex = new Stack<>();
         DebugTools.enableLogging("OFF");
@@ -51,10 +52,10 @@ public class BfImageReader extends BMPReader implements Reader {
             height = getSizeY();
             buffer = new byte[27];
         } catch (FormatException e) {
-            e.printStackTrace();
+            throw new IOException();
             // TODO: 22/10/2016 find the exception to throw.
         } catch (java.io.IOException e) {
-            throw new IOException(path);
+            throw new FileNotFoundException(path);
         }
     }
 
@@ -75,6 +76,7 @@ public class BfImageReader extends BMPReader implements Reader {
         }
         try {
             buffer = openBytes(0, buffer, offX, offY, 3, 3);
+            System.out.print(""+Integer.toHexString(buffer[0]) + Integer.toHexString(buffer[1])+ Integer.toHexString(buffer[2]));
         } catch (FormatException e) {
             throw new IOException("Image size incorrect.");
         } catch (java.io.IOException e) {
