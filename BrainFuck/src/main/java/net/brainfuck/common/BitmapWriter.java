@@ -10,7 +10,7 @@ import java.awt.image.*;
  * http://www.javaworld.com/article/2077561/learn-java/java-tip-60--saving-bitmap-files-in-java.html</a>
  * 
  * Some fields and methods visibilities have been changed for our uses.
- * FileOutputStream has been change to OututStream because we have to wirte on stdout
+ * FileOutputStream has been change to OutputStream because we have to wirte on stdout
  * 
  * @author Jean-Pierre Dubé
  *
