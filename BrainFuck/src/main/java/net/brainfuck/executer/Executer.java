@@ -1,5 +1,6 @@
 package net.brainfuck.executer;
 
+import net.brainfuck.common.BfImageWriter;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
@@ -18,6 +19,7 @@ public class Executer {
     private List<ContextExecuter> contextExecuters = new ArrayList<>();
     private Memory memory;
     private Reader reader;
+    private BfImageWriter imageWriter;
 
     /**
      * Initialize contextExecuters, memory and reader
@@ -53,11 +55,13 @@ public class Executer {
     public void execute(AbstractExecute i) throws MemoryOutOfBoundsException, BracketsParseException,
             MemoryOverFlowException, FileNotFoundIn, IOException {
         for (ContextExecuter c : contextExecuters) {
-            c.execute(i, memory, reader);
+            c.execute(i, memory, reader, imageWriter);
         }
     }
 
-    public void end() throws BracketsParseException {
+    public void end() throws BracketsParseException, IOException, FileNotFoundException {
+        reader.closeReader();
+
         int index;
         if ((index = this.contextExecuters.indexOf(Context.contextMap.get(Context.CHECK.getSyntax()))) >= 0) {
             CheckExecuter checkExecuter = (CheckExecuter)this.contextExecuters.get(index);
@@ -65,7 +69,14 @@ public class Executer {
                 throw new BracketsParseException();
             }
         }
+        if (this.contextExecuters.indexOf(Context.contextMap.get(Context.TRANSLATE.getSyntax())) >= 0) {
+            imageWriter.close();
+        }
     }
 
+
+    public void setImageWriter(BfImageWriter i) {
+        this.imageWriter = i;
+    }
 
 }

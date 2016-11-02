@@ -41,17 +41,56 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	/**
 	 * Instantiates a new bf image writer.
 	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException the file not found exception
+	 */
+	public BfImageWriter() throws IOException, FileNotFoundException {
+		this(System.out);
+	}
+	
+	/**
+	 * Instantiates a new bf image writer.
+	 *
 	 * @param path
+	 *            the path of the output file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws java.io.FileNotFoundException 
+	 * @throws FileNotFoundException 
+	 */
+	@Deprecated
+	public BfImageWriter(String path) throws IOException, FileNotFoundException, java.io.FileNotFoundException {
+		this(new File(path));
+	}
+
+	/**
+	 * Instantiates a new bf image writer.
+	 *
+	 * @param outputFile
+	 *            the output file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException 
+	 * @throws java.io.FileNotFoundException 
+	 */
+	@Deprecated
+	public BfImageWriter(File outputFile) throws IOException, FileNotFoundException, java.io.FileNotFoundException {
+		this(new FileOutputStream(outputFile));
+	}
+
+	/**
+	 * Instantiates a new bf image writer.
+	 *
+	 * @param out
 	 *            the output stream
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 * @throws FileNotFoundException 
 	 */
-	public BfImageWriter(String path) throws IOException, FileNotFoundException {
+	public BfImageWriter(OutputStream out) throws IOException, FileNotFoundException {
 		try {
-			File file = new File(path);
-			super.out = new FileOutputStream(file);
-			tmpFile = File.createTempFile("tmp-", null, new File("Brainfuck/src/test/resources/assets/brainfucktest/common/"));
+			super.out = out;
+			tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
 			tmpFile.deleteOnExit();
 			tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
 		} catch (java.io.FileNotFoundException e) {
@@ -95,7 +134,7 @@ public class BfImageWriter extends BitmapWriter implements Writer {
 	}
 
 	/**
-	 * Add black pixel for squared the image, wirte the image and closeReader all I/O streams
+	 * Add black pixel for squared the image, wirte the image and close all I/O streams
 	 * 
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
