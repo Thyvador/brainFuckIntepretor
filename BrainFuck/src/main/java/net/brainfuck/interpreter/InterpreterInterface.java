@@ -26,6 +26,7 @@ public interface InterpreterInterface {
      * @throws IOException throw by memory
      * @throws BracketsParseException 
      */
-    void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
+    void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException,
+            MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 }
 

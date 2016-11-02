@@ -47,6 +47,7 @@ public class Main {
             System.out.println(m);
         } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
             // Exit code not set
+            e.printStackTrace();
             System.exit(5);
         } catch (MemoryOutOfBoundsException e) {
             System.exit(1);
