@@ -14,7 +14,7 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
 public class TestBfImageReader {
 
     public static void main(String[] args){
-        String [] args2 = {"-p", "./tesfzt144.bmp","--rewrite"};
+        String [] args2 = {"-p", "./test144.bmp","--rewrite"};
         new Main(args2);
 
     }
