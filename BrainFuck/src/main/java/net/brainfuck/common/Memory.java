@@ -30,6 +30,7 @@ public class Memory {
 		clean();
 	}
 
+
 	/**
 	 * Return a representation of the memory. Empty cell are not printed. The n-th cell (if not empty) is : "Cn : [value of n-th cell]"
 	 */
