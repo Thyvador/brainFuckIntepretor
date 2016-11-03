@@ -1,24 +1,23 @@
 package net.brainfuck.common;
 
 
-import loci.common.DebugTools;
-import loci.formats.FormatException;
-import loci.formats.in.BMPReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Stack;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The <code>BfImageReader</code> class is used to read BitMap files.
- * This class extends <code>BMPReader</code> from the bioformats library.
+ * This class implements the <code>Reader</code> Interface.
  *
  * @author Alexandre Hiltcher
  */
-public class BfImageReader extends BMPReader implements Reader {
+public class BfImageReader implements Reader {
     /**
      * The offset of the pixel being read.
      */
@@ -28,45 +27,44 @@ public class BfImageReader extends BMPReader implements Reader {
      */
     private int width, height;
     /**
-     * The buffer that contains the 9 pixels forming an instruction.
+     * The bufferedImage that contains the data from the bitmap file.
      */
-    private byte[] buffer;
-    private Stack<Integer[]> markIndex;
-    private Stack<Byte> marks;
+    private BufferedImage bufferedImage;
+    /**
+     * The stack that contains all the points corresponding to the JUMP adn BACK instructions.
+     */
+    private Stack<Point> marks;
+
+    // TODO: 03/11/2016 Utiliser des points
 
     /**
      * Constructs a BfImageReader from the path of a file.
      *
      * @param path the path of the file to read.
-     * @throws IOException {@link IOException} if an IOException occur.
+     * @throws FileNotFoundException {@link FileNotFoundException} if the file does not exit or cannot be read.
      */
-    public BfImageReader(String path) throws IOException, FileNotFoundException {
+    public BfImageReader(String path) throws FileNotFoundException {
         marks = new Stack<>();
-        markIndex = new Stack<>();
-        DebugTools.enableLogging("OFF");
+        marks = new Stack<>();
         try {
-            initFile(path);
-            offX = 0;
-            offY = 0;
-            width = getSizeX();
-            height = getSizeY();
-            buffer = new byte[27];
-        } catch (FormatException e) {
-            throw new IOException();
-            // TODO: 22/10/2016 find the exception to throw.
+            bufferedImage = ImageIO.read(new File(path));
         } catch (java.io.IOException e) {
             throw new FileNotFoundException(path);
         }
+        offX = 0;
+        offY = 0;
+        width = bufferedImage.getWidth();
+        height = bufferedImage.getHeight();
     }
 
     /**
      * Return the color of the next instruction.
      *
-     * @return the hexadecimal value of the next color.
+     * @return the hexadecimal value of the next color as a String.
      * @throws IOException {@link IOException} if an IOException occur.
      */
     @Override
-    public String getNext() throws IOException {
+    public String getNext() {
         if (offX >= width) {
             offX = 0;
             offY += 3;
@@ -74,22 +72,21 @@ public class BfImageReader extends BMPReader implements Reader {
         if (offY >= height) {
             return null;
         }
-        try {
-            buffer = openBytes(0, buffer, offX, offY, 3, 3);
-            System.out.print(""+Integer.toHexString(buffer[0]) + Integer.toHexString(buffer[1])+ Integer.toHexString(buffer[2]));
-        } catch (FormatException e) {
-            throw new IOException("Image size incorrect.");
-        } catch (java.io.IOException e) {
-            throw new IOException();
+        int rgb = bufferedImage.getRGB(offX, offY);
+
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if (rgb != bufferedImage.getRGB(offX + x, offY + y)) {
+                    return "Error at " + offX + " , " + offY;
+                }
+            }
         }
+
+        int b = rgb & 0xFF;
+        int g = (rgb >> 8) & 0xFF;
+        int r = (rgb >> 16) & 0xFF;
         offX += 3;
 
-        byte r = buffer[0], g = buffer[1], b = buffer[2];
-        for (int i = 1; i < 9; i++) {
-            r = (byte) (r & buffer[3 * i]);
-            g = (byte) (g & buffer[3 * i + 1]);
-            b = (byte) (b & buffer[3 * i + 2]);
-        }
         if (r == 0 && g == 0 && b == 0) return null;
         return String.format("%02x%02x%02x", r, g, b);
     }
@@ -102,35 +99,42 @@ public class BfImageReader extends BMPReader implements Reader {
         if (!marks.isEmpty()) {
             throw new BracketsParseException("]");
         }
-        try {
-            super.close();
-        } catch (java.io.IOException e) {
-            throw new IOException();
-        }
     }
 
+    /**
+     * Mark the current instruction by adding it into the stack.
+     */
     @Override
-    public void mark() throws IOException {
-        Integer[] tmp = {offX, offY};
-        markIndex.push(tmp);
-        marks.push(buffer[0]);
+    public void mark(){
+        Point tmp = new Point(offX, offY);
+        marks.push(tmp);
     }
 
+    /**
+     * Reset the index of the next pixel to the last mark.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
+     */
     @Override
-    public void reset() throws IOException, BracketsParseException {
+    public void reset() throws BracketsParseException {
         if (marks.isEmpty()) {
             throw new BracketsParseException("[");
         }
-        offX = markIndex.peek()[0];
-        offY = markIndex.peek()[1];
+        offX = (int) marks.peek().getX();
+        offY = (int) marks.peek().getY();
     }
 
+    /**
+     * Unmark the last marked instructions by remove it from the stack.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
+     */
     @Override
     public void unmark() throws BracketsParseException {
         if (marks.isEmpty()) {
             throw new BracketsParseException("[");
         }
-        markIndex.pop();
+        marks.pop();
         marks.pop();
     }
 }
