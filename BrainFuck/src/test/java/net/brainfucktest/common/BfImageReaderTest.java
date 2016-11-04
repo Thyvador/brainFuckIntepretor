@@ -10,7 +10,7 @@ import net.brainfuck.exception.IOException;
 public class BfImageReaderTest {
 
     public static void main(String[] args) throws FileNotFoundException, IOException, java.io.IOException {
-        BfImageReader bfImageReader = new BfImageReader("BrainFuck/src/test/resources/assets/brainfucktest/common/imageTest24bit.bmp");
+        BfImageReader bfImageReader = new BfImageReader("BrainFuck/src/test/resources/assets/brainfucktest/common/test43.bmp");
         String nb;
         while((nb=bfImageReader.getNext()) != null) {
             System.out.println(nb);
