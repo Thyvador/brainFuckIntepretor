@@ -15,7 +15,7 @@ public class Main {
      * Print the usage
      */
     private void printUsage() {
-        System.out.println("Usage : bfck.sh -p FILE [--rewrite]");
+        System.out.println("Usage : bfck.sh -p FILE [--rewrite] [--translate] [--check] [-o output_file] [-i input_file]");
     }
 
     /**
@@ -47,7 +47,6 @@ public class Main {
 //            System.out.println(m);
         } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
             // Exit code not set
-            e.printStackTrace();
             System.exit(5);
         } catch (MemoryOutOfBoundsException e) {
             System.exit(1);
