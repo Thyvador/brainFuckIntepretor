@@ -16,7 +16,6 @@ public class TestBfImageReader {
     public static void main(String[] args){
         String [] args2 = {"-p", "./test43.bmp"};
         new Main(args2);
-
     }
 
 }
