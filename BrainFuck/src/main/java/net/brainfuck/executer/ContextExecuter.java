@@ -21,7 +21,7 @@ interface ContextExecuter {
      * @throws IOException throw by reader
      * @throws MemoryOutOfBoundsException throw by memory
      * @throws FileNotFoundIn throw by reader
-     * @throws BracketsParseException throw by JumpExecute or by BackExecute
+     * @throws BracketsParseException throw by JumpInstruction or by BackInstruction
      */
     void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException;
 }
