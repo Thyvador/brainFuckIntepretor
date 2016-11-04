@@ -31,7 +31,7 @@ public class BfImageReader implements Reader {
      */
     private BufferedImage bufferedImage;
     /**
-     * The stack that contains all the points corresponding to the JUMP adn BACK instructions.
+     * The stack that contains all the points corresponding to the JUMP instructions.
      */
     private Stack<Point> marks;
 
@@ -44,7 +44,6 @@ public class BfImageReader implements Reader {
      * @throws FileNotFoundException {@link FileNotFoundException} if the file does not exit or cannot be read.
      */
     public BfImageReader(String path) throws FileNotFoundException {
-        marks = new Stack<>();
         marks = new Stack<>();
         try {
             bufferedImage = ImageIO.read(new File(path));
@@ -134,7 +133,6 @@ public class BfImageReader implements Reader {
         if (marks.isEmpty()) {
             throw new BracketsParseException("[");
         }
-        marks.pop();
         marks.pop();
     }
 }
