@@ -76,7 +76,7 @@ public class BfImageReader implements Reader {
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 if (rgb != bufferedImage.getRGB(offX + x, offY + y)) {
-                    return "Error at " + offX + " , " + offY;
+                    return "Error at pixel (" + (offX+x) + ", " + (offY+y)+")";
                 }
             }
         }
