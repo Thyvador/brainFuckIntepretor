@@ -8,20 +8,20 @@ import net.brainfuck.exception.MemoryOverFlowException;
 /**
  * @author davidLANG
  */
-class DecremanteExecute extends AbstractExecute {
-	
-    DecremanteExecute() {
-		super(Language.DECR);
+class IncremanteInstruction extends AbstractExecute {
+
+    IncremanteInstruction() {
+		super(Language.INCR);
 	}
 
 	/**
-     * Execute "decr" method from class Memory
+     * Execute the "incr" method of Memory Class
      *
      * @param memory Memory machine
      */
     @Override
     public void execute(Memory memory, Reader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-        memory.decr();
+        memory.incr();
     }
 
 }

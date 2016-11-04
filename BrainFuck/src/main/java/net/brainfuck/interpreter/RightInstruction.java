@@ -7,9 +7,9 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 /**
  * @author davidLANG
  */
-class RightExecute  extends AbstractExecute {
+class RightInstruction extends AbstractExecute {
 	
-    RightExecute() {
+    RightInstruction() {
 		super(Language.RIGHT);
 	}
 

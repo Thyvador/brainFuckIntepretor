@@ -24,14 +24,14 @@ enum Language {
 	
 	static {
 		// Set interpretors
-		INCR.setInterpreter(new IncremanteExecute());
-		DECR.setInterpreter(new DecremanteExecute());
-		RIGHT.setInterpreter(new RightExecute());
+		INCR.setInterpreter(new IncremanteInstruction());
+		DECR.setInterpreter(new DecremanteInstruction());
+		RIGHT.setInterpreter(new RightInstruction());
 		LEFT.setInterpreter(new LeftExecute());
-		IN.setInterpreter(new InExecute());
-		OUT.setInterpreter(new OutExecute());
-		JUMP.setInterpreter(new JumpExecute());
-		BACK.setInterpreter(new BackExecute());
+		IN.setInterpreter(new InInstruction());
+		OUT.setInterpreter(new OutInstruction());
+		JUMP.setInterpreter(new JumpInstruction());
+		BACK.setInterpreter(new BackInstruction());
 		// Init language map
 		Language[] languages = Language.values();
 		for (Language language : languages) {
