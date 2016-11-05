@@ -8,9 +8,9 @@ import net.brainfuck.exception.MemoryOverFlowException;
 /**
  * @author davidLANG
  */
-class DecremanteInstruction extends AbstractExecute {
+class DecrementInstruction extends AbstractExecute {
 	
-    DecremanteInstruction() {
+    DecrementInstruction() {
 		super(Language.DECR);
 	}
 

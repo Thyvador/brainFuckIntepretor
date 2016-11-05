@@ -10,7 +10,8 @@ public enum Context {
     CHECK("--check"),
     UNCHECK("--uncheck"),
     TRANSLATE("--translate"),
-    REWRITE("--rewrite");
+    REWRITE("--rewrite"),
+    TRACE("--trace");
 
     static Map<String, ContextExecuter> contextMap = new HashMap<>();
 
@@ -19,6 +20,7 @@ public enum Context {
         UNCHECK.setContextExecuter(new UncheckExecuter());
         TRANSLATE.setContextExecuter(new TranslateExecuter());
         REWRITE.setContextExecuter(new RewriteExecuter());
+        TRACE.setContextExecuter(new TraceExecuter());
 
         for (Context c: Context.values()) {
             contextMap.put(c.getSyntax(), c.getContextExecuter());

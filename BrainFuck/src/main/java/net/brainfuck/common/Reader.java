@@ -17,6 +17,13 @@ public interface Reader {
      */
     String getNext() throws IOException;
 
+    /**
+     * Return the position of the execution pointer.
+     *
+     * @return the position of the execution pointer.
+     */
+    int getExecutionPointer() throws IOException;
+
 
     /**
      * Close the file when the reader finished him.

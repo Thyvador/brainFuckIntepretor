@@ -109,6 +109,15 @@ public class BfReader implements Reader {
 
 	}
 
+	@Override
+	public int getExecutionPointer() throws IOException {
+		try {
+			return (int) reader.getFilePointer();
+		} catch (java.io.IOException e) {
+			throw new IOException("Impossible to access file pointer");
+		}
+	}
+
 	/**
 	 * Check if a character is a '\n' or '\r'.
 	 *

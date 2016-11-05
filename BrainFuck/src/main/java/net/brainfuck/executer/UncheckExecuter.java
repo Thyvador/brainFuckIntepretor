@@ -4,7 +4,6 @@ import net.brainfuck.common.BfImageWriter;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.AbstractExecute;
 import net.brainfuck.interpreter.InterpreterInterface;
 
 /**
@@ -18,6 +17,7 @@ class UncheckExecuter implements ContextExecuter {
      * @param i the AbstractCommand to execute
      * @param m the memory representation
      * @param r the reader
+     * @param fileName
      * @throws MemoryOverFlowException throw by memory
      * @throws IOException throw by reader
      * @throws MemoryOutOfBoundsException throw by memory
@@ -25,7 +25,7 @@ class UncheckExecuter implements ContextExecuter {
      * @throws BracketsParseException throw by JumpInstruction or by BackInstruction
      */
     @Override
-    public void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
+    public void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter, String fileName) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
         i.execute(m, r);
     }
 }

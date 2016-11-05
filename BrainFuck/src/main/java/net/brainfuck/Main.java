@@ -37,11 +37,11 @@ public class Main {
             Memory m = new Memory();
             Reader r = null;
             if (a.getArgument(PATH).endsWith(".bmp")) {
-                    r = new BfImageReader(a.getArgument(PATH));
+                r = new BfImageReader(a.getArgument(PATH));
             } else {
                 r = new BfReader(a.getArgument(PATH));
             }
-            Executer e = new Executer(m, a.getFlags(), r);
+            Executer e = new Executer(m, a.getFlags(), r, a.getArgument(PATH));
             Interpreter i = new Interpreter(r, a, e);
             i.interprate();
 //            System.out.println(m);

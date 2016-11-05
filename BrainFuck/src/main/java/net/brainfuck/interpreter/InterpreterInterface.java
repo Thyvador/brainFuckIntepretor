@@ -38,5 +38,7 @@ public interface InterpreterInterface {
      * @return String represent the syntax converted to the code color
      */
     String translate();
+
+    void trace(Memory memory, Reader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
 }
 

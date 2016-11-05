@@ -87,6 +87,11 @@ public class BfImageReader implements Reader {
         return String.format("%02x%02x%02x", r, g, b);
     }
 
+    @Override
+    public int getExecutionPointer() {
+        return (offX+offY*width)/9;
+    }
+
     /**
      * Close the reader once the file is read.
      *
@@ -134,4 +139,6 @@ public class BfImageReader implements Reader {
         }
         marks.pop();
     }
+
+
 }

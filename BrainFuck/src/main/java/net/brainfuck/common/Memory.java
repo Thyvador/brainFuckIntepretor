@@ -176,4 +176,12 @@ public class Memory {
 		return this;
 	}
 
+	/**
+	 * Return the memory index.
+	 *
+	 * @return the memory index.
+	 */
+	public int getIndex() {
+		return index;
+	}
 }
