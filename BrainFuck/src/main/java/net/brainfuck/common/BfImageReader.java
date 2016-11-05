@@ -35,8 +35,6 @@ public class BfImageReader implements Reader {
      */
     private Stack<Point> marks;
 
-    // TODO: 03/11/2016 Utiliser des points
-
     /**
      * Constructs a BfImageReader from the path of a file.
      *
@@ -60,7 +58,6 @@ public class BfImageReader implements Reader {
      * Return the color of the next instruction.
      *
      * @return the hexadecimal value of the next color as a String.
-     * @throws IOException {@link IOException} if an IOException occur.
      */
     @Override
     public String getNext() {
@@ -76,7 +73,7 @@ public class BfImageReader implements Reader {
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 if (rgb != bufferedImage.getRGB(offX + x, offY + y)) {
-                    return "Error at pixel (" + (offX+x) + ", " + (offY+y)+")";
+                    return "Error at pixel (" + (offX + x) + ", " + (offY + y) + ")";
                 }
             }
         }
@@ -92,9 +89,11 @@ public class BfImageReader implements Reader {
 
     /**
      * Close the reader once the file is read.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
      */
     @Override
-    public void closeReader() throws IOException, BracketsParseException {
+    public void closeReader() throws BracketsParseException {
         if (!marks.isEmpty()) {
             throw new BracketsParseException("]");
         }
@@ -104,7 +103,7 @@ public class BfImageReader implements Reader {
      * Mark the current instruction by adding it into the stack.
      */
     @Override
-    public void mark(){
+    public void mark() {
         Point tmp = new Point(offX, offY);
         marks.push(tmp);
     }
