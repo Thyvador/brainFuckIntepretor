@@ -3,6 +3,7 @@ package net.brainfuck.interpreter;
 
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.BfImageWriter;
+import net.brainfuck.common.Logger;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Context;
@@ -105,6 +106,7 @@ public class Interpreter {
                 throw new SyntaxErrorException(instruction);
             }
             executer.execute(currentInstruction.getInterpreter());
+            Logger.countInstruction();
         }
         executer.end();
     }
