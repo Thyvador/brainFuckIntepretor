@@ -35,8 +35,6 @@ public class BfImageReader implements Reader {
      */
     private Stack<Point> marks;
 
-    // TODO: 03/11/2016 Utiliser des points
-
     /**
      * Constructs a BfImageReader from the path of a file.
      *
