@@ -2,7 +2,6 @@ package net.brainfuck;
 
 import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
-import net.brainfuck.exception.Exception;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.Interpreter;
 
@@ -29,6 +28,7 @@ public class Main {
             System.exit(0);
         }
         try {
+	        Logger.startExecTime();
             ArgumentAnalyzer a = new ArgumentAnalyzer(args);
             if (a.getArgument(PATH) == null) {
                 this.printUsage();
@@ -44,7 +44,8 @@ public class Main {
             Executer e = new Executer(m, a.getFlags(), r, a.getArgument(PATH));
             Interpreter i = new Interpreter(r, a, e);
             i.interprate();
-//            System.out.println(m);
+            System.out.println(m);
+            System.out.println(Logger.showResume());
         } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
             // Exit code not set
             System.exit(5);
