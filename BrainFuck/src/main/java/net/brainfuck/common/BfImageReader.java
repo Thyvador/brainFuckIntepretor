@@ -60,7 +60,6 @@ public class BfImageReader implements Reader {
      * Return the color of the next instruction.
      *
      * @return the hexadecimal value of the next color as a String.
-     * @throws IOException {@link IOException} if an IOException occur.
      */
     @Override
     public String getNext() {
@@ -71,17 +70,19 @@ public class BfImageReader implements Reader {
         if (offY >= height) {
             return null;
         }
-        int[] rgb = bufferedImage.getRGB(offX, offY, 3, 3, null, 0, 9);
+        int rgb = bufferedImage.getRGB(offX, offY);
 
-        for (int x = 1; x < 9; x++) {
-            if (rgb[0] != rgb[x]) {
-//                return "Error at pixel (" + (offX + x%3) + ", " + (offY + (int)(x/3)) + ")";
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if (rgb != bufferedImage.getRGB(offX + x, offY + y)) {
+                    return "Error at pixel (" + (offX + x) + ", " + (offY + y) + ")";
+                }
             }
         }
 
-        int b = rgb[0] & 0xFF;
-        int g = (rgb[0] >> 8) & 0xFF;
-        int r = (rgb[0] >> 16) & 0xFF;
+        int b = rgb & 0xFF;
+        int g = (rgb >> 8) & 0xFF;
+        int r = (rgb >> 16) & 0xFF;
         offX += 3;
 
         if (r == 0 && g == 0 && b == 0) return null;
@@ -90,9 +91,11 @@ public class BfImageReader implements Reader {
 
     /**
      * Close the reader once the file is read.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
      */
     @Override
-    public void closeReader() throws IOException, BracketsParseException {
+    public void closeReader() throws BracketsParseException {
         if (!marks.isEmpty()) {
             throw new BracketsParseException("]");
         }
