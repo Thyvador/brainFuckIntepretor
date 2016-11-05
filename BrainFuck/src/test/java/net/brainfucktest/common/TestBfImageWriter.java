@@ -1,5 +1,7 @@
 package net.brainfucktest.common;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
@@ -12,7 +14,7 @@ public class TestBfImageWriter {
 
 	public static void main(String[] args) {
 		try {
-			test2();
+			test1();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -23,15 +25,16 @@ public class TestBfImageWriter {
 	}
 
 	private static void test1() throws IOException, net.brainfuck.exception.IOException, FileNotFoundException {
-		BfImageWriter wrt = new BfImageWriter("c:/Users/user/Desktop/test.bmp");
+		BfImageWriter wrt = new BfImageWriter(new FileOutputStream(new File("c:/Users/user/Desktop/test.bmp")));
 		wrt.write("0000FF");
 		wrt.write("FFFFFF");
 		wrt.write("FFFFFF");
 		wrt.close();		
 	}
 	
+	@SuppressWarnings("unused")
 	private static void test2() throws IOException, net.brainfuck.exception.IOException, FileNotFoundException {
-		BfImageWriter wrt = new BfImageWriter("c:/Users/user/Desktop/test.bmp");
+		BfImageWriter wrt = new BfImageWriter(new FileOutputStream(new File("c:/Users/user/Desktop/test.bmp")));
 		for (int i = 0; i < 200; i++) {
 			wrt.write(rnd.nextInt(0xFFFFFF+1));
 		}
