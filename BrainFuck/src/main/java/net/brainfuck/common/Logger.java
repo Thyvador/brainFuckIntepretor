@@ -28,10 +28,6 @@ public class Logger {
     private static BufferedWriter writer = null;
     private static int step = 0;
 
-    public static void countInstruction() {
-        numInstructions++;
-    }
-
 	/**
 	 * Create a string with all informations collected.
 	 * @return informations
@@ -59,21 +55,7 @@ public class Logger {
 	public static void startExecTime() {
 		start = System.currentTimeMillis();
 	}
-    public static void startExecTime() {
-        start = System.currentTimeMillis();
-    }
 
-    public static void countMemoryWrite() {
-        numMemoryWrite++;
-    }
-
-    public static void countMemoryRead() {
-        numMemoryRead++;
-    }
-
-    public static void countMemoryMove() {
-        numMemoryMove++;
-    }
 	/**
 	 * Count the number of times that data is stored in memory.
 	 */
@@ -93,15 +75,20 @@ public class Logger {
 		numMemoryMove++;
 	}
 
-    public static void countMove() {
-        numExecMove++;
-    }
 
-
+    /**
+     * Increment by one the number of execution step.
+     */
     public static void incrStep() {
         Logger.step++;
     }
 
+    /**
+     * Set the writer to write in the log file.
+     *
+     * @param fileName the programme path and name.
+     * @throws IOException {@link IOException} if the file cannot be access.
+     */
     public static void setWriter(String fileName) throws IOException {
         if (!isWriterOpen()) {
             try {
@@ -113,6 +100,13 @@ public class Logger {
         }
     }
 
+    /**
+     * Write an instruction execution log into the log file.
+     *
+     * @param executionPointer the index of the execution pointer.
+     * @param memory the memory.
+     * @throws IOException {@link IOException} if the file cannot be access.
+     */
     public static void write(int executionPointer, Memory memory) throws IOException {
         try {
             step += 1;
@@ -128,10 +122,19 @@ public class Logger {
         }
     }
 
+    /**
+     * Check if the writer was created.
+     * @return true if the writer is set, false otherwise.
+     */
     public static boolean isWriterOpen() {
         return writer != null;
     }
 
+    /**
+     * Close the wrioter.
+     *
+     * @throws IOException {@link IOException} if the file cannot be access.
+     */
     public static void closeWriter() throws IOException {
         try {
             writer.close();
