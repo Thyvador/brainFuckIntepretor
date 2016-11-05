@@ -112,9 +112,9 @@ public class Logger {
             step += 1;
             writer.write(
                     "============\n"+
-                    "Execution Step : " + step +
+                    "Execution Step " + step +
                     " : \nExecution pointer : " + executionPointer +
-                    ". Data pointer  : " + memory.getIndex() +
+                    ". Data pointer  : C" + memory.getIndex() +
                     ".\nMemory : \n" + memory.toString() + "\n");
             writer.flush();
         } catch (java.io.IOException e) {
