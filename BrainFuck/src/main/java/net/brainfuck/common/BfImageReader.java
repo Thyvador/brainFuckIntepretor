@@ -71,19 +71,17 @@ public class BfImageReader implements Reader {
         if (offY >= height) {
             return null;
         }
-        int rgb = bufferedImage.getRGB(offX, offY);
+        int[] rgb = bufferedImage.getRGB(offX, offY, 3, 3, null, 0, 9);
 
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                if (rgb != bufferedImage.getRGB(offX + x, offY + y)) {
-                    return "Error at pixel (" + (offX+x) + ", " + (offY+y)+")";
-                }
+        for (int x = 1; x < 9; x++) {
+            if (rgb[0] != rgb[x]) {
+//                return "Error at pixel (" + (offX + x%3) + ", " + (offY + (int)(x/3)) + ")";
             }
         }
 
-        int b = rgb & 0xFF;
-        int g = (rgb >> 8) & 0xFF;
-        int r = (rgb >> 16) & 0xFF;
+        int b = rgb[0] & 0xFF;
+        int g = (rgb[0] >> 8) & 0xFF;
+        int r = (rgb[0] >> 16) & 0xFF;
         offX += 3;
 
         if (r == 0 && g == 0 && b == 0) return null;
@@ -104,7 +102,7 @@ public class BfImageReader implements Reader {
      * Mark the current instruction by adding it into the stack.
      */
     @Override
-    public void mark(){
+    public void mark() {
         Point tmp = new Point(offX, offY);
         marks.push(tmp);
     }

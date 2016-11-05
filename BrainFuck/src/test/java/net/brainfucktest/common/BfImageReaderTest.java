@@ -1,5 +1,6 @@
 package net.brainfucktest.common;
 
+import net.brainfuck.Main;
 import net.brainfuck.common.BfImageReader;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
@@ -10,11 +11,8 @@ import net.brainfuck.exception.IOException;
 public class BfImageReaderTest {
 
     public static void main(String[] args) throws FileNotFoundException, IOException, java.io.IOException {
-        BfImageReader bfImageReader = new BfImageReader("BrainFuck/src/test/resources/assets/brainfucktest/common/image/test43.bmp");
-        String nb;
-        while((nb=bfImageReader.getNext()) != null) {
-            System.out.println(nb);
-        }
+        String[] args2 = {"-p", "Brainfuck/src/test/resources/assets/brainfucktest/common/image/test43.bmp"};
+        new Main(args2); // On lance sur un fichier au hasard
 
     }
 }
