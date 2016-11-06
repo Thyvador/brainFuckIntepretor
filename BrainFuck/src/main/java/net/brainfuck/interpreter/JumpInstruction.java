@@ -22,6 +22,7 @@ public class JumpInstruction extends AbstractExecute {
 			Language instruction;
 			while(cpt > 0) {
 				instruction = Language.languageMap.get(reader.getNext());
+				System.out.println(instruction);
 				if (instruction == null) {
 					throw new BracketsParseException("]");
 				}
