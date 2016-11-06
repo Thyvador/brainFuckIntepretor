@@ -242,3 +242,4 @@ public class BfReader implements Reader {
 		marks.pop();
 	}
 }
+
