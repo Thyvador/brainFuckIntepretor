@@ -31,7 +31,7 @@ public class TestChooser {
 		while ((choose = System.in.read())!='\n'){
 			args += Character.toString((char)choose);
 		}
-		System.out.println("bfck.sh -p "+args);
+		System.out.println("bfck.sh "+args);
 		new Main(args.split(" "));
 	}
 }
