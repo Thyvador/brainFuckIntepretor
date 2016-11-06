@@ -99,15 +99,11 @@ public class Memory {
 	 * Used with IN instruction
 	 *
 	 * @param newValue the value to set
-	 * @return
+	 *
 	 * @throws MemoryOverFlowException
-	 * @throws MemoryOutOfBoundsException
 	 */
 	public void set(int newValue) throws MemoryOverFlowException {
-		if (newValue > MAX_VALUE || newValue < MIN_VALUE)
-			throw new MemoryOverFlowException("Invalid value " + newValue + " at index " + index);
-		Logger.countMemoryWrite();
-		memory[index] = (short) newValue;
+		set(index, newValue);
 	}
 
 	/**
