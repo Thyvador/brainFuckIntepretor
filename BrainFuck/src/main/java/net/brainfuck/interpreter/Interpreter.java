@@ -104,15 +104,15 @@ public class Interpreter {
 		String instruction;
 		Language currentInstruction;
 
-		while ((instruction = reader.getNext()) != null) {
-			if ((currentInstruction = Language.languageMap.get(instruction)) == null) {
-				throw new SyntaxErrorException(instruction);
-			}
-			executer.execute(currentInstruction.getInterpreter());
-			Logger.countInstruction();
-		}
-		executer.end();
-	}
+        while ((instruction = reader.getNext()) != null) {
+            if ((currentInstruction = Language.languageMap.get(instruction)) == null) {
+                throw new SyntaxErrorException(instruction);
+            }
+            executer.execute(currentInstruction.getInterpreter());
+            Logger.countMove();
+        }
+        executer.end();
+    }
 
 
 	void markReader() throws IOException {
