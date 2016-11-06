@@ -35,7 +35,7 @@ public class Logger {
 	 * @param m memory to show
 	 */
 	public static String showResume(Memory m) {
-		String retour =m+"\nPROG_SIZE : "+numInstructions+"\n";
+		String retour =m+"PROG_SIZE : "+numInstructions+"\n";
 		retour+= "EXEC_TIME : "+(System.currentTimeMillis()-start)+" ms\n";
 		retour+= "EXEC_MOVE : "+numExecMove+"\n";
 		retour+= "DATA_MOVE : "+numMemoryMove+"\n";
