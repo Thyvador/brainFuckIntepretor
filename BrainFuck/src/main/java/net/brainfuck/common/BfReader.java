@@ -18,7 +18,10 @@ public class BfReader implements Reader {
 	private Stack<Long> marks;
 	private boolean firstLine = true;
 	private static final int CR = '\r';
+	private static final int TAB = '\t';
+	private static final int COMMENT = '#';
 	private static final int LF = '\n';
+	private static final int SPACE = ' ';
 	private static final int EOF = -1;
 	private int oldvar;
 
@@ -48,9 +51,15 @@ public class BfReader implements Reader {
 	 */
 	private void readUntilEndOfLine(int val) throws java.io.IOException {
 		next = Character.toString((char) val);
+		boolean comment = false;
 		int c = read();
 		while (!isNewLine(c) && c != EOF) {
-			next += Character.toString((char) c);
+			if (isComment(c)) {
+				comment = true;
+			}
+			if (!comment && !isSpace(c)) {
+				next += Character.toString((char) c);
+			}
 			c = read();
 		}
 		oldvar = c;
@@ -70,6 +79,37 @@ public class BfReader implements Reader {
 		return c;
 	}
 
+	private int ignoreComment() throws java.io.IOException {
+		int c;
+		c = read();
+		while (!isNewLine(c) && c != EOF) c = read();
+		return c;
+	}
+
+	private int ignoreSpace() throws java.io.IOException {
+		int c;
+		c = read();
+		while (isSpace(c) && c != EOF) c = read();
+		return c;
+	}
+
+	private int ignore(int nextVal) throws java.io.IOException {
+		boolean end = false;
+
+		while (!end) {
+			if (isComment(nextVal)) {
+				nextVal = ignoreComment();
+			} else if (isSpace(nextVal)) {
+				nextVal = ignoreSpace();
+			} else if (isNewLine(nextVal)){
+				nextVal = ignoreNewLineChar();
+			} else {
+				end = true;
+			}
+		}
+		return nextVal;
+	}
+
 	/**
 	 * Get the next instruction.
 	 * If the next instruction seems long, it
@@ -81,9 +121,11 @@ public class BfReader implements Reader {
 	public String getNext() throws IOException {
 		try {
 			int nextVal = read();
-			if (isNewLine(nextVal)) {
-				nextVal = ignoreNewLineChar();
-			}
+
+			// Ignore space, tab, newLine, commentary
+			nextVal = this.ignore(nextVal);
+
+
 			if (nextVal == EOF) {
 				return null;
 			}
@@ -134,6 +176,14 @@ public class BfReader implements Reader {
 		return nextVal == CR || nextVal == LF;
 	}
 
+	private boolean isComment(int nextVal) {
+		return nextVal == COMMENT;
+	}
+
+	private boolean isSpace(int nextVal) {
+		return nextVal == TAB || nextVal == SPACE;
+	}
+
 	/**
 	 * Check if the character start a "long" syntax or not.
 	 *
@@ -149,7 +199,7 @@ public class BfReader implements Reader {
 	 * Close the file when the reader finished him.
 	 *
 	 * @throws IOException            if file can't close.
-	 * @throws BracketsParseException
+	 * @throws BracketsParseException if the stack of bracket is not empty
 	 */
 	@Override
 	public void closeReader() throws IOException, BracketsParseException {
