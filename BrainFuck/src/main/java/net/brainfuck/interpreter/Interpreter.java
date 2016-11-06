@@ -109,7 +109,7 @@ public class Interpreter {
                 throw new SyntaxErrorException(instruction);
             }
             executer.execute(currentInstruction.getInterpreter());
-            Logger.countInstruction();
+            Logger.countMove();
         }
         executer.end();
     }
