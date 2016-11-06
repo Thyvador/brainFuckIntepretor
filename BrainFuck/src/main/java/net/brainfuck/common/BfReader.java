@@ -32,11 +32,13 @@ public class BfReader implements Reader {
 	 * @param filename name of the file.
 	 * @throws FileNotFoundException if the file doesn't exist
 	 */
+
 	public BfReader(String filename) throws FileNotFoundException {
 		try {
 			reader = new RandomAccessFile(filename, "r");
+			Logger.countInstruction((int)reader.length());
 			marks = new Stack<>();
-		} catch (java.io.FileNotFoundException e) {
+		} catch (java.io.IOException e) {
 			throw new FileNotFoundException(filename);
 		}
 	}
@@ -52,7 +54,7 @@ public class BfReader implements Reader {
 	private void readUntilEndOfLine(int val) throws java.io.IOException {
 		next = Character.toString((char) val);
 		boolean comment = false;
-		int c = read();
+		int c = reader.read();
 		while (!isNewLine(c) && c != EOF) {
 			if (isComment(c)) {
 				comment = true;
@@ -60,7 +62,7 @@ public class BfReader implements Reader {
 			if (!comment && !isSpace(c)) {
 				next += Character.toString((char) c);
 			}
-			c = read();
+			c = reader.read();
 		}
 		oldvar = c;
 	}
@@ -74,22 +76,22 @@ public class BfReader implements Reader {
 	 */
 	private int ignoreNewLineChar() throws java.io.IOException {
 		int c;
-		while (isNewLine(c = read())) ;
+		while (isNewLine(c = reader.read())) ;
 		oldvar = LF;
 		return c;
 	}
 
 	private int ignoreComment() throws java.io.IOException {
 		int c;
-		c = read();
-		while (!isNewLine(c) && c != EOF) c = read();
+		c = reader.read();
+		while (!isNewLine(c) && c != EOF) c = reader.read();
 		return c;
 	}
 
 	private int ignoreSpace() throws java.io.IOException {
 		int c;
-		c = read();
-		while (isSpace(c) && c != EOF) c = read();
+		c = reader.read();
+		while (isSpace(c) && c != EOF) c = reader.read();
 		return c;
 	}
 
@@ -120,7 +122,7 @@ public class BfReader implements Reader {
 	@Override
 	public String getNext() throws IOException {
 		try {
-			int nextVal = read();
+			int nextVal = reader.read();
 
 			// Ignore space, tab, newLine, commentary
 			nextVal = this.ignore(nextVal);
@@ -149,11 +151,6 @@ public class BfReader implements Reader {
 			throw new IOException();
 		}
 
-	}
-
-	private int read() throws java.io.IOException {
-		Logger.countMove();
-		return  reader.read();
 	}
 
 
