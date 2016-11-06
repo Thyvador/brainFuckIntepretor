@@ -44,8 +44,7 @@ public class Main {
             Executer e = new Executer(m, a.getFlags(), r);
             Interpreter i = new Interpreter(r, a, e);
             i.interprate();
-            System.out.print(m);
-            System.out.println(Logger.showResume());
+            System.out.println(Logger.showResume(m));
         } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
             // Exit code not set
             System.exit(5);

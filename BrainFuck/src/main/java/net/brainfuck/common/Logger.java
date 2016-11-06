@@ -30,10 +30,12 @@ public class Logger {
 
 	/**
 	 * Create a string with all informations collected.
+	 * Start with '\n' to stop
 	 * @return informations
+	 * @param m
 	 */
-	public static String showResume() {
-		String retour ="PROG_SIZE : "+numInstructions+"\n";
+	public static String showResume(Memory m) {
+		String retour ="\nPROG_SIZE : "+numInstructions+"\n";
 		retour+= "EXEC_TIME : "+(System.currentTimeMillis()-start)+" ms\n";
 		retour+= "EXEC_MOVE : "+numExecMove+"\n";
 		retour+= "DATA_MOVE : "+numMemoryMove+"\n";
@@ -79,9 +81,11 @@ public class Logger {
     /**
      * Increment by one the number of execution step.
      */
+
     public static void incrStep() {
         Logger.step++;
     }
+
 
     /**
      * Set the writer to write in the log file.

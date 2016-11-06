@@ -89,21 +89,26 @@ public class Memory {
 	 *             if the value overflow the cell capacity
 	 */
 	private Memory set(int index, int changeValue) throws MemoryOverFlowException {
-		try {
-			if (get(index) > (MAX_VALUE - changeValue) || get(index) < (MIN_VALUE - changeValue))
+			if (memory[index] > (MAX_VALUE - changeValue) || memory[index] < (MIN_VALUE - changeValue))
 				throw new MemoryOverFlowException("Invalid value "+(memory[index]+changeValue)+" at index "+index);
 			memory[index] += changeValue;
 			Logger.countMemoryWrite();
 			return this;
-		} catch (MemoryOutOfBoundsException e) {
-			// Might not append because has been made before
-			e.printStackTrace();
-		}
-		return this;
 	}
-	
-	public Memory set(int changeValue) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-		return set(index,changeValue-get());
+
+	/**
+	 * Set the value of the specified memory cell to a specific value
+	 * Used with IN instruction
+	 * @param newValue  the value to set
+	 * @return
+	 * @throws MemoryOverFlowException
+	 * @throws MemoryOutOfBoundsException
+	 */
+	public void set(int newValue) throws MemoryOverFlowException {
+		if (newValue > MAX_VALUE  || newValue < MIN_VALUE )
+			throw new MemoryOverFlowException("Invalid value "+newValue+" at index "+index);
+		Logger.countMemoryWrite();
+		memory[index] = (short)newValue;
 	}
 
 	/**
