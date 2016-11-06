@@ -84,7 +84,14 @@ public class BfImageReader implements Reader {
         int r = (rgb >> 16) & 0xFF;
         offX += 3;
 
-        if (r == 0 && g == 0 && b == 0) return null;
+        if (r == 0 && g == 0 && b == 0){
+	        int calcul = (offY)*(width)/9+offX/3-1;
+	        Logger.countInstruction(calcul);
+
+	        return null;
+
+        }
+
         return String.format("%02x%02x%02x", r, g, b);
     }
 
