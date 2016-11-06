@@ -7,3 +7,6 @@ BrainFuck.iml
 brainFuck.iml
 *.iml
 /BrainFuck/src/main/main.iml
+/BrainFuck/src/test/test.iml
+
+.gitignore
