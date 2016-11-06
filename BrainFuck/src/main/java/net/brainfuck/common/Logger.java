@@ -30,18 +30,19 @@ public class Logger {
 
 	/**
 	 * Create a string with all informations collected.
-	 *
+	 * <p>
 	 * Start with '\n' to stop
-	 * @return informations
+	 *
 	 * @param m
+	 * @return informations
 	 */
 	public static String showResume(Memory m) {
-		String retour ="\nPROG_SIZE : "+numInstructions+"\n";
-		retour+= "EXEC_TIME : "+(System.currentTimeMillis()-start)+" ms\n";
-		retour+= "EXEC_MOVE : "+numExecMove+"\n";
-		retour+= "DATA_MOVE : "+numMemoryMove+"\n";
-		retour+= "DATA_WRITE : "+numMemoryWrite+"\n";
-		retour+= "DATA_READ : "+numMemoryRead+"\n";
+		String retour = "\nPROG_SIZE : " + numInstructions + "\n";
+		retour += "EXEC_TIME : " + (System.currentTimeMillis() - start) + " ms\n";
+		retour += "EXEC_MOVE : " + numExecMove + "\n";
+		retour += "DATA_MOVE : " + numMemoryMove + "\n";
+		retour += "DATA_WRITE : " + numMemoryWrite + "\n";
+		retour += "DATA_READ : " + numMemoryRead + "\n";
 		return retour;
 	}
 
@@ -90,22 +91,20 @@ public class Logger {
 	}
 
 
-    /**
-     * Set the writer to write in the log file.
-     *
-     * @param fileName the programme path and name.
-     * @throws IOException {@link IOException} if the file cannot be access.
-     */
-    public static void setWriter(String fileName) throws IOException {
-        if (!isWriterOpen()) {
-            try {
-                fileName = fileName.subSequence(0, fileName.lastIndexOf('.')) + ".log";
-                Logger.writer = new BufferedWriter(new FileWriter(fileName));
-            } catch (java.io.IOException e) {
-                throw new IOException("Impossible to access : " + fileName + ".log");
-            }
-        }
-    }
+	/**
+	 * Set the writer to write in the log file.
+	 *
+	 * @param fileName the programme path and name.
+	 * @throws IOException {@link IOException} if the file cannot be access.
+	 */
+	public static void setWriter(String fileName) throws IOException {
+		try {
+			fileName = fileName.subSequence(0, fileName.lastIndexOf('.')) + ".log";
+			Logger.writer = new BufferedWriter(new FileWriter(fileName));
+		} catch (java.io.IOException e) {
+			throw new IOException("Impossible to access : " + fileName + ".log");
+		}
+	}
 
 	/**
 	 * Write an instruction execution log into the log file.
