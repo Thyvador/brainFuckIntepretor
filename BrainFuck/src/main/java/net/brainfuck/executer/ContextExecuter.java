@@ -16,13 +16,12 @@ interface ContextExecuter {
      * @param i the AbstractCommand to execute
      * @param m the memory representation
      * @param r the reader
-     * @param fileName
      * @throws MemoryOverFlowException throw by memory
      * @throws IOException throw by reader
      * @throws MemoryOutOfBoundsException throw by memory
      * @throws FileNotFoundIn throw by reader
      * @throws BracketsParseException throw by JumpInstruction or by BackInstruction
      */
-    void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter, String fileName) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException;
+    void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException;
 }
 

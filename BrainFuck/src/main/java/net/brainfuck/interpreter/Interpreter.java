@@ -42,6 +42,9 @@ public class Interpreter {
         if(arg.getFlags().contains(Context.TRANSLATE.getSyntax())) {
 	        executer.setImageWriter(new BfImageWriter());
         }
+        if (arg.getFlags().contains(Context.TRACE.getSyntax())){
+            Logger.setWriter(arg.getArgument(PATH));
+        }
     }
 
 	/**
