@@ -1,6 +1,7 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.BfImageWriter;
+import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
@@ -20,17 +21,19 @@ public class Executer {
     private Memory memory;
     private Reader reader;
     private BfImageWriter imageWriter;
+    private String fileName;
 
     /**
      * Initialize contextExecuters, memory and reader
      *
-     * @param m Memory
+     * @param m         Memory
      * @param arguments The long arguments
-     * @param r Reader
+     * @param r         Reader
      */
-    public Executer(Memory m, List<String> arguments, Reader r) {
+    public Executer(Memory m, List<String> arguments, Reader r) throws IOException {
         this.memory = m;
         this.reader = r;
+        this.fileName = fileName;
 
         // Initialize context executer
         this.contextExecuters.add(Context.contextMap.get(Context.UNCHECK.getSyntax()));
@@ -47,10 +50,10 @@ public class Executer {
      *
      * @param i AbstractExecute command to execute
      * @throws MemoryOutOfBoundsException Throw by memory
-     * @throws BracketsParseException Throw by Interpreter
-     * @throws MemoryOverFlowException Throw by memory
-     * @throws FileNotFoundIn Throw by reader
-     * @throws IOException Throw by reader
+     * @throws BracketsParseException     Throw by Interpreter
+     * @throws MemoryOverFlowException    Throw by memory
+     * @throws FileNotFoundIn             Throw by reader
+     * @throws IOException                Throw by reader
      */
     public void execute(AbstractExecute i) throws MemoryOutOfBoundsException, BracketsParseException,
             MemoryOverFlowException, FileNotFoundIn, IOException {
@@ -66,15 +69,15 @@ public class Executer {
      * She close the imageWriter if the long argument "--translate" have been passed
      *
      * @throws BracketsParseException throw if the program have more "[" than "]"
-     * @throws IOException throw by reader.closeReader() and imageWrite.close()
-     * @throws FileNotFoundException throw by reader.closeReader() and imageWrite.close()
+     * @throws IOException            throw by reader.closeReader() and imageWrite.close()
+     * @throws FileNotFoundException  throw by reader.closeReader() and imageWrite.close()
      */
     public void end() throws BracketsParseException, IOException, FileNotFoundException {
         reader.closeReader();
 
         int index;
         if ((index = this.contextExecuters.indexOf(Context.contextMap.get(Context.CHECK.getSyntax()))) >= 0) {
-            CheckExecuter checkExecuter = (CheckExecuter)this.contextExecuters.get(index);
+            CheckExecuter checkExecuter = (CheckExecuter) this.contextExecuters.get(index);
             if (checkExecuter.getCpt() > 0) {
                 throw new BracketsParseException();
             }
@@ -82,10 +85,14 @@ public class Executer {
         if (this.contextExecuters.indexOf(Context.contextMap.get(Context.TRANSLATE.getSyntax())) >= 0) {
             imageWriter.close();
         }
+        if(Logger.isWriterOpen()){
+            Logger.closeWriter();
+        }
     }
 
     /**
      * Set imageWriter parameter
+     *
      * @param i imageWriter
      */
     public void setImageWriter(BfImageWriter i) {

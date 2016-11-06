@@ -6,13 +6,14 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Stack;
 
 /**
  * The <code>BfImageReader</code> class is used to read BitMap files.
- * This class extends <code>BMPReader</code> from the bioformats library.
+ * This class implements the <code>Reader</code> Interface.
  *
  * @author Alexandre Hiltcher
  */
@@ -26,19 +27,21 @@ public class BfImageReader implements Reader {
      */
     private int width, height;
     /**
-     * The buffer that contains the 9 pixels forming an instruction.
+     * The bufferedImage that contains the data from the bitmap file.
      */
     private BufferedImage bufferedImage;
-    private Stack<Integer[]> marks;
+    /**
+     * The stack that contains all the points corresponding to the JUMP instructions.
+     */
+    private Stack<Point> marks;
 
     /**
      * Constructs a BfImageReader from the path of a file.
      *
      * @param path the path of the file to read.
-     * @throws IOException {@link IOException} if an IOException occur.
+     * @throws FileNotFoundException {@link FileNotFoundException} if the file does not exit or cannot be read.
      */
-    public BfImageReader(String path) throws IOException, FileNotFoundException {
-        marks = new Stack<>();
+    public BfImageReader(String path) throws FileNotFoundException {
         marks = new Stack<>();
         try {
             bufferedImage = ImageIO.read(new File(path));
@@ -54,11 +57,10 @@ public class BfImageReader implements Reader {
     /**
      * Return the color of the next instruction.
      *
-     * @return the hexadecimal value of the next color.
-     * @throws IOException {@link IOException} if an IOException occur.
+     * @return the hexadecimal value of the next color as a String.
      */
     @Override
-    public String getNext() throws IOException {
+    public String getNext() {
         if (offX >= width) {
             offX = 0;
             offY += 3;
@@ -67,11 +69,12 @@ public class BfImageReader implements Reader {
             return null;
         }
         int rgb = bufferedImage.getRGB(offX, offY);
+        Logger.countMove();
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 if (rgb != bufferedImage.getRGB(offX + x, offY + y)) {
-                    return "erreur";
+                    return "Error at pixel (" + (offX + x) + ", " + (offY + y) + ")";
                 }
             }
         }
@@ -85,37 +88,58 @@ public class BfImageReader implements Reader {
         return String.format("%02x%02x%02x", r, g, b);
     }
 
+    @Override
+    public int getExecutionPointer() {
+        return (offX+offY*width)/9;
+    }
+
     /**
      * Close the reader once the file is read.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
      */
     @Override
-    public void closeReader() throws IOException, BracketsParseException {
+    public void closeReader() throws BracketsParseException {
         if (!marks.isEmpty()) {
             throw new BracketsParseException("]");
         }
     }
 
+    /**
+     * Mark the current instruction by adding it into the stack.
+     */
     @Override
-    public void mark() throws IOException {
-        Integer[] tmp = {offX, offY};
+    public void mark() {
+        Point tmp = new Point(offX, offY);
         marks.push(tmp);
     }
 
+    /**
+     * Reset the index of the next pixel to the last mark.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
+     */
     @Override
-    public void reset() throws IOException, BracketsParseException {
+    public void reset() throws BracketsParseException {
         if (marks.isEmpty()) {
             throw new BracketsParseException("[");
         }
-        offX = marks.peek()[0];
-        offY = marks.peek()[1];
+        offX = (int) marks.peek().getX();
+        offY = (int) marks.peek().getY();
     }
 
+    /**
+     * Unmark the last marked instructions by remove it from the stack.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
+     */
     @Override
     public void unmark() throws BracketsParseException {
         if (marks.isEmpty()) {
             throw new BracketsParseException("[");
         }
         marks.pop();
-        marks.pop();
     }
+
+
 }

@@ -2,7 +2,6 @@ package net.brainfuck;
 
 import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
-import net.brainfuck.exception.Exception;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.Interpreter;
 
@@ -15,7 +14,7 @@ public class Main {
      * Print the usage
      */
     private void printUsage() {
-        System.out.println("Usage : bfck.sh -p FILE [--rewrite]");
+        System.out.println("Usage : bfck.sh -p FILE [--rewrite] [--translate] [--check] [-o output_file] [-i input_file]");
     }
 
     /**
@@ -29,6 +28,7 @@ public class Main {
             System.exit(0);
         }
         try {
+	        Logger.startExecTime();
             ArgumentAnalyzer a = new ArgumentAnalyzer(args);
             if (a.getArgument(PATH) == null) {
                 this.printUsage();
@@ -37,17 +37,17 @@ public class Main {
             Memory m = new Memory();
             Reader r = null;
             if (a.getArgument(PATH).endsWith(".bmp")) {
-                    r = new BfImageReader(a.getArgument(PATH));
+                r = new BfImageReader(a.getArgument(PATH));
             } else {
                 r = new BfReader(a.getArgument(PATH));
             }
             Executer e = new Executer(m, a.getFlags(), r);
             Interpreter i = new Interpreter(r, a, e);
             i.interprate();
-//            System.out.println(m);
+            System.out.println(m);
+            System.out.println(Logger.showResume());
         } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
             // Exit code not set
-            e.printStackTrace();
             System.exit(5);
         } catch (MemoryOutOfBoundsException e) {
             System.exit(1);

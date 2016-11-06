@@ -48,10 +48,10 @@ public class BfReader implements Reader {
 	 */
 	private void readUntilEndOfLine(int val) throws java.io.IOException {
 		next = Character.toString((char) val);
-		int c = reader.read();
+		int c = read();
 		while (!isNewLine(c) && c != EOF) {
 			next += Character.toString((char) c);
-			c = reader.read();
+			c = read();
 		}
 		oldvar = c;
 	}
@@ -65,7 +65,7 @@ public class BfReader implements Reader {
 	 */
 	private int ignoreNewLineChar() throws java.io.IOException {
 		int c;
-		while (isNewLine(c = reader.read())) ;
+		while (isNewLine(c = read())) ;
 		oldvar = LF;
 		return c;
 	}
@@ -80,7 +80,7 @@ public class BfReader implements Reader {
 	@Override
 	public String getNext() throws IOException {
 		try {
-			int nextVal = reader.read();
+			int nextVal = read();
 			if (isNewLine(nextVal)) {
 				nextVal = ignoreNewLineChar();
 			}
@@ -107,6 +107,21 @@ public class BfReader implements Reader {
 			throw new IOException();
 		}
 
+	}
+
+	private int read() throws java.io.IOException {
+		Logger.countMove();
+		return  reader.read();
+	}
+
+
+	@Override
+	public int getExecutionPointer() throws IOException {
+		try {
+			return (int) reader.getFilePointer();
+		} catch (java.io.IOException e) {
+			throw new IOException("Impossible to access file pointer");
+		}
 	}
 
 	/**

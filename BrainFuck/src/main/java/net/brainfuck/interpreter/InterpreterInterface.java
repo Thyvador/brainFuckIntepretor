@@ -24,7 +24,7 @@ public interface InterpreterInterface {
      * @throws MemoryOutOfBoundsException throw by memory
      * @throws MemoryOverFlowException  throw by memory
      * @throws IOException throw by memory
-     * @throws BracketsParseException throw by JumpExecute and BackExecute
+     * @throws BracketsParseException throw by JumpInstruction and BackInstruction
      */
     void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException,
             MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
@@ -38,5 +38,7 @@ public interface InterpreterInterface {
      * @return String represent the syntax converted to the code color
      */
     String translate();
+
+    void trace(Memory memory, Reader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
 }
 

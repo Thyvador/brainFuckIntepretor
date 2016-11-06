@@ -6,7 +6,6 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.interpreter.AbstractExecute;
 import net.brainfuck.interpreter.InterpreterInterface;
 
 /**
