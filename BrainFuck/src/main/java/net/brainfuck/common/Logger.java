@@ -30,27 +30,26 @@ public class Logger {
 
 	/**
 	 * Create a string with all informations collected.
-	 * <p>
 	 * Start with '\n' to stop
 	 *
 	 * @param m
 	 * @return informations
 	 */
 	public static String showResume(Memory m) {
-		String retour = "\nPROG_SIZE : " + numInstructions + "\n";
-		retour += "EXEC_TIME : " + (System.currentTimeMillis() - start) + " ms\n";
-		retour += "EXEC_MOVE : " + numExecMove + "\n";
-		retour += "DATA_MOVE : " + numMemoryMove + "\n";
-		retour += "DATA_WRITE : " + numMemoryWrite + "\n";
-		retour += "DATA_READ : " + numMemoryRead + "\n";
+		String retour =m+"PROG_SIZE : "+numInstructions+"\n";
+		retour+= "EXEC_TIME : "+(System.currentTimeMillis()-start)+" ms\n";
+		retour+= "EXEC_MOVE : "+numExecMove+"\n";
+		retour+= "DATA_MOVE : "+numMemoryMove+"\n";
+		retour+= "DATA_WRITE : "+numMemoryWrite+"\n";
+		retour+= "DATA_READ : "+numMemoryRead+"\n";
 		return retour;
 	}
 
 	/**
 	 * Count the number of instruction read.
 	 */
-	public static void countInstruction() {
-		numInstructions++;
+	public static void countInstruction(int instr) {
+		numInstructions = instr;
 	}
 
 	/**
@@ -84,6 +83,13 @@ public class Logger {
 
 
 	/**
+	 * Count the char read in the input file
+	 */
+	public static void countMove() {
+		numExecMove++;
+	}
+
+	/**
 	 * Increment by one the number of execution step.
 	 */
 	public static void incrStep() {
@@ -110,7 +116,7 @@ public class Logger {
 	 * Write an instruction execution log into the log file.
 	 *
 	 * @param executionPointer the index of the execution pointer.
-	 * @param memory           the memory.
+	 * @param memory the memory.
 	 * @throws IOException {@link IOException} if the file cannot be access.
 	 */
 	public static void write(int executionPointer, Memory memory) throws IOException {
@@ -148,12 +154,5 @@ public class Logger {
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
-	}
-
-	/**
-	 * Count the char read in the input file
-	 */
-	public static void countMove() {
-		numExecMove++;
 	}
 }
