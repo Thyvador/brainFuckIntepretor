@@ -12,9 +12,21 @@ import net.brainfuck.interpreter.InterpreterInterface;
  */
 public class TraceExecuter implements ContextExecuter{
 
+    /**
+     * Execute the AbstractExecute command according to the "--trace" context.
+     *
+     * @param i the AbstractCommand to execute
+     * @param m the memory representation
+     * @param r the reader
+     * @param imageWriter
+     * @throws MemoryOverFlowException
+     * @throws IOException
+     * @throws MemoryOutOfBoundsException
+     * @throws FileNotFoundIn
+     * @throws BracketsParseException
+     */
     @Override
-    public void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter, String fileName) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
-        Logger.setWriter(fileName);
+    public void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
         i.trace(m,r);
     }
 }

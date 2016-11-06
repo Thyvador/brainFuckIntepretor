@@ -29,9 +29,8 @@ public class Executer {
      * @param m         Memory
      * @param arguments The long arguments
      * @param r         Reader
-     * @param fileName  String
      */
-    public Executer(Memory m, List<String> arguments, Reader r, String fileName) {
+    public Executer(Memory m, List<String> arguments, Reader r) throws IOException {
         this.memory = m;
         this.reader = r;
         this.fileName = fileName;
@@ -59,7 +58,7 @@ public class Executer {
     public void execute(AbstractExecute i) throws MemoryOutOfBoundsException, BracketsParseException,
             MemoryOverFlowException, FileNotFoundIn, IOException {
         for (ContextExecuter c : contextExecuters) {
-            c.execute(i, memory, reader, imageWriter, fileName);
+            c.execute(i, memory, reader, imageWriter);
         }
     }
 

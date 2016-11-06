@@ -19,13 +19,12 @@ class TranslateExecuter implements ContextExecuter {
      * @param i the AbstractCommand to execute
      * @param m the memory representation
      * @param r the reader
-     * @param fileName
      * @throws MemoryOverFlowException throw by memory
      * @throws IOException throw by reader
      * @throws MemoryOutOfBoundsException throw by memory
      */
     @Override
-    public void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter, String fileName) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException {
+    public void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException {
         imageWriter.write(i.translate());
     }
 }
