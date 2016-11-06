@@ -32,8 +32,11 @@ public class BfReader implements Reader {
 	public BfReader(String filename) throws FileNotFoundException {
 		try {
 			reader = new RandomAccessFile(filename, "r");
+			Logger.countInstruction((int)reader.length());
 			marks = new Stack<>();
 		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException(filename);
+		} catch (java.io.IOException e) {
 			throw new FileNotFoundException(filename);
 		}
 	}
@@ -48,10 +51,10 @@ public class BfReader implements Reader {
 	 */
 	private void readUntilEndOfLine(int val) throws java.io.IOException {
 		next = Character.toString((char) val);
-		int c = read();
+		int c = reader.read();
 		while (!isNewLine(c) && c != EOF) {
 			next += Character.toString((char) c);
-			c = read();
+			c = reader.read();
 		}
 		oldvar = c;
 	}
@@ -65,7 +68,7 @@ public class BfReader implements Reader {
 	 */
 	private int ignoreNewLineChar() throws java.io.IOException {
 		int c;
-		while (isNewLine(c = read())) ;
+		while (isNewLine(c = reader.read())) ;
 		oldvar = LF;
 		return c;
 	}
@@ -80,7 +83,7 @@ public class BfReader implements Reader {
 	@Override
 	public String getNext() throws IOException {
 		try {
-			int nextVal = read();
+			int nextVal = reader.read();
 			if (isNewLine(nextVal)) {
 				nextVal = ignoreNewLineChar();
 			}
@@ -109,10 +112,6 @@ public class BfReader implements Reader {
 
 	}
 
-	private int read() throws java.io.IOException {
-		Logger.countMove();
-		return  reader.read();
-	}
 
 
 	@Override
