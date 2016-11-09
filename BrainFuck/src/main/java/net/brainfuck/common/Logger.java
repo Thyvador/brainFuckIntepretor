@@ -144,7 +144,7 @@ public class Logger {
 	}
 
 	/**
-	 * Close the wrioter.
+	 * Close the writer.
 	 *
 	 * @throws IOException {@link IOException} if the file cannot be access.
 	 */
