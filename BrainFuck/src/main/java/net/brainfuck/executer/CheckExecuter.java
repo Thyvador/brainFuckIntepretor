@@ -1,11 +1,12 @@
 package net.brainfuck.executer;
 
+import net.brainfuck.common.ArgumentExecuter;
 import net.brainfuck.common.BfImageWriter;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.BackInstruction;
-import net.brainfuck.interpreter.InterpreterInterface;
+import net.brainfuck.interpreter.InstructionInterface;
 import net.brainfuck.interpreter.JumpInstruction;
 
 /**
@@ -17,9 +18,6 @@ class CheckExecuter implements ContextExecuter{
          * Execute the AbstractExecute command according to a context without "--rewrite" and "--check".
          *
          * @param i the AbstractCommand to execute
-         * @param m the memory representation
-         * @param r the reader
-         * @param fileName
          * @throws MemoryOverFlowException throw by memory
          * @throws IOException throw by reader
          * @throws MemoryOutOfBoundsException throw by memory
@@ -27,7 +25,7 @@ class CheckExecuter implements ContextExecuter{
          * @throws BracketsParseException throw by JumpInstruction or by BackInstruction
          */
         @Override
-        public void execute(InterpreterInterface i, Memory m, Reader r, BfImageWriter imageWriter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
+        public void execute(InstructionInterface i, ArgumentExecuter argumentExecuter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
             if (i instanceof JumpInstruction) {
                 cpt++;
             }

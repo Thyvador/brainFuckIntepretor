@@ -5,6 +5,7 @@
  */
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
@@ -17,16 +18,15 @@ import net.brainfuck.exception.MemoryOverFlowException;
  *
  * @author davidLANG
  */
-public interface InterpreterInterface {
+public interface InstructionInterface {
     /**
      * Execute a method of Memory Class
-     * @param memory Memory machine
      * @throws MemoryOutOfBoundsException throw by memory
      * @throws MemoryOverFlowException  throw by memory
      * @throws IOException throw by memory
      * @throws BracketsParseException throw by JumpInstruction and BackInstruction
      */
-    void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException,
+    void execute(ArgumentInstruction args) throws MemoryOutOfBoundsException,
             MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 
     /**
@@ -39,6 +39,6 @@ public interface InterpreterInterface {
      */
     String translate();
 
-    void trace(Memory memory, Reader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
+    void trace(ArgumentInstruction argumentInstruction) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
 }
 

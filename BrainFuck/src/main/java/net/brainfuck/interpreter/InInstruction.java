@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.FileNotFoundIn;
@@ -24,7 +25,8 @@ class InInstruction extends AbstractExecute {
      * @param machine Memory machine
      */
     @Override
-    public void execute(Memory machine, Reader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {
+    public void execute(ArgumentInstruction argumentInstruction) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {
+        Memory memory = argumentInstruction.getMemory();
 
         int value;
         try {
@@ -35,8 +37,7 @@ class InInstruction extends AbstractExecute {
         if (value == -1) {
             throw new FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
         }
-        machine.set(value);
-
+        memory.set(value);
     }
 
 }

@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -23,8 +24,8 @@ class OutInstruction extends AbstractExecute {
      * @param machine Memory machine
      */
     @Override
-    public void execute(Memory machine, Reader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-        System.out.print( (char)machine.get());
+    public void execute(ArgumentInstruction argumentInstruction) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+        System.out.print( (char)argumentInstruction.getMemory().get());
     }
 
 }

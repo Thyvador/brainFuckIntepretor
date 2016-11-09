@@ -82,6 +82,12 @@ public class BfReader implements Reader {
 		return c;
 	}
 
+	/**
+	 * Skip all character until new line or end of file character is read.
+	 *
+	 * @return the current caracter : new line or end of file
+	 * @throws java.io.IOException if IO error, it will be catch in getNext().
+	 */
 	private int ignoreComment() throws java.io.IOException {
 		int c;
 		c = reader.read();
@@ -89,6 +95,12 @@ public class BfReader implements Reader {
 		return c;
 	}
 
+	/**
+	 * Skip all space and tabulation charecter until another charecter is read.
+	 *
+	 * @return the current charecter read :  could be everything except space or tabulation
+	 * @throws java.io.IOException if IO error, it will be catch in getNext().
+	 */
 	private int ignoreSpace() throws java.io.IOException {
 		int c;
 		c = reader.read();
@@ -96,6 +108,13 @@ public class BfReader implements Reader {
 		return c;
 	}
 
+	/**
+	 *
+	 *
+	 * @param nextVal
+	 * @return
+	 * @throws java.io.IOException
+	 */
 	private int ignore(int nextVal) throws java.io.IOException {
 		boolean end = false;
 

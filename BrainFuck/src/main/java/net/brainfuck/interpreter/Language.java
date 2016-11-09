@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represent the language with his syntax and his corresponding InterpreterInterface (wich implements the corresponding method to the
+ * Represent the language with his syntax and his corresponding InstructionInterface (wich implements the corresponding method to the
  * syntax)
  *
  * @author davidLANG
@@ -49,7 +49,7 @@ enum Language {
 	/**
 	 *
 	 * @param interpreter
-	 *            InterpreterInterface corresponding to syntax
+	 *            InstructionInterface corresponding to syntax
 	 * @param aliases
 	 *            au moins 2 string : {String shortSyntax, String longSyntax}
 	 */

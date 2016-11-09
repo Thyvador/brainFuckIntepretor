@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
@@ -13,11 +14,11 @@ public class BackInstruction extends AbstractExecute {
 	}
 
 	@Override
-	public void execute(Memory memory, Reader reader) throws BracketsParseException, IOException, MemoryOutOfBoundsException {
-		if (memory.get() != 0) {
-			reader.reset();
+	public void execute(ArgumentInstruction argumentInstruction) throws BracketsParseException, IOException, MemoryOutOfBoundsException {
+		if (argumentInstruction.getMemory().get() != 0) {
+			argumentInstruction.getReader().reset();
 		} else {
-			reader.unmark();
+			argumentInstruction.getReader().unmark();
 		}
 	}
 

@@ -1,5 +1,7 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ArgumentExecuter;
+import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -20,8 +22,8 @@ class DecrementInstruction extends AbstractExecute {
      * @param memory Memory machine
      */
     @Override
-    public void execute(Memory memory, Reader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-        memory.decr();
+    public void execute(ArgumentInstruction argumentExecuter) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+        argumentExecuter.getMemory().decr();
     }
 
 }

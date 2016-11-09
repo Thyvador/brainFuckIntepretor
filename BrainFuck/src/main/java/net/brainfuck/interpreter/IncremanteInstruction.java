@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -20,8 +21,8 @@ class IncremanteInstruction extends AbstractExecute {
      * @param memory Memory machine
      */
     @Override
-    public void execute(Memory memory, Reader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-        memory.incr();
+    public void execute(ArgumentInstruction argumentInstruction) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+        argumentInstruction.getMemory().incr();
     }
 
 }

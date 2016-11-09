@@ -1,10 +1,7 @@
 
 package net.brainfuck.interpreter;
 
-import net.brainfuck.common.ArgumentAnalyzer;
-import net.brainfuck.common.BfImageWriter;
-import net.brainfuck.common.Logger;
-import net.brainfuck.common.Reader;
+import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
@@ -25,70 +22,22 @@ public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
 	private Executer executer;
 	private Reader reader;
-	private ArgumentAnalyzer argumentAnalyzer;
+	private ArgumentExecuter argumentExecuter;
 
 	/**
 	 * Constructor which initialize attribute.
-	 * @param reader Reader
-	 * @param arg ArgumentAnalyzer use to get arguments
 	 * @throws FileNotFoundException throw by setIo()
 	 * @throws IOException throw bt BfImageWriter
 	 */
-	public Interpreter(Reader reader, ArgumentAnalyzer arg, Executer executer) throws FileNotFoundException, IOException {
-		this.reader = reader;
-		this.argumentAnalyzer = arg;
+	public Interpreter(Executer executer, ArgumentExecuter argumentExecuter) throws FileNotFoundException, IOException {
+		this.reader = argumentExecuter.getReader();
 		this.executer = executer;
-		setIO();
-		if(arg.getFlags().contains(Context.TRANSLATE.getSyntax())) {
-			executer.setImageWriter(new BfImageWriter());
-		}
-		if (arg.getFlags().contains(Context.TRACE.getSyntax())){
-			Logger.setWriter(arg.getArgument(PATH));
-		}
+		this.argumentExecuter = argumentExecuter;
 	}
 
-	/**
-	 * Set default Input and output files depending of args "-i" and "-o"
-	 *
-	 * @throws FileNotFoundException if the path entered isn't valide, the file is missing and can't be open
-	 */
-	private void setIO() throws FileNotFoundException{
-		this.setIn();
-		this.setOut();
-	}
 
-	/**
-	 * Set the default input to a files depending of args "-i"
-	 *
-	 * @throws FileNotFoundException throw by System.setIn()
-	 */
-	private void setIn() throws FileNotFoundException {
-		String inPath = argumentAnalyzer.getArgument(IN_PATH);
-		if(inPath != null){
-			try {
-				System.setIn(new FileInputStream(inPath));
-			} catch (java.io.FileNotFoundException e) {
-				throw new FileNotFoundException(inPath);
-			}
-		}
-	}
 
-	/**
-	 * Set the default output to a files depending of args "-i"
-	 *
-	 * @throws FileNotFoundException throw by System.setOut()
-	 */
-	private void setOut() throws FileNotFoundException {
-		String outPath = argumentAnalyzer.getArgument(OUT_PATH);
-		if(outPath != null){
-			try {
-				PrintStream printStream = new PrintStream(outPath);
-				System.setOut(printStream);
-			} catch (java.io.FileNotFoundException e) {
-				throw new FileNotFoundException(outPath);
-			}
-		}
-	}
+
 
 	/**
 	 * Interpret all characters which can be read with the attribute reader.

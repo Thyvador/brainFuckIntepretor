@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
@@ -14,7 +15,10 @@ public class JumpInstruction extends AbstractExecute {
 	}
 
 	@Override
-	public void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+	public void execute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+		Memory memory = argumentInstruction.getMemory();
+		Reader reader = argumentInstruction.getReader();
+
 		if (memory.get() != 0) {
 			reader.mark();
 		} else {

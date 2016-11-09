@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -15,11 +16,11 @@ class RightInstruction extends AbstractExecute {
 
 	/**
      * Execute the "right" method of Memory Class
-     * @param memory Memory machine
+     * @param
      */
     @Override
-    public void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException {
-        memory.right();
+    public void execute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException {
+        argumentInstruction.getMemory().right();
     }
 
 }
