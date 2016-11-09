@@ -2,6 +2,7 @@ package net.brainfuck.common;
 
 import java.io.RandomAccessFile;
 import java.util.Stack;
+import java.util.StringTokenizer;
 
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
@@ -56,14 +57,14 @@ public class BfReader implements Reader {
 		boolean comment = false;
 		int c = reader.read();
 		while (!isNewLine(c) && c != EOF) {
-			if (isComment(c)) {
+			if (isComment(c))
 				comment = true;
-			}
-			if (!comment && !isSpace(c)) {
+			if (!comment)
 				next += Character.toString((char) c);
-			}
 			c = reader.read();
 		}
+		StringTokenizer tok = new StringTokenizer(next, "\t ");
+		next = tok.nextToken();
 		oldvar = c;
 	}
 
