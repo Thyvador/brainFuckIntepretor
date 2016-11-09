@@ -27,7 +27,7 @@ public class Main {
             this.printUsage();
             System.exit(0);
         }
-        try {
+		try {
 	        Logger.startExecTime();
             ArgumentAnalyzer a = new ArgumentAnalyzer(args);
             if (a.getArgument(PATH) == null) {
@@ -41,20 +41,20 @@ public class Main {
             } else {
                 r = new BfReader(a.getArgument(PATH));
             }
-            Executer e = new Executer(m, a.getFlags(), r);
-            Interpreter i = new Interpreter(r, a, e);
+			Executer e = new Executer(m, a.getFlags(), r);
+			Interpreter i = new Interpreter(r, a, e);
             i.interprate();
             System.out.println(Logger.showResume(m));
-        } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
-            // Exit code not set
+		}
+        catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e1) {
             System.exit(5);
-        } catch (MemoryOutOfBoundsException e) {
+        } catch (MemoryOutOfBoundsException e1) {
             System.exit(1);
-        } catch (MemoryOverFlowException e) {
+        } catch (MemoryOverFlowException e1) {
             System.exit(2);
-        } catch (FileNotFoundIn e) {
+        } catch (FileNotFoundIn e1) {
             System.exit(3);
-        } catch (BracketsParseException e) {
+        } catch (BracketsParseException e1) {
             System.exit(4);
         }
         System.exit(0);
