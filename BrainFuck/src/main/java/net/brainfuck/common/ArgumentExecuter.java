@@ -1,5 +1,7 @@
 package net.brainfuck.common;
 
+import net.brainfuck.interpreter.JumpTable;
+
 /**
  * @author davidLANG
  */
@@ -8,8 +10,8 @@ public class ArgumentExecuter extends ArgumentInstruction {
     private Reader reader;
     private BfImageWriter imageWriter;
 
-    public ArgumentExecuter(Memory memory, Reader reader, BfImageWriter bfImageWriter) {
-        super(memory, reader);
+    public ArgumentExecuter(Memory memory, Reader reader, BfImageWriter bfImageWriter, JumpTable jumpTable) {
+        super(memory, reader, jumpTable);
         this.imageWriter = bfImageWriter;
     }
 

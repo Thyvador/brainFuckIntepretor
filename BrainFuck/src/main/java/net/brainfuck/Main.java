@@ -5,6 +5,7 @@ import net.brainfuck.exception.*;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.Interpreter;
+import net.brainfuck.interpreter.JumpTable;
 
 import java.io.FileInputStream;
 import java.io.PrintStream;
@@ -23,14 +24,14 @@ public class Main {
         System.out.println("Usage : bfck.sh -p FILE [--rewrite] [--translate] [--check] [-o output_file] [-i input_file]");
     }
 
-    private ArgumentExecuter initArgumentExecuter(ArgumentAnalyzer a, Memory m, Reader r) throws IOException, FileNotFoundException {
+    private ArgumentExecuter initArgumentExecuter(ArgumentAnalyzer a, Memory m, Reader r, JumpTable jumpTable) throws IOException, FileNotFoundException {
         BfImageWriter bfImageWriter = null;
 
         if(a.getFlags().contains(Context.TRANSLATE.getSyntax())) {
             bfImageWriter = new BfImageWriter();
         }
 
-        return new ArgumentExecuter(m, r, bfImageWriter);
+        return new ArgumentExecuter(m, r, bfImageWriter, jumpTable);
     }
 
     private void checkPath(ArgumentAnalyzer a) {
@@ -40,25 +41,25 @@ public class Main {
         }
     }
 
-    private void initLoggerFromContext(ArgumentAnalyzer a) throws IOException {
-        if (a.getFlags().contains(Context.TRACE.getSyntax())){
-            Logger.setWriter(a.getArgument(PATH));
+    private void initLoggerFromContext(ArgumentAnalyzer argAnalizer) throws IOException {
+        if (argAnalizer.getFlags().contains(Context.TRACE.getSyntax())){
+            Logger.setWriter(argAnalizer.getArgument(PATH));
         }
     }
 
-    private Reader initReader(ArgumentAnalyzer a) throws FileNotFoundException {
+    private Reader initReader(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
         Reader r;
-        if (a.getArgument(PATH).endsWith(".bmp")) {
-            r = new BfImageReader(a.getArgument(PATH));
+        if (argAnalizer.getArgument(PATH).endsWith(".bmp")) {
+            r = new BfImageReader(argAnalizer.getArgument(PATH));
         } else {
-            r = new BfReader(a.getArgument(PATH));
+            r = new BfReader(argAnalizer.getArgument(PATH));
         }
         return r;
     }
 
-    private void initJumpTable() {
-    	JumpTable jumpTable = new JumpTable();
-    	
+    private JumpTable initJumpTable(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException {
+    	JumpTable jumpTable = new JumpTable(initReader(argAnalizer));
+    	return jumpTable;
 	}
 
 	/**
@@ -66,8 +67,8 @@ public class Main {
      *
      * @throws FileNotFoundException throw by System.setIn()
      */
-    private void setIn(ArgumentAnalyzer a) throws FileNotFoundException {
-        String inPath = a.getArgument(IN_PATH);
+    private void setIn(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
+        String inPath = argAnalizer.getArgument(IN_PATH);
         if(inPath != null){
             try {
                 System.setIn(new FileInputStream(inPath));
@@ -82,8 +83,8 @@ public class Main {
      *
      * @throws FileNotFoundException throw by System.setOut()
      */
-    private void setOut(ArgumentAnalyzer a) throws FileNotFoundException {
-        String outPath = a.getArgument(OUT_PATH);
+    private void setOut(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
+        String outPath = argAnalizer.getArgument(OUT_PATH);
         if(outPath != null){
             try {
                 PrintStream printStream = new PrintStream(outPath);
@@ -104,15 +105,15 @@ public class Main {
         this.setOut(a);
     }
 
-    private ArgumentExecuter init(ArgumentAnalyzer a) throws FileNotFoundException, IOException {
-        checkPath(a);
-        setIO(a);
-        initJumpTable();
-        initLoggerFromContext(a);
+    private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException {
+        checkPath(argAnalizer);
+        setIO(argAnalizer);
+        initLoggerFromContext(argAnalizer);
 
         Memory m = new Memory();
-        Reader r = this.initReader(a);
-        return initArgumentExecuter(a, m, r);
+        Reader r = this.initReader(argAnalizer);
+        JumpTable jumpTable = initJumpTable(argAnalizer);
+        return initArgumentExecuter(argAnalizer, m, r, jumpTable);
     }
 
 

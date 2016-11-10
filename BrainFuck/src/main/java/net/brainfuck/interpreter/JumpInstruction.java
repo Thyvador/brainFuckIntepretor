@@ -16,6 +16,21 @@ public class JumpInstruction extends AbstractExecute {
 
 	@Override
 	public void execute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+		nonLinearExecute(argumentInstruction);
+	}
+
+	private void nonLinearExecute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+		Reader reader = argumentInstruction.getReader();
+
+		if (argumentInstruction.getMemory().get() == 0) {
+			reader.seek(argumentInstruction.getJumpTable().getAssociated(reader.getExecutionPointer()));
+			// Reach corresponding closing bracket
+		}
+	}
+	
+	@SuppressWarnings("unused")
+	@Deprecated
+	private void linearExecute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
 		Memory memory = argumentInstruction.getMemory();
 		Reader reader = argumentInstruction.getReader();
 
@@ -26,7 +41,6 @@ public class JumpInstruction extends AbstractExecute {
 			Language instruction;
 			while(cpt > 0) {
 				instruction = Language.languageMap.get(reader.getNext());
-//				System.out.println(instruction);
 				if (instruction == null) {
 					throw new BracketsParseException("]");
 				}

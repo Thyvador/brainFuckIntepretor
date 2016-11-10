@@ -17,7 +17,7 @@ public class Memory {
 	/**
 	 * Max value in the memory (255)
 	 */
-	private static final short MAX_VALUE = (short) 255;
+	private static final short MAX_VALUE = Short.MAX_VALUE;
 	/**
 	 * Min value in the memory (0)
 	 */
