@@ -119,7 +119,7 @@ public class Logger {
 	 * @param memory the memory.
 	 * @throws IOException {@link IOException} if the file cannot be access.
 	 */
-	public static void write(int executionPointer, Memory memory) throws IOException {
+	public static void write(long executionPointer, Memory memory) throws IOException {
 		try {
 			step += 1;
 			writer.write(

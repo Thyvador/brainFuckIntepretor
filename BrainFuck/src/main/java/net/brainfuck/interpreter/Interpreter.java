@@ -57,6 +57,7 @@ public class Interpreter {
             if ((currentInstruction = Language.languageMap.get(instruction)) == null) {
                 throw new SyntaxErrorException(instruction);
             }
+            System.out.println(currentInstruction);
             executer.execute(currentInstruction.getInterpreter());
             Logger.countMove();
         }

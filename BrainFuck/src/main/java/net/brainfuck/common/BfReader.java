@@ -175,9 +175,9 @@ public class BfReader implements Reader {
 
 
 	@Override
-	public int getExecutionPointer() throws IOException {
+	public long getExecutionPointer() throws IOException {
 		try {
-			return (int) reader.getFilePointer();
+			return reader.getFilePointer();
 		} catch (java.io.IOException e) {
 			throw new IOException("Impossible to access file pointer");
 		}
@@ -229,34 +229,37 @@ public class BfReader implements Reader {
 		}
 	}
 
-
 	@Override
 	public void mark() throws IOException {
 		try {
 			marks.push(reader.getFilePointer());
+			System.out.println(reader.getFilePointer());
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
 	}
-
 
 	@Override
 	public void reset() throws IOException, BracketsParseException {
 		if (marks.isEmpty())
 			throw new BracketsParseException("[");
-		try {
-			reader.seek(marks.peek());
-		} catch (java.io.IOException e) {
-			throw new IOException();
-		}
+		seek(marks.peek());
 	}
-
 
 	@Override
 	public void unmark() throws BracketsParseException {
 		if (marks.isEmpty())
 			throw new BracketsParseException("[");
 		marks.pop();
+	}
+	
+	@Override
+	public void seek(long pos) throws IOException {
+		try {
+			reader.seek(pos);
+		} catch (java.io.IOException e) {
+			throw new IOException();
+		}
 	}
 }
 

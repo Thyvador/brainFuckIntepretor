@@ -56,7 +56,12 @@ public class Main {
         return r;
     }
 
-    /**
+    private void initJumpTable() {
+    	JumpTable jumpTable = new JumpTable();
+    	
+	}
+
+	/**
      * Set the default input to a files depending of args "-i"
      *
      * @throws FileNotFoundException throw by System.setIn()
@@ -102,6 +107,7 @@ public class Main {
     private ArgumentExecuter init(ArgumentAnalyzer a) throws FileNotFoundException, IOException {
         checkPath(a);
         setIO(a);
+        initJumpTable();
         initLoggerFromContext(a);
 
         Memory m = new Memory();

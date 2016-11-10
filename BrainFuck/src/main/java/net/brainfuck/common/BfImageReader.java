@@ -33,7 +33,7 @@ public class BfImageReader implements Reader {
     /**
      * The stack that contains all the points corresponding to the JUMP instructions.
      */
-    private Stack<Point> marks;
+    private Stack<Long> marks;
 
     /**
      * Constructs a BfImageReader from the path of a file.
@@ -96,8 +96,8 @@ public class BfImageReader implements Reader {
     }
 
     @Override
-    public int getExecutionPointer() {
-        return (offX+offY*width)/9;
+    public long getExecutionPointer() {
+        return ((offX/3)+(offY*width)/9);
     }
 
     /**
@@ -117,8 +117,8 @@ public class BfImageReader implements Reader {
      */
     @Override
     public void mark() {
-        Point tmp = new Point(offX, offY);
-        marks.push(tmp);
+        //Point tmp = new Point(offX, offY);
+        marks.push(getExecutionPointer());
     }
 
     /**
@@ -131,8 +131,7 @@ public class BfImageReader implements Reader {
         if (marks.isEmpty()) {
             throw new BracketsParseException("[");
         }
-        offX = (int) marks.peek().getX();
-        offY = (int) marks.peek().getY();
+        seek(marks.peek());
     }
 
     /**
@@ -147,6 +146,13 @@ public class BfImageReader implements Reader {
         }
         marks.pop();
     }
+
+	@Override
+	public void seek(long pos) {
+		System.out.println(pos);
+		offX = (int) ((pos*3)%width);
+        offY = (int) ((pos*9)/width);
+	}
 
 
 }

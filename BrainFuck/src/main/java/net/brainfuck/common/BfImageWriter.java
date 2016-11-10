@@ -53,7 +53,7 @@ public class BfImageWriter implements Writer {
 			this.out = out;
 			wrt = ImageIO.getImageWritersByFormatName("bmp").next();
 			wrt.setOutput(ImageIO.createImageOutputStream(out));
-			tmpFile = File.createTempFile("tmp-", null, new File("c:/Users/user/Desktop"));
+			tmpFile = File.createTempFile("tmp-", null);
 			tmpFile.deleteOnExit();
 			tmpOs = new DataOutputStream(new FileOutputStream(tmpFile));
 		} catch (java.io.FileNotFoundException e) {

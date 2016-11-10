@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class Executer {
     private List<ContextExecuter> contextExecuters = new ArrayList<>();
-    private BfImageWriter imageWriter;
     private ArgumentExecuter argumentExecuter;
 
     /**
@@ -74,20 +73,11 @@ public class Executer {
             }
         }
         if (this.contextExecuters.indexOf(Context.contextMap.get(Context.TRANSLATE.getSyntax())) >= 0) {
-            imageWriter.close();
+            argumentExecuter.getImageWriter().close();
         }
         if(Logger.isWriterOpen()){
             Logger.closeWriter();
         }
-    }
-
-    /**
-     * Set imageWriter parameter
-     *
-     * @param i imageWriter
-     */
-    public void setImageWriter(BfImageWriter i) {
-        this.imageWriter = i;
     }
 
 }

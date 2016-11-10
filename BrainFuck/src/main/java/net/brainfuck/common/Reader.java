@@ -22,7 +22,7 @@ public interface Reader {
      *
      * @return the position of the execution pointer.
      */
-    int getExecutionPointer() throws IOException;
+    long getExecutionPointer() throws IOException;
 
 
     /**
@@ -38,4 +38,6 @@ public interface Reader {
     void reset() throws IOException, BracketsParseException;
     
     void unmark() throws BracketsParseException;
+
+	void seek(long pos) throws IOException;
 }
