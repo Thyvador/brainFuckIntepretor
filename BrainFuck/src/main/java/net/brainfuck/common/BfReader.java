@@ -67,8 +67,7 @@ public class BfReader implements Reader {
 				next += Character.toString((char) c);
 			c = reader.read();
 		}
-		StringTokenizer tok = new StringTokenizer(next, "\t ");
-		next = tok.nextToken();
+		next = next.trim();
 		oldvar = c;
 	}
 
