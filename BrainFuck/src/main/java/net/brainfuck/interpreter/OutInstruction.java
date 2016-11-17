@@ -12,9 +12,9 @@ import java.io.IOException;
  * @author François Melkonian
  *
  */
-class OutInstruction extends AbstractExecute {
+public class OutInstruction extends AbstractExecute {
 
-    OutInstruction() {
+    public OutInstruction() {
 		super(Language.OUT);
 	}
 

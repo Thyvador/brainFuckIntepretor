@@ -69,7 +69,7 @@ public class BfImageReader implements Reader {
             return null;
         }
         int rgb = bufferedImage.getRGB(offX, offY);
-        Logger.countMove();
+        Logger.getInstance().countMove();
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
@@ -86,7 +86,7 @@ public class BfImageReader implements Reader {
 
         if (r == 0 && g == 0 && b == 0){
 	        int calcul = (offY)*(width)/9+offX/3-1;
-	        Logger.countInstruction(calcul);
+//	        Logger.getInstance().countInstruction(calcul);
 
 	        return null;
 
@@ -153,5 +153,7 @@ public class BfImageReader implements Reader {
         offY = (int) ((pos*9)/width);
 	}
 
-
+    public Stack<Long> getMarks() {
+        return marks;
+    }
 }

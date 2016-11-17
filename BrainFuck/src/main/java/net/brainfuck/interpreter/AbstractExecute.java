@@ -27,7 +27,7 @@ public abstract class AbstractExecute implements InstructionInterface {
 
     public final void trace(ArgumentInstruction argumentInstruction) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn {
 		execute(argumentInstruction);
-		Logger.write(argumentInstruction.getReader().getExecutionPointer(), argumentInstruction.getMemory());
+		Logger.getInstance().write(argumentInstruction.getReader().getExecutionPointer(), argumentInstruction.getMemory());
 	}
     
 }

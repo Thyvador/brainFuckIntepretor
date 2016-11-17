@@ -18,84 +18,68 @@ import java.io.FileWriter;
  *         on 05/11/2016
  */
 public class Logger {
-	private static int numInstructions = 0;
-	private static int numExecMove = 0;
-	private static int numMemoryWrite = 0;
-	private static int numMemoryRead = 0;
-	private static int numMemoryMove = 0;
-	private static long start = 0;
 
-	private static BufferedWriter writer = null;
-	private static int step = 0;
+	private static Logger instance;
+
+	private int numInstructions = 0;
+	private int numExecMove = 0;
+	private int numMemoryWrite = 0;
+	private int numMemoryRead = 0;
+	private int numMemoryMove = 0;
+	private long start = 0;
+
+	private BufferedWriter writer = null;
+	private int step = 0;
+
+	private Logger() {
+		if (instance != null)
+			throw new IllegalStateException("Already instantiated");
+		startExecTime();
+	}
 
 	/**
-	 * Create a string with all informations collected.
-	 * Start with '\n' to stop
+	 * Gets the single instance of World.
 	 *
-	 * @param m
-	 * @return informations
+	 * @return the instance
 	 */
-	public static String showResume(Memory m) {
-		String retour =m+"PROG_SIZE : "+numInstructions+"\n";
-		retour+= "EXEC_TIME : "+(System.currentTimeMillis()-start)+" ms\n";
-		retour+= "EXEC_MOVE : "+numExecMove+"\n";
-		retour+= "DATA_MOVE : "+numMemoryMove+"\n";
-		retour+= "DATA_WRITE : "+numMemoryWrite+"\n";
-		retour+= "DATA_READ : "+numMemoryRead+"\n";
-		return retour;
+	public static Logger getInstance() {
+		if (instance == null) {
+			instance = new Logger();
+		}
+		return instance;
 	}
 
-	/**
-	 * Count the number of instruction read.
-	 */
-	public static void countInstruction(int instr) {
-		numInstructions = instr;
+	public int getNumInstructions() {
+		return numInstructions;
 	}
 
-	/**
-	 * Save the current timestamp of the start of the program
-	 * Useful to calculate the exec time with a subtraction.
-	 */
-	public static void startExecTime() {
-		start = System.currentTimeMillis();
+	public int getNumExecMove() {
+		return numExecMove;
 	}
 
-	/**
-	 * Count the number of times that data is stored in memory.
-	 */
-	public static void countMemoryWrite() {
-		numMemoryWrite++;
+	public int getNumMemoryWrite() {
+		return numMemoryWrite;
 	}
 
-	/**
-	 * Count the number of times that data is read in memory.
-	 */
-	public static void countMemoryRead() {
-		numMemoryRead++;
+	public int getNumMemoryRead() {
+		return numMemoryRead;
 	}
 
-	/**
-	 * Count the number of times that the pointer move in memory.
-	 */
-	public static void countMemoryMove() {
-		numMemoryMove++;
+	public int getNumMemoryMove() {
+		return numMemoryMove;
 	}
 
-
-	/**
-	 * Count the char read in the input file
-	 */
-	public static void countMove() {
-		numExecMove++;
+	public long getStart() {
+		return start;
 	}
 
-	/**
-	 * Increment by one the number of execution step.
-	 */
-	public static void incrStep() {
-		Logger.step++;
+	public int getStep() {
+		return step;
 	}
 
+	public BufferedWriter getWriter() {
+		return writer;
+	}
 
 	/**
 	 * Set the writer to write in the log file.
@@ -103,34 +87,12 @@ public class Logger {
 	 * @param fileName the programme path and name.
 	 * @throws IOException {@link IOException} if the file cannot be access.
 	 */
-	public static void setWriter(String fileName) throws IOException {
+	public void setWriter(String fileName) throws IOException {
+		String logFileName = fileName.subSequence(0, fileName.lastIndexOf('.')) + ".log";
 		try {
-			fileName = fileName.subSequence(0, fileName.lastIndexOf('.')) + ".log";
-			Logger.writer = new BufferedWriter(new FileWriter(fileName));
+			writer = new BufferedWriter(new FileWriter(logFileName));
 		} catch (java.io.IOException e) {
-			throw new IOException("Impossible to access : " + fileName + ".log");
-		}
-	}
-
-	/**
-	 * Write an instruction execution log into the log file.
-	 *
-	 * @param executionPointer the index of the execution pointer.
-	 * @param memory the memory.
-	 * @throws IOException {@link IOException} if the file cannot be access.
-	 */
-	public static void write(long executionPointer, Memory memory) throws IOException {
-		try {
-			step += 1;
-			writer.write(
-					"============\n" +
-							"Execution Step " + step +
-							" : \nExecution pointer : " + executionPointer +
-							". Data pointer  : C" + memory.getIndex() +
-							".\nMemory : \n" + memory.toString() + "\n");
-			writer.flush();
-		} catch (java.io.IOException e) {
-			throw new IOException("Impossible to write in the file.");
+			throw new IOException("Impossible to access : " + logFileName);
 		}
 	}
 
@@ -139,8 +101,116 @@ public class Logger {
 	 *
 	 * @return true if the writer is set, false otherwise.
 	 */
-	public static boolean isWriterOpen() {
+	public boolean isWriterOpen() {
 		return writer != null;
+	}
+
+	/**
+	 * Create a string with all informations collected.
+	 * Start with '\n' to stop
+	 *
+	 * @param m
+	 * @return informations
+	 */
+	public String showResume(Memory m) {
+		String retour = m + "PROG_SIZE : " + numInstructions + "\n";
+		retour += "EXEC_TIME : " + (System.currentTimeMillis() - start) + " ms\n";
+		retour += "EXEC_MOVE : " + numExecMove + "\n";
+		retour += "DATA_MOVE : " + numMemoryMove + "\n";
+		retour += "DATA_WRITE : " + numMemoryWrite + "\n";
+		retour += "DATA_READ : " + numMemoryRead + "\n";
+		return retour;
+	}
+
+	/**
+	 * Count the number of instruction read.
+	 */
+	public void incrInstruction() {
+		numInstructions++;
+	}
+
+
+	/**
+	 * Save the current timestamp of the start of the program
+	 * Useful to calculate the exec time with a subtraction.
+	 */
+	public void startExecTime() {
+		start = System.currentTimeMillis();
+	}
+
+	/**
+	 * Count the number of times that data is stored in memory.
+	 */
+	public void countMemoryWrite() {
+		numMemoryWrite++;
+	}
+
+	/**
+	 * Count the number of times that data is read in memory.
+	 */
+	public void countMemoryRead() {
+		numMemoryRead++;
+	}
+
+	/**
+	 * Count the number of times that the pointer move in memory.
+	 */
+	public void countMemoryMove() {
+		numMemoryMove++;
+	}
+
+
+	/**
+	 * Count the char read in the input file
+	 */
+	public void countMove() {
+		numExecMove++;
+	}
+
+	/**
+	 * Increment by one the number of execution step.
+	 */
+	public void incrStep() {
+		step++;
+	}
+
+
+	/**
+	 * Write an instruction execution log into the log file.
+	 *
+	 * @param executionPointer the index of the execution pointer.
+	 * @param memory           the memory.
+	 * @throws IOException {@link IOException} if the file cannot be access.
+	 */
+	public void write(long executionPointer, Memory memory) throws IOException {
+		try {
+			step += 1;
+			writer.write(
+					"============\n" +
+							"Execution Step " + step +
+							" : \nExecution pointer : " + executionPointer +
+							".\nData pointer  : C" + memory.getIndex() +
+							".\nMemory : \n" + memory.toString() + "\n");
+			writer.flush();
+		} catch (java.io.IOException e) {
+			throw new IOException("Impossible to write in the file.");
+		}
+	}
+
+	/**
+	 * @param message
+	 * @throws IOException
+	 */
+	public void write(String message) {
+		try {
+			writer.write(
+					"============\n" +
+							"Error: \n" + message);
+			writer.flush();
+		} catch (java.io.IOException e) {
+			e.printStackTrace();
+			System.exit(5);
+		}
 	}
 
 	/**
@@ -148,11 +218,23 @@ public class Logger {
 	 *
 	 * @throws IOException {@link IOException} if the file cannot be access.
 	 */
-	public static void closeWriter() throws IOException {
+	public void closeWriter() throws IOException {
 		try {
 			writer.close();
+			writer = null;
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
+	}
+
+	/**
+	 * Override of the clone method because of the singleton.
+	 *
+	 * @return the object
+	 * @throws CloneNotSupportedException because this instance is a singleton
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException("Cannot clone instance of this class");
 	}
 }

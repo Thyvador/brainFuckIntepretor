@@ -9,9 +9,9 @@ import net.brainfuck.exception.MemoryOverFlowException;
 /**
  * @author davidLANG
  */
-class IncremanteInstruction extends AbstractExecute {
+public class IncremanteInstruction extends AbstractExecute {
 
-    IncremanteInstruction() {
+    public IncremanteInstruction() {
 		super(Language.INCR);
 	}
 

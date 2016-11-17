@@ -58,7 +58,7 @@ public class Interpreter {
                 throw new SyntaxErrorException(instruction);
             }
             executer.execute(currentInstruction.getInterpreter());
-            Logger.countMove();
+            Logger.getInstance().countMove();
         }
         executer.end();
     }

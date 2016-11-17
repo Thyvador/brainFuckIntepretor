@@ -10,7 +10,7 @@ import net.brainfuck.exception.SyntaxErrorException;
 
 public class JumpInstruction extends AbstractExecute {
 
-	JumpInstruction() {
+	public JumpInstruction() {
 		super(Language.JUMP);
 	}
 

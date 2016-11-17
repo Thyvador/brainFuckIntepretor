@@ -44,7 +44,7 @@ public class Main {
 
     private void initLoggerFromContext(ArgumentAnalyzer argAnalizer) throws IOException {
         if (argAnalizer.getFlags().contains(Context.TRACE.getSyntax())){
-            Logger.setWriter(argAnalizer.getArgument(PATH));
+            Logger.getInstance().setWriter(argAnalizer.getArgument(PATH));
         }
     }
 
@@ -136,9 +136,9 @@ public class Main {
             Executer e = new Executer(a.getFlags(), argumentExecuter);
             Interpreter i = new Interpreter(e, argumentExecuter);
 
-            Logger.startExecTime();
+            Logger.getInstance().startExecTime();
             i.interprate();
-            System.out.println(Logger.showResume(argumentExecuter.getMemory()));
+            System.out.println(Logger.getInstance().showResume(argumentExecuter.getMemory()));
         } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
             // Exit code not set
             System.exit(5);

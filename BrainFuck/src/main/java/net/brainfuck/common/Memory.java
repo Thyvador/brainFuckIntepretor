@@ -74,7 +74,7 @@ public class Memory {
 	 */
 	private short get(int index) throws MemoryOutOfBoundsException {
 		checkIndex(index);
-		Logger.countMemoryRead();
+		Logger.getInstance().countMemoryRead();
 		return memory[index];
 	}
 
@@ -90,7 +90,7 @@ public class Memory {
 		if (memory[index] > (MAX_VALUE - changeValue) || memory[index] < (MIN_VALUE - changeValue))
 			throw new MemoryOverFlowException("Invalid value " + (memory[index] + changeValue) + " at index " + index);
 		memory[index] += changeValue;
-		Logger.countMemoryWrite();
+		Logger.getInstance().countMemoryWrite();
 		return this;
 	}
 
@@ -137,7 +137,7 @@ public class Memory {
 	 */
 	public Memory left() throws MemoryOutOfBoundsException {
 		index--;
-		Logger.countMemoryMove();
+		Logger.getInstance().countMemoryMove();
 		checkIndex(index);
 		return this;
 	}
