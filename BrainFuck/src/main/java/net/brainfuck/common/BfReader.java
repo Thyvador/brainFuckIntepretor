@@ -14,6 +14,9 @@ import net.brainfuck.exception.IOException;
  * @author : Francois Melkonian
  */
 public class BfReader implements Reader {
+	
+	public static final int PREPROCESSING = '!';
+	
 	private String next = null;
 	private RandomAccessFile reader;
 	private Stack<Long> marks;
@@ -25,6 +28,7 @@ public class BfReader implements Reader {
 	private static final int SPACE = ' ';
 	private static final int EOF = -1;
 	private int oldvar;
+	private boolean checkPreprocessing = true;
 
 	/**
 	 * Constructs a BfReader from file name.
@@ -147,10 +151,15 @@ public class BfReader implements Reader {
 			// Ignore space, tab, newLine, commentary
 			nextVal = this.ignore(nextVal);
 
-
 			if (nextVal == EOF) {
 				return null;
 			}
+			
+			if(checkPreprocessing && isPreprocessing(nextVal)) {
+				readUntilEndOfLine(nextVal);
+				return next;
+			}
+			checkPreprocessing = false;
 			if (isLong(nextVal)) {
 				if (firstLine) {
 					firstLine = false;
@@ -183,6 +192,11 @@ public class BfReader implements Reader {
 		}
 	}
 
+	private boolean isPreprocessing(int nextVal) {
+		return nextVal == PREPROCESSING;
+	}
+
+
 	/**
 	 * Check if a character is a '\n' or '\r'.
 	 *
@@ -208,7 +222,7 @@ public class BfReader implements Reader {
 	 * @return true if the line may contain a "long" syntax.
 	 */
 	private boolean isLong(int nextVal) {
-		return nextVal >= 'B' && nextVal <= 'R';
+		return (nextVal >= 'A' && nextVal <= 'Z') ||(nextVal >= 'a' && nextVal <= 'z');
 	}
 
 
