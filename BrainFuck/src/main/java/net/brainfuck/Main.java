@@ -1,15 +1,17 @@
 package net.brainfuck;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 
-import java.io.FileInputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 import static net.brainfuck.common.ArgumentConstante.IN_PATH;
 import static net.brainfuck.common.ArgumentConstante.OUT_PATH;
@@ -106,7 +108,7 @@ public class Main {
         this.setOut(a);
     }
 
-    private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException {
+    private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
         checkPath(argAnalizer);
         setIO(argAnalizer);
         initLoggerFromContext(argAnalizer);
@@ -150,6 +152,8 @@ public class Main {
             System.exit(3);
         } catch (BracketsParseException e) {
             System.exit(4);
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
         }
         System.exit(0);
     }
