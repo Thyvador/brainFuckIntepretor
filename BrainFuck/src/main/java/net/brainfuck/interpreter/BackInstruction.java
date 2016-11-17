@@ -9,7 +9,7 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 
 public class BackInstruction extends AbstractExecute {
 
-	BackInstruction() {
+	public BackInstruction() {
 		super(Language.BACK);
 	}
 

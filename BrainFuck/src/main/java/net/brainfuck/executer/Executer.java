@@ -75,8 +75,8 @@ public class Executer {
         if (this.contextExecuters.indexOf(Context.contextMap.get(Context.TRANSLATE.getSyntax())) >= 0) {
             argumentExecuter.getImageWriter().close();
         }
-        if(Logger.isWriterOpen()){
-            Logger.closeWriter();
+        if(Logger.getInstance().isWriterOpen()){
+            Logger.getInstance().closeWriter();
         }
     }
 

@@ -41,7 +41,7 @@ public class BfReader implements Reader {
 	public BfReader(String filename) throws FileNotFoundException {
 		try {
 			reader = new RandomAccessFile(filename, "r");
-			Logger.countInstruction((int)reader.length());
+//			Logger.countInstruction((int)reader.length());
 			marks = new Stack<>();
 		} catch (java.io.IOException e) {
 			throw new FileNotFoundException(filename);
@@ -272,6 +272,10 @@ public class BfReader implements Reader {
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
+	}
+
+	public Stack<Long> getMarks() {
+		return marks;
 	}
 }
 

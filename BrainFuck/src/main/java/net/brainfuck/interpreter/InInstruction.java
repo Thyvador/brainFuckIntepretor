@@ -13,9 +13,9 @@ import net.brainfuck.exception.IOException;
  * @author François Melkonian
  *         IN_PATH
  */
-class InInstruction extends AbstractExecute {
+public class InInstruction extends AbstractExecute {
 
-	InInstruction() {
+	public InInstruction() {
 		super(Language.IN);
 	}
 
