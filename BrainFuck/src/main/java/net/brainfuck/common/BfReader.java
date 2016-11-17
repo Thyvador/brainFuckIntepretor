@@ -233,7 +233,6 @@ public class BfReader implements Reader {
 	public void mark() throws IOException {
 		try {
 			marks.push(reader.getFilePointer());
-			System.out.println(reader.getFilePointer());
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}

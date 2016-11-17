@@ -23,7 +23,7 @@ public class ArgumentInstruction {
     public Reader getReader() {
         return reader;
     }
-
+    
 	/**
 	 * @return the jumpTable
 	 */

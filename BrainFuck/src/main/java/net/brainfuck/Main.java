@@ -4,6 +4,7 @@ import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
+import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 
@@ -111,9 +112,10 @@ public class Main {
         initLoggerFromContext(argAnalizer);
 
         Memory m = new Memory();
-        Reader r = this.initReader(argAnalizer);
-        JumpTable jumpTable = initJumpTable(argAnalizer);
-        return initArgumentExecuter(argAnalizer, m, r, jumpTable);
+        /*Reader r = this.initReader(argAnalizer);
+        JumpTable jumpTable = initJumpTable(argAnalizer);*/
+        Pair <Reader, JumpTable> readerAndJump = new BfCompiler(initReader(argAnalizer)).compile();
+        return initArgumentExecuter(argAnalizer, m, readerAndJump.getFirst(), readerAndJump.getSecond());
     }
 
 
