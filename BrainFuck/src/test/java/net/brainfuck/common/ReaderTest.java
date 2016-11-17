@@ -16,7 +16,6 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 /**
- *
  * @author Francois Melkonian
  * @date 16/11/2016
  */
@@ -27,6 +26,7 @@ public class ReaderTest {
 
 	/**
 	 * Initialise a bf file
+	 *
 	 * @throws Exception
 	 */
 	@Before
@@ -43,6 +43,7 @@ public class ReaderTest {
 
 	/**
 	 * Each instructions wrote in file is read in order.
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -55,6 +56,7 @@ public class ReaderTest {
 
 	/**
 	 * The executer pointer is correct when the file is read
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -67,6 +69,9 @@ public class ReaderTest {
 	}
 
 	/**
+	 * }
+	 * <p>
+	 * <p>
 	 * Test if we can write on file after we closed it.
 	 */
 	@Test(expected = net.brainfuck.exception.IOException.class)
@@ -74,6 +79,39 @@ public class ReaderTest {
 		BfReader bfReader = new BfReader(filename);
 		bfReader.closeReader();
 		bfReader.getNext();
+	}
+
+	/**
+	 * Test if commentary is omitted.
+	 */
+	@Test
+	public void testS() throws Exception {
+		String file = "filename2.bf";
+		data = "+#test\nINCR";
+		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(file), Charset.forName("UTF-8"))) {
+			writer.write(data, 0, data.length());
+		} catch (IOException x) {
+			System.err.format("IOException: %s%n", x);
+		}
+		BfReader bfReader = new BfReader(file);
+		assertEquals("+", bfReader.getNext());
+		assertEquals("INCR", bfReader.getNext());
+	}
+	/**
+	 * Test if we can write on file after we closed it.
+	 */
+	@Test
+	public void testSpace() throws Exception {
+		String file = "filename.bf";
+		data = "+#test\n  \t   INCR     ";
+		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(file), Charset.forName("UTF-8"))) {
+			writer.write(data, 0, data.length());
+		} catch (IOException x) {
+			System.err.format("IOException: %s%n", x);
+		}
+		BfReader bfReader = new BfReader(file);
+		assertEquals("+", bfReader.getNext());
+		assertEquals("INCR", bfReader.getNext());
 	}
 
 	/**
@@ -85,7 +123,7 @@ public class ReaderTest {
 		reader.mark();
 		String instruction = reader.getNext();
 		reader.seek(1);
-		assertEquals(instruction,reader.getNext());
+		assertEquals(instruction, reader.getNext());
 	}
 
 	/**
@@ -100,8 +138,9 @@ public class ReaderTest {
 			reader.getNext();
 		}
 		reader.seek(1);
-		assertEquals(instruction,reader.getNext());
+		assertEquals(instruction, reader.getNext());
 	}
+
 	/**
 	 * Test if mark can be preserved during the read of a file
 	 */
@@ -152,6 +191,7 @@ public class ReaderTest {
 
 	/**
 	 * Check if reset go on last marks, even if the reader pointer has move before reset
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -163,11 +203,11 @@ public class ReaderTest {
 			reader.getNext();
 		}
 		reader.reset();
-		assertEquals(instruction,reader.getNext());
+		assertEquals(instruction, reader.getNext());
 	}
 
 	/**
-	 *  Check if unmark delete marks
+	 * Check if unmark delete marks
 	 */
 	@Test
 	public void unmark() throws Exception {
@@ -179,21 +219,22 @@ public class ReaderTest {
 
 		}
 	}
+
 	/**
-	 *  Check if the unmark delete the last mark
+	 * Check if the unmark delete the last mark
 	 */
 	@Test
 	public void unmark2() throws Exception {
 		BfReader reader = new BfReader(filename);
-		for (int i = 0; i < data.length()/2; i++) {
+		for (int i = 0; i < data.length() / 2; i++) {
 			reader.mark();
 			reader.getNext();
 		}
 		int size = reader.getMarks().size();
-		Long last = reader.getMarks().get(size-1);
+		Long last = reader.getMarks().get(size - 1);
 		reader.unmark();
 		assertTrue(!reader.getMarks().contains(last));
-		assertEquals(size - 1,reader.getMarks().size());
+		assertEquals(size - 1, reader.getMarks().size());
 	}
 
 	/**
@@ -216,8 +257,8 @@ public class ReaderTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		File file = new File(filename);
-		file.delete();
+		new File(filename).delete();
+		new File("filename2.bf").delete();
 
 	}
 }

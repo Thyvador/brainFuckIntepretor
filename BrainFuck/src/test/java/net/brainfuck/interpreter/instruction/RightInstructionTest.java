@@ -52,7 +52,7 @@ public class RightInstructionTest {
 
 	@Test(expected = MemoryOutOfBoundsException.class)
 	public void OutOfBoundRight() throws MemoryOutOfBoundsException {
-		for (int i = 0; i < 30000; i++) {
+		for (int i = 0; i < 30001; i++) {
 			instruction.execute(argumentInstruction);
 		}
 	}
