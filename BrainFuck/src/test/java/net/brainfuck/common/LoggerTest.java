@@ -78,6 +78,7 @@ public class LoggerTest {
 		int randomTimeExec = new Random().nextInt(500);
 		while (System.currentTimeMillis() - temps<randomTimeExec){
 		}
+
 		String str = logger.showResume(new Memory());
 		assertTrue(str.contains("EXEC_TIME : "+(System.currentTimeMillis()-temps)+" ms"));
 	}
