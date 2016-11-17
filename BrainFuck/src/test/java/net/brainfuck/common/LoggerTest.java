@@ -47,9 +47,10 @@ public class LoggerTest {
 	 * Another test check the EXEC_TIME, a test on it here will depend of the context.
 	 * @throws Exception
 	 */
-	@Ignore ("Probleme")
+	//@Ignore ("Probleme")
 	@Test
 	public void showResume() throws Exception {
+		logger.reset();
 		String resLogger = logger.showResume(new Memory());
 		assertTrue(resLogger.contains("PROG_SIZE : 0\n") );
 		assertTrue(resLogger.contains("EXEC_TIME : ") );
@@ -89,27 +90,31 @@ public class LoggerTest {
 
 	@Test
 	public void countMemoryRead() throws Exception {
+		logger.reset();
 		logger.countMemoryRead();
 		assertEquals(1, logger.getNumMemoryRead());
 	}
 
 	@Test
 	public void countMemoryMove() throws Exception {
+		logger.reset();
 		logger.countMemoryMove();
 		assertEquals(1, logger.getNumMemoryMove());
 	}
 
-	@Ignore ("Probleme")
 	@Test
 	public void countMove() throws Exception {
+		logger.reset();
 		logger.countMove();
 		assertEquals(1, logger.getNumExecMove());
 	}
 
 	@Test
 	public void incrStep() throws Exception {
+		int i = logger.getStep();
+		logger.reset();
 		logger.incrStep();
-		assertEquals(2, logger.getStep());
+		assertEquals(i + 1, logger.getStep());
 	}
 
 

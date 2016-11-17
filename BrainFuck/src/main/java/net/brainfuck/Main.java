@@ -68,7 +68,7 @@ public class Main {
      *
      * @throws FileNotFoundException throw by System.setIn()
      */
-    private void setIn(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
+    private void setIn(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IncorrectArgumentException {
         String inPath = argAnalizer.getArgument(IN_PATH);
         if(inPath != null){
             try {
@@ -76,6 +76,8 @@ public class Main {
             } catch (java.io.FileNotFoundException e) {
                 throw new FileNotFoundException(inPath);
             }
+        }else if(inPath.charAt(0)=='-'){
+            throw new IncorrectArgumentException();
         }
     }
 
@@ -101,12 +103,12 @@ public class Main {
      *
      * @throws FileNotFoundException if the path entered isn't valide, the file is missing and can't be open
      */
-    private void setIO(ArgumentAnalyzer a) throws FileNotFoundException{
+    private void setIO(ArgumentAnalyzer a) throws FileNotFoundException, IncorrectArgumentException {
         this.setIn(a);
         this.setOut(a);
     }
 
-    private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException {
+    private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, IncorrectArgumentException {
         checkPath(argAnalizer);
         setIO(argAnalizer);
         initLoggerFromContext(argAnalizer);

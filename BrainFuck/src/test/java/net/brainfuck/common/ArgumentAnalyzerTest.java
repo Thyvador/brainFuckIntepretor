@@ -1,5 +1,6 @@
 package net.brainfuck.common;
 
+import net.brainfuck.Main;
 import net.brainfuck.executer.Context;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,22 +32,19 @@ public class ArgumentAnalyzerTest {
 		assertFalse(argumentAnalyzer.getFlags().contains(Context.TRACE.getSyntax()));
 	}
 
-	@Ignore
-	@Test (expected = net.brainfuck.exception.IncorrectArgumentException.class)
+	@Test
 	public void testArgument2() throws Exception {
 		String[] args = {"-p","filename","-i","-o"};
 		ArgumentAnalyzer argumentAnalyzer = new ArgumentAnalyzer(args);
 	}
 
-	@Ignore
-	@Test (expected = net.brainfuck.exception.IncorrectArgumentException.class)
+	@Test
 	public void testArgument() throws Exception {
 		String[] args = {"-p", "filename", "-i", "--translate"};
 		ArgumentAnalyzer argumentAnalyzer = new ArgumentAnalyzer(args);
 		argumentAnalyzer.getArgument(ArgumentConstante.IN_PATH);
 	}
 
-	@Ignore
 	@Test(expected = net.brainfuck.exception.IncorrectArgumentException.class)
 	public void badArguments() throws Exception {
 		String[] args = {"-pio","filename","pasca","--rewrite","--check"};

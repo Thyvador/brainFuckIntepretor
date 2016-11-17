@@ -237,4 +237,13 @@ public class Logger {
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException("Cannot clone instance of this class");
 	}
+
+	public void reset() {
+		numExecMove = 0;
+		numMemoryMove = 0;
+		numInstructions = 0;
+		numMemoryRead = 0;
+		numMemoryWrite = 0;
+		startExecTime();
+	}
 }

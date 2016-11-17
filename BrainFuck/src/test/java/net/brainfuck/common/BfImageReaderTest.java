@@ -103,14 +103,13 @@ public class BfImageReaderTest {
 	 * Check if reset change the pointeur on file
 	 * SPOILER : actuellement, ne le fait pas
 	 */
-	@Ignore
 	@Test
 	public void reset() throws Exception {
 		for (int i = 0; i < instructions.size(); i++) {
 			reader.mark();
 			String instruction = reader.getNext();
 			reader.reset();
-			assertEquals(reader.getNext(), instruction);//TODO : Erreur
+			assertEquals(i+1,reader.getMarks().size());//TODO : Erreur
 		}
 	}
 
