@@ -13,6 +13,7 @@ import java.util.Map;
 
 
 import net.brainfuck.common.BfReader;
+import net.brainfuck.common.Logger;
 import net.brainfuck.common.Pair;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
@@ -143,6 +144,7 @@ public class BfCompiler {
 
 		while ((instruction = reader.getNext()) != null) {
 			writeInstructionAndMacro(instruction);
+			Logger.getInstance().incrInstruction();
 		}
 	}
 
@@ -158,6 +160,7 @@ public class BfCompiler {
 				endofCompile = true;
 				writeInstructionAndMacro(instruction);
 			}
+			Logger.getInstance().incrInstruction();
 		}
 	}
 
