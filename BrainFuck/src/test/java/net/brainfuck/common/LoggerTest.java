@@ -36,7 +36,6 @@ public class LoggerTest {
 		data = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++.>+.+++++++..+++.<<++.>+++++++++++++++.>.+++.------.--------.<<+.<.";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
-			writer.close();
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
