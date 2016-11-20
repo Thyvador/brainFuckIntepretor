@@ -16,7 +16,7 @@ enum Language {
 	RIGHT(null, ">", "RIGHT", "0000ff"),
 	LEFT(null, "<", "LEFT", "9400d3"),
 	IN(null, ",", "IN", "ffff00"),
-	OUT(null, ".", "OUT", "ffff00"),
+	OUT(null, ".", "OUT", "00ff00"),
 	JUMP(null, "[", "JUMP", "ff7f00"),
 	BACK(null, "]", "BACK", "ff0000");
 
@@ -27,7 +27,7 @@ enum Language {
 		INCR.setInterpreter(new IncremanteInstruction());
 		DECR.setInterpreter(new DecrementInstruction());
 		RIGHT.setInterpreter(new RightInstruction());
-		LEFT.setInterpreter(new LeftExecute());
+		LEFT.setInterpreter(new LeftInstruction());
 		IN.setInterpreter(new InInstruction());
 		OUT.setInterpreter(new OutInstruction());
 		JUMP.setInterpreter(new JumpInstruction());

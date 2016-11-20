@@ -4,13 +4,10 @@ import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.interpreter.BackInstruction;
-import net.brainfuck.interpreter.DecrementInstruction;
+import net.brainfuck.interpreter.InInstruction;
 import net.brainfuck.interpreter.JumpTable;
-import org.junit.AfterClass;
+import net.brainfuck.interpreter.LeftInstruction;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
@@ -23,12 +20,12 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Alexandre on 16/11/2016.
  */
-public class DecrementInstructionTest {
+public class LeftInstructionTest {
 	ArgumentInstruction argumentInstruction;
 	Memory memory;
 	Reader reader;
-	DecrementInstruction instruction;
-	private static String filename;
+	LeftInstruction instruction;
+	private String filename;
 
 	@Before
 	public void setUp() throws Exception {
@@ -42,26 +39,29 @@ public class DecrementInstructionTest {
 		BfReader reader = new BfReader(filename);
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new DecrementInstruction();
+		instruction = new LeftInstruction();
 	}
 
 	@Test
-	public void decr() throws Exception {
-		memory.set(50);
+	public void left() throws Exception {
+		memory.right();
+		memory.right();
 		instruction.execute(argumentInstruction);
-		assertEquals(49, memory.get());
+		assertEquals(1, memory.getIndex());
 	}
 
-	@Test(expected = MemoryOverFlowException.class)
-	public void OverFlow() throws MemoryOverFlowException, MemoryOutOfBoundsException {
+	@Test(expected = MemoryOutOfBoundsException.class)
+	public void OutOfBoundLeft() throws MemoryOutOfBoundsException {
 		instruction.execute(argumentInstruction);
+
 	}
+
 
 	@Test
 	public void rewriteLong() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
-		String data = "DECR";
+		String data = "LEFT";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 		} catch (IOException x) {
@@ -70,36 +70,36 @@ public class DecrementInstructionTest {
 		reader = new BfReader(filename);
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new DecrementInstruction();
+		instruction = new LeftInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
 		instruction.rewrite();
-		assertEquals("-", outputStream.toString());
+		assertEquals("<", outputStream.toString());
 	}
 
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bmp";
-		String data = "4b0082";
+		String data = "9400d3";
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
 		writer.write(data);
 		writer.close();
 		reader = new BfImageReader(filename);
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new DecrementInstruction();
+		instruction = new LeftInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
 		instruction.rewrite();
-		assertEquals("-", outputStream.toString());
+		assertEquals("<", outputStream.toString());
 	}
 
 	@Test
 	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
-		String data = "DECR";
+		String data = "LEFT";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 		} catch (IOException x) {
@@ -108,16 +108,7 @@ public class DecrementInstructionTest {
 		reader = new BfReader(filename);
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new DecrementInstruction();
-		assertEquals("4b0082",instruction.translate() );
-	}
-
-
-
-	@AfterClass
-	public static void cleanUp() throws IOException {
-		new File("filename.bf").delete();
-		new File("filename.log").delete();
-		new File("test.bmp").delete();
+		instruction = new LeftInstruction();
+		assertEquals("9400d3",instruction.translate() );
 	}
 }

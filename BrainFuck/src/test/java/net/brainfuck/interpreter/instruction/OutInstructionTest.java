@@ -1,17 +1,15 @@
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.ArgumentInstruction;
-import net.brainfuck.common.BfReader;
-import net.brainfuck.common.Memory;
+import net.brainfuck.common.*;
+import net.brainfuck.common.Reader;
+import net.brainfuck.exception.Exception;
+import net.brainfuck.interpreter.InInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.OutInstruction;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,6 +25,7 @@ public class OutInstructionTest {
 	private Memory memory;
 	private OutInstruction instruction;
 	private String filename;
+	private Reader reader;
 
 	@Before
 	public void setUp() throws Exception {
@@ -49,6 +48,62 @@ public class OutInstructionTest {
 		memory.set('a');
 		instruction.execute(argumentInstruction);
 		assertEquals("a", outputStream.toString());
+	}
+
+
+	@Test
+	public void rewriteLong() throws Exception {
+		Charset charset = Charset.forName("UTF-8");
+		filename = "filename.bf";
+		String data = "OUT";
+		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
+			writer.write(data, 0, data.length());
+		} catch (IOException x) {
+			System.err.format("IOException: %s%n", x);
+		}
+		reader = new BfReader(filename);
+		memory = new Memory();
+		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		instruction = new OutInstruction();
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outputStream));
+		instruction.rewrite();
+		assertEquals(".", outputStream.toString());
+	}
+
+	@Test
+	public void rewriteCol() throws Exception, FileNotFoundException {
+		Charset charset = Charset.forName("UTF-8");
+		filename = "filename.bmp";
+		String data = "00ff00";
+		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
+		writer.write(data);
+		writer.close();
+		reader = new BfImageReader(filename);
+		memory = new Memory();
+		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		instruction = new OutInstruction();
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outputStream));
+		instruction.rewrite();
+		assertEquals(".", outputStream.toString());
+	}
+
+	@Test
+	public void translate() throws Exception {
+		Charset charset = Charset.forName("UTF-8");
+		filename = "filename.bf";
+		String data = "OUT";
+		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
+			writer.write(data, 0, data.length());
+		} catch (IOException x) {
+			System.err.format("IOException: %s%n", x);
+		}
+		reader = new BfReader(filename);
+		memory = new Memory();
+		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		instruction = new OutInstruction();
+		assertEquals("00ff00",instruction.translate() );
 	}
 
 }
