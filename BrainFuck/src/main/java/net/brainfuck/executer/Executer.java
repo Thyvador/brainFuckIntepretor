@@ -1,11 +1,19 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.AbstractExecute;
+import net.brainfuck.interpreter.BfCompiler;
+import net.brainfuck.interpreter.JumpTable;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.brainfuck.common.ArgumentConstante.PATH;
 
 /**
  * @author davidLANG
@@ -21,18 +29,18 @@ public class Executer {
      * @param arguments The long arguments
      * @param r         Reader
      */
-    public Executer(List<String> arguments, ArgumentExecuter argumentExecuter) throws IOException {
-        this.argumentExecuter = argumentExecuter;
+    public Executer(ArgumentAnalyzer argumentAnalyzer) throws IOException, FileNotFoundException, BracketsParseException, java.io.IOException, SyntaxErrorException {
 
-        // Initialize context executer
-        this.contextExecuters.add(Context.contextMap.get(Context.UNCHECK.getSyntax()));
-        if (arguments.size() > 0) {
-            this.contextExecuters.remove(Context.contextMap.get(Context.UNCHECK.getSyntax()));
-        }
-        for (String argument : arguments) {
-            this.contextExecuters.add(Context.contextMap.get(argument));
-        }
-    }
+		// Initialize context executer
+		this.contextExecuters.add(Context.contextMap.get(Context.UNCHECK.getSyntax()));
+		if (argumentAnalyzer.getFlags().size() > 0) {
+			this.contextExecuters.remove(Context.contextMap.get(Context.UNCHECK.getSyntax()));
+		}
+		for (String argument : argumentAnalyzer.getFlags()) {
+			this.contextExecuters.add(Context.contextMap.get(argument));
+		}
+		this.argumentExecuter = init(argumentAnalyzer);
+	}
 
     /**
      * Execute the AbstractExecute command according to the context.
@@ -80,4 +88,38 @@ public class Executer {
         }
     }
 
+
+    private ArgumentExecuter initArgumentExecuter(ArgumentAnalyzer a, Memory m, Reader r, JumpTable jumpTable) throws IOException, FileNotFoundException {
+        BfImageWriter bfImageWriter = null;
+
+        if(a.getFlags().contains(Context.TRANSLATE.getSyntax())) {
+            bfImageWriter = new BfImageWriter();
+        }
+
+        return new ArgumentExecuter(m, r, bfImageWriter, jumpTable);
+    }
+
+
+    private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
+        Reader r;
+        if (argAnalizer.getArgument(PATH).endsWith(".bmp")) {
+            r = new BfImageReader(argAnalizer.getArgument(PATH));
+        } else {
+            r = new BfReader(argAnalizer.getArgument(PATH));
+        }
+
+        Memory m = new Memory();
+        /*Reader r = this.initReader(argAnalizer);
+        JumpTable jumpTable = initJumpTable(argAnalizer);*/
+        Pair <Reader, JumpTable> readerAndJump = new BfCompiler(r).compile(contextExecuters);
+        return initArgumentExecuter(argAnalizer, m, readerAndJump.getFirst(), readerAndJump.getSecond());
+    }
+
+	public ArgumentExecuter getArgumentExecuter() {
+		return argumentExecuter;
+	}
+
+	public List<ContextExecuter> getContextExecuters() {
+		return contextExecuters;
+	}
 }

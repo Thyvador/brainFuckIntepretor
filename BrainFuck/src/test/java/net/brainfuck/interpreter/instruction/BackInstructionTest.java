@@ -5,9 +5,8 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.FileNotFoundException;
-import net.brainfuck.interpreter.BackInstruction;
-import net.brainfuck.interpreter.DecrementInstruction;
-import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.executer.Executer;
+import net.brainfuck.interpreter.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -88,12 +87,11 @@ public class BackInstructionTest {
 
 	}
 
-	@Ignore ("Probleme de check")
 	@Test
-	public void rewriteLong() throws Exception {
+	public void rewriteLong() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
-		String data = "BACK";
+		String data = "JUMP\nBACK";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 		} catch (IOException x) {
@@ -101,38 +99,43 @@ public class BackInstructionTest {
 		}
 		reader = new BfReader(filename);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
+		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
 		instruction = new BackInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
+		reader.getNext();
 		instruction.rewrite();
 		assertEquals("]", outputStream.toString());
 	}
 
 	@Test
-	public void rewriteCol() throws Exception, java.io.FileNotFoundException {
+	public void rewriteCol() throws Exception, IOException {
 		filename = "filename.bmp";
-		String data = "4b0082";
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
-		writer.write(data);
+		writer.write("ff7f00");
+		writer.write("4b0082");
 		writer.close();
 		reader = new BfImageReader(filename);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bmp"}));
+		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
 		instruction = new BackInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
+		reader.getNext();
 		instruction.rewrite();
-		assertEquals("-", outputStream.toString());
+		assertEquals("]", outputStream.toString());
 	}
 
 
-	@Ignore ("Probleme de check")
 	@Test
-	public void translate() throws Exception {
+	public void translate() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
-		String data = "BACK";
+		String data = "JUMP\nBACK";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 		} catch (IOException x) {
@@ -140,7 +143,10 @@ public class BackInstructionTest {
 		}
 		reader = new BfReader(filename);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
+		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
+		reader.getNext();
 		instruction = new BackInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		assertEquals("ff0000", instruction.translate());

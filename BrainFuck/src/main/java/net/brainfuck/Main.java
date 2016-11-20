@@ -108,16 +108,10 @@ public class Main {
         this.setOut(a);
     }
 
-    private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
+    private void init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
         checkPath(argAnalizer);
         setIO(argAnalizer);
         initLoggerFromContext(argAnalizer);
-
-        Memory m = new Memory();
-        /*Reader r = this.initReader(argAnalizer);
-        JumpTable jumpTable = initJumpTable(argAnalizer);*/
-        Pair <Reader, JumpTable> readerAndJump = new BfCompiler(initReader(argAnalizer)).compile();
-        return initArgumentExecuter(argAnalizer, m, readerAndJump.getFirst(), readerAndJump.getSecond());
     }
 
 
@@ -134,13 +128,13 @@ public class Main {
         try {
             ArgumentAnalyzer a = new ArgumentAnalyzer(args);
 
-            ArgumentExecuter argumentExecuter = this.init(a);
-            Executer e = new Executer(a.getFlags(), argumentExecuter);
-            Interpreter i = new Interpreter(e, argumentExecuter);
+            this.init(a);
+            Executer e = new Executer(a);
+            Interpreter i = new Interpreter(e);
 
             Logger.getInstance().startExecTime();
             i.interprate();
-            System.out.println(Logger.getInstance().showResume(argumentExecuter.getMemory()));
+            System.out.println(Logger.getInstance().showResume(e.getArgumentExecuter().getMemory()));
         } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
             // Exit code not set
             System.exit(5);

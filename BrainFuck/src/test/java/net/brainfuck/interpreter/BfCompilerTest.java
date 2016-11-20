@@ -8,6 +8,10 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import net.brainfuck.common.ArgumentAnalyzer;
+import net.brainfuck.common.ArgumentInstruction;
+import net.brainfuck.exception.IncorrectArgumentException;
+import net.brainfuck.executer.Executer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,8 +46,9 @@ public class BfCompilerTest {
 	}
 
 	@Test
-	public void testCompile() throws net.brainfuck.exception.IOException, FileNotFoundException, SyntaxErrorException, BracketsParseException, IOException {
-		Reader r = compiler.compile().getFirst();
+	public void testCompile() throws net.brainfuck.exception.IOException, FileNotFoundException, SyntaxErrorException, BracketsParseException, IOException, IncorrectArgumentException {
+		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p","filename.bf"}));
+		Reader r = new BfCompiler(new BfReader("filename.bf")).compile(executer.getContextExecuters()).getFirst();
 		StringBuilder res = new StringBuilder();
 		String instruction;
 		while((instruction = r.getNext()) != null)

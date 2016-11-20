@@ -20,6 +20,8 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
+import net.brainfuck.executer.Context;
+import net.brainfuck.executer.ContextExecuter;
 
 public class BfCompiler {
 
@@ -164,14 +166,17 @@ public class BfCompiler {
 		}
 	}
 
-	public Pair<Reader, JumpTable> compile() throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
+	public Pair<Reader, JumpTable> compile(List<ContextExecuter> contextExecuters) throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
 		analyzeMacro();
 		writeAll();
-		return endCompile();
+		return endCompile(contextExecuters);
 	}
 
-	private Pair<Reader, JumpTable> endCompile() throws BracketsParseException, IOException {
-		jumpTable.finish();
+	private Pair<Reader, JumpTable> endCompile(List<ContextExecuter> contextExecuters) throws BracketsParseException, IOException {
+		if (contextExecuters.contains(Context.CHECK.getContextExecuter())){
+			System.out.println(contextExecuters);
+			jumpTable.finish();
+		}
 		try {
 			writer.close();
 		} catch (java.io.IOException e1) {

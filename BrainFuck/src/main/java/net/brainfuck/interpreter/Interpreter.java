@@ -29,10 +29,10 @@ public class Interpreter {
 	 * @throws FileNotFoundException throw by setIo()
 	 * @throws IOException throw bt BfImageWriter
 	 */
-	public Interpreter(Executer executer, ArgumentExecuter argumentExecuter) throws FileNotFoundException, IOException {
-		this.reader = argumentExecuter.getReader();
+	public Interpreter(Executer executer) throws FileNotFoundException, IOException {
 		this.executer = executer;
-		this.argumentExecuter = argumentExecuter;
+		this.argumentExecuter = executer.getArgumentExecuter();
+		this.reader = argumentExecuter.getReader();
 	}
 
 

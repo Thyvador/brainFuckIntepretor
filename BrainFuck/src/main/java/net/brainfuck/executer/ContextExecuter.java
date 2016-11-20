@@ -10,7 +10,7 @@ import net.brainfuck.interpreter.InstructionInterface;
 /**
  * @author davidLANG
  */
-interface ContextExecuter {
+public interface ContextExecuter {
     /**
      * Execute the AbstractExecute command according to the context.
      *
