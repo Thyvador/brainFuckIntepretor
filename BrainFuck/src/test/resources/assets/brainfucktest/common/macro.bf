@@ -1,6 +1,6 @@
-!bite ---
-yolo 30
+!test ---
+!yolo +++  +++ test 2
+
 +++
 +++
-ceci est la fin du fichier,
-une instruction bien plus lointaine que celle ou il y a une erreur
+yolo
