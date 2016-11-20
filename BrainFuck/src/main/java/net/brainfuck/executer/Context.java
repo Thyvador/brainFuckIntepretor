@@ -3,7 +3,10 @@ package net.brainfuck.executer;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Enum Context.
+ *
  * @author davidLANG
  */
 public enum Context {
@@ -30,14 +33,36 @@ public enum Context {
     private String syntax;
     private ContextExecuter c;
 
+    /**
+	 * Instantiates a new context.
+	 *
+	 * @param syntax
+	 *            the syntax
+	 */
     Context(String syntax) {
         this.syntax = syntax;
     }
 
+    /**
+	 * Gets the syntax.
+	 *
+	 * @return the syntax
+	 */
     public String getSyntax() { return syntax; }
 
+    /**
+	 * Gets the context executer.
+	 *
+	 * @return the context executer
+	 */
     public ContextExecuter getContextExecuter() { return c; }
 
+    /**
+	 * Sets the context executer.
+	 *
+	 * @param c
+	 *            the new context executer
+	 */
     public void setContextExecuter(ContextExecuter c) { this.c = c; }
 
 }

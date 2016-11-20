@@ -11,15 +11,34 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JumpTable.
+ */
 public class JumpTable {
 
 	private Map<Long, Long> table = new HashMap<>();
 	private Stack<Long> jumpStack = new Stack<>();
 
+	/**
+	 * Instantiates a new jump table.
+	 */
 	public JumpTable() {
 		Stack<Long> jumpStack = new Stack<>();
 	}
 
+	/**
+	 * Instantiates a new jump table.
+	 *
+	 * @param reader
+	 *            the reader
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws SyntaxErrorException
+	 *             the syntax error exception
+	 * @throws BracketsParseException
+	 *             the brackets parse exception
+	 */
 	public JumpTable(Reader reader) throws IOException, SyntaxErrorException, BracketsParseException {
 		Stack<Long> jumpStack = new Stack<>();
 		String instruction;
@@ -44,6 +63,16 @@ public class JumpTable {
 		}
 	}
 
+	/**
+	 * Adds the instruction.
+	 *
+	 * @param currentInstruction
+	 *            the current instruction
+	 * @param pos
+	 *            the pos
+	 * @throws BracketsParseException
+	 *             the brackets parse exception
+	 */
 	public void addInstruction(Language currentInstruction, long pos) throws BracketsParseException {
 		try {
 			if (currentInstruction == Language.JUMP) {
@@ -57,11 +86,24 @@ public class JumpTable {
 		}
 	}
 
+	/**
+	 * Finish.
+	 *
+	 * @throws BracketsParseException
+	 *             the brackets parse exception
+	 */
 	public void finish() throws BracketsParseException {
 		if (!jumpStack.isEmpty())
 			throw new BracketsParseException("]");
 	}
 
+	/**
+	 * Gets the associated.
+	 *
+	 * @param pos
+	 *            the pos
+	 * @return the associated
+	 */
 	public long getAssociated(long pos) {
 		return table.get(pos);
 	}

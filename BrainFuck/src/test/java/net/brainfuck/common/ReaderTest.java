@@ -15,7 +15,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class ReaderTest.
+ *
  * @author Francois Melkonian
  * @date 16/11/2016
  */
@@ -25,9 +28,10 @@ public class ReaderTest {
 
 
 	/**
-	 * Initialise a bf file
+	 * Initialise a bf file.
 	 *
 	 * @throws Exception
+	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -44,7 +48,9 @@ public class ReaderTest {
 	/**
 	 * Each instructions wrote in file is read in order.
 	 *
+	 * @return the next
 	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void getNext() throws Exception {
@@ -55,9 +61,11 @@ public class ReaderTest {
 	}
 
 	/**
-	 * The executer pointer is correct when the file is read
+	 * The executer pointer is correct when the file is read.
 	 *
+	 * @return the execution pointer
 	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void getExecutionPointer() throws Exception {
@@ -73,6 +81,9 @@ public class ReaderTest {
 	 * <p>
 	 * <p>
 	 * Test if we can write on file after we closed it.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test(expected = net.brainfuck.exception.IOException.class)
 	public void closeReader() throws Exception {
@@ -83,6 +94,9 @@ public class ReaderTest {
 
 	/**
 	 * Test if commentary is omitted.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void testS() throws Exception {
@@ -97,8 +111,12 @@ public class ReaderTest {
 		assertEquals("+", bfReader.getNext());
 		assertEquals("INCR", bfReader.getNext());
 	}
+	
 	/**
 	 * Test if we can write on file after we closed it.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void testSpace() throws Exception {
@@ -116,6 +134,9 @@ public class ReaderTest {
 
 	/**
 	 * Check if seek move the pointer to the last mark.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void seek() throws Exception {
@@ -128,6 +149,9 @@ public class ReaderTest {
 
 	/**
 	 * Check if seek move the pointer to the last mark, even after read instructions.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void seek2() throws Exception {
@@ -142,7 +166,10 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Test if mark can be preserved during the read of a file
+	 * Test if mark can be preserved during the read of a file.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void mark() throws Exception {
@@ -157,7 +184,10 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Test if multiple marks can be preserved during the read of a file
+	 * Test if multiple marks can be preserved during the read of a file.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void marks() throws Exception {
@@ -173,7 +203,10 @@ public class ReaderTest {
 
 
 	/**
-	 * Check if reset change the pointeur on file
+	 * Check if reset change the pointeur on file.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void reset() throws Exception {
@@ -190,9 +223,10 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Check if reset go on last marks, even if the reader pointer has move before reset
+	 * Check if reset go on last marks, even if the reader pointer has move before reset.
 	 *
 	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void reset2s() throws Exception {
@@ -207,7 +241,10 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Check if unmark delete marks
+	 * Check if unmark delete marks.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void unmark() throws Exception {
@@ -221,7 +258,10 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Check if the unmark delete the last mark
+	 * Check if the unmark delete the last mark.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void unmark2() throws Exception {
@@ -238,7 +278,10 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Check if marks can be stacked
+	 * Check if marks can be stacked.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void unmark3() throws Exception {
@@ -254,6 +297,9 @@ public class ReaderTest {
 
 	/**
 	 * Delete the file used for test.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@After
 	public void tearDown() throws Exception {

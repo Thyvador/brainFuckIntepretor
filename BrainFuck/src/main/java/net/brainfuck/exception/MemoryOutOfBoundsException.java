@@ -1,5 +1,6 @@
 package net.brainfuck.exception;
 
+// TODO: Auto-generated Javadoc
 /**
  * Signal when a bound excess error is detected in the file.
  * This exception will be thrown by <code>Memory</code>.

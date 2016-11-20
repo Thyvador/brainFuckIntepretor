@@ -18,15 +18,36 @@ import static net.brainfuck.common.ArgumentConstante.OUT_PATH;
 import static net.brainfuck.common.ArgumentConstante.PATH;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Main.
+ */
 public class Main {
 
     /**
-     * Print the usage
-     */
+	 * Print the usage.
+	 */
     private void printUsage() {
         System.out.println("Usage : bfck.sh -p FILE [--rewrite] [--translate] [--check] [-o output_file] [-i input_file]");
     }
 
+    /**
+	 * Inits the argument executer.
+	 *
+	 * @param a
+	 *            the a
+	 * @param m
+	 *            the m
+	 * @param r
+	 *            the r
+	 * @param jumpTable
+	 *            the jump table
+	 * @return the argument executer
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
     private ArgumentExecuter initArgumentExecuter(ArgumentAnalyzer a, Memory m, Reader r, JumpTable jumpTable) throws IOException, FileNotFoundException {
         BfImageWriter bfImageWriter = null;
 
@@ -37,6 +58,12 @@ public class Main {
         return new ArgumentExecuter(m, r, bfImageWriter, jumpTable);
     }
 
+    /**
+	 * Check path.
+	 *
+	 * @param a
+	 *            the a
+	 */
     private void checkPath(ArgumentAnalyzer a) {
         if (a.getArgument(PATH) == null) {
             this.printUsage();
@@ -44,12 +71,29 @@ public class Main {
         }
     }
 
+    /**
+	 * Inits the logger from context.
+	 *
+	 * @param argAnalizer
+	 *            the arg analizer
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
     private void initLoggerFromContext(ArgumentAnalyzer argAnalizer) throws IOException {
         if (argAnalizer.getFlags().contains(Context.TRACE.getSyntax())){
             Logger.getInstance().setWriter(argAnalizer.getArgument(PATH));
         }
     }
 
+    /**
+	 * Inits the reader.
+	 *
+	 * @param argAnalizer
+	 *            the arg analizer
+	 * @return the reader
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
     private Reader initReader(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
         Reader r;
         if (argAnalizer.getArgument(PATH).endsWith(".bmp")) {
@@ -60,16 +104,34 @@ public class Main {
         return r;
     }
 
+    /**
+	 * Inits the jump table.
+	 *
+	 * @param argAnalizer
+	 *            the arg analizer
+	 * @return the jump table
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws SyntaxErrorException
+	 *             the syntax error exception
+	 * @throws BracketsParseException
+	 *             the brackets parse exception
+	 */
     private JumpTable initJumpTable(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException {
     	JumpTable jumpTable = new JumpTable(initReader(argAnalizer));
     	return jumpTable;
 	}
 
 	/**
-     * Set the default input to a files depending of args "-i"
-     *
-     * @throws FileNotFoundException throw by System.setIn()
-     */
+	 * Set the default input to a files depending of args "-i".
+	 *
+	 * @param argAnalizer
+	 *            the new in
+	 * @throws FileNotFoundException
+	 *             throw by System.setIn()
+	 */
     private void setIn(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
         String inPath = argAnalizer.getArgument(IN_PATH);
         if(inPath != null){
@@ -82,10 +144,13 @@ public class Main {
     }
 
     /**
-     * Set the default output to a files depending of args "-i"
-     *
-     * @throws FileNotFoundException throw by System.setOut()
-     */
+	 * Set the default output to a files depending of args "-i".
+	 *
+	 * @param argAnalizer
+	 *            the new out
+	 * @throws FileNotFoundException
+	 *             throw by System.setOut()
+	 */
     private void setOut(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
         String outPath = argAnalizer.getArgument(OUT_PATH);
         if(outPath != null){
@@ -99,15 +164,34 @@ public class Main {
     }
 
     /**
-     * Set default Input and output files depending of args "-i" and "-o"
-     *
-     * @throws FileNotFoundException if the path entered isn't valide, the file is missing and can't be open
-     */
+	 * Set default Input and output files depending of args "-i" and "-o".
+	 *
+	 * @param a
+	 *            the new io
+	 * @throws FileNotFoundException
+	 *             if the path entered isn't valide, the file is missing and can't be open
+	 */
     private void setIO(ArgumentAnalyzer a) throws FileNotFoundException{
         this.setIn(a);
         this.setOut(a);
     }
 
+    /**
+	 * Inits the.
+	 *
+	 * @param argAnalizer
+	 *            the arg analizer
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws SyntaxErrorException
+	 *             the syntax error exception
+	 * @throws BracketsParseException
+	 *             the brackets parse exception
+	 */
     private void init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
         checkPath(argAnalizer);
         setIO(argAnalizer);
@@ -116,10 +200,11 @@ public class Main {
 
 
     /**
-     * Default constr uctor
-     *
-     * @param args
-     */
+	 * Instantiates a new main.
+	 *
+	 * @param args
+	 *            the args
+	 */
     public Main(String[] args) {
         if (args.length == 0) {
             this.printUsage();
@@ -153,8 +238,11 @@ public class Main {
     }
 
     /**
-     * @param args command-line args
-     */
+	 * The main method.
+	 *
+	 * @param args
+	 *            command-line args
+	 */
     public static void main(String[] args) {
         new Main(args);
     }

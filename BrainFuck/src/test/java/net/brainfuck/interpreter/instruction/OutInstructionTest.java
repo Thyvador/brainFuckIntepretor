@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexandre on 16/11/2016.
  */
@@ -27,6 +28,12 @@ public class OutInstructionTest {
 	private String filename;
 	private Reader reader;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -43,6 +50,12 @@ public class OutInstructionTest {
 		System.setOut(new PrintStream(outputStream));
 	}
 
+	/**
+	 * Out.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void out() throws Exception {
 		memory.set('a');
@@ -51,6 +64,12 @@ public class OutInstructionTest {
 	}
 
 
+	/**
+	 * Rewrite long.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void rewriteLong() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -71,6 +90,14 @@ public class OutInstructionTest {
 		assertEquals(".", outputStream.toString());
 	}
 
+	/**
+	 * Rewrite col.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
 		Charset charset = Charset.forName("UTF-8");
@@ -89,6 +116,12 @@ public class OutInstructionTest {
 		assertEquals(".", outputStream.toString());
 	}
 
+	/**
+	 * Translate.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");

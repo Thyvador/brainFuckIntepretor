@@ -21,7 +21,10 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class BackInstructionTest.
+ *
  * @author Alexandre,Francois Melkonian
  */
 public class BackInstructionTest {
@@ -33,7 +36,10 @@ public class BackInstructionTest {
 
 
 	/**
-	 * Create a
+	 * Create a.
+	 *
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -52,6 +58,12 @@ public class BackInstructionTest {
 		instruction = new BackInstruction();
 	}
 
+	/**
+	 * Back.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	//La case mémoire et à 0, ca passe.
 	@Test
 	public void back() throws Exception {
@@ -60,6 +72,12 @@ public class BackInstructionTest {
 		assertEquals(6, reader.getExecutionPointer());
 	}
 
+	/**
+	 * Do not back.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void doNotBack() throws Exception {
 		memory.set(2);
@@ -69,6 +87,12 @@ public class BackInstructionTest {
 	}
 
 
+	/**
+	 * Parenthizing error.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test (expected = BracketsParseException.class)
 	public void parenthizingError() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -87,6 +111,14 @@ public class BackInstructionTest {
 
 	}
 
+	/**
+	 * Rewrite long.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void rewriteLong() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
@@ -110,6 +142,14 @@ public class BackInstructionTest {
 		assertEquals("]", outputStream.toString());
 	}
 
+	/**
+	 * Rewrite col.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void rewriteCol() throws Exception, IOException {
 		filename = "filename.bmp";
@@ -131,6 +171,14 @@ public class BackInstructionTest {
 	}
 
 
+	/**
+	 * Translate.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void translate() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
@@ -152,6 +200,12 @@ public class BackInstructionTest {
 		assertEquals("ff0000", instruction.translate());
 	}
 
+	/**
+	 * Tear down.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		new File(filename).delete();

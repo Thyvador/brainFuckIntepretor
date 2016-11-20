@@ -1,5 +1,6 @@
 package net.brainfuck.exception;
 
+// TODO: Auto-generated Javadoc
 /**
  * Signal when an error input or output is detected in the file.
  * This exception will be thrown by <code>BfReader</code>.

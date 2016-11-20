@@ -18,6 +18,7 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexandre on 16/11/2016.
  */
@@ -29,6 +30,12 @@ public class JumpInstructionTest {
 	String filename;
 	String data;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -45,6 +52,12 @@ public class JumpInstructionTest {
 		instruction = new JumpInstruction();
 	}
 
+	/**
+	 * Jump.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	//La case mémoire est à 0.
 	@Test
 	public void jump() throws Exception {
@@ -53,6 +66,12 @@ public class JumpInstructionTest {
 		assertEquals(6, reader.getExecutionPointer());
 	}
 
+	/**
+	 * Do not jump.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void doNotJump() throws Exception {
 		memory.set(3);
@@ -61,12 +80,26 @@ public class JumpInstructionTest {
 		assertEquals(3, reader.getExecutionPointer());
 	}
 
+	/**
+	 * Tear down.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		new File(filename).delete();
 
 	}
 
+	/**
+	 * Rewrite long.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void rewriteLong() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
@@ -89,6 +122,14 @@ public class JumpInstructionTest {
 		assertEquals("[", outputStream.toString());
 	}
 
+	/**
+	 * Rewrite col.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void rewriteCol() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
@@ -109,6 +150,14 @@ public class JumpInstructionTest {
 		assertEquals("[", outputStream.toString());
 	}
 
+	/**
+	 * Translate.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void translate() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");

@@ -14,11 +14,12 @@ import javax.imageio.ImageWriter;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
-/** 
- * The BfImageWriter class represents a class that write a BMP image
+// TODO: Auto-generated Javadoc
+/**
  * 
- * @author Jeremy Junac
+ * The BfImageWriter class represents a class that write a BMP image.
  *
+ * @author Jeremy Junac
  */
 public class BfImageWriter implements Writer {
 	

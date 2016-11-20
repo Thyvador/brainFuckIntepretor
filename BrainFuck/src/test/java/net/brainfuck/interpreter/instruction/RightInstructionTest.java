@@ -18,6 +18,7 @@ import net.brainfuck.interpreter.RightInstruction;
 
 import static org.junit.Assert.assertEquals;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexandre on 16/11/2016.
  */
@@ -28,6 +29,12 @@ public class RightInstructionTest {
 	RightInstruction instruction;
 	private static String filename;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -43,24 +50,49 @@ public class RightInstructionTest {
 		instruction = new RightInstruction();
 	}
 
+	/**
+	 * Right.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void right() throws Exception {
 		instruction.execute(argumentInstruction);
 		assertEquals(1, memory.getIndex());
 	}
 
+	/**
+	 * Out of bound right.
+	 *
+	 * @throws MemoryOutOfBoundsException
+	 *             the memory out of bounds exception
+	 */
 	@Test(expected = MemoryOutOfBoundsException.class)
 	public void OutOfBoundRight() throws MemoryOutOfBoundsException {
 		for (int i = 0; i < 30001; i++) {
 			instruction.execute(argumentInstruction);
 		}
 	}
+	
+	/**
+	 * Clean up.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@AfterClass
 	public static void cleanUp() throws IOException {
 		new File(filename).delete();
 	}
 
 
+	/**
+	 * Rewrite long.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void rewriteLong() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -81,6 +113,14 @@ public class RightInstructionTest {
 		assertEquals(">", outputStream.toString());
 	}
 
+	/**
+	 * Rewrite col.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
 		Charset charset = Charset.forName("UTF-8");
@@ -99,6 +139,12 @@ public class RightInstructionTest {
 		assertEquals(">", outputStream.toString());
 	}
 
+	/**
+	 * Translate.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");

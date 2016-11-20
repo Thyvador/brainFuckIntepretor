@@ -15,6 +15,7 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexandre on 16/11/2016.
  * @author Alexandre,Francois Melkonian
@@ -26,6 +27,9 @@ public class LoggerTest {
 	private String data;
 	private static String filenameLOG;
 
+	/**
+	 * Sets the up.
+	 */
 	@Before
 	public void setUp() {
 		logger = Logger.getInstance();
@@ -43,9 +47,11 @@ public class LoggerTest {
 	}
 
 	/**
-	 * Check if the resume contains all desired metrics if the program is empty.
-	 * Another test check the EXEC_TIME, a test on it here will depend of the context.
+	 * Check if the resume contains all desired metrics if the program is empty. Another test check the EXEC_TIME, a test on it here will
+	 * depend of the context.
+	 *
 	 * @throws Exception
+	 *             the exception
 	 */
 	//@Ignore ("Probleme")
 	@Test
@@ -60,6 +66,12 @@ public class LoggerTest {
 		assertTrue(resLogger.contains("DATA_READ : 0\n") );
 	}
 
+	/**
+	 * Incr instruction.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void incrInstruction() throws Exception {
 		logger.incrInstruction();
@@ -67,9 +79,10 @@ public class LoggerTest {
 	}
 
 	/**
-	 * Wait a random time ( between 0 and 500ms ) to simulate a program,
-	 * then check if the logger return the real execution time.
+	 * Wait a random time ( between 0 and 500ms ) to simulate a program, then check if the logger return the real execution time.
+	 *
 	 * @throws Exception
+	 *             the exception
 	 */
 	@Test
 	public void startExecTime() throws Exception {
@@ -84,12 +97,24 @@ public class LoggerTest {
 		assertTrue(str.contains("EXEC_TIME : "+(System.currentTimeMillis()-temps)+" ms"));
 	}
 
+	/**
+	 * Count memory write.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void countMemoryWrite() throws Exception {
 		logger.countMemoryWrite();
 		assertEquals(1, logger.getNumMemoryWrite());
 	}
 
+	/**
+	 * Count memory read.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void countMemoryRead() throws Exception {
 		logger.reset();
@@ -97,6 +122,12 @@ public class LoggerTest {
 		assertEquals(1, logger.getNumMemoryRead());
 	}
 
+	/**
+	 * Count memory move.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void countMemoryMove() throws Exception {
 		logger.reset();
@@ -104,6 +135,12 @@ public class LoggerTest {
 		assertEquals(1, logger.getNumMemoryMove());
 	}
 
+	/**
+	 * Count move.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void countMove() throws Exception {
 		logger.reset();
@@ -111,6 +148,12 @@ public class LoggerTest {
 		assertEquals(1, logger.getNumExecMove());
 	}
 
+	/**
+	 * Incr step.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void incrStep() throws Exception {
 		int i = logger.getStep();
@@ -120,12 +163,24 @@ public class LoggerTest {
 	}
 
 
+	/**
+	 * Sets the writer.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void setWriter() throws Exception {
 		logger.setWriter(filename);
 		assertNotNull(logger.getWriter());
 	}
 
+	/**
+	 * Write.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void write() throws Exception {
 		logger.setWriter(filename);
@@ -134,6 +189,12 @@ public class LoggerTest {
 		assertEquals(str, Files.readAllLines(Paths.get(filenameLOG)));
 	}
 
+	/**
+	 * Write 1.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void write1() throws Exception {
 		logger.setWriter(filename);
@@ -148,16 +209,35 @@ public class LoggerTest {
 		assertEquals(str, Files.readAllLines(Paths.get(filenameLOG)));
 	}
 
+	/**
+	 * Checks if is writer open.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void isWriterOpen() throws Exception {
 		logger.setWriter(filename);
 		assertTrue(logger.isWriterOpen());
 	}
+	
+	/**
+	 * Check time execution.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void checkTimeExecution() throws Exception {
 		assertTrue(logger.isWriterOpen());
 	}
 
+	/**
+	 * Close writer.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test(expected = java.lang.NullPointerException.class)
 	public void closeWriter() throws Exception {
 		logger.setWriter(filename);
@@ -167,6 +247,12 @@ public class LoggerTest {
 
 
 
+	/**
+	 * Clean up.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@AfterClass
 	public static void cleanUp() throws IOException {
 		new File(filenameLOG).delete();

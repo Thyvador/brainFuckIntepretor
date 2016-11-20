@@ -8,6 +8,7 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
+// TODO: Auto-generated Javadoc
 /**
  * Read file with long and short syntax blended.
  *
@@ -50,11 +51,12 @@ public class BfReader implements Reader {
 
 
 	/**
-	 * Read the line just after the pointer on the file
-	 * and put it on "next" string.
+	 * Read the line just after the pointer on the file and put it on "next" string.
 	 *
-	 * @param val the current value
-	 * @throws java.io.IOException if IO error, it will be catch in getNext().
+	 * @param val
+	 *            the current value
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void readUntilEndOfLine(int val) throws java.io.IOException {
 		next = Character.toString((char) val);
@@ -72,11 +74,11 @@ public class BfReader implements Reader {
 	}
 
 	/**
-	 * Skip new line character(s).
-	 * End of line character change according OS.
+	 * Skip new line character(s). End of line character change according OS.
 	 *
 	 * @return The first character of the line.
-	 * @throws java.io.IOException if IO error, it will be catch in getNext().
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private int ignoreNewLineChar() throws java.io.IOException {
 		int c;
@@ -89,7 +91,8 @@ public class BfReader implements Reader {
 	 * Skip all character until new line or end of file character is read.
 	 *
 	 * @return the current caracter : new line or end of file
-	 * @throws java.io.IOException if IO error, it will be catch in getNext().
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private int ignoreComment() throws java.io.IOException {
 		int c;
@@ -101,8 +104,9 @@ public class BfReader implements Reader {
 	/**
 	 * Skip all space and tabulation charecter until another charecter is read.
 	 *
-	 * @return the current charecter read :  could be everything except space or tabulation
-	 * @throws java.io.IOException if IO error, it will be catch in getNext().
+	 * @return the current charecter read : could be everything except space or tabulation
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private int ignoreSpace() throws java.io.IOException {
 		int c;
@@ -112,11 +116,13 @@ public class BfReader implements Reader {
 	}
 
 	/**
-	 *
+	 * Ignore.
 	 *
 	 * @param nextVal
-	 * @return
-	 * @throws java.io.IOException
+	 *            the next val
+	 * @return the int
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private int ignore(int nextVal) throws java.io.IOException {
 		boolean end = false;
@@ -182,6 +188,9 @@ public class BfReader implements Reader {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see net.brainfuck.common.Reader#getExecutionPointer()
+	 */
 	@Override
 	public long getExecutionPointer() throws IOException {
 		try {
@@ -191,6 +200,13 @@ public class BfReader implements Reader {
 		}
 	}
 
+	/**
+	 * Checks if is preprocessing.
+	 *
+	 * @param nextVal
+	 *            the next val
+	 * @return true, if is preprocessing
+	 */
 	private boolean isPreprocessing(int nextVal) {
 		return nextVal == PREPROCESSING;
 	}
@@ -206,10 +222,24 @@ public class BfReader implements Reader {
 		return nextVal == CR || nextVal == LF;
 	}
 
+	/**
+	 * Checks if is comment.
+	 *
+	 * @param nextVal
+	 *            the next val
+	 * @return true, if is comment
+	 */
 	private boolean isComment(int nextVal) {
 		return nextVal == COMMENT;
 	}
 
+	/**
+	 * Checks if is space.
+	 *
+	 * @param nextVal
+	 *            the next val
+	 * @return true, if is space
+	 */
 	private boolean isSpace(int nextVal) {
 		return nextVal == TAB || nextVal == SPACE;
 	}
@@ -242,6 +272,9 @@ public class BfReader implements Reader {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see net.brainfuck.common.Reader#mark()
+	 */
 	@Override
 	public void mark() throws IOException {
 		try {
@@ -251,6 +284,9 @@ public class BfReader implements Reader {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see net.brainfuck.common.Reader#reset()
+	 */
 	@Override
 	public void reset() throws IOException, BracketsParseException {
 		if (marks.isEmpty())
@@ -258,6 +294,9 @@ public class BfReader implements Reader {
 		seek(marks.peek());
 	}
 
+	/* (non-Javadoc)
+	 * @see net.brainfuck.common.Reader#unmark()
+	 */
 	@Override
 	public void unmark() throws BracketsParseException {
 		if (marks.isEmpty())
@@ -265,6 +304,9 @@ public class BfReader implements Reader {
 		marks.pop();
 	}
 	
+	/* (non-Javadoc)
+	 * @see net.brainfuck.common.Reader#seek(long)
+	 */
 	@Override
 	public void seek(long pos) throws IOException {
 		try {
@@ -274,6 +316,11 @@ public class BfReader implements Reader {
 		}
 	}
 
+	/**
+	 * Gets the marks.
+	 *
+	 * @return the marks
+	 */
 	public Stack<Long> getMarks() {
 		return marks;
 	}

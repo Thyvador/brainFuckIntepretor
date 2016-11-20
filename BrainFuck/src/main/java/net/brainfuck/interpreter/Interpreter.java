@@ -13,9 +13,11 @@ import java.util.Map;
 
 import static net.brainfuck.common.ArgumentConstante.*;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author davidLANG
+ * The Class Interpreter.
  *
+ * @author davidLANG
  */
 
 public class Interpreter {
@@ -26,8 +28,13 @@ public class Interpreter {
 
 	/**
 	 * Constructor which initialize attribute.
-	 * @throws FileNotFoundException throw by setIo()
-	 * @throws IOException throw bt BfImageWriter
+	 *
+	 * @param executer
+	 *            the executer
+	 * @throws FileNotFoundException
+	 *             throw by setIo()
+	 * @throws IOException
+	 *             throw bt BfImageWriter
 	 */
 	public Interpreter(Executer executer) throws FileNotFoundException, IOException {
 		this.executer = executer;
@@ -42,11 +49,20 @@ public class Interpreter {
 	/**
 	 * Interpret all characters which can be read with the attribute reader.
 	 *
-	 * @throws SyntaxErrorException {@link SyntaxErrorException} if an error of syntax is found.
-	 * @throws MemoryOutOfBoundsException {@link MemoryOutOfBoundsException} if memory throw an exception.
-	 * @throws IOException {@link IOException}  if reader throw an exception.
-	 * @throws MemoryOverFlowException throw by memory
-	 * @throws BracketsParseException throw by executer
+	 * @throws IOException
+	 *             {@link IOException} if reader throw an exception.
+	 * @throws SyntaxErrorException
+	 *             {@link SyntaxErrorException} if an error of syntax is found.
+	 * @throws MemoryOutOfBoundsException
+	 *             {@link MemoryOutOfBoundsException} if memory throw an exception.
+	 * @throws MemoryOverFlowException
+	 *             throw by memory
+	 * @throws FileNotFoundIn
+	 *             the file not found in
+	 * @throws BracketsParseException
+	 *             throw by executer
+	 * @throws FileNotFoundException
+	 *             the file not found exception
 	 */
 	public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
 			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException {
@@ -64,10 +80,24 @@ public class Interpreter {
     }
 
 
+	/**
+	 * Mark reader.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	void markReader() throws IOException {
 		reader.mark();
 	}
 
+	/**
+	 * Reset reader.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws BracketsParseException
+	 *             the brackets parse exception
+	 */
 	void resetReader() throws IOException, BracketsParseException {
 		reader.reset();
 	}
