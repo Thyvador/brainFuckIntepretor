@@ -9,21 +9,33 @@ import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.exception.IOException;
 
 
+// TODO: Auto-generated Javadoc
 /**
- * @author François Melkonian
- *         IN_PATH
+ * The Class InInstruction.
+ *
+ * @author François Melkonian IN_PATH
  */
 public class InInstruction extends AbstractExecute {
 
+	/**
+	 * Instantiates a new in instruction.
+	 */
 	public InInstruction() {
 		super(Language.IN);
 	}
 
     /**
-     * Execute "" method from class Memory
-     *
-     * @param machine Memory machine
-     */
+	 * Execute "" method from class Memory.
+	 *
+	 * @param argumentInstruction
+	 *            the argument instruction
+	 * @throws MemoryOverFlowException
+	 *             the memory over flow exception
+	 * @throws MemoryOutOfBoundsException
+	 *             the memory out of bounds exception
+	 * @throws FileNotFoundIn
+	 *             the file not found in
+	 */
     @Override
     public void execute(ArgumentInstruction argumentInstruction) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {
         Memory memory = argumentInstruction.getMemory();

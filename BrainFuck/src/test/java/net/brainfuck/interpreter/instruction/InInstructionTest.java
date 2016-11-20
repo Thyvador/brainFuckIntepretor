@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexandre on 16/11/2016.
  */
@@ -27,6 +28,12 @@ public class InInstructionTest {
 	private Reader reader;
 	private String data;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -49,6 +56,12 @@ public class InInstructionTest {
 		System.setIn(inputStream);
 	}
 
+	/**
+	 * In.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void in() throws Exception {
 		instruction.execute(argumentInstruction);
@@ -56,8 +69,10 @@ public class InInstructionTest {
 	}
 
 	/**
-	 * Simule empty file
+	 * Simule empty file.
+	 *
 	 * @throws Exception
+	 *             the exception
 	 */
 	@Test(expected = net.brainfuck.exception.FileNotFoundIn.class)
 	public void badIn() throws Exception {
@@ -68,6 +83,12 @@ public class InInstructionTest {
 	}
 
 
+	/**
+	 * Rewrite long.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void rewriteLong() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -88,6 +109,14 @@ public class InInstructionTest {
 		assertEquals(",", outputStream.toString());
 	}
 
+	/**
+	 * Rewrite col.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
 		Charset charset = Charset.forName("UTF-8");
@@ -106,6 +135,12 @@ public class InInstructionTest {
 		assertEquals(",", outputStream.toString());
 	}
 
+	/**
+	 * Translate.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");

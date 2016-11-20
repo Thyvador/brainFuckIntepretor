@@ -20,6 +20,7 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexandre on 16/11/2016.
  */
@@ -30,6 +31,12 @@ public class IncremanteInstructionTest {
 	IncremanteInstruction instruction;
 	private static String filename;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -45,12 +52,26 @@ public class IncremanteInstructionTest {
 		instruction = new IncremanteInstruction();
 	}
 
+	/**
+	 * Incr.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void incr() throws Exception {
 		instruction.execute(argumentInstruction);
 		assertEquals(1, memory.get());
 	}
 
+	/**
+	 * Over flow.
+	 *
+	 * @throws MemoryOverFlowException
+	 *             the memory over flow exception
+	 * @throws MemoryOutOfBoundsException
+	 *             the memory out of bounds exception
+	 */
 	@Test(expected = MemoryOverFlowException.class)
 	public void OverFlow() throws MemoryOverFlowException, MemoryOutOfBoundsException {
 		for (int i = 0; i < 5000; i++) {
@@ -58,6 +79,12 @@ public class IncremanteInstructionTest {
 		}
 	}
 
+	/**
+	 * Rewrite long.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void rewriteLong() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -78,6 +105,14 @@ public class IncremanteInstructionTest {
 		assertEquals("+", outputStream.toString());
 	}
 
+	/**
+	 * Rewrite col.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
 		Charset charset = Charset.forName("UTF-8");
@@ -96,6 +131,12 @@ public class IncremanteInstructionTest {
 		assertEquals("+", outputStream.toString());
 	}
 
+	/**
+	 * Translate.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -113,6 +154,12 @@ public class IncremanteInstructionTest {
 		assertEquals("ffffff",instruction.translate() );
 	}
 
+	/**
+	 * Clean up.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@AfterClass
 	public static void cleanUp() throws IOException {
 		new File(filename).delete();

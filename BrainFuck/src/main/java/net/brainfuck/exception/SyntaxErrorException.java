@@ -1,6 +1,7 @@
 package net.brainfuck.exception;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * Signal when an error of syntax is detected in the file.
  * This exception will be thrown by <code>Interpreter</code>.

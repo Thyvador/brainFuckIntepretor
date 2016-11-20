@@ -7,11 +7,23 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class TestChooser.
+ *
  * @author user
  * @date 06/11/2016
  */
 public class TestChooser {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param argumentsDuMain
+	 *            the arguments
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] argumentsDuMain) throws IOException {
 		System.out.println("Which test do you want to execute ?");
 		File dir = new File("Brainfuck/src/test/resources/assets/brainfucktest/common");

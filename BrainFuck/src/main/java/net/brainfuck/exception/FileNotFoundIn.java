@@ -1,5 +1,6 @@
 package net.brainfuck.exception;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by FranÃ§ois Melkonian on 12/10/2016.
 

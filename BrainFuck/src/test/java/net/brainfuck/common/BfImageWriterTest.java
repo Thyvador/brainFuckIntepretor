@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertArrayEquals;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexandre on 16/11/2016.
  */
@@ -22,6 +23,16 @@ public class BfImageWriterTest {
 	byte[] imageArray;
 	private static String filename;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
 	@Before
 	public void setUp() throws IOException, FileNotFoundException, java.io.FileNotFoundException {
 		filename ="test.bmp";
@@ -36,6 +47,12 @@ public class BfImageWriterTest {
 
 	}
 
+	/**
+	 * Write.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void write() throws Exception {
 		writer.write(0xffffff);
@@ -44,6 +61,12 @@ public class BfImageWriterTest {
 		assertArrayEquals(imageArray, tmp);
 	}
 
+	/**
+	 * Write 1.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void write1() throws Exception {
 		writer.write("ffffff");
@@ -53,12 +76,24 @@ public class BfImageWriterTest {
 		assertArrayEquals(imageArray, tmp);
 	}
 
+	/**
+	 * Close.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void close() throws Exception {
 		writer.close();
 		writer.write(111);
 	}
 
+	/**
+	 * Clean up.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@AfterClass
 	public static void cleanUp() throws java.io.IOException {
 		new File(filename).delete();

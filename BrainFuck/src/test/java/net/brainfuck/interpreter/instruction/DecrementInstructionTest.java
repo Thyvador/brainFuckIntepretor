@@ -20,6 +20,7 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexandre on 16/11/2016.
  */
@@ -30,6 +31,12 @@ public class DecrementInstructionTest {
 	DecrementInstruction instruction;
 	private static String filename;
 
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -45,6 +52,12 @@ public class DecrementInstructionTest {
 		instruction = new DecrementInstruction();
 	}
 
+	/**
+	 * Decr.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void decr() throws Exception {
 		memory.set(50);
@@ -52,11 +65,25 @@ public class DecrementInstructionTest {
 		assertEquals(49, memory.get());
 	}
 
+	/**
+	 * Over flow.
+	 *
+	 * @throws MemoryOverFlowException
+	 *             the memory over flow exception
+	 * @throws MemoryOutOfBoundsException
+	 *             the memory out of bounds exception
+	 */
 	@Test(expected = MemoryOverFlowException.class)
 	public void OverFlow() throws MemoryOverFlowException, MemoryOutOfBoundsException {
 		instruction.execute(argumentInstruction);
 	}
 
+	/**
+	 * Rewrite long.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void rewriteLong() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -77,6 +104,14 @@ public class DecrementInstructionTest {
 		assertEquals("-", outputStream.toString());
 	}
 
+	/**
+	 * Rewrite col.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
 		Charset charset = Charset.forName("UTF-8");
@@ -95,6 +130,12 @@ public class DecrementInstructionTest {
 		assertEquals("-", outputStream.toString());
 	}
 
+	/**
+	 * Translate.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -114,6 +155,12 @@ public class DecrementInstructionTest {
 
 
 
+	/**
+	 * Clean up.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@AfterClass
 	public static void cleanUp() throws IOException {
 		new File("filename.bf").delete();

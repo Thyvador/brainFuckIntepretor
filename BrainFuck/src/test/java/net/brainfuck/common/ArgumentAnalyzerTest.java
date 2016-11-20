@@ -7,11 +7,22 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class ArgumentAnalyzerTest.
+ *
  * @author Francois Melkonian
  * @date 16/11/2016
  */
 public class ArgumentAnalyzerTest {
+	
+	/**
+	 * Gets the args.
+	 *
+	 * @return the args
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void getArgs() throws Exception {
 		String[] args = {"-p","filename","-i","input","-o","pasca"};
@@ -21,6 +32,13 @@ public class ArgumentAnalyzerTest {
 		assertEquals(argumentAnalyzer.getArgument(ArgumentConstante.OUT_PATH),"pasca");
 	}
 
+	/**
+	 * Gets the flags.
+	 *
+	 * @return the flags
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void getFlags() throws Exception {
 		String[] args = {"-p","filename","-i","input","-o","pasca","--translate","--rewrite","--check"};
@@ -32,12 +50,24 @@ public class ArgumentAnalyzerTest {
 		assertFalse(argumentAnalyzer.getFlags().contains(Context.TRACE.getSyntax()));
 	}
 
+	/**
+	 * Test argument 2.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void testArgument2() throws Exception {
 		String[] args = {"-p","filename","-i","-o"};
 		ArgumentAnalyzer argumentAnalyzer = new ArgumentAnalyzer(args);
 	}
 
+	/**
+	 * Test argument.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test
 	public void testArgument() throws Exception {
 		String[] args = {"-p", "filename", "-i", "--translate"};
@@ -45,6 +75,12 @@ public class ArgumentAnalyzerTest {
 		argumentAnalyzer.getArgument(ArgumentConstante.IN_PATH);
 	}
 
+	/**
+	 * Bad arguments.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	@Test(expected = net.brainfuck.exception.IncorrectArgumentException.class)
 	public void badArguments() throws Exception {
 		String[] args = {"-pio","filename","pasca","--rewrite","--check"};

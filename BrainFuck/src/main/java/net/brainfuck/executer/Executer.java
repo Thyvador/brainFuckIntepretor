@@ -15,7 +15,10 @@ import java.util.List;
 
 import static net.brainfuck.common.ArgumentConstante.PATH;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Executer.
+ *
  * @author davidLANG
  */
 public class Executer {
@@ -23,12 +26,21 @@ public class Executer {
     private ArgumentExecuter argumentExecuter;
 
     /**
-     * Initialize contextExecuters, memory and reader
-     *
-     * @param m         Memory
-     * @param arguments The long arguments
-     * @param r         Reader
-     */
+	 * Initialize contextExecuters, memory and reader.
+	 *
+	 * @param argumentAnalyzer
+	 *            the argument analyzer
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws BracketsParseException
+	 *             the brackets parse exception
+	 * @throws SyntaxErrorException
+	 *             the syntax error exception
+	 */
     public Executer(ArgumentAnalyzer argumentAnalyzer) throws IOException, FileNotFoundException, BracketsParseException, java.io.IOException, SyntaxErrorException {
 
 		// Initialize context executer
@@ -89,6 +101,23 @@ public class Executer {
     }
 
 
+    /**
+	 * Inits the argument executer.
+	 *
+	 * @param a
+	 *            the a
+	 * @param m
+	 *            the m
+	 * @param r
+	 *            the r
+	 * @param jumpTable
+	 *            the jump table
+	 * @return the argument executer
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
     private ArgumentExecuter initArgumentExecuter(ArgumentAnalyzer a, Memory m, Reader r, JumpTable jumpTable) throws IOException, FileNotFoundException {
         BfImageWriter bfImageWriter = null;
 
@@ -100,6 +129,23 @@ public class Executer {
     }
 
 
+    /**
+	 * Inits the.
+	 *
+	 * @param argAnalizer
+	 *            the arg analizer
+	 * @return the argument executer
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws SyntaxErrorException
+	 *             the syntax error exception
+	 * @throws BracketsParseException
+	 *             the brackets parse exception
+	 */
     private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
         Reader r;
         if (argAnalizer.getArgument(PATH).endsWith(".bmp")) {
@@ -115,10 +161,20 @@ public class Executer {
         return initArgumentExecuter(argAnalizer, m, readerAndJump.getFirst(), readerAndJump.getSecond());
     }
 
+	/**
+	 * Gets the argument executer.
+	 *
+	 * @return the argument executer
+	 */
 	public ArgumentExecuter getArgumentExecuter() {
 		return argumentExecuter;
 	}
 
+	/**
+	 * Gets the context executers.
+	 *
+	 * @return the context executers
+	 */
 	public List<ContextExecuter> getContextExecuters() {
 		return contextExecuters;
 	}

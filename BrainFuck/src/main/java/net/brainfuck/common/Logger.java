@@ -5,6 +5,7 @@ import net.brainfuck.exception.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+// TODO: Auto-generated Javadoc
 /**
  * Count and group informations about the execution, a.k.a :
  * PROG_SIZE : nombres d'instructions
@@ -31,6 +32,9 @@ public class Logger {
 	private BufferedWriter writer = null;
 	private int step = 0;
 
+	/**
+	 * Instantiates a new logger.
+	 */
 	private Logger() {
 		if (instance != null)
 			throw new IllegalStateException("Already instantiated");
@@ -49,34 +53,74 @@ public class Logger {
 		return instance;
 	}
 
+	/**
+	 * Gets the num instructions.
+	 *
+	 * @return the num instructions
+	 */
 	public int getNumInstructions() {
 		return numInstructions;
 	}
 
+	/**
+	 * Gets the num exec move.
+	 *
+	 * @return the num exec move
+	 */
 	public int getNumExecMove() {
 		return numExecMove;
 	}
 
+	/**
+	 * Gets the num memory write.
+	 *
+	 * @return the num memory write
+	 */
 	public int getNumMemoryWrite() {
 		return numMemoryWrite;
 	}
 
+	/**
+	 * Gets the num memory read.
+	 *
+	 * @return the num memory read
+	 */
 	public int getNumMemoryRead() {
 		return numMemoryRead;
 	}
 
+	/**
+	 * Gets the num memory move.
+	 *
+	 * @return the num memory move
+	 */
 	public int getNumMemoryMove() {
 		return numMemoryMove;
 	}
 
+	/**
+	 * Gets the start.
+	 *
+	 * @return the start
+	 */
 	public long getStart() {
 		return start;
 	}
 
+	/**
+	 * Gets the step.
+	 *
+	 * @return the step
+	 */
 	public int getStep() {
 		return step;
 	}
 
+	/**
+	 * Gets the writer.
+	 *
+	 * @return the writer
+	 */
 	public BufferedWriter getWriter() {
 		return writer;
 	}
@@ -106,10 +150,10 @@ public class Logger {
 	}
 
 	/**
-	 * Create a string with all informations collected.
-	 * Start with '\n' to stop
+	 * Create a string with all informations collected. Start with '\n' to stop
 	 *
 	 * @param m
+	 *            the m
 	 * @return informations
 	 */
 	public String showResume(Memory m) {
@@ -161,7 +205,7 @@ public class Logger {
 
 
 	/**
-	 * Count the char read in the input file
+	 * Count the char read in the input file.
 	 */
 	public void countMove() {
 		numExecMove++;
@@ -198,8 +242,10 @@ public class Logger {
 	}
 
 	/**
+	 * Write.
+	 *
 	 * @param message
-	 * @throws IOException
+	 *            the message
 	 */
 	public void write(String message) {
 		try {
@@ -238,6 +284,9 @@ public class Logger {
 		throw new CloneNotSupportedException("Cannot clone instance of this class");
 	}
 
+	/**
+	 * Reset.
+	 */
 	public void reset() {
 		numExecMove = 0;
 		numMemoryMove = 0;

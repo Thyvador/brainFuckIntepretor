@@ -3,9 +3,10 @@ package net.brainfuck.interpreter;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: Auto-generated Javadoc
 /**
  * Represent the language with his syntax and his corresponding InstructionInterface (wich implements the corresponding method to the
- * syntax)
+ * syntax).
  *
  * @author davidLANG
  */
@@ -47,6 +48,7 @@ enum Language {
 	private String[] aliases;
 
 	/**
+	 * Instantiates a new language.
 	 *
 	 * @param interpreter
 	 *            InstructionInterface corresponding to syntax
@@ -59,6 +61,8 @@ enum Language {
 	}
 
 	/**
+	 * Gets the aliases.
+	 *
 	 * @return the aliases
 	 */
 	public String[] getAliases() {
@@ -66,25 +70,38 @@ enum Language {
 	}
 
 	/**
-	 * 
+	 * Gets the interpreter.
+	 *
 	 * @return the interpreter
 	 */
 	public AbstractExecute getInterpreter() {
 		return interpreter;
 	}
 
+	/**
+	 * Sets the interpreter.
+	 *
+	 * @param interpreter
+	 *            the new interpreter
+	 */
 	public void setInterpreter(AbstractExecute interpreter) {
 		this.interpreter = interpreter;
 	}
 
 	/**
-	 * 
+	 * Gets the short syntax.
+	 *
 	 * @return the short syntax
 	 */
 	public String getShortSyntax() {
 		return this.aliases[0];
 	}
 
+	/**
+	 * Gets the color syntax.
+	 *
+	 * @return the color syntax
+	 */
 	public String getColorSyntax() {
 		return aliases[2];
 	}

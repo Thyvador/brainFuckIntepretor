@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Stack;
 
+// TODO: Auto-generated Javadoc
 /**
  * The <code>BfImageReader</code> class is used to read BitMap files.
  * This class implements the <code>Reader</code> Interface.
@@ -62,6 +63,8 @@ public class BfImageReader implements Reader {
 	 * Return the color of the next instruction.
 	 *
 	 * @return the hexadecimal value of the next color as a String.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Override
 	public String getNext() throws IOException {
@@ -101,6 +104,9 @@ public class BfImageReader implements Reader {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see net.brainfuck.common.Reader#getExecutionPointer()
+	 */
 	@Override
 	public long getExecutionPointer() {
 		return ((offX / 3) + (offY * width) / 9);
@@ -154,12 +160,20 @@ public class BfImageReader implements Reader {
 		marks.pop();
 	}
 
+	/* (non-Javadoc)
+	 * @see net.brainfuck.common.Reader#seek(long)
+	 */
 	@Override
 	public void seek(long pos) {
 		offX = (int) ((pos * 3) % width);
 		offY = (int) ((pos * 9) / width);
 	}
 
+	/**
+	 * Gets the marks.
+	 *
+	 * @return the marks
+	 */
 	public Stack<Long> getMarks() {
 		return marks;
 	}
