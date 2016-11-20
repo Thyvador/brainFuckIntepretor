@@ -8,9 +8,9 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 /**
  * @author davidLANG
  */
-public class LeftExecute extends AbstractExecute {
+public class LeftInstruction extends AbstractExecute {
 	
-    public LeftExecute() {
+    public LeftInstruction() {
 		super(Language.LEFT);
 	}
 

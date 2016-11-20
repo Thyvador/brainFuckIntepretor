@@ -86,7 +86,7 @@ public class ReaderTest {
 	 */
 	@Test
 	public void testS() throws Exception {
-		String file = "filename2.bf";
+		String file = "filename.bf";
 		data = "+#test\nINCR";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(file), Charset.forName("UTF-8"))) {
 			writer.write(data, 0, data.length());
@@ -258,7 +258,7 @@ public class ReaderTest {
 	@After
 	public void tearDown() throws Exception {
 		new File(filename).delete();
-		new File("filename2.bf").delete();
+		new File("filename.bf").delete();
 
 	}
 }
