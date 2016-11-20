@@ -79,6 +79,7 @@ public class LoggerTest {
 		}
 
 		String str = logger.showResume(new Memory());
+		System.out.println(str);
 		assertTrue(str.contains("EXEC_TIME : "+(System.currentTimeMillis()-temps)+" ms"));
 	}
 

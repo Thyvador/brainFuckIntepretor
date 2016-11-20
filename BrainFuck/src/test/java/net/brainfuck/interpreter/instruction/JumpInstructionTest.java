@@ -3,15 +3,14 @@ package net.brainfuck.interpreter.instruction;
 import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
-import net.brainfuck.interpreter.InInstruction;
+import net.brainfuck.executer.Executer;
+import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.JumpInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.xml.ws.soap.Addressing;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -68,9 +67,8 @@ public class JumpInstructionTest {
 
 	}
 
-	@Ignore
 	@Test
-	public void rewriteLong() throws Exception {
+	public void rewriteLong() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
 		String data = "JUMP";
@@ -81,7 +79,9 @@ public class JumpInstructionTest {
 		}
 		reader = new BfReader(filename);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
+		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
 		instruction = new JumpInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
@@ -89,9 +89,8 @@ public class JumpInstructionTest {
 		assertEquals("[", outputStream.toString());
 	}
 
-	@Ignore
 	@Test
-	public void rewriteCol() throws Exception, FileNotFoundException {
+	public void rewriteCol() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bmp";
 		String data = "ff7f00";
@@ -100,7 +99,9 @@ public class JumpInstructionTest {
 		writer.close();
 		reader = new BfImageReader(filename);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
+		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
 		instruction = new JumpInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
@@ -108,9 +109,8 @@ public class JumpInstructionTest {
 		assertEquals("[", outputStream.toString());
 	}
 
-	@Ignore
 	@Test
-	public void translate() throws Exception {
+	public void translate() throws Exception, IOException {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
 		String data = "JUMP";
@@ -121,7 +121,9 @@ public class JumpInstructionTest {
 		}
 		reader = new BfReader(filename);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
+		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
 		instruction = new JumpInstruction();
 		assertEquals("ff7f00",instruction.translate() );
 	}
