@@ -41,16 +41,14 @@ public class BfCompiler {
 	/**
 	 * Instantiates a new bf compiler.
 	 *
-	 * @param reader
-	 *            the reader
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws FileNotFoundException
-	 *             the file not found exception
+	 * @param reader the reader
+	 * @throws IOException           Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException the file not found exception
 	 */
 	public BfCompiler(Reader reader) throws IOException, FileNotFoundException {
+
 		this.reader = reader;
-		jumpTable = new JumpTable();
+		jumpTable = new JumpTable(true);
 		try {
 			tmpFile = new File("compiledBrainFuck.o");
 			tmpFile.deleteOnExit();
@@ -62,6 +60,20 @@ public class BfCompiler {
 		}
 	}
 
+	public BfCompiler(Reader r, List<ContextExecuter> contextExecuters) throws FileNotFoundException, IOException {
+
+		this.reader = r;
+		jumpTable = new JumpTable(!contextExecuters.contains(Context.REWRITE.getContextExecuter()));
+		try {
+			tmpFile = new File("compiledBrainFuck.o");
+			tmpFile.deleteOnExit();
+			writer = new BufferedWriter(new FileWriter(tmpFile));
+		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException();
+		} catch (java.io.IOException e) {
+			throw new IOException();
+		}
+	}
 
 
 	/**

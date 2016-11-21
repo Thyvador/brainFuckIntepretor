@@ -103,27 +103,6 @@ public class Main {
         }
         return r;
     }
-
-    /**
-	 * Inits the jump table.
-	 *
-	 * @param argAnalizer
-	 *            the arg analizer
-	 * @return the jump table
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws SyntaxErrorException
-	 *             the syntax error exception
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
-	 */
-    private JumpTable initJumpTable(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException {
-    	JumpTable jumpTable = new JumpTable(initReader(argAnalizer));
-    	return jumpTable;
-	}
-
 	/**
 	 * Set the default input to a files depending of args "-i".
 	 *

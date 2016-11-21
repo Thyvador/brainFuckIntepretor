@@ -132,7 +132,7 @@ public class BackInstructionTest {
 		reader = new BfReader(filename);
 		memory = new Memory();
 		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
-		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		JumpTable jumpTable = new BfCompiler(reader,executer.getContextExecuters()).compile(executer.getContextExecuters()).getSecond();
 		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
 		instruction = new BackInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -160,7 +160,7 @@ public class BackInstructionTest {
 		reader = new BfImageReader(filename);
 		memory = new Memory();
 		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bmp"}));
-		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		JumpTable jumpTable = new BfCompiler(reader,executer.getContextExecuters()).compile(executer.getContextExecuters()).getSecond();
 		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
 		instruction = new BackInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -192,7 +192,7 @@ public class BackInstructionTest {
 		reader = new BfReader(filename);
 		memory = new Memory();
 		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
-		JumpTable jumpTable = new BfCompiler(reader).compile(executer.getContextExecuters()).getSecond();
+		JumpTable jumpTable = new BfCompiler(reader,executer.getContextExecuters()).compile(executer.getContextExecuters()).getSecond();
 		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
 		reader.getNext();
 		instruction = new BackInstruction();

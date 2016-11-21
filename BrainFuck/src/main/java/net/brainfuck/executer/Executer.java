@@ -157,7 +157,7 @@ public class Executer {
         Memory m = new Memory();
         /*Reader r = this.initReader(argAnalizer);
         JumpTable jumpTable = initJumpTable(argAnalizer);*/
-        Pair <Reader, JumpTable> readerAndJump = new BfCompiler(r).compile(contextExecuters);
+        Pair <Reader, JumpTable> readerAndJump = new BfCompiler(r,contextExecuters).compile(contextExecuters);
         return initArgumentExecuter(argAnalizer, m, readerAndJump.getFirst(), readerAndJump.getSecond());
     }
 

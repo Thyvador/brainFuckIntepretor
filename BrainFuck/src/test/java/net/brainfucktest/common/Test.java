@@ -15,7 +15,7 @@ public class Test {
 	 *            the arguments
 	 */
     public static void main(String[] args) {
-        String[] args2 = {"-p", "Brainfuck/src/test/resources/assets/brainfucktest/common/yapi.bf"};
+        String[] args2 = {"-p", "Brainfuck/src/test/resources/assets/brainfucktest/common/test.bf","--rewrite"};
         new Main(args2); // On lance sur un fichier au hasard
     }
 }
