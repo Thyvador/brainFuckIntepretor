@@ -7,13 +7,15 @@ import static org.junit.Assert.assertEquals;
 
 // TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * Teh TestMemory tests the <code>Memory</code> class.
+ *
+ * @author Alexandre HILTCHER
  */
 public class TestMemory {
 	Memory memory;
 
 	/**
-	 * Sets the up.
+	 * Sets the memory for the following tests.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -24,7 +26,7 @@ public class TestMemory {
 	}
 
 	/**
-	 * Right.
+	 * Tests the right method.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -36,7 +38,7 @@ public class TestMemory {
 	}
 
 	/**
-	 * Left.
+	 * Tests the left method .
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -50,7 +52,7 @@ public class TestMemory {
 	}
 
 	/**
-	 * Incr.
+	 * Tests the incr method.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -62,7 +64,7 @@ public class TestMemory {
 	}
 
 	/**
-	 * Decr.
+	 * test the decr method.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -76,7 +78,7 @@ public class TestMemory {
 	}
 
 	/**
-	 * Gets the index.
+	 * Test if the reurned index is the current index.
 	 *
 	 * @return the index
 	 * @throws Exception

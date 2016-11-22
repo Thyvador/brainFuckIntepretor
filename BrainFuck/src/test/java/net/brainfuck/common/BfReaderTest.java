@@ -15,14 +15,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ReaderTest.
+ * The Class BfReaderTest tests the <code>BfReader</code> interface.
  *
  * @author Francois Melkonian
  * @date 16/11/2016
  */
-public class ReaderTest {
+public class BfReaderTest {
 	String filename;
 	String data;
 
@@ -46,7 +45,7 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Each instructions wrote in file is read in order.
+	 * Check if each instructions written in file is read in the correct order.
 	 *
 	 * @return the next
 	 * @throws Exception
@@ -61,9 +60,8 @@ public class ReaderTest {
 	}
 
 	/**
-	 * The executer pointer is correct when the file is read.
+	 * Check içf the execution pointer is correct when the file is read.
 	 *
-	 * @return the execution pointer
 	 * @throws Exception
 	 *             the exception
 	 */
@@ -77,10 +75,7 @@ public class ReaderTest {
 	}
 
 	/**
-	 * }
-	 * <p>
-	 * <p>
-	 * Test if we can write on file after we closed it.
+	 * Test if the file can be written after closed.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -113,7 +108,7 @@ public class ReaderTest {
 	}
 	
 	/**
-	 * Test if we can write on file after we closed it.
+	 * Test if the space are omitted.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -133,7 +128,7 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Check if seek move the pointer to the last mark.
+	 * Check if seek move the pointer to the given position.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -148,7 +143,7 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Check if seek move the pointer to the last mark, even after read instructions.
+	 * Check if seek move the pointer to given position, even after read instructions.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -166,7 +161,7 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Test if mark can be preserved during the read of a file.
+	 * Test if mark can be preserved during reading a file.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -184,7 +179,7 @@ public class ReaderTest {
 	}
 
 	/**
-	 * Test if multiple marks can be preserved during the read of a file.
+	 * Test if multiple marks can be preserved during reading a file.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -203,7 +198,7 @@ public class ReaderTest {
 
 
 	/**
-	 * Check if reset change the pointeur on file.
+	 * Check if reset change the pointer on file.
 	 *
 	 * @throws Exception
 	 *             the exception

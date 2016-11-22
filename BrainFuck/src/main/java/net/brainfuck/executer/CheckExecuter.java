@@ -6,13 +6,13 @@ import net.brainfuck.interpreter.BackInstruction;
 import net.brainfuck.interpreter.InstructionInterface;
 import net.brainfuck.interpreter.JumpInstruction;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CheckExecuter.
+ * Execute the AbstractInstruction command according to the "--trace" context.
  *
  * @author davidLANG
  */
 class CheckExecuter implements ContextExecuter{
+		
         static private int cpt = 0;
         
         /**
