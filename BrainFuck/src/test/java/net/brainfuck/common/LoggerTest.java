@@ -85,6 +85,7 @@ public class LoggerTest {
 	 */
 	@Test
 	public void startExecTime() throws Exception {
+		logger.reset();
 		long temps = System.currentTimeMillis();
 		logger.startExecTime();
 		int randomTimeExec = new Random().nextInt(500);
