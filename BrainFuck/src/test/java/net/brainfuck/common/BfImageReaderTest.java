@@ -12,16 +12,14 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BfImageReaderTest.
  *
- * @author FranÃ§ois Melkonian
- * @date 16/11/2016
+ * @author Francois Melkonian
  */
 public class BfImageReaderTest {
-	BfImageReader reader;
-	List<String> instructions;
+	private BfImageReader reader;
+	private List<String> instructions;
 
 
 	/**
@@ -45,7 +43,6 @@ public class BfImageReaderTest {
 	/**
 	 * Check if each instructions wrote in file is read in order.
 	 *
-	 * @return the next
 	 * @throws Exception
 	 *             the exception
 	 */
@@ -60,7 +57,6 @@ public class BfImageReaderTest {
 	/**
 	 * Check if the reader return null where the file is fully read.
 	 *
-	 * @return the next 2
 	 * @throws Exception
 	 *             the exception
 	 */
@@ -76,7 +72,6 @@ public class BfImageReaderTest {
 	/**
 	 * The executer pointer is correct when the file is read.
 	 *
-	 * @return the execution pointer
 	 * @throws Exception
 	 *             the exception
 	 */

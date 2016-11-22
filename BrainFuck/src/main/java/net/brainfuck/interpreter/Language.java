@@ -25,7 +25,7 @@ enum Language {
 	
 	static {
 		// Set interpretors
-		INCR.setInterpreter(new IncremanteInstruction());
+		INCR.setInterpreter(new IncrementInstruction());
 		DECR.setInterpreter(new DecrementInstruction());
 		RIGHT.setInterpreter(new RightInstruction());
 		LEFT.setInterpreter(new LeftInstruction());
@@ -65,7 +65,7 @@ enum Language {
 	 *
 	 * @return the aliases
 	 */
-	public String[] getAliases() {
+	private String[] getAliases() {
 		return aliases;
 	}
 
@@ -84,7 +84,7 @@ enum Language {
 	 * @param interpreter
 	 *            the new interpreter
 	 */
-	public void setInterpreter(AbstractExecute interpreter) {
+	private void setInterpreter(AbstractExecute interpreter) {
 		this.interpreter = interpreter;
 	}
 

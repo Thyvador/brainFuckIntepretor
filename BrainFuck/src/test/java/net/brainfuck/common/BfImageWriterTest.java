@@ -19,8 +19,8 @@ import static org.junit.Assert.assertArrayEquals;
  */
 public class BfImageWriterTest {
 
-	BfImageWriter writer;
-	byte[] imageArray;
+	private BfImageWriter writer;
+	private byte[] imageArray;
 	private static String filename;
 
 	/**
@@ -91,7 +91,7 @@ public class BfImageWriterTest {
 	/**
 	 * Clean up.
 	 *
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
 	@AfterClass

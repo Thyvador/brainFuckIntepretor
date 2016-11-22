@@ -92,11 +92,7 @@ public class BfImageReader implements Reader {
 		offX += 3;
 
 		if (r == 0 && g == 0 && b == 0) {
-			int calcul = (offY) * (width) / 9 + offX / 3 - 1;
-//	        Logger.getInstance().countInstruction(calcul);
-
 			return null;
-
 		}
 
 		return String.format("%02x%02x%02x", r, g, b);

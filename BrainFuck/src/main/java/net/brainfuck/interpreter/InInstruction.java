@@ -42,10 +42,10 @@ public class InInstruction extends AbstractExecute {
         try {
             value = System.in.read();
         } catch (java.io.IOException e) {
-            throw new FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
+            throw new FileNotFoundIn("can't be read");
         }
         if (value == -1) {
-            throw new FileNotFoundIn("IN_PATH : La lecture de caractère a échouée");
+            throw new FileNotFoundIn("is finished");
         }
         memory.set(value);
     }

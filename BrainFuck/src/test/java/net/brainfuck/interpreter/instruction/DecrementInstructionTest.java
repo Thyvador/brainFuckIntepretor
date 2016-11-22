@@ -23,10 +23,10 @@ import static org.junit.Assert.assertEquals;
  * Created by Alexandre on 16/11/2016.
  */
 public class DecrementInstructionTest {
-	ArgumentInstruction argumentInstruction;
-	Memory memory;
-	Reader reader;
-	DecrementInstruction instruction;
+	private ArgumentInstruction argumentInstruction;
+	private Memory memory;
+	private Reader reader;
+	private DecrementInstruction instruction;
 	private static String filename;
 
 	/**
@@ -112,7 +112,6 @@ public class DecrementInstructionTest {
 	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
-		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bmp";
 		String data = "4b0082";
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));

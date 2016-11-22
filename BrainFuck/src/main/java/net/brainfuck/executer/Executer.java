@@ -1,10 +1,7 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.*;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
-import net.brainfuck.exception.FileNotFoundException;
-import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.AbstractExecute;
 import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.JumpTable;
@@ -154,8 +151,6 @@ public class Executer {
         }
 
         Memory m = new Memory();
-        /*Reader r = this.initReader(argAnalizer);
-        JumpTable jumpTable = initJumpTable(argAnalizer);*/
         Pair <Reader, JumpTable> readerAndJump = new BfCompiler(r,contextExecuters).compile(contextExecuters);
         return initArgumentExecuter(argAnalizer, m, readerAndJump.getFirst(), readerAndJump.getSecond());
     }

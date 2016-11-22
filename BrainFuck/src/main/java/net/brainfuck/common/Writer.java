@@ -4,7 +4,6 @@ package net.brainfuck.common;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Writer interface represents a writer.
  *

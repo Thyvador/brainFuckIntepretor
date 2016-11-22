@@ -193,7 +193,7 @@ public class BfCompiler {
 	 *             the brackets parse exception
 	 */
 	private void writeInstructionAndMacro(String instruction) throws IOException, BracketsParseException {
-		Language currentInstruction = null;
+		Language currentInstruction;
 
 		if ((currentInstruction = Language.languageMap.get(instruction)) != null) {
 			write(currentInstruction);

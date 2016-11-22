@@ -26,7 +26,7 @@ import net.brainfuck.exception.SyntaxErrorException;
  */
 public class BfCompilerTest {
 
-	BfCompiler compiler;
+	private BfCompiler compiler;
 
 	/**
 	 * Sets the up.

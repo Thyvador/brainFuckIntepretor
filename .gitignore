@@ -1,12 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
-/.idea/workspace.xml
 /bin/
 /.settings/
 /.idea
-BrainFuck.iml
 brainFuck.iml
 *.iml
-/BrainFuck/src/main/main.iml
-/BrainFuck/src/test/test.iml
-
 .gitignore
