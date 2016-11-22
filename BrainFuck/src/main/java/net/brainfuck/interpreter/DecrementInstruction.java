@@ -10,7 +10,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
  *
  * @author davidLANG
  */
-public class DecrementInstruction extends AbstractExecute {
+public class DecrementInstruction extends AbstractInstruction {
 	
     /**
 	 * Instantiates a new decrement instruction.
