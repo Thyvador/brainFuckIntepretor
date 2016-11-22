@@ -7,7 +7,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.InstructionInterface;
 
 /**
- * Execute the AbstractExecute command according to the "--rewrite" context.
+ * Execute the AbstractInstruction command according to the "--rewrite" context.
  *
  * @author davidLANG
  */
@@ -15,7 +15,7 @@ class RewriteExecuter implements ContextExecuter {
 
 
     /**
-	 * Execute the AbstractExecute command according to the "--rewrite" context.
+	 * Execute the AbstractInstruction command according to the "--rewrite" context.
 	 *
 	 * @param i the AbstractCommand to execute
 	 * @param argumentExecuter the argument executer

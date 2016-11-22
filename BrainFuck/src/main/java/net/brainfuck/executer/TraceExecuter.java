@@ -5,14 +5,14 @@ import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.InstructionInterface;
 
 /**
- * Execute the AbstractExecute command according to the "--trace" context.
+ * Execute the AbstractInstruction command according to the "--trace" context.
  *
  * @author Alexandre
  */
 public class TraceExecuter implements ContextExecuter{
 
     /**
-	 * Execute the AbstractExecute command according to the "--trace" context.
+	 * Execute the AbstractInstruction command according to the "--trace" context.
 	 *
 	 * @param i the AbstractCommand to execute
 	 * @param argumentExecuter the argument executer

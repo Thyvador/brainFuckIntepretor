@@ -2,7 +2,7 @@ package net.brainfuck.executer;
 
 import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.AbstractExecute;
+import net.brainfuck.interpreter.AbstractInstruction;
 import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.JumpTable;
 
@@ -50,16 +50,16 @@ public class Executer {
 	}
 
     /**
-     * Execute the AbstractExecute command according to the context.
+     * Execute the AbstractInstruction command according to the context.
      *
-     * @param i AbstractExecute command to execute
+     * @param i AbstractInstruction command to execute
      * @throws MemoryOutOfBoundsException Throw by memory
      * @throws BracketsParseException     Throw by Interpreter
      * @throws MemoryOverFlowException    Throw by memory
      * @throws FileNotFoundIn             Throw by reader
      * @throws IOException                Throw by reader
      */
-    public void execute(AbstractExecute i) throws MemoryOutOfBoundsException, BracketsParseException,
+    public void execute(AbstractInstruction i) throws MemoryOutOfBoundsException, BracketsParseException,
             MemoryOverFlowException, FileNotFoundIn, IOException {
         for (ContextExecuter c : contextExecuters) {
             c.execute(i, argumentExecuter);

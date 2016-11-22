@@ -5,14 +5,14 @@ import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.InstructionInterface;
 
 /**
- * Execute the AbstractExecute command according to a context without "--rewrite" and "--check".
+ * Execute the AbstractInstruction command according to a context without "--rewrite" and "--check".
  *
  * @author davidLANG
  */
 class UncheckExecuter implements ContextExecuter {
 
     /**
-	 * Execute the AbstractExecute command according to a context without "--rewrite" and "--check".
+	 * Execute the AbstractInstruction command according to a context without "--rewrite" and "--check".
 	 *
 	 * @param i the AbstractCommand to execute
 	 * @param argumentExecuter the argument executer

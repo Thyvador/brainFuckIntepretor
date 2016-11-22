@@ -7,14 +7,14 @@ import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.InstructionInterface;
 
 /**
- * Execute the AbstractExecute command according to the "--translate" context.
+ * Execute the AbstractInstruction command according to the "--translate" context.
  *
  * @author davidLANG
  */
 class TranslateExecuter implements ContextExecuter {
 
     /**
-	 * Execute the AbstractExecute command according to the "--translate" context.
+	 * Execute the AbstractInstruction command according to the "--translate" context.
 	 *
 	 * @param i the AbstractCommand to execute
 	 * @param argumentExecuter the argument executer

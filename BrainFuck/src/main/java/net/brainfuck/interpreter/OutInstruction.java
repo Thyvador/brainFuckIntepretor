@@ -10,7 +10,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
  *
  * @author François Melkonian
  */
-public class OutInstruction extends AbstractExecute {
+public class OutInstruction extends AbstractInstruction {
 
     /**
 	 * Instantiates a new out instruction.

@@ -16,7 +16,7 @@ class CheckExecuter implements ContextExecuter{
         static private int cpt = 0;
         
         /**
-		 * Execute the AbstractExecute command according to a context without "--rewrite" and "--check".
+		 * Execute the AbstractInstruction command according to a context without "--rewrite" and "--check".
 		 *
 		 * @param i
 		 *            the AbstractCommand to execute
