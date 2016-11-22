@@ -16,9 +16,8 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class LeftInstructionTest {
 	ArgumentInstruction argumentInstruction;
@@ -30,8 +29,6 @@ public class LeftInstructionTest {
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -51,8 +48,6 @@ public class LeftInstructionTest {
 	/**
 	 * Left.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void left() throws Exception {
@@ -78,8 +73,6 @@ public class LeftInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void rewriteLong() throws Exception {
@@ -104,10 +97,6 @@ public class LeftInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws Exception
-	 *             the exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
 	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
@@ -130,8 +119,6 @@ public class LeftInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void translate() throws Exception {
