@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
 
-// TODO: Auto-generated Javadoc
 /**
  * @author Alexandre Hiltcher,François Melkonian
  */

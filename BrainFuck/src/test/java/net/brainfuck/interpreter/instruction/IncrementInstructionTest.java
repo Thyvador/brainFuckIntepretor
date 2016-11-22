@@ -17,11 +17,10 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
-public class IncremanteInstructionTest {
+public class IncrementInstructionTest {
 	private ArgumentInstruction argumentInstruction;
 	private Memory memory;
 	private Reader reader;

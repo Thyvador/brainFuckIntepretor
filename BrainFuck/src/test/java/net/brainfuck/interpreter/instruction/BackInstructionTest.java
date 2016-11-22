@@ -35,8 +35,6 @@ public class BackInstructionTest {
 	/**
 	 * Create a.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -58,8 +56,6 @@ public class BackInstructionTest {
 	/**
 	 * Back.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	//La case mémoire et à 0, ca passe.
 	@Test
@@ -72,8 +68,6 @@ public class BackInstructionTest {
 	/**
 	 * Do not back.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void doNotBack() throws Exception {
@@ -87,8 +81,6 @@ public class BackInstructionTest {
 	/**
 	 * Parenthizing error.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test (expected = BracketsParseException.class)
 	public void parenthizingError() throws Exception {
@@ -111,10 +103,6 @@ public class BackInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test
 	public void rewriteLong() throws Exception, IOException {
@@ -140,12 +128,8 @@ public class BackInstructionTest {
 	}
 
 	/**
-	 * Rewrite col.
+	 * Write "back" in a bmp file and read its
 	 *
-	 * @throws Exception
-	 *             the exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test
 	public void rewriteCol() throws Exception, IOException {
@@ -171,8 +155,6 @@ public class BackInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
@@ -198,10 +180,8 @@ public class BackInstructionTest {
 	}
 
 	/**
-	 * Tear down.
+	 * Delete test file
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@After
 	public void tearDown() throws Exception {

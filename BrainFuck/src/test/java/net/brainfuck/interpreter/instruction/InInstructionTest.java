@@ -15,9 +15,8 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class InInstructionTest {
 	private ArgumentInstruction argumentInstruction;
@@ -29,8 +28,6 @@ public class InInstructionTest {
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -57,8 +54,6 @@ public class InInstructionTest {
 	/**
 	 * In.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void in() throws Exception {
@@ -68,9 +63,8 @@ public class InInstructionTest {
 
 	/**
 	 * Simule empty file.
+	 * An FileNotFoundIn Exception may happens.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test(expected = net.brainfuck.exception.FileNotFoundIn.class)
 	public void badIn() throws Exception {
@@ -84,8 +78,6 @@ public class InInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void rewriteLong() throws Exception {
@@ -110,14 +102,9 @@ public class InInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws Exception
-	 *             the exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
 	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
-		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bmp";
 		String data = "ffff00";
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
@@ -136,8 +123,6 @@ public class InInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void translate() throws Exception {

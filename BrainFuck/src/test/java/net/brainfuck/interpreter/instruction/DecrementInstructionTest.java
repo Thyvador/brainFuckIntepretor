@@ -18,9 +18,8 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class DecrementInstructionTest {
 	private ArgumentInstruction argumentInstruction;
@@ -32,8 +31,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -53,8 +50,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Decr.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void decr() throws Exception {
@@ -79,8 +74,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void rewriteLong() throws Exception {
@@ -105,8 +98,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 * @throws FileNotFoundException
 	 *             the file not found exception
 	 */
@@ -130,8 +121,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void translate() throws Exception {
@@ -155,8 +144,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Clean up.
 	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
 	@AfterClass
 	public static void cleanUp() throws IOException {
