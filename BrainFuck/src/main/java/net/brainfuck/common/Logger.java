@@ -8,7 +8,7 @@ import java.io.FileWriter;
 /**
  * Count and group metrics about the execution
  *
- * @author Francois Melkonian
+ * @author Francois Melkonian,Alexandre Hiltcher
  */
 public class Logger {
 
@@ -46,15 +46,6 @@ public class Logger {
 	}
 
 	/**
-	 * Gets the instruction number.
-	 *
-	 * @return the num instructions
-	 */
-	public int getNumInstructions() {
-		return numInstructions;
-	}
-
-	/**
 	 * Gets the num exec move.
 	 *
 	 * @return the num exec move
@@ -63,41 +54,6 @@ public class Logger {
 		return numExecMove;
 	}
 
-	/**
-	 * Gets the num memory write.
-	 *
-	 * @return the num memory write
-	 */
-	public int getNumMemoryWrite() {
-		return numMemoryWrite;
-	}
-
-	/**
-	 * Gets the num memory read.
-	 *
-	 * @return the num memory read
-	 */
-	public int getNumMemoryRead() {
-		return numMemoryRead;
-	}
-
-	/**
-	 * Gets the num memory move.
-	 *
-	 * @return the num memory move
-	 */
-	public int getNumMemoryMove() {
-		return numMemoryMove;
-	}
-
-	/**
-	 * Gets the start.
-	 *
-	 * @return the start
-	 */
-	public long getStart() {
-		return start;
-	}
 
 	/**
 	 * Gets the step.
@@ -277,7 +233,7 @@ public class Logger {
 	}
 
 	/**
-	 * Reset.
+	 * Reset the Logger
 	 */
 	public void reset() {
 		numExecMove = 0;

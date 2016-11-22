@@ -24,6 +24,7 @@ public class LoggerTest {
 	private Logger logger;
 	private static String filename;
 	private static String filenameLOG;
+	Memory memory;
 
 	/**
 	 * Sets the up.
@@ -41,16 +42,14 @@ public class LoggerTest {
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
+		memory = new Memory();
 	}
 
 	/**
 	 * Check if the resume contains all desired metrics if the program is empty. Another test check the EXEC_TIME, a test on it here will
 	 * depend of the context.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
-	//@Ignore ("Probleme")
 	@Test
 	public void showResume() throws Exception {
 		logger.reset();
@@ -66,20 +65,16 @@ public class LoggerTest {
 	/**
 	 * Incr instruction.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void incrInstruction() throws Exception {
 		logger.incrInstruction();
-		assertEquals(1, logger.getNumInstructions());
+		assertTrue(logger.showResume(memory).contains("PROG_SIZE : 1\n") );
 	}
 
 	/**
 	 * Wait a random time ( between 0 and 500ms ) to simulate a program, then check if the logger return the real execution time.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void startExecTime() throws Exception {
@@ -97,47 +92,39 @@ public class LoggerTest {
 
 	/**
 	 * Count memory write.
-	 *
-	 * @throws Exception
-	 *             the exception
+
 	 */
 	@Test
 	public void countMemoryWrite() throws Exception {
 		logger.countMemoryWrite();
-		assertEquals(1, logger.getNumMemoryWrite());
+		assertTrue(logger.showResume(memory).contains("DATA_WRITE : 1\n") );
 	}
 
 	/**
 	 * Count memory read.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void countMemoryRead() throws Exception {
 		logger.reset();
 		logger.countMemoryRead();
-		assertEquals(1, logger.getNumMemoryRead());
+		assertTrue(logger.showResume(memory).contains("DATA_READ : 1\n") );
 	}
 
 	/**
 	 * Count memory move.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void countMemoryMove() throws Exception {
 		logger.reset();
 		logger.countMemoryMove();
-		assertEquals(1, logger.getNumMemoryMove());
+		assertTrue(logger.showResume(memory).contains("DATA_MOVE : 1\n") );
 	}
 
 	/**
 	 * Count move.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void countMove() throws Exception {
@@ -149,8 +136,6 @@ public class LoggerTest {
 	/**
 	 * Incr step.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void incrStep() throws Exception {
@@ -164,8 +149,6 @@ public class LoggerTest {
 	/**
 	 * Sets the writer.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void setWriter() throws Exception {
@@ -176,8 +159,6 @@ public class LoggerTest {
 	/**
 	 * Write.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void write() throws Exception {
@@ -190,8 +171,6 @@ public class LoggerTest {
 	/**
 	 * Write 1.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void write1() throws Exception {
@@ -210,8 +189,6 @@ public class LoggerTest {
 	/**
 	 * Checks if is writer open.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void isWriterOpen() throws Exception {
@@ -222,8 +199,6 @@ public class LoggerTest {
 	/**
 	 * Check time execution.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void checkTimeExecution() throws Exception {
@@ -231,9 +206,10 @@ public class LoggerTest {
 	}
 
 	/**
-	 * Close writer.
+	 * Write a message after writer has been close is forbidden.$
+	 * An error will occurs.
 	 *
-	 * @throws Exception
+	 * @throws NullPointerException
 	 *             the exception
 	 */
 	@Test(expected = java.lang.NullPointerException.class)
