@@ -7,7 +7,7 @@ import net.brainfuck.interpreter.InstructionInterface;
 import net.brainfuck.interpreter.JumpInstruction;
 
 /**
- * The Class CheckExecuter.
+ * Execute the AbstractInstruction command according to the "--trace" context.
  *
  * @author davidLANG
  */
