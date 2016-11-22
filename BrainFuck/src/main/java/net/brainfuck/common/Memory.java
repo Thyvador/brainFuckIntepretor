@@ -3,7 +3,6 @@ package net.brainfuck.common;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The <code>Memory</code> class represents the memory of the BrainFuck interpreter.
  *

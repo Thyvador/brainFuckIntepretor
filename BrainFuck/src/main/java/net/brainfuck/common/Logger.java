@@ -5,18 +5,10 @@ import net.brainfuck.exception.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-// TODO: Auto-generated Javadoc
 /**
- * Count and group informations about the execution, a.k.a :
- * PROG_SIZE : nombres d'instructions
- * EXEC_TIME : temps d'éxécution
- * EXEC_MOVE : nombre de changements du pointeur
- * DATA_MOVE : nombre de changement du pointeur de la memoire (<>)
- * DATA_WRITE : nombre d'écriture dans la mémoire (+-,)
- * DATA_READ : nombre de lecture memoire ( [].)
+ * Count and group metrics about the execution
  *
  * @author Francois Melkonian
- *         on 05/11/2016
  */
 public class Logger {
 
@@ -54,7 +46,7 @@ public class Logger {
 	}
 
 	/**
-	 * Gets the num instructions.
+	 * Gets the instruction number.
 	 *
 	 * @return the num instructions
 	 */
