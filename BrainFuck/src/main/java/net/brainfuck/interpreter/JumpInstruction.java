@@ -7,9 +7,8 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class JumpInstruction.
+ *  Representation of JUMP instruction "[" "JUMP".
  */
 public class JumpInstruction extends AbstractInstruction {
 
@@ -20,46 +19,41 @@ public class JumpInstruction extends AbstractInstruction {
 		super(Language.JUMP);
 	}
 
-	/* (non-Javadoc)
-	 * @see net.brainfuck.interpreter.InstructionInterface#execute(net.brainfuck.common.ArgumentInstruction)
+	/**
+	 * Execute the nonLinear approch of JUMP instruction.
+	 *
+	 * @param argumentInstruction the arguments
+	 * @throws MemoryOutOfBoundsException throw by memory
+	 * @throws IOException throw by memory
 	 */
 	@Override
-	public void execute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+	public void execute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException, IOException {
 		nonLinearExecute(argumentInstruction);
 	}
 
 	/**
 	 * Non linear execute.
 	 *
-	 * @param argumentInstruction
-	 *            the argument instruction
-	 * @throws MemoryOutOfBoundsException
-	 *             the memory out of bounds exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 * @param argumentInstruction the argument instruction
+	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	private void nonLinearExecute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+	private void nonLinearExecute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException, IOException {
 		Reader reader = argumentInstruction.getReader();
 
+		// Reach corresponding closing bracket
 		if (argumentInstruction.getMemory().get() == 0) {
 			reader.seek(argumentInstruction.getJumpTable().getAssociated(reader.getExecutionPointer()));
-			// Reach corresponding closing bracket
 		}
 	}
 	
 	/**
 	 * Linear execute.
 	 *
-	 * @param argumentInstruction
-	 *            the argument instruction
-	 * @throws MemoryOutOfBoundsException
-	 *             the memory out of bounds exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 * @param argumentInstruction the argument instruction
+	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws BracketsParseException the brackets parse exception
 	 */
 	@SuppressWarnings("unused")
 	@Deprecated

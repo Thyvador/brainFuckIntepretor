@@ -24,6 +24,8 @@ import net.brainfuck.executer.ContextExecuter;
 
 /**
  * The Class BfCompiler.
+ * Compile and analyze the brainfuck syntax.
+ *
  */
 public class BfCompiler {
 

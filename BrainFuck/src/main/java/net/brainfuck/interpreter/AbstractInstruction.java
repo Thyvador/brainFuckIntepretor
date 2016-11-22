@@ -5,7 +5,7 @@ import net.brainfuck.common.Logger;
 import net.brainfuck.exception.*;
 
 /**
- * Abstraction of a
+ * Abstraction of a instruction
  */
 public abstract class AbstractInstruction implements InstructionInterface {
 
@@ -37,6 +37,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
     }
 
 	/**
+	 * Execute the instruction and write the trace.
 	 *
 	 * @param argumentInstruction
 	 *            the argument instruction

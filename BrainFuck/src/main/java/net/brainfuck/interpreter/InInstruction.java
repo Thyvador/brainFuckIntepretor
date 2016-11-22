@@ -7,9 +7,8 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class InInstruction.
+ *  Representation of IN instruction "." "IN".
  *
  * @author François Melkonian IN_PATH
  */
@@ -23,16 +22,12 @@ public class InInstruction extends AbstractInstruction {
 	}
 
     /**
-	 * Execute "" method from class Memory.
+	 * Execute "set" method from class Memory.
 	 *
-	 * @param argumentInstruction
-	 *            the argument instruction
-	 * @throws MemoryOverFlowException
-	 *             the memory over flow exception
-	 * @throws MemoryOutOfBoundsException
-	 *             the memory out of bounds exception
-	 * @throws FileNotFoundIn
-	 *             the file not found in
+	 * @param argumentInstruction the argument instruction
+	 * @throws MemoryOverFlowException the memory over flow exception
+	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
+	 * @throws FileNotFoundIn the file not found in
 	 */
     @Override
     public void execute(ArgumentInstruction argumentInstruction) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {

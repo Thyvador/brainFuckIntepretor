@@ -5,7 +5,7 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class LeftInstruction.
+ * Representation of LEFT instruction "<" "LEFT".
  *
  * @author davidLANG
  */
@@ -21,10 +21,8 @@ public class LeftInstruction extends AbstractInstruction {
 	/**
 	 * Execute the "left" method of Memory Class.
 	 *
-	 * @param argumentInstruction
-	 *            the argument instruction
-	 * @throws MemoryOutOfBoundsException
-	 *             the memory out of bounds exception
+	 * @param argumentInstruction the argument instruction
+	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 */
     @Override
     public void execute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException {

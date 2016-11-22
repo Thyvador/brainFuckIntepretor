@@ -50,10 +50,8 @@ enum Language {
 	/**
 	 * Instantiates a new language.
 	 *
-	 * @param interpreter
-	 *            InstructionInterface corresponding to syntax
-	 * @param aliases
-	 *            au moins 2 string : {String shortSyntax, String longSyntax}
+	 * @param interpreter InstructionInterface corresponding to syntax
+	 * @param aliases au moins 2 string : {String shortSyntax, String longSyntax}
 	 */
 	Language(AbstractInstruction interpreter, String... aliases) {
 		this.interpreter = interpreter;
@@ -81,8 +79,7 @@ enum Language {
 	/**
 	 * Sets the interpreter.
 	 *
-	 * @param interpreter
-	 *            the new interpreter
+	 * @param interpreter the new interpreter
 	 */
 	private void setInterpreter(AbstractInstruction interpreter) {
 		this.interpreter = interpreter;
