@@ -10,7 +10,7 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 /**
  * The Class BackInstruction.
  */
-public class BackInstruction extends AbstractExecute {
+public class BackInstruction extends AbstractInstruction {
 
 	/**
 	 * Instantiates a new back instruction.

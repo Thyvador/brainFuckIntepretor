@@ -3,13 +3,14 @@ package net.brainfuck.executer;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum Context.
  *
  * @author davidLANG
  */
 public enum Context {
+	
+    /** The check flag. */
     CHECK("--check"),
     UNCHECK("--uncheck"),
     TRANSLATE("--translate"),

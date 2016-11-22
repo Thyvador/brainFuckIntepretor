@@ -10,7 +10,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
  *
  * @author davidLANG
  */
-public class IncrementInstruction extends AbstractExecute {
+public class IncrementInstruction extends AbstractInstruction {
 
     /**
 	 * Instantiates a new incremante instruction.

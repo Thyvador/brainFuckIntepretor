@@ -13,7 +13,7 @@ import net.brainfuck.exception.MemoryOverFlowException;
  *
  * @author François Melkonian IN_PATH
  */
-public class InInstruction extends AbstractExecute {
+public class InInstruction extends AbstractInstruction {
 
 	/**
 	 * Instantiates a new in instruction.

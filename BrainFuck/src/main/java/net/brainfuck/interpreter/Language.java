@@ -36,7 +36,7 @@ enum Language {
 		// Init language map
 		Language[] languages = Language.values();
 		for (Language language : languages) {
-			// AbstractExecute interpreter = language.getInterpreter();
+			// AbstractInstruction interpreter = language.getInterpreter();
 			String[] aliases = language.getAliases();
 			for (String alias : aliases) {
 				languageMap.put(alias, language);
@@ -44,7 +44,7 @@ enum Language {
 		}
 	}
 
-	private AbstractExecute interpreter;
+	private AbstractInstruction interpreter;
 	private String[] aliases;
 
 	/**
@@ -55,7 +55,7 @@ enum Language {
 	 * @param aliases
 	 *            au moins 2 string : {String shortSyntax, String longSyntax}
 	 */
-	Language(AbstractExecute interpreter, String... aliases) {
+	Language(AbstractInstruction interpreter, String... aliases) {
 		this.interpreter = interpreter;
 		this.aliases = aliases;
 	}
@@ -74,7 +74,7 @@ enum Language {
 	 *
 	 * @return the interpreter
 	 */
-	public AbstractExecute getInterpreter() {
+	public AbstractInstruction getInterpreter() {
 		return interpreter;
 	}
 
@@ -84,7 +84,7 @@ enum Language {
 	 * @param interpreter
 	 *            the new interpreter
 	 */
-	private void setInterpreter(AbstractExecute interpreter) {
+	private void setInterpreter(AbstractInstruction interpreter) {
 		this.interpreter = interpreter;
 	}
 

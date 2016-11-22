@@ -9,7 +9,7 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
  *
  * @author davidLANG
  */
-public class LeftInstruction extends AbstractExecute {
+public class LeftInstruction extends AbstractInstruction {
 	
     /**
 	 * Instantiates a new left instruction.

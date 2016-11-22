@@ -11,7 +11,7 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 /**
  * The Class JumpInstruction.
  */
-public class JumpInstruction extends AbstractExecute {
+public class JumpInstruction extends AbstractInstruction {
 
 	/**
 	 * Instantiates a new jump instruction.

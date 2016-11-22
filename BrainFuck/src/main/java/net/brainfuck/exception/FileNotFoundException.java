@@ -1,10 +1,9 @@
 package net.brainfuck.exception;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * Signal when a file to read is not found.
- * This exception will be thrown by <code>BfReader</code>.
+ * This exception will be thrown by <code>BfCompiler</code> and <code>BfImageWriter</code>.
  *
  * @author Alexandre Hiltcher
  */

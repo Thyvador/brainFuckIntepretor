@@ -3,7 +3,7 @@ package net.brainfuck.exception;
 
 /**
  * Signal when a file to read is not found is detected in the file.
- * This exception will be thrown by <code>LineReader</code>.
+ * This exception will be thrown by <code>InInstruction</code>.
  *
  * @author Alexandre Hiltcher
  * @author Francois Melkonian
