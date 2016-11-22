@@ -110,13 +110,14 @@ public class Main {
 	 * @throws FileNotFoundException
 	 *             throw by System.setIn()
 	 */
-    private void setIn(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
+    private void setIn(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IncorrectArgumentException {
         String inPath = argAnalizer.getArgument(IN_PATH);
         if(inPath != null){
             try {
                 System.setIn(new FileInputStream(inPath));
             } catch (java.io.FileNotFoundException e) {
-                throw new FileNotFoundException(inPath);
+	            throw new IncorrectArgumentException("IN_PATH file '"+inPath+"' don't exist");
+
             }
         }
     }
@@ -129,9 +130,13 @@ public class Main {
 	 * @throws FileNotFoundException
 	 *             throw by System.setOut()
 	 */
-    private void setOut(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
+    private void setOut(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IncorrectArgumentException {
         String outPath = argAnalizer.getArgument(OUT_PATH);
         if(outPath != null){
+	        File outFile = new File(outPath);
+	        if(!outFile.exists()||outPath.startsWith("-")){
+		        throw new IncorrectArgumentException("OUT_PATH file '"+outPath+"' don't exist");
+	        }
             try {
                 PrintStream printStream = new PrintStream(outPath);
                 System.setOut(printStream);
@@ -149,7 +154,7 @@ public class Main {
 	 * @throws FileNotFoundException
 	 *             if the path entered isn't valide, the file is missing and can't be open
 	 */
-    private void setIO(ArgumentAnalyzer a) throws FileNotFoundException{
+    private void setIO(ArgumentAnalyzer a) throws FileNotFoundException, IncorrectArgumentException {
         this.setIn(a);
         this.setOut(a);
     }
@@ -170,7 +175,7 @@ public class Main {
 	 * @throws BracketsParseException
 	 *             the brackets parse exception
 	 */
-    private void init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
+    private void init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException, IncorrectArgumentException {
         checkPath(argAnalizer);
         setIO(argAnalizer);
         initLoggerFromContext(argAnalizer);
