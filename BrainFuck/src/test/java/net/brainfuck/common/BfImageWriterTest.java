@@ -13,8 +13,8 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertArrayEquals;
 
-// TODO: Auto-generated Javadoc
 /**
+ * BfImageWriterTest tests the <code>BfImageWriter</code> class.
  * @author Alexandre Hiltcher
  */
 public class BfImageWriterTest {
@@ -24,7 +24,7 @@ public class BfImageWriterTest {
 	private static String filename;
 
 	/**
-	 * Sets the up.
+	 * Sets the writer for following tests.
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
@@ -48,7 +48,7 @@ public class BfImageWriterTest {
 	}
 
 	/**
-	 * Write.
+	 * Tests the method write with int as parameters.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -62,7 +62,7 @@ public class BfImageWriterTest {
 	}
 
 	/**
-	 * Write 1.
+	 * Tests the method write with String as parameters.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -77,7 +77,7 @@ public class BfImageWriterTest {
 	}
 
 	/**
-	 * Close.
+	 * Check if the file cannot be written when writer closed.
 	 *
 	 * @throws Exception
 	 *             the exception

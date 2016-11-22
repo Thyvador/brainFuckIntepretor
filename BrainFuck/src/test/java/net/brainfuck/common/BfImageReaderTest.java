@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * The Class BfImageReaderTest.
+ * The Class BfImageReaderTest tests the <code>BfImageReader</code> class.
  *
  * @author Francois Melkonian
  */
@@ -41,7 +41,7 @@ public class BfImageReaderTest {
 
 
 	/**
-	 * Check if each instructions wrote in file is read in order.
+	 * Check if each instructions written in the file is read correctly.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -55,7 +55,7 @@ public class BfImageReaderTest {
 	}
 
 	/**
-	 * Check if the reader return null where the file is fully read.
+	 * Check if the reader return null when the file is fully read.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -70,7 +70,7 @@ public class BfImageReaderTest {
 	}
 	
 	/**
-	 * The executer pointer is correct when the file is read.
+	 * Test if the execution pointer is correct when the file is read.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -85,7 +85,7 @@ public class BfImageReaderTest {
 
 
 	/**
-	 * Test if we can write on file after we closed it.
+	 * Test if file can be written when closed.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -100,7 +100,7 @@ public class BfImageReaderTest {
 	}
 
 	/**
-	 * check if use reset before mark throw an error.
+	 * Check if use reset before mark throw an error.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -111,7 +111,7 @@ public class BfImageReaderTest {
 	}
 
 	/**
-	 * Check if reset change the pointeur on file SPOILER : actuellement, ne le fait pas.
+	 * Check if reset change the pointer in the file.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -177,7 +177,7 @@ public class BfImageReaderTest {
 	}
 
 	/**
-	 * Check if seek move the pointer to the last mark.
+	 * Check if seek move the pointer to the given position.
 	 *
 	 * @throws Exception
 	 *             the exception

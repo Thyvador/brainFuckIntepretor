@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class CheckExecuterTest.
+ * The Class CheckExecuterTest tests the <code>CheckExecuter</code> class.
  *
  * @author François Melkonian
  * @date 16/11/2016
@@ -19,7 +19,7 @@ public class CheckExecuterTest {
 	private ArgumentAnalyzer argumentAnalyzer;
 
 	/**
-	 * Sets the up.
+	 * Sets the arguments for the following tests.
 	 *
 	 * @throws IncorrectArgumentException
 	 *             the incorrect argument exception
@@ -32,7 +32,7 @@ public class CheckExecuterTest {
 	}
 
 	/**
-	 * Execute.
+	 * Tests the execute function.
 	 *
 	 * @throws Exception
 	 *             the exception
@@ -43,7 +43,7 @@ public class CheckExecuterTest {
 	}
 
 	/**
-	 * Inits the cpt.
+	 * Initialize the cpt.
 	 *
 	 * @throws Exception
 	 *             the exception

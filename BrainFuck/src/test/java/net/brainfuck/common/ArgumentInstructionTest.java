@@ -7,9 +7,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ArgumentInstructionTest.
+ * The Class ArgumentInstructionTest tests the <code>ArgumentInstruction</code> class.
  */
 public class ArgumentInstructionTest {
 
@@ -20,7 +19,7 @@ public class ArgumentInstructionTest {
 	private ArgumentInstruction toTest;
 
 	/**
-	 * Sets the up.
+	 * Sets up the memory and the reader for the following tests.
 	 */
 	@Before
 	public void setUp() {

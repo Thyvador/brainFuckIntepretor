@@ -1,6 +1,5 @@
 package net.brainfuck.exception;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * Signal when a file to read is not found is detected in the file.
