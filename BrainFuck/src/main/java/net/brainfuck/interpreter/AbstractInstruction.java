@@ -40,11 +40,11 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 *
 	 * @param argumentInstruction
 	 *            the argument instruction
-	 * @throws IOException
-	 * @throws MemoryOutOfBoundsException
-	 * @throws BracketsParseException
-	 * @throws MemoryOverFlowException
-	 * @throws FileNotFoundIn
+	 * @throws IOException throw by reader
+	 * @throws MemoryOutOfBoundsException throw by memory
+	 * @throws BracketsParseException throw by interpreter
+	 * @throws MemoryOverFlowException throw by memory
+	 * @throws FileNotFoundIn throw by writer
 	 */
     public final void trace(ArgumentInstruction argumentInstruction) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn {
 		execute(argumentInstruction);

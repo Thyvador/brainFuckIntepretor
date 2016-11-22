@@ -4,8 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +21,7 @@ import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class BfCompiler.
  */
@@ -36,13 +34,12 @@ public class BfCompiler {
 	private int pos = 0;
 	private Map<String, List<Language>> macros = new HashMap<>();
 
-	//private Map<String, String>
 
 	/**
 	 * Instantiates a new bf compiler.
 	 *
 	 * @param reader the reader
-	 * @throws IOException           Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws FileNotFoundException the file not found exception
 	 */
 	public BfCompiler(Reader reader) throws IOException, FileNotFoundException {
@@ -60,6 +57,14 @@ public class BfCompiler {
 		}
 	}
 
+	/**
+	 * Initialize the BfCompiler Object
+	 *
+	 * @param r Reader
+	 * @param contextExecuters List of context get by ArgumentAnalyzer
+	 * @throws FileNotFoundException when file is not found
+	 * @throws IOException Throw by bufferedWriter
+	 */
 	public BfCompiler(Reader r, List<ContextExecuter> contextExecuters) throws FileNotFoundException, IOException {
 
 		this.reader = r;
@@ -77,28 +82,39 @@ public class BfCompiler {
 
 
 	/**
-	 * Adds the macro to macro.
+	 * Get list of instruction of a macro.
+	 *
+	 * @param definitions definition of a macro "++++"
+	 * @param nb the number of time the macro is call
+	 * @return List of instruction :  N * List of intruction of a macro
 	 */
-	private List<Language> getMacroInstructions(String[] definitions, int i, int nb) {
+	private List<Language> getMacroInstructions(String definitions, int nb) {
 		List<Language> instrList = new ArrayList<>();
 
 		for (int cpt=0; cpt < nb; cpt++) {
-			instrList.addAll(macros.get(definitions[i]));
+			instrList.addAll(macros.get(definitions));
 		}
 		return instrList;
 	}
 
-
-	private List<Language> getListOfInstruction(String[] definitions, int i) throws SyntaxErrorException {
+	/**
+	 *
+	 * Read a string and return the list of instruction corresponding
+	 *
+	 * @param definitions definitions definition of a macro "++++"
+	 * @return List of instruction
+	 * @throws SyntaxErrorException when an instruction is unknown
+	 */
+	private List<Language> getListOfInstruction(String definitions) throws SyntaxErrorException {
 		Language language;
 		List<Language> instrList = new ArrayList<>();
 
-		if ((language = Language.languageMap.get(definitions[i])) != null) {
+		if ((language = Language.languageMap.get(definitions)) != null) {
 			instrList.add(language);
 		} else {
-			for (char inst: definitions[i].toCharArray()) {
+			for (char inst: definitions.toCharArray()) {
 				if ((language = Language.languageMap.get("" + inst)) == null) {
-					throw  new SyntaxErrorException("Bad macro definition : " + definitions[i]);
+					throw  new SyntaxErrorException("Bad macro definition : " + definitions);
 				}
 				instrList.add(language);
 			}
@@ -109,8 +125,7 @@ public class BfCompiler {
 	/**
 	 * Checks if is numeric.
 	 *
-	 * @param str
-	 *            the str
+	 * @param str the string to analyze
 	 * @return true, if is numeric
 	 */
 	private boolean isNumeric(String str)
@@ -119,12 +134,10 @@ public class BfCompiler {
 	}
 
 	/**
-	 * Save macro.
+	 * Save a macro.
 	 *
-	 * @param instruction
-	 *            the instruction
-	 * @throws SyntaxErrorException
-	 *             the syntax error exception
+	 * @param instruction the instruction
+	 * @throws SyntaxErrorException the syntax error exception
 	 */
 	private void saveMacro(String instruction) throws SyntaxErrorException {
 		instruction = instruction.substring(1);
@@ -136,12 +149,12 @@ public class BfCompiler {
 			if (macros.containsKey(definitions[i])) {
 				if (i+1 < length && this.isNumeric(definitions[i + 1])) {
 					int nb = Integer.parseUnsignedInt(definitions[i + 1]);
-					instrList.addAll(getMacroInstructions(definitions, i++, nb));
+					instrList.addAll(getMacroInstructions(definitions[i++], nb));
 				} else {
-					instrList.addAll(getMacroInstructions(definitions, i, 1));
+					instrList.addAll(getMacroInstructions(definitions[i], 1));
 				}
 			} else {
-				instrList.addAll(getListOfInstruction(definitions, i));
+				instrList.addAll(getListOfInstruction(definitions[i]));
 			}
 		}
 		macros.put(definitions[0], instrList);
@@ -150,33 +163,26 @@ public class BfCompiler {
 	/**
 	 * Write macro.
 	 *
-	 * @param instruction
-	 *            the instruction
+	 * @param instruction the instruction
 	 * @return true, if successful
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws BracketsParseException the brackets parse exception
 	 */
-	private boolean writeMacro(String instruction) throws IOException, BracketsParseException {
+	private boolean writeMacro(String instruction) throws IOException, BracketsParseException, SyntaxErrorException {
 		String[] definitions = instruction.split("\\s+");
 
 
 		if (macros.containsKey(definitions[0])) {
 			int length = definitions.length;
-			int number = 1;
-
-
-			if (2 <= length && this.isNumeric(definitions[1])) {
-				number = Integer.parseUnsignedInt(definitions[1]);
+			if (length > 2) {
+				throw new SyntaxErrorException("Syntax behind macro '"+ definitions[0] + "'");
 			}
+
+			int number = (length == 2 && this.isNumeric(definitions[1])) ? Integer.parseUnsignedInt(definitions[1]) : 1;
 			for (int i=0; i < number; i++) {
 				for (Language instr: macros.get(definitions[0]))
 					write(instr);
 			}
-			for (int i=2; i<length; i++)
-				write(definitions[i]);
-
 			return true;
 		}
 		return false;
@@ -185,14 +191,11 @@ public class BfCompiler {
 	/**
 	 * Write instruction and macro.
 	 *
-	 * @param instruction
-	 *            the instruction
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 * @param instruction the instruction
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws BracketsParseException the brackets parse exception
 	 */
-	private void writeInstructionAndMacro(String instruction) throws IOException, BracketsParseException {
+	private void writeInstructionAndMacro(String instruction) throws IOException, BracketsParseException, SyntaxErrorException {
 		Language currentInstruction;
 
 		if ((currentInstruction = Language.languageMap.get(instruction)) != null) {
@@ -200,22 +203,18 @@ public class BfCompiler {
 		} else if (macros.containsKey(instruction)) {
 			writeMacro(instruction);
 		} else {
-			if (!writeMacro(instruction))
-				write(instruction);
+			throw new SyntaxErrorException(instruction);
 		}
 	}
 
 	/**
 	 * Write all.
 	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws BracketsParseException the brackets parse exception
 	 */
-	private void writeAll() throws IOException, BracketsParseException, java.io.IOException {
+	private void writeAll() throws IOException, BracketsParseException, java.io.IOException, SyntaxErrorException {
 		String instruction;
 
 		while ((instruction = reader.getNext()) != null) {
@@ -227,14 +226,10 @@ public class BfCompiler {
 	/**
 	 * Analyze macro.
 	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
-	 * @throws SyntaxErrorException
-	 *             the syntax error exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws BracketsParseException the brackets parse exception
+	 * @throws SyntaxErrorException the syntax error exception
 	 */
 	private void analyzeMacro() throws java.io.IOException, IOException, BracketsParseException, SyntaxErrorException {
 		boolean endofCompile = false;
@@ -245,8 +240,8 @@ public class BfCompiler {
 					instruction.charAt(0) == BfReader.PREPROCESSING) {
 				this.saveMacro(instruction);
 			} else {
-				endofCompile = true;
 				writeInstructionAndMacro(instruction);
+				endofCompile = true;
 			}
 			Logger.getInstance().incrInstruction();
 		}
@@ -255,17 +250,12 @@ public class BfCompiler {
 	/**
 	 * Compile.
 	 *
-	 * @param contextExecuters
-	 *            the context executers
+	 * @param contextExecuters the context executers
 	 * @return the pair
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws SyntaxErrorException
-	 *             the syntax error exception
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SyntaxErrorException the syntax error exception
+	 * @throws BracketsParseException the brackets parse exception
 	 */
 	public Pair<Reader, JumpTable> compile(List<ContextExecuter> contextExecuters) throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
 		analyzeMacro();
@@ -276,13 +266,10 @@ public class BfCompiler {
 	/**
 	 * End compile.
 	 *
-	 * @param contextExecuters
-	 *            the context executers
+	 * @param contextExecuters the context executers
 	 * @return the pair
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws BracketsParseException the brackets parse exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private Pair<Reader, JumpTable> endCompile(List<ContextExecuter> contextExecuters) throws BracketsParseException, IOException {
 		if (contextExecuters.contains(Context.CHECK.getContextExecuter())){
@@ -304,10 +291,8 @@ public class BfCompiler {
 	/**
 	 * Write.
 	 *
-	 * @param currentInstruction
-	 *            the current instruction
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @param currentInstruction the current instruction
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void write(String currentInstruction) throws IOException {
 		try {
@@ -320,12 +305,9 @@ public class BfCompiler {
 	/**
 	 * Write.
 	 *
-	 * @param currentInstruction
-	 *            the current instruction
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 * @param currentInstruction the current instruction
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws BracketsParseException the brackets parse exception
 	 */
 	private void write(Language currentInstruction) throws IOException, BracketsParseException {
 		write(currentInstruction.getShortSyntax());
