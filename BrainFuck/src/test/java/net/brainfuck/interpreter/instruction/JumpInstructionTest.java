@@ -2,7 +2,6 @@ package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
-import net.brainfuck.exception.Exception;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.JumpInstruction;
@@ -27,8 +26,8 @@ public class JumpInstructionTest {
 	private Memory memory;
 	private Reader reader;
 	private JumpInstruction instruction;
-	String filename;
-	String data;
+	private String filename;
+	private String data;
 
 	/**
 	 * Sets the up.

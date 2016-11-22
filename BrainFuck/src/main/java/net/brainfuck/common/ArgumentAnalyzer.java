@@ -107,7 +107,6 @@ public class ArgumentAnalyzer {
 	 *            the current index of analyze()
 	 * @param position
 	 *            the position in array of arguments where add the argument
-	 * @return the double argument
 	 * @throws IncorrectArgumentException
 	 *             missing argument
 	 */

@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  * @date 16/11/2016
  */
 public class CheckExecuterTest {
-	ArgumentAnalyzer argumentAnalyzer;
+	private ArgumentAnalyzer argumentAnalyzer;
 
 	/**
 	 * Sets the up.
