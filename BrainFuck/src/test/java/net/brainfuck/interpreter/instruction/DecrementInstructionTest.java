@@ -5,12 +5,10 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.interpreter.BackInstruction;
 import net.brainfuck.interpreter.DecrementInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
@@ -20,22 +18,19 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class DecrementInstructionTest {
-	ArgumentInstruction argumentInstruction;
-	Memory memory;
-	Reader reader;
-	DecrementInstruction instruction;
+	private ArgumentInstruction argumentInstruction;
+	private Memory memory;
+	private Reader reader;
+	private DecrementInstruction instruction;
 	private static String filename;
 
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -55,8 +50,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Decr.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void decr() throws Exception {
@@ -81,8 +74,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void rewriteLong() throws Exception {
@@ -107,14 +98,11 @@ public class DecrementInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 * @throws FileNotFoundException
 	 *             the file not found exception
 	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
-		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bmp";
 		String data = "4b0082";
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
@@ -133,8 +121,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void translate() throws Exception {
@@ -158,8 +144,6 @@ public class DecrementInstructionTest {
 	/**
 	 * Clean up.
 	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
 	@AfterClass
 	public static void cleanUp() throws IOException {

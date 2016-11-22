@@ -2,13 +2,11 @@ package net.brainfuck.common;
 
 import java.io.RandomAccessFile;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
-// TODO: Auto-generated Javadoc
 /**
  * Read file with long and short syntax blended.
  *
@@ -42,7 +40,6 @@ public class BfReader implements Reader {
 	public BfReader(String filename) throws FileNotFoundException {
 		try {
 			reader = new RandomAccessFile(filename, "r");
-//			Logger.countInstruction((int)reader.length());
 			marks = new Stack<>();
 		} catch (java.io.IOException e) {
 			throw new FileNotFoundException(filename);
@@ -116,7 +113,7 @@ public class BfReader implements Reader {
 	}
 
 	/**
-	 * Ignore.
+	 * Ignore space,comments and new line char
 	 *
 	 * @param nextVal
 	 *            the next val

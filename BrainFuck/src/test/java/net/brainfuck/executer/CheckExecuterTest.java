@@ -1,9 +1,7 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.ArgumentAnalyzer;
-import net.brainfuck.common.ArgumentExecuter;
 import net.brainfuck.exception.IncorrectArgumentException;
-import net.brainfuck.interpreter.Interpreter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  * @date 16/11/2016
  */
 public class CheckExecuterTest {
-	ArgumentAnalyzer argumentAnalyzer;
+	private ArgumentAnalyzer argumentAnalyzer;
 
 	/**
 	 * Sets the up.

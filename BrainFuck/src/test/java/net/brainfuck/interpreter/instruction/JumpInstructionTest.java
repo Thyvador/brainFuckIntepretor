@@ -2,7 +2,6 @@ package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
-import net.brainfuck.exception.Exception;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.JumpInstruction;
@@ -18,23 +17,20 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher,François Melkonian
  */
 public class JumpInstructionTest {
 	private ArgumentInstruction argumentInstruction;
 	private Memory memory;
 	private Reader reader;
 	private JumpInstruction instruction;
-	String filename;
-	String data;
+	private String filename;
+	private String data;
 
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -54,11 +50,9 @@ public class JumpInstructionTest {
 
 	/**
 	 * Jump.
-	 *
-	 * @throws Exception
-	 *             the exception
+	 * La case mémoire est à 0.
 	 */
-	//La case mémoire est à 0.
+	//
 	@Test
 	public void jump() throws Exception {
 		reader.seek(3);
@@ -69,8 +63,6 @@ public class JumpInstructionTest {
 	/**
 	 * Do not jump.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void doNotJump() throws Exception {
@@ -83,8 +75,6 @@ public class JumpInstructionTest {
 	/**
 	 * Tear down.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
@@ -95,8 +85,6 @@ public class JumpInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
@@ -125,13 +113,11 @@ public class JumpInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test
-	public void rewriteCol() throws Exception, IOException {
+	public void rewriteCol() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bmp";
 		String data = "ff7f00";
@@ -153,13 +139,9 @@ public class JumpInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test
-	public void translate() throws Exception, IOException {
+	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
 		String data = "JUMP";

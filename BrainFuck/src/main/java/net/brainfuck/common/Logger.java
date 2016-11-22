@@ -5,18 +5,10 @@ import net.brainfuck.exception.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-// TODO: Auto-generated Javadoc
 /**
- * Count and group informations about the execution, a.k.a :
- * PROG_SIZE : nombres d'instructions
- * EXEC_TIME : temps d'éxécution
- * EXEC_MOVE : nombre de changements du pointeur
- * DATA_MOVE : nombre de changement du pointeur de la memoire (<>)
- * DATA_WRITE : nombre d'écriture dans la mémoire (+-,)
- * DATA_READ : nombre de lecture memoire ( [].)
+ * Count and group metrics about the execution
  *
- * @author Francois Melkonian
- *         on 05/11/2016
+ * @author Francois Melkonian,Alexandre Hiltcher
  */
 public class Logger {
 
@@ -54,15 +46,6 @@ public class Logger {
 	}
 
 	/**
-	 * Gets the num instructions.
-	 *
-	 * @return the num instructions
-	 */
-	public int getNumInstructions() {
-		return numInstructions;
-	}
-
-	/**
 	 * Gets the num exec move.
 	 *
 	 * @return the num exec move
@@ -71,41 +54,6 @@ public class Logger {
 		return numExecMove;
 	}
 
-	/**
-	 * Gets the num memory write.
-	 *
-	 * @return the num memory write
-	 */
-	public int getNumMemoryWrite() {
-		return numMemoryWrite;
-	}
-
-	/**
-	 * Gets the num memory read.
-	 *
-	 * @return the num memory read
-	 */
-	public int getNumMemoryRead() {
-		return numMemoryRead;
-	}
-
-	/**
-	 * Gets the num memory move.
-	 *
-	 * @return the num memory move
-	 */
-	public int getNumMemoryMove() {
-		return numMemoryMove;
-	}
-
-	/**
-	 * Gets the start.
-	 *
-	 * @return the start
-	 */
-	public long getStart() {
-		return start;
-	}
 
 	/**
 	 * Gets the step.
@@ -285,7 +233,7 @@ public class Logger {
 	}
 
 	/**
-	 * Reset.
+	 * Reset the Logger
 	 */
 	public void reset() {
 		numExecMove = 0;

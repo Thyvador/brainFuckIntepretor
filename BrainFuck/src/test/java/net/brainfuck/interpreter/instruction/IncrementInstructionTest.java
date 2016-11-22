@@ -2,15 +2,12 @@ package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
-import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.interpreter.DecrementInstruction;
-import net.brainfuck.interpreter.IncremanteInstruction;
+import net.brainfuck.interpreter.IncrementInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.*;
@@ -20,15 +17,14 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
-public class IncremanteInstructionTest {
-	ArgumentInstruction argumentInstruction;
-	Memory memory;
-	Reader reader;
-	IncremanteInstruction instruction;
+public class IncrementInstructionTest {
+	private ArgumentInstruction argumentInstruction;
+	private Memory memory;
+	private Reader reader;
+	private IncrementInstruction instruction;
 	private static String filename;
 
 	/**
@@ -49,7 +45,7 @@ public class IncremanteInstructionTest {
 		BfReader reader = new BfReader(filename);
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new IncremanteInstruction();
+		instruction = new IncrementInstruction();
 	}
 
 	/**
@@ -98,7 +94,7 @@ public class IncremanteInstructionTest {
 		reader = new BfReader(filename);
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new IncremanteInstruction();
+		instruction = new IncrementInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
 		instruction.rewrite();
@@ -124,7 +120,7 @@ public class IncremanteInstructionTest {
 		reader = new BfImageReader(filename);
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new IncremanteInstruction();
+		instruction = new IncrementInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
 		instruction.rewrite();
@@ -150,7 +146,7 @@ public class IncremanteInstructionTest {
 		reader = new BfReader(filename);
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new IncremanteInstruction();
+		instruction = new IncrementInstruction();
 		assertEquals("ffffff",instruction.translate() );
 	}
 

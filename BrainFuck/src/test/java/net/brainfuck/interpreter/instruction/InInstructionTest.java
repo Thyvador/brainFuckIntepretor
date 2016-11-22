@@ -3,7 +3,6 @@ package net.brainfuck.interpreter.instruction;
 import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
-import net.brainfuck.interpreter.DecrementInstruction;
 import net.brainfuck.interpreter.InInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import org.junit.Before;
@@ -16,9 +15,8 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class InInstructionTest {
 	private ArgumentInstruction argumentInstruction;
@@ -26,19 +24,16 @@ public class InInstructionTest {
 	private InInstruction instruction;
 	private String filename;
 	private Reader reader;
-	private String data;
 
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
-		data = "+++-++";
+		String data = "+++-++";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 			writer.close();
@@ -59,8 +54,6 @@ public class InInstructionTest {
 	/**
 	 * In.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void in() throws Exception {
@@ -70,9 +63,8 @@ public class InInstructionTest {
 
 	/**
 	 * Simule empty file.
+	 * An FileNotFoundIn Exception may happens.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test(expected = net.brainfuck.exception.FileNotFoundIn.class)
 	public void badIn() throws Exception {
@@ -86,8 +78,6 @@ public class InInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void rewriteLong() throws Exception {
@@ -112,14 +102,9 @@ public class InInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws Exception
-	 *             the exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
 	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
-		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bmp";
 		String data = "ffff00";
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
@@ -138,8 +123,6 @@ public class InInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void translate() throws Exception {

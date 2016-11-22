@@ -63,7 +63,7 @@ public enum Context {
 	 * @param c
 	 *            the new context executer
 	 */
-    public void setContextExecuter(ContextExecuter c) { this.c = c; }
+    private void setContextExecuter(ContextExecuter c) { this.c = c; }
 
 }
 

@@ -4,7 +4,6 @@ import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.interpreter.InInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,9 +17,8 @@ import net.brainfuck.interpreter.RightInstruction;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class RightInstructionTest {
 	ArgumentInstruction argumentInstruction;
@@ -32,8 +30,6 @@ public class RightInstructionTest {
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -53,8 +49,6 @@ public class RightInstructionTest {
 	/**
 	 * Right.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void right() throws Exception {
@@ -90,8 +84,6 @@ public class RightInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void rewriteLong() throws Exception {
@@ -116,8 +108,6 @@ public class RightInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 * @throws FileNotFoundException
 	 *             the file not found exception
 	 */
@@ -142,8 +132,6 @@ public class RightInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void translate() throws Exception {

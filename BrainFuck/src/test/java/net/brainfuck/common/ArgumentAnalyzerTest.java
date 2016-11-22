@@ -1,8 +1,6 @@
 package net.brainfuck.common;
 
-import net.brainfuck.Main;
 import net.brainfuck.executer.Context;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,14 +10,12 @@ import static org.junit.Assert.*;
  * The Class ArgumentAnalyzerTest.
  *
  * @author Francois Melkonian
- * @date 16/11/2016
  */
 public class ArgumentAnalyzerTest {
 	
 	/**
 	 * Gets the args.
 	 *
-	 * @return the args
 	 * @throws Exception
 	 *             the exception
 	 */
@@ -35,7 +31,6 @@ public class ArgumentAnalyzerTest {
 	/**
 	 * Gets the flags.
 	 *
-	 * @return the flags
 	 * @throws Exception
 	 *             the exception
 	 */

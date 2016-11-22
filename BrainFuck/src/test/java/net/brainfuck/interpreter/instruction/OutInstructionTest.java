@@ -3,7 +3,6 @@ package net.brainfuck.interpreter.instruction;
 import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
-import net.brainfuck.interpreter.InInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.OutInstruction;
 import org.junit.Before;
@@ -16,9 +15,8 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class OutInstructionTest {
 	private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -31,8 +29,6 @@ public class OutInstructionTest {
 	/**
 	 * Sets the up.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -53,8 +49,6 @@ public class OutInstructionTest {
 	/**
 	 * Out.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void out() throws Exception {
@@ -67,8 +61,6 @@ public class OutInstructionTest {
 	/**
 	 * Rewrite long.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void rewriteLong() throws Exception {
@@ -93,14 +85,11 @@ public class OutInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 * @throws FileNotFoundException
 	 *             the file not found exception
 	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
-		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bmp";
 		String data = "00ff00";
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
@@ -119,8 +108,6 @@ public class OutInstructionTest {
 	/**
 	 * Translate.
 	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	@Test
 	public void translate() throws Exception {

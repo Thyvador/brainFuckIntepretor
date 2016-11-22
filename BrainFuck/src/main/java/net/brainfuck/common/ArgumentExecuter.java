@@ -2,15 +2,12 @@ package net.brainfuck.common;
 
 import net.brainfuck.interpreter.JumpTable;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ArgumentExecuter.
  *
  * @author davidLANG
  */
 public class ArgumentExecuter extends ArgumentInstruction {
-    private Memory memory;
-    private Reader reader;
     private BfImageWriter imageWriter;
 
     /**

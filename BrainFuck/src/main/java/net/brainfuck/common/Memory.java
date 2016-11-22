@@ -136,6 +136,7 @@ public class Memory {
 	 */
 	public Memory right() throws MemoryOutOfBoundsException {
 		index++;
+		Logger.getInstance().countMemoryMove();
 		checkIndex(index);
 		return this;
 	}

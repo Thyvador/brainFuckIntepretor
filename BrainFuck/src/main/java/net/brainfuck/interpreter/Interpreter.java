@@ -3,15 +3,10 @@ package net.brainfuck.interpreter;
 
 import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
-import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
 
-import java.io.FileInputStream;
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.brainfuck.common.ArgumentConstante.*;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -24,7 +19,6 @@ public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
 	private Executer executer;
 	private Reader reader;
-	private ArgumentExecuter argumentExecuter;
 
 	/**
 	 * Constructor which initialize attribute.
@@ -38,7 +32,7 @@ public class Interpreter {
 	 */
 	public Interpreter(Executer executer) throws FileNotFoundException, IOException {
 		this.executer = executer;
-		this.argumentExecuter = executer.getArgumentExecuter();
+		ArgumentExecuter argumentExecuter = executer.getArgumentExecuter();
 		this.reader = argumentExecuter.getReader();
 	}
 

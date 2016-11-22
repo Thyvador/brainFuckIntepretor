@@ -15,12 +15,12 @@ import static org.junit.Assert.assertArrayEquals;
 
 // TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class BfImageWriterTest {
 
-	BfImageWriter writer;
-	byte[] imageArray;
+	private BfImageWriter writer;
+	private byte[] imageArray;
 	private static String filename;
 
 	/**
@@ -91,7 +91,7 @@ public class BfImageWriterTest {
 	/**
 	 * Clean up.
 	 *
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
 	@AfterClass

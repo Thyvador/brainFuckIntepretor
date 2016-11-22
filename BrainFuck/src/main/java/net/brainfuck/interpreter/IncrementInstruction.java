@@ -1,23 +1,21 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.common.ArgumentInstruction;
-import net.brainfuck.common.Memory;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class IncremanteInstruction.
+ * The Class IncrementInstruction.
  *
  * @author davidLANG
  */
-public class IncremanteInstruction extends AbstractExecute {
+public class IncrementInstruction extends AbstractExecute {
 
     /**
 	 * Instantiates a new incremante instruction.
 	 */
-    public IncremanteInstruction() {
+    public IncrementInstruction() {
 		super(Language.INCR);
 	}
 

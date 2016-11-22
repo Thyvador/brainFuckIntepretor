@@ -77,24 +77,33 @@ public class BfCompiler {
 
 
 	/**
-	 * Save simple macro.
-	 */
-	private void saveSimpleMacro(){
-
-	}
-
-	/**
-	 * Save argument macro.
-	 */
-	private void saveArgumentMacro() {
-
-	}
-
-	/**
 	 * Adds the macro to macro.
 	 */
-	private void addMacroToMacro() {
+	private List<Language> getMacroInstructions(String[] definitions, int i, int nb) {
+		List<Language> instrList = new ArrayList<>();
 
+		for (int cpt=0; cpt < nb; cpt++) {
+			instrList.addAll(macros.get(definitions[i]));
+		}
+		return instrList;
+	}
+
+
+	private List<Language> getListOfInstruction(String[] definitions, int i) throws SyntaxErrorException {
+		Language language;
+		List<Language> instrList = new ArrayList<>();
+
+		if ((language = Language.languageMap.get(definitions[i])) != null) {
+			instrList.add(language);
+		} else {
+			for (char inst: definitions[i].toCharArray()) {
+				if ((language = Language.languageMap.get("" + inst)) == null) {
+					throw  new SyntaxErrorException("Bad macro definition : " + definitions[i]);
+				}
+				instrList.add(language);
+			}
+		}
+		return instrList;
 	}
 
 	/**
@@ -106,10 +115,7 @@ public class BfCompiler {
 	 */
 	private boolean isNumeric(String str)
 	{
-		NumberFormat formatter = NumberFormat.getInstance();
-		ParsePosition pos = new ParsePosition(0);
-		formatter.parse(str, pos);
-		return str.length() == pos.getIndex();
+		return str.matches("^\\d+$");
 	}
 
 	/**
@@ -124,31 +130,18 @@ public class BfCompiler {
 		instruction = instruction.substring(1);
 		String[] definitions = instruction.split("\\s+");
 		List<Language> instrList = new ArrayList<>();
-		Language language;
 
 		int length = definitions.length;
 		for (int i=1; i<length; i++) {
 			if (macros.containsKey(definitions[i])) {
 				if (i+1 < length && this.isNumeric(definitions[i + 1])) {
 					int nb = Integer.parseUnsignedInt(definitions[i + 1]);
-					for (int cpt=0; cpt < nb; cpt++) {
-						instrList.addAll(macros.get(definitions[i]));
-					}
-					i += 1;
+					instrList.addAll(getMacroInstructions(definitions, i++, nb));
 				} else {
-					instrList.addAll(macros.get(definitions[i]));
+					instrList.addAll(getMacroInstructions(definitions, i, 1));
 				}
 			} else {
-				if ((language = Language.languageMap.get(definitions[i])) != null) {
-					instrList.add(language);
-				} else {
-					for (char inst: definitions[i].toCharArray()) {
-						if ((language = Language.languageMap.get("" + inst)) == null) {
-							throw  new SyntaxErrorException("Bad macro definition : " + definitions[i]);
-						}
-						instrList.add(language);
-					}
-				}
+				instrList.addAll(getListOfInstruction(definitions, i));
 			}
 		}
 		macros.put(definitions[0], instrList);
@@ -200,7 +193,7 @@ public class BfCompiler {
 	 *             the brackets parse exception
 	 */
 	private void writeInstructionAndMacro(String instruction) throws IOException, BracketsParseException {
-		Language currentInstruction = null;
+		Language currentInstruction;
 
 		if ((currentInstruction = Language.languageMap.get(instruction)) != null) {
 			write(currentInstruction);

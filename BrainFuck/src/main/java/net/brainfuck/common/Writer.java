@@ -4,7 +4,6 @@ package net.brainfuck.common;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Writer interface represents a writer.
  *
@@ -20,7 +19,7 @@ public interface Writer {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public void write(int pixel) throws IOException;
+	void write(int pixel) throws IOException;
 
 	/**
 	 * Write the pixel.
@@ -40,6 +39,6 @@ public interface Writer {
 	 * @throws FileNotFoundException
 	 *             the file not found exception
 	 */
-	public void close() throws net.brainfuck.exception.IOException, FileNotFoundException;
+	void close() throws net.brainfuck.exception.IOException, FileNotFoundException;
 
 }
