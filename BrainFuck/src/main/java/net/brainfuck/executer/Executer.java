@@ -11,7 +11,6 @@ import java.util.List;
 
 import static net.brainfuck.common.ArgumentConstante.PATH;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Executer.
  *
@@ -70,7 +69,7 @@ public class Executer {
 
     /**
      * This function must be called when all instruction have been read and execute
-     * She throw an error if the program has no enought parenthesis
+     * She throw an error if the program has no enough parenthesis
      * She close the Reader.*
      * She close the imageWriter if the long argument "--translate" have been passed
      *
