@@ -3,7 +3,6 @@ package net.brainfuck.interpreter.instruction;
 import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
-import net.brainfuck.interpreter.InInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.OutInstruction;
 import org.junit.Before;

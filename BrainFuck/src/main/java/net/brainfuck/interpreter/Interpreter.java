@@ -3,15 +3,10 @@ package net.brainfuck.interpreter;
 
 import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
-import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
 
-import java.io.FileInputStream;
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.brainfuck.common.ArgumentConstante.*;
 
 // TODO: Auto-generated Javadoc
 /**

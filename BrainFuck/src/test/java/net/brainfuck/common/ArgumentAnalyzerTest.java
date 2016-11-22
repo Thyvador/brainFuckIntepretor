@@ -1,8 +1,6 @@
 package net.brainfuck.common;
 
-import net.brainfuck.Main;
 import net.brainfuck.executer.Context;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -6,7 +6,6 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.exception.SyntaxErrorException;
 
 // TODO: Auto-generated Javadoc
 /**

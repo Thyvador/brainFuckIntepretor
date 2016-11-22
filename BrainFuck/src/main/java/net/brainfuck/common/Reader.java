@@ -1,7 +1,6 @@
 package net.brainfuck.common;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
-import net.brainfuck.exception.SyntaxErrorException;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -7,7 +7,6 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
-import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 

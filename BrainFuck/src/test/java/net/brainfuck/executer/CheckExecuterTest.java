@@ -1,9 +1,7 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.ArgumentAnalyzer;
-import net.brainfuck.common.ArgumentExecuter;
 import net.brainfuck.exception.IncorrectArgumentException;
-import net.brainfuck.interpreter.Interpreter;
 import org.junit.Before;
 import org.junit.Test;
 

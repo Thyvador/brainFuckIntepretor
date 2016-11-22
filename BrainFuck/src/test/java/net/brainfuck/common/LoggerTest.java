@@ -1,7 +1,6 @@
 package net.brainfuck.common;
 
 import org.junit.*;
-import org.junit.experimental.categories.Categories;
 
 import java.io.BufferedWriter;
 import java.io.File;

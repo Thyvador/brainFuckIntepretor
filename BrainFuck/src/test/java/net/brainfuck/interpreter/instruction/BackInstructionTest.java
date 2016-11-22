@@ -4,14 +4,11 @@ import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.Exception;
-import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.*;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.experimental.categories.Categories;
 
 import java.io.*;
 import java.io.IOException;

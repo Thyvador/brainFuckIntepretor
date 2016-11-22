@@ -9,7 +9,6 @@ import net.brainfuck.interpreter.AbstractExecute;
 import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.JumpTable;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 

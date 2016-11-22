@@ -77,7 +77,6 @@ public class BfImageReader implements Reader {
 			return null;
 		}
 		int rgb = bufferedImage.getRGB(offX, offY);
-		Logger.getInstance().countMove();
 
 		for (int x = 0; x < 3; x++) {
 			for (int y = 0; y < 3; y++) {

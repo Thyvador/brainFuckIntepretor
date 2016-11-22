@@ -2,7 +2,6 @@ package net.brainfuck.common;
 
 import java.io.RandomAccessFile;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;

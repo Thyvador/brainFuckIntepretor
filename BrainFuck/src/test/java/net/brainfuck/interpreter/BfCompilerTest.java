@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import net.brainfuck.common.ArgumentAnalyzer;
-import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.exception.IncorrectArgumentException;
 import net.brainfuck.executer.Executer;
 import org.junit.Before;
