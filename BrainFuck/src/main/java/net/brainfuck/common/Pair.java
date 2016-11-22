@@ -8,6 +8,8 @@ package net.brainfuck.common;
  *            the generic type
  * @param <S>
  *            the generic type
+ *
+ * @Jeremy JUNAC
  */
 public class Pair<F, S> {
     

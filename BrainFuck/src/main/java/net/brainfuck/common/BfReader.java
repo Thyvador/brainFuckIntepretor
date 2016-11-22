@@ -15,9 +15,9 @@ import net.brainfuck.exception.IOException;
  * @author : Francois Melkonian
  */
 public class BfReader implements Reader {
-	
+
 	public static final int PREPROCESSING = '!';
-	
+
 	private String next = null;
 	private RandomAccessFile reader;
 	private Stack<Long> marks;
@@ -159,7 +159,7 @@ public class BfReader implements Reader {
 			if (nextVal == EOF) {
 				return null;
 			}
-			
+
 			if(checkPreprocessing && isPreprocessing(nextVal)) {
 				readUntilEndOfLine(nextVal);
 				return next;
@@ -303,7 +303,7 @@ public class BfReader implements Reader {
 			throw new BracketsParseException("[");
 		marks.pop();
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see net.brainfuck.common.Reader#seek(long)
 	 */

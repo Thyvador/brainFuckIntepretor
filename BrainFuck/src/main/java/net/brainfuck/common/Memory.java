@@ -3,7 +3,6 @@ package net.brainfuck.common;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The <code>Memory</code> class represents the memory of the BrainFuck interpreter.
  *
@@ -34,7 +33,7 @@ public class Memory {
 	private int index;
 
 	/**
-	 * Default constructor.
+	 * Default constructor
 	 */
 	public Memory() {
 		clean();
@@ -63,18 +62,18 @@ public class Memory {
 	 *
 	 * @return the value of the current memory cell
 	 * @throws MemoryOutOfBoundsException
-	 *             if the index isn't valid
+	 *             if the index isn't valid.
 	 */
 	public short get() throws MemoryOutOfBoundsException {
 		return get(index);
 	}
 
 	/**
-	 * Read the specified memory cell.
+	 * Read the specified memory cell
 	 *
 	 * @param index
 	 *            the index of the memory cell to read
-	 * @return the value of the current memory cell
+	 * @return the value of the memory cell at the index
 	 * @throws MemoryOutOfBoundsException
 	 *             if the index isn't valid
 	 */
@@ -91,9 +90,9 @@ public class Memory {
 	 *            the index of the memory cell to set
 	 * @param changeValue
 	 *            the value to set
-	 * @return current object
+	 * @return the current memory
 	 * @throws MemoryOverFlowException
-	 *             if the value overflow the cell capacity
+	 *             if the value overflow or underflow the cell capacity
 	 */
 	private Memory set(int index, int changeValue) throws MemoryOverFlowException {
 		if (memory[index] > (MAX_VALUE - changeValue) || memory[index] < (MIN_VALUE - changeValue))
@@ -104,7 +103,7 @@ public class Memory {
 	}
 
 	/**
-	 * Set the value of the specified memory cell to a specific value Used with IN instruction.
+	 * Set the value of the specified memory cell to a specific value (used with IN instruction).
 	 *
 	 * @param newValue
 	 *            the value to set
@@ -116,7 +115,7 @@ public class Memory {
 	}
 
 	/**
-	 * Check the specified index.
+	 * Check the specified index
 	 *
 	 * @param index
 	 *            the index to check
@@ -131,7 +130,7 @@ public class Memory {
 	/**
 	 * Move the pointer to the memory cell to the right.
 	 *
-	 * @return current object
+	 * @return the current memory
 	 * @throws MemoryOutOfBoundsException
 	 *             if the pointer move out of the memory
 	 */
@@ -144,7 +143,7 @@ public class Memory {
 	/**
 	 * Move the pointer to the memory cell to the left.
 	 *
-	 * @return current object
+	 * @return the current memory
 	 * @throws MemoryOutOfBoundsException
 	 *             if the pointer move out of the memory
 	 */
@@ -158,9 +157,9 @@ public class Memory {
 	/**
 	 * Increase by one the value of the current memory cell.
 	 *
-	 * @return current object
+	 * @return the current memory
 	 * @throws MemoryOverFlowException
-	 *             if the value exceed the capacity of the cell
+	 *             if the value exceed the max capacity of the cell
 	 */
 	public Memory incr() throws MemoryOverFlowException {
 		return set(index, 1);
@@ -169,9 +168,9 @@ public class Memory {
 	/**
 	 * Decrease by one the value of the current memory cell.
 	 *
-	 * @return current object
+	 * @return the current memory
 	 * @throws MemoryOverFlowException
-	 *             if the value exceed the capacity of the cell
+	 *             if the value exceed the minimum capacity of the cell
 	 */
 	public Memory decr() throws MemoryOverFlowException {
 		return set(index, -1);
@@ -180,7 +179,7 @@ public class Memory {
 	/**
 	 * Clean all the memory.
 	 *
-	 * @return current object
+	 * @return the current memory
 	 */
 	private Memory clean() {
 		memory = new short[MAX_CAPACITY];

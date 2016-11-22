@@ -52,7 +52,6 @@ public class LoggerTest {
 	 * @throws Exception
 	 *             the exception
 	 */
-	//@Ignore ("Probleme")
 	@Test
 	public void showResume() throws Exception {
 		logger.reset();

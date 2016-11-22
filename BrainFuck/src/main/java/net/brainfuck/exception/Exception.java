@@ -1,9 +1,7 @@
 package net.brainfuck.exception;
 
-// TODO: Auto-generated Javadoc
 /**
- * Signal when a read character is incorrect is detected in the file.
- * This exception will be thrown by <code>LineReader</code>.
+ * Signal when an error occurs.
  *
  * @author Alexandre Hiltcher
  */
@@ -20,7 +18,7 @@ public class Exception extends java.lang.Exception{
     }
 
     /**
-     * Constructs a new Exception with a detailed message.
+     * Constructs a new Exception with a specific message.
      * @param message the detailed message.
      */
     public Exception(String message){

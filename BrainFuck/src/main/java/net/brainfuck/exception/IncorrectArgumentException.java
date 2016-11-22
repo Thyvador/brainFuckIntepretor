@@ -1,11 +1,10 @@
 package net.brainfuck.exception;
 
-// TODO: Auto-generated Javadoc
 /**
- *  Signal when a file to read is not found is detected in the file.
+ * Signal when a argument pass through the JVM is not correct.
  * This exception will be thrown by <code>ArgumentAnalyser</code>.
  *
- * Created by Alexandre Hiltcher on 12/10/2016.
+ * @author Alexandre HILTCHER
  */
 public class IncorrectArgumentException extends Exception {
 

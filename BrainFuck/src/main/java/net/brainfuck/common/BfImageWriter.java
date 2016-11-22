@@ -14,16 +14,15 @@ import javax.imageio.ImageWriter;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
-// TODO: Auto-generated Javadoc
 /**
  * 
- * The BfImageWriter class represents a class that write a BMP image.
+ * The BfImageWriter class represents a class that write a brainfuck program as a BMP image.
  *
  * @author Jeremy Junac
  */
 public class BfImageWriter implements Writer {
 	
-	/** The out. */
+	/** The final output. */
 	private OutputStream out;
 	/** The tmp output stream. */
 	private DataOutputStream tmpOs;
@@ -43,9 +42,9 @@ public class BfImageWriter implements Writer {
 	}
 	
 	/**
-	 * Instantiates a new bf image writer.
+	 * Instantiates a new bf image writer from a output stream.
 	 *
-	 * @param out the out
+	 * @param out the out stream to write in.
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws FileNotFoundException the file not found exception
 	 */
@@ -88,7 +87,7 @@ public class BfImageWriter implements Writer {
 			tmpOs.writeInt(Integer.parseInt(hexaChain, 16));
 			tmpOs.flush();
 		} catch (NumberFormatException e) {
-			// Might not append
+			// Should not append
 			e.printStackTrace();
 		} catch (java.io.IOException e) {
 			throw new IOException();

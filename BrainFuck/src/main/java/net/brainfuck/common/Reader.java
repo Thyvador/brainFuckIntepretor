@@ -3,19 +3,21 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by François MELKONIAN on 28/09/2016.
+ *
  * Reader interface used to read bf instruction in "short" , "long" and picture format.
+ *
+ * @author Francois MELKONIAN
+ * @author Alexandre HILTCHER
  */
 public interface Reader {
 
     /**
-	 * Read the file to see if there is an other instruction.
+	 * Read the file and return the next instruction.
 	 *
-	 * @return true if there is an other instruction, false in others case
+	 * @return the next instruction, null if the EOF is reached.
 	 * @throws IOException
-	 *             if the file closeReader while we read it, this exception may not happens.
+	 *             If an I/O exception occurs.
 	 */
     String getNext() throws IOException;
 
@@ -24,7 +26,7 @@ public interface Reader {
 	 *
 	 * @return the position of the execution pointer.
 	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 *             If an I/O exception occurs.
 	 */
     long getExecutionPointer() throws IOException;
 
@@ -33,45 +35,45 @@ public interface Reader {
 	 * Close the file when the reader finished him.
 	 *
 	 * @throws IOException
-	 *             if file can't closeReader.
+	 *             If the reader can't be closed because an I/O exception occurs.
 	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 *             If a brackets exception occurs.
 	 */
     void closeReader() throws IOException, BracketsParseException;
     
     /**
-	 * Mark.
+	 * Mark the current position of the execution pointer.
 	 *
 	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 *             If an I/O exception occurs.
 	 */
     void mark() throws IOException;
     
     /**
-	 * Reset.
+	 * Set the exception pointer to last position marked.
 	 *
 	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 *             If an I/O exception occurs.
 	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 *             If a bracket exception occurs.
 	 */
     void reset() throws IOException, BracketsParseException;
     
     /**
-	 * Unmark.
+	 * Unmark the last marked instruction.
 	 *
 	 * @throws BracketsParseException
-	 *             the brackets parse exception
+	 *             If a bracket exception occurs.
 	 */
     void unmark() throws BracketsParseException;
 
 	/**
-	 * Seek.
+	 * Set trhe execution pointer to the position.
 	 *
 	 * @param pos
-	 *            the pos
+	 *            the posistion to seek.
 	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 *             If an I/O exception occurs.
 	 */
 	void seek(long pos) throws IOException;
 }

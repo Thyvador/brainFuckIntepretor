@@ -10,9 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Stack;
 
-// TODO: Auto-generated Javadoc
 /**
- * The <code>BfImageReader</code> class is used to read BitMap files.
+ * The <code>BfImageReader</code> class is used to read brainfuck files encoded as BitMap files.
  * This class implements the <code>Reader</code> Interface.
  *
  * @author Alexandre Hiltcher
@@ -93,9 +92,6 @@ public class BfImageReader implements Reader {
 		offX += 3;
 
 		if (r == 0 && g == 0 && b == 0) {
-			int calcul = (offY) * (width) / 9 + offX / 3 - 1;
-//	        Logger.getInstance().countInstruction(calcul);
-
 			return null;
 
 		}
@@ -130,12 +126,11 @@ public class BfImageReader implements Reader {
 	 */
 	@Override
 	public void mark() {
-		//Point tmp = new Point(offX, offY);
 		marks.push(getExecutionPointer());
 	}
 
 	/**
-	 * Reset the index of the next pixel to the last mark.
+	 * Set the index of the next pixel to the last mark.
 	 *
 	 * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
 	 */
@@ -170,7 +165,7 @@ public class BfImageReader implements Reader {
 	}
 
 	/**
-	 * Gets the marks.
+	 * Gets the marked positions.
 	 *
 	 * @return the marks
 	 */

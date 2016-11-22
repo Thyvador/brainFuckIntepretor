@@ -2,7 +2,7 @@ package net.brainfuck.common;
 
 
 /**
- * Usefull constant for argumentAnalyzer.
+ * Useful constant for argumentAnalyzer.
  *
  * @author davidLANG
  */
