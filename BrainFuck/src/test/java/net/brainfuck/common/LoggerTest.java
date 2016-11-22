@@ -24,7 +24,6 @@ public class LoggerTest {
 
 	private Logger logger;
 	private static String filename;
-	private String data;
 	private static String filenameLOG;
 
 	/**
@@ -37,7 +36,7 @@ public class LoggerTest {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
 		filenameLOG = "filename.log";
-		data = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++.>+.+++++++..+++.<<++.>+++++++++++++++.>.+++.------.--------.<<+.<.";
+		String data = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++.>+.+++++++..+++.<<++.>+++++++++++++++.>.+++.------.--------.<<+.<.";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 		} catch (IOException x) {

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 // TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
+ * @author Alexandre Hiltcher
  */
 public class BfImageWriterTest {
 

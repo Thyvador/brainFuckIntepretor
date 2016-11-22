@@ -26,7 +26,6 @@ public class InInstructionTest {
 	private InInstruction instruction;
 	private String filename;
 	private Reader reader;
-	private String data;
 
 	/**
 	 * Sets the up.
@@ -38,7 +37,7 @@ public class InInstructionTest {
 	public void setUp() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
 		filename = "filename.bf";
-		data = "+++-++";
+		String data = "+++-++";
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 			writer.close();

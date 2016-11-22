@@ -28,9 +28,7 @@ import net.brainfuck.exception.SyntaxErrorException;
 public class BfCompilerTest {
 
 	BfCompiler compiler;
-	private String filename;
-	private String data;
-	
+
 	/**
 	 * Sets the up.
 	 *
@@ -40,8 +38,8 @@ public class BfCompilerTest {
 	@Before
 	public void setUp() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bf";
-		data = "!test ++ ++\n"
+		String filename = "filename.bf";
+		String data = "!test ++ ++\n"
 				+ "!decr -\n"
 				+ "+\n"
 				+ "test\n"
