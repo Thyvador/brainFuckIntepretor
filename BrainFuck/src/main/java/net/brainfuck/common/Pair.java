@@ -9,7 +9,7 @@ package net.brainfuck.common;
  * @param <S>
  *            the generic type
  *
- * @Jeremy JUNAC
+ * @author Jeremy JUNAC
  */
 public class Pair<F, S> {
     

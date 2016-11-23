@@ -52,7 +52,7 @@ public class BfReader implements Reader {
 	 *
 	 * @param val
 	 *            the current value
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private void readUntilEndOfLine(int val) throws java.io.IOException {
@@ -74,7 +74,7 @@ public class BfReader implements Reader {
 	 * Skip new line character(s). End of line character change according OS.
 	 *
 	 * @return The first character of the line.
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private int ignoreNewLineChar() throws java.io.IOException {
@@ -88,7 +88,7 @@ public class BfReader implements Reader {
 	 * Skip all character until new line or end of file character is read.
 	 *
 	 * @return the current caracter : new line or end of file
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private int ignoreComment() throws java.io.IOException {
@@ -102,7 +102,7 @@ public class BfReader implements Reader {
 	 * Skip all space and tabulation charecter until another charecter is read.
 	 *
 	 * @return the current charecter read : could be everything except space or tabulation
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private int ignoreSpace() throws java.io.IOException {
@@ -118,7 +118,7 @@ public class BfReader implements Reader {
 	 * @param nextVal
 	 *            the next val
 	 * @return the int
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private int ignore(int nextVal) throws java.io.IOException {
