@@ -4,7 +4,6 @@ import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.interpreter.IncrementInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import org.junit.AfterClass;
 import org.junit.Before;

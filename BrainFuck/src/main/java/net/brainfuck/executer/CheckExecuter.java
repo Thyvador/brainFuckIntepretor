@@ -2,9 +2,9 @@ package net.brainfuck.executer;
 
 import net.brainfuck.common.ArgumentExecuter;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.BackInstruction;
-import net.brainfuck.interpreter.InstructionInterface;
-import net.brainfuck.interpreter.JumpInstruction;
+import net.brainfuck.interpreter.instruction.BackInstruction;
+import net.brainfuck.interpreter.instruction.InstructionInterface;
+import net.brainfuck.interpreter.instruction.JumpInstruction;
 
 /**
  * Execute the AbstractInstruction command according to the "--trace" context.

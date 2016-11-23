@@ -2,7 +2,7 @@ package net.brainfuck.executer;
 
 import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.AbstractInstruction;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.JumpTable;
 

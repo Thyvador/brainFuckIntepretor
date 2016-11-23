@@ -1,5 +1,7 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.interpreter.instruction.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ import java.util.Map;
  *
  * @author davidLANG
  */
-enum Language {
+public enum Language {
 	// Declaration de l'enum
 	INCR(null, "+", "INCR", "ffffff"),
 	DECR(null, "-", "DECR", "4b0082"),
@@ -20,7 +22,7 @@ enum Language {
 	JUMP(null, "[", "JUMP", "ff7f00"),
 	BACK(null, "]", "BACK", "ff0000");
 
-	static Map<String, Language> languageMap = new HashMap<>();
+	public static Map<String, Language> languageMap = new HashMap<>();
 	
 	static {
 		// Set interpretors
