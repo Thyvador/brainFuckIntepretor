@@ -2,8 +2,8 @@ package net.brainfucktest.common;
 
 import net.brainfuck.Main;
 
-// TODO: Auto-generated Javadoc
 /**
+ * @author Alexandre Hiltcher
  * Created by Alexandre on 05/11/2016.
  */
 public class TestTrace {
