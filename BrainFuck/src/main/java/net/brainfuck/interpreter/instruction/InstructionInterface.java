@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.exception.BracketsParseException;

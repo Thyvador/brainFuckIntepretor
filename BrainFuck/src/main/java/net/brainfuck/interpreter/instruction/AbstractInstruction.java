@@ -1,8 +1,9 @@
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Logger;
 import net.brainfuck.exception.*;
+import net.brainfuck.interpreter.Language;
 
 /**
  * Abstraction of a instruction

@@ -14,7 +14,6 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import net.brainfuck.interpreter.RightInstruction;
 
 import static org.junit.Assert.assertEquals;
 

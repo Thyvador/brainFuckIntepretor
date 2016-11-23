@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Memory;
@@ -6,6 +6,8 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
  *  Representation of JUMP instruction "[" "JUMP".

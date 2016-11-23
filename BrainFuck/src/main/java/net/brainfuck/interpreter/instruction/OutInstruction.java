@@ -1,8 +1,10 @@
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 
 /**

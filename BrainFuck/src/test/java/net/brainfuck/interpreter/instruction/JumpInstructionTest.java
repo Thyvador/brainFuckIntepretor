@@ -4,7 +4,6 @@ import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.BfCompiler;
-import net.brainfuck.interpreter.JumpInstruction;
 import net.brainfuck.interpreter.JumpTable;
 import org.junit.After;
 import org.junit.Before;
