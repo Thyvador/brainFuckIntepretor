@@ -2,7 +2,6 @@ package net.brainfucktest.common;
 
 import net.brainfuck.Main;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TestTranslate.
  */

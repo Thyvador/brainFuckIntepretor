@@ -2,7 +2,6 @@ package net.brainfuck.common;
 
 import net.brainfuck.interpreter.JumpTable;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ArgumentInstruction.
  *

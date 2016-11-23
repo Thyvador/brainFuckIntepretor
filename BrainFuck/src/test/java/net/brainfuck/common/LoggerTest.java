@@ -14,20 +14,18 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-// TODO: Auto-generated Javadoc
 /**
- * Created by Alexandre on 16/11/2016.
- * @author Alexandre,Francois Melkonian
+ * @author Alexandre Hiltcher ,Francois Melkonian
  */
 public class LoggerTest {
 
 	private Logger logger;
 	private static String filename;
 	private static String filenameLOG;
-	Memory memory;
+	private Memory memory;
 
 	/**
-	 * Sets the up.
+	 * Setup the file read
 	 */
 	@Before
 	public void setUp() {
@@ -222,7 +220,7 @@ public class LoggerTest {
 
 
 	/**
-	 * Clean up.
+	 * Clean up file read
 	 *
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.

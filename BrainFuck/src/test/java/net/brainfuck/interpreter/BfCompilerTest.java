@@ -44,6 +44,7 @@ public class BfCompilerTest {
 				+ "test\n"
 				+ "test 2\n"
 				+ "decr 3";
+		System.out.println(data);
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 		} catch (IOException x) {

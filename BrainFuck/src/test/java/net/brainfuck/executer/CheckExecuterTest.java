@@ -8,12 +8,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CheckExecuterTest tests the <code>CheckExecuter</code> class.
  *
  * @author François Melkonian
- * @date 16/11/2016
  */
 public class CheckExecuterTest {
 	private ArgumentAnalyzer argumentAnalyzer;

@@ -4,7 +4,6 @@ import net.brainfuck.common.ArgumentExecuter;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface ContextExecuter.
  *

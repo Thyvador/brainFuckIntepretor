@@ -1,6 +1,5 @@
 package net.brainfuck.common;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Pair.
  *
