@@ -5,6 +5,7 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.JumpTable;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -150,4 +151,9 @@ public class RightInstructionTest {
 		assertEquals("0000ff",instruction.translate() );
 	}
 
+	@After
+	public void tearDown() throws Exception {
+		new File(filename).delete();
+
+	}
 }
