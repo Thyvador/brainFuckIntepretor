@@ -20,7 +20,6 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.SyntaxErrorException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BfCompilerTest.
  */
