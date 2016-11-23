@@ -80,7 +80,6 @@ public class TestMemory {
 	/**
 	 * Test if the reurned index is the current index.
 	 *
-	 * @return the index
 	 * @throws Exception
 	 *             the exception
 	 */

@@ -5,7 +5,6 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.JumpTable;
-import net.brainfuck.interpreter.LeftInstruction;
 import org.junit.Before;
 import org.junit.Test;
 

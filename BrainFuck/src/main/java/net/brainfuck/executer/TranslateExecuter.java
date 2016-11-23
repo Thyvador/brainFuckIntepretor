@@ -4,7 +4,7 @@ import net.brainfuck.common.ArgumentExecuter;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.interpreter.InstructionInterface;
+import net.brainfuck.interpreter.instruction.InstructionInterface;
 
 /**
  * Execute the AbstractInstruction command according to the "--translate" context.

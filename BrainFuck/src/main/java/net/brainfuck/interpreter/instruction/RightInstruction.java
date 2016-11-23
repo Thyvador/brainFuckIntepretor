@@ -1,11 +1,12 @@
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class RightInstruction.
+ * Representation of RIGHT instruction ">" "RIGHT".
  *
  * @author davidLANG
  */
@@ -21,10 +22,8 @@ public class RightInstruction extends AbstractInstruction {
 	/**
 	 * Execute the "right" method of Memory Class.
 	 *
-	 * @param argumentInstruction
-	 *            the argument instruction
-	 * @throws MemoryOutOfBoundsException
-	 *             the memory out of bounds exception
+	 * @param argumentInstruction the argument instruction
+	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 */
     @Override
     public void execute(ArgumentInstruction argumentInstruction) throws MemoryOutOfBoundsException {

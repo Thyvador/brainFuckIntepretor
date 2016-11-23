@@ -1,11 +1,12 @@
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.common.Logger;
 import net.brainfuck.exception.*;
+import net.brainfuck.interpreter.Language;
 
 /**
- * Abstraction of a
+ * Abstraction of a instruction
  */
 public abstract class AbstractInstruction implements InstructionInterface {
 
@@ -37,14 +38,15 @@ public abstract class AbstractInstruction implements InstructionInterface {
     }
 
 	/**
+	 * Execute the instruction and write the trace.
 	 *
 	 * @param argumentInstruction
 	 *            the argument instruction
-	 * @throws IOException
-	 * @throws MemoryOutOfBoundsException
-	 * @throws BracketsParseException
-	 * @throws MemoryOverFlowException
-	 * @throws FileNotFoundIn
+	 * @throws IOException throw by reader
+	 * @throws MemoryOutOfBoundsException throw by memory
+	 * @throws BracketsParseException throw by interpreter
+	 * @throws MemoryOverFlowException throw by memory
+	 * @throws FileNotFoundIn throw by writer
 	 */
     public final void trace(ArgumentInstruction argumentInstruction) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn {
 		execute(argumentInstruction);

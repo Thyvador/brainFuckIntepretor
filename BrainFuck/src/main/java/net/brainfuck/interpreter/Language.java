@@ -1,16 +1,17 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.interpreter.instruction.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
  * Represent the language with his syntax and his corresponding InstructionInterface (wich implements the corresponding method to the
  * syntax).
  *
  * @author davidLANG
  */
-enum Language {
+public enum Language {
 	// Declaration de l'enum
 	INCR(null, "+", "INCR", "ffffff"),
 	DECR(null, "-", "DECR", "4b0082"),
@@ -21,7 +22,7 @@ enum Language {
 	JUMP(null, "[", "JUMP", "ff7f00"),
 	BACK(null, "]", "BACK", "ff0000");
 
-	static Map<String, Language> languageMap = new HashMap<>();
+	public static Map<String, Language> languageMap = new HashMap<>();
 	
 	static {
 		// Set interpretors
@@ -50,10 +51,8 @@ enum Language {
 	/**
 	 * Instantiates a new language.
 	 *
-	 * @param interpreter
-	 *            InstructionInterface corresponding to syntax
-	 * @param aliases
-	 *            au moins 2 string : {String shortSyntax, String longSyntax}
+	 * @param interpreter InstructionInterface corresponding to syntax
+	 * @param aliases au moins 2 string : {String shortSyntax, String longSyntax}
 	 */
 	Language(AbstractInstruction interpreter, String... aliases) {
 		this.interpreter = interpreter;
@@ -81,8 +80,7 @@ enum Language {
 	/**
 	 * Sets the interpreter.
 	 *
-	 * @param interpreter
-	 *            the new interpreter
+	 * @param interpreter the new interpreter
 	 */
 	private void setInterpreter(AbstractInstruction interpreter) {
 		this.interpreter = interpreter;
