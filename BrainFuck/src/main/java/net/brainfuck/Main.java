@@ -17,7 +17,6 @@ import static net.brainfuck.common.ArgumentConstante.OUT_PATH;
 import static net.brainfuck.common.ArgumentConstante.PATH;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Main.
  */
@@ -30,35 +29,9 @@ public class Main {
         System.out.println("Usage : bfck.sh -p FILE [--rewrite] [--translate] [--check] [-o output_file] [-i input_file]");
     }
 
-    /**
-	 * Inits the argument executer.
-	 *
-	 * @param a
-	 *            the a
-	 * @param m
-	 *            the m
-	 * @param r
-	 *            the r
-	 * @param jumpTable
-	 *            the jump table
-	 * @return the argument executer
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	 */
-    private ArgumentExecuter initArgumentExecuter(ArgumentAnalyzer a, Memory m, Reader r, JumpTable jumpTable) throws IOException, FileNotFoundException {
-        BfImageWriter bfImageWriter = null;
-
-        if(a.getFlags().contains(Context.TRANSLATE.getSyntax())) {
-            bfImageWriter = new BfImageWriter();
-        }
-
-        return new ArgumentExecuter(m, r, bfImageWriter, jumpTable);
-    }
 
     /**
-	 * Check path.
+	 * Check path and exit if -p path isn't define
 	 *
 	 * @param a
 	 *            the a
@@ -71,7 +44,8 @@ public class Main {
     }
 
     /**
-	 * Inits the logger from context.
+	 * Initialise the logger from context.
+     * Useful when --trace args is used
 	 *
 	 * @param argAnalizer
 	 *            the arg analizer
