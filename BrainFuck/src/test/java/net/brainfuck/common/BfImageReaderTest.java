@@ -122,7 +122,7 @@ public class BfImageReaderTest {
 			reader.mark();
 			String instruction = reader.getNext();
 			reader.reset();
-			assertEquals(i+1,reader.getMarks().size());//TODO : Erreur
+			assertEquals(i+1,reader.getMarks().size());
 		}
 	}
 
