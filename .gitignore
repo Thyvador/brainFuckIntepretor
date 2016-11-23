@@ -5,3 +5,7 @@
 brainFuck.iml
 *.iml
 .gitignore
+compiledBrainFuck.o
+filename.bf
+filename.bmp
+test.bmp

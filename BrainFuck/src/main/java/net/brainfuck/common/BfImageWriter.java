@@ -101,13 +101,13 @@ public class BfImageWriter implements Writer {
 	public void close() throws FileNotFoundException, IOException {
 		try {
 			DataInputStream tmpIs = new DataInputStream(new FileInputStream(tmpFile));
-			double square;
-			while ((square = Math.sqrt(tmpIs.available()/4)) != (int) square) {
+			double blackNeeded = Math.pow(Math.round(Math.sqrt(tmpIs.available()/4) + 0.5), 2) - tmpIs.available()/4;
+			for (int i=0; i < blackNeeded; i++)	 {
 				write(0x000000);
 			}
 			tmpOs.close();
-			square *= 3;
-			BufferedImage bi = new BufferedImage((int)square, (int)square, BufferedImage.TYPE_INT_RGB);
+			int square = (int) (3 * Math.sqrt(tmpIs.available()/4));
+			BufferedImage bi = new BufferedImage(square, square, BufferedImage.TYPE_INT_RGB);
 			int color;
 			for (int y = 0; y < square; y+=3) {
 				for (int x = 0; x < square; x+=3) {
