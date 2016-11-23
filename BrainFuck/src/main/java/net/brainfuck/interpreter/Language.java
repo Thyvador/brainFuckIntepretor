@@ -3,7 +3,6 @@ package net.brainfuck.interpreter;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
  * Represent the language with his syntax and his corresponding InstructionInterface (wich implements the corresponding method to the
  * syntax).

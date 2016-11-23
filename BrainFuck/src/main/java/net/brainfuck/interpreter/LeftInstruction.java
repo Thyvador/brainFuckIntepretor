@@ -3,7 +3,6 @@ package net.brainfuck.interpreter;
 import net.brainfuck.common.ArgumentInstruction;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 
-// TODO: Auto-generated Javadoc
 /**
  * Representation of LEFT instruction "<" "LEFT".
  *
