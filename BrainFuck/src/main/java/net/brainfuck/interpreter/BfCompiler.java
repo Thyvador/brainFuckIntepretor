@@ -202,7 +202,7 @@ public class BfCompiler {
 
 		if ((currentInstruction = Language.languageMap.get(instruction)) != null) {
 			write(currentInstruction);
-		} else if (macros.containsKey(instruction)) {
+		} else if (macros.containsKey(instruction.split("\\s+")[0])) {
 			writeMacro(instruction);
 		} else {
 			throw new SyntaxErrorException(instruction);

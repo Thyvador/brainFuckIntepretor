@@ -76,7 +76,7 @@ public class BfCompilerTest {
 		String instruction;
 		while((instruction = r.getNext()) != null)
 			res.append(instruction);
-		assertEquals(res.toString(), "+++++++++++++---");
+		assertEquals("+++++++++++++---", res.toString());
 	}
 
 	
