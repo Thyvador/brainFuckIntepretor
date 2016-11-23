@@ -58,24 +58,6 @@ public class Main {
         }
     }
 
-    /**
-	 * Inits the reader.
-	 *
-	 * @param argAnalizer
-	 *            the arg analizer
-	 * @return the reader
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	 */
-    private Reader initReader(ArgumentAnalyzer argAnalizer) throws FileNotFoundException {
-        Reader r;
-        if (argAnalizer.getArgument(PATH).endsWith(".bmp")) {
-            r = new BfImageReader(argAnalizer.getArgument(PATH));
-        } else {
-            r = new BfReader(argAnalizer.getArgument(PATH));
-        }
-        return r;
-    }
 	/**
 	 * Set the default input to a files depending of args "-i".
 	 *
@@ -160,7 +142,7 @@ public class Main {
 	 * Instantiates a new main.
 	 *
 	 * @param args
-	 *            the args
+	 *            the JVM args
 	 */
     public Main(String[] args) {
         if (args.length == 0) {
