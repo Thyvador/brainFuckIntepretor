@@ -48,44 +48,15 @@ public class BfImageWriterTest {
 	}
 
 	/**
-	 * Tests the method write with int as parameters.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	@Test
-	public void write() throws Exception {
-		writer.write(0xffffff);
-		writer.close();
-		byte[] tmp = Files.readAllBytes(Paths.get(filename));
-		assertArrayEquals(imageArray, tmp);
-	}
-
-	/**
-	 * Tests the method write with String as parameters.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	@Test
-	public void write1() throws Exception {
-		writer.write("ffffff");
-		writer.close();
-		//"src/test/resources/assets/brainfucktest/common/", "test.bmp"
-		byte[] tmp = Files.readAllBytes(Paths.get(filename));
-		assertArrayEquals(imageArray, tmp);
-	}
-
-	/**
 	 * Check if the file cannot be written when writer closed.
 	 *
 	 * @throws Exception
 	 *             the exception
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IOException.class)
 	public void close() throws Exception {
 		writer.close();
-		writer.write(111);
+		writer.write(0x000111);
 	}
 
 	/**
