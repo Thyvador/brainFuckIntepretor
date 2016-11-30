@@ -15,19 +15,18 @@ import net.brainfuck.exception.IOException;
 public class BfReader implements Reader {
 
 	public static final int PREPROCESSING = '!';
-
-	private String next = null;
-	private RandomAccessFile reader;
-	private Stack<Long> marks;
-	private boolean firstLine = true;
 	private static final int CR = '\r';
 	private static final int TAB = '\t';
 	private static final int COMMENT = '#';
 	private static final int LF = '\n';
 	private static final int SPACE = ' ';
 	private static final int EOF = -1;
-	private int oldvar;
-	private boolean checkPreprocessing = true;
+
+	private String next = null;
+	private RandomAccessFile reader;
+	private Stack<Long> marks;
+	private int oldvar = LF;
+
 
 	/**
 	 * Constructs argumentAnalyzer BfReader from file name.
@@ -138,6 +137,7 @@ public class BfReader implements Reader {
 		return nextVal;
 	}
 
+
 	/**
 	 * Get the next instruction.
 	 * If the next instruction seems long, it
@@ -148,42 +148,78 @@ public class BfReader implements Reader {
 	@Override
 	public String getNext() throws IOException {
 		try {
-			int nextVal = reader.read();
-
 			// Ignore space, tab, newLine, commentary
+			int nextVal = reader.read();
 			nextVal = this.ignore(nextVal);
 
-			if (nextVal == EOF) {
-				return null;
-			}
-
-			if(checkPreprocessing && isPreprocessing(nextVal)) {
-				readUntilEndOfLine(nextVal);
-				return next;
-			}
-			checkPreprocessing = false;
-			if (isLong(nextVal)) {
-				if (firstLine) {
-					firstLine = false;
-					readUntilEndOfLine(nextVal);
-					return next;
-				} else if (isNewLine(oldvar)) {
-					readUntilEndOfLine(nextVal);
-					return next;
-				}
-			}
-			if (firstLine) {
-				firstLine = false;
-			}
-			oldvar = nextVal;
-			return Character.toString((char) nextVal);
-
+			return  (!isEndOfFile(nextVal)) ? this.getInstruction(nextVal) : null;
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
 
 	}
 
+	/**
+	 * Check if is the end of file
+	 * @param val the character to check
+	 * @return true if is the end of file
+	 */
+	private boolean isEndOfFile(int val) {
+		return val == EOF;
+	}
+
+	private String getInstruction(int nextVal) throws java.io.IOException {
+		if (isLong(nextVal) && isNewLine(oldvar)) {
+			return getLongInstruction(nextVal);
+		}
+		return getShortInstruction(nextVal);
+	}
+
+	/**
+	 * Get the next Short Instruction
+	 *
+	 * @param nextVal the current val read
+	 * @return String represent the short instruction
+	 */
+	private String getShortInstruction(int nextVal) {
+		oldvar = nextVal;
+		return Character.toString((char) nextVal);
+	}
+
+	/**
+	 * Get the next Long Instruction
+	 *
+	 * @param nextVal the current val read
+	 * @return String represent the long instruction
+	 */
+	private String getLongInstruction(int nextVal) throws java.io.IOException {
+		readUntilEndOfLine(nextVal);
+		return next;
+	}
+
+	/**
+	 * Get the next Macro. Warning if it's not a macro return the next instruction
+	 *
+	 * @return the next Macro or next Instruction if not macro
+	 * @throws IOException if file close during reading.
+	 */
+	public String getNextMacro() throws IOException {
+		try {
+			int nextVal = reader.read();
+			nextVal = ignore(nextVal);
+			if (isMacro(nextVal)) {
+				readUntilEndOfLine(nextVal);
+				return next;
+			}
+			return this.getInstruction(nextVal);
+		} catch (java.io.IOException e) {
+			throw new IOException();
+		}
+	}
+
+	private boolean isMacro(int nextVal) {
+		return nextVal == PREPROCESSING;
+	}
 
 	/* (non-Javadoc)
 	 * @see net.brainfuck.common.Reader#getExecutionPointer()
@@ -197,16 +233,6 @@ public class BfReader implements Reader {
 		}
 	}
 
-	/**
-	 * Checks if is preprocessing.
-	 *
-	 * @param nextVal
-	 *            the next val
-	 * @return true, if is preprocessing
-	 */
-	private boolean isPreprocessing(int nextVal) {
-		return nextVal == PREPROCESSING;
-	}
 
 
 	/**

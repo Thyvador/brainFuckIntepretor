@@ -237,7 +237,7 @@ public class BfCompiler {
 		boolean endofCompile = false;
 		String instruction;
 
-		while (!endofCompile && (instruction = reader.getNext()) != null) {
+		while (!endofCompile && (instruction = ((BfReader) reader).getNextMacro()) != null) {
 			if (Language.languageMap.get(instruction) == null &&
 					instruction.charAt(0) == BfReader.PREPROCESSING) {
 				this.saveMacro(instruction);
