@@ -11,7 +11,7 @@ public class ArgumentExecuter extends ArgumentInstruction {
     private BfImageWriter imageWriter;
 
     /**
-	 * Instantiates a new argument executer.
+	 * Instantiates argumentAnalyzer new argument executer.
 	 *
 	 * @param memory
 	 *            the memory

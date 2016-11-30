@@ -25,7 +25,7 @@ public class Logger {
 	private int step = 0;
 
 	/**
-	 * Instantiates a new logger.
+	 * Instantiates argumentAnalyzer new logger.
 	 */
 	private Logger() {
 		if (instance != null)
@@ -98,7 +98,7 @@ public class Logger {
 	}
 
 	/**
-	 * Create a string with all informations collected. Start with '\n' to stop
+	 * Create argumentAnalyzer string with all informations collected. Start with '\n' to stop
 	 *
 	 * @param m
 	 *            the m
@@ -124,7 +124,7 @@ public class Logger {
 
 	/**
 	 * Save the current timestamp of the start of the program
-	 * Useful to calculate the exec time with a subtraction.
+	 * Useful to calculate the exec time with argumentAnalyzer subtraction.
 	 */
 	public void startExecTime() {
 		start = System.currentTimeMillis();
@@ -225,7 +225,7 @@ public class Logger {
 	 * Override of the clone method because of the singleton.
 	 *
 	 * @return the object
-	 * @throws CloneNotSupportedException because this instance is a singleton
+	 * @throws CloneNotSupportedException because this instance is argumentAnalyzer singleton
 	 */
 	@Override
 	public Object clone() throws CloneNotSupportedException {

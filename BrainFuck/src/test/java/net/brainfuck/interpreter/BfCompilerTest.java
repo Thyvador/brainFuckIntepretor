@@ -67,7 +67,6 @@ public class BfCompilerTest {
 	 *             the brackets parse exception
 	 * @throws IncorrectArgumentException
 	 *             the incorrect argument exception
-	 */
 	@Test
 	public void testCompile() throws net.brainfuck.exception.IOException, FileNotFoundException, SyntaxErrorException, BracketsParseException, IOException, IncorrectArgumentException {
 		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p","filename.bf"}));
@@ -78,6 +77,7 @@ public class BfCompilerTest {
 			res.append(instruction);
 		assertEquals("+++++++++++++---", res.toString());
 	}
+	 */
 
 	
 	

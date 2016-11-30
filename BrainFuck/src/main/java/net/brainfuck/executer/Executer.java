@@ -18,7 +18,12 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
  */
 public class Executer {
     private List<ContextExecuter> contextExecuters = new ArrayList<>();
-    private ArgumentExecuter argumentExecuter;
+
+	public void setArgumentExecuter(ArgumentExecuter argumentExecuter) {
+		this.argumentExecuter = argumentExecuter;
+	}
+
+	private ArgumentExecuter argumentExecuter;
 
     /**
 	 * Initialize contextExecuters, memory and reader.
@@ -36,7 +41,7 @@ public class Executer {
 	 * @throws SyntaxErrorException
 	 *             the syntax error exception
 	 */
-    public Executer(ArgumentAnalyzer argumentAnalyzer) throws IOException, FileNotFoundException, BracketsParseException, java.io.IOException, SyntaxErrorException {
+    public Executer(ArgumentAnalyzer argumentAnalyzer,Reader preReader,Memory m) throws IOException, FileNotFoundException, BracketsParseException, java.io.IOException, SyntaxErrorException {
 
 		// Initialize context executer
 		this.contextExecuters.add(Context.contextMap.get(Context.UNCHECK.getSyntax()));
@@ -46,7 +51,7 @@ public class Executer {
 		for (String argument : argumentAnalyzer.getFlags()) {
 			this.contextExecuters.add(Context.contextMap.get(argument));
 		}
-		this.argumentExecuter = init(argumentAnalyzer);
+
 	}
 
     /**
@@ -96,63 +101,7 @@ public class Executer {
     }
 
 
-    /**
-	 * Inits the argument executer.
-	 *
-	 * @param a
-	 *            the a
-	 * @param m
-	 *            the m
-	 * @param r
-	 *            the r
-	 * @param jumpTable
-	 *            the jump table
-	 * @return the argument executer
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	 */
-    private ArgumentExecuter initArgumentExecuter(ArgumentAnalyzer a, Memory m, Reader r, JumpTable jumpTable) throws IOException, FileNotFoundException {
-        BfImageWriter bfImageWriter = null;
 
-        if(a.getFlags().contains(Context.TRANSLATE.getSyntax())) {
-            bfImageWriter = new BfImageWriter();
-        }
-
-        return new ArgumentExecuter(m, r, bfImageWriter, jumpTable);
-    }
-
-
-    /**
-	 * Inits the.
-	 *
-	 * @param argAnalizer
-	 *            the arg analizer
-	 * @return the argument executer
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws SyntaxErrorException
-	 *             the syntax error exception
-	 * @throws BracketsParseException
-	 *             the brackets parse exception
-	 */
-    private ArgumentExecuter init(ArgumentAnalyzer argAnalizer) throws FileNotFoundException, IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
-        Reader r;
-        if (argAnalizer.getArgument(PATH).endsWith(".bmp")) {
-            r = new BfImageReader(argAnalizer.getArgument(PATH));
-        } else {
-            r = new BfReader(argAnalizer.getArgument(PATH));
-        }
-
-        Memory m = new Memory();
-        Pair <Reader, JumpTable> readerAndJump = new BfCompiler(r,contextExecuters).compile(contextExecuters);
-        return initArgumentExecuter(argAnalizer, m, readerAndJump.getFirst(), readerAndJump.getSecond());
-    }
 
 	/**
 	 * Gets the argument executer.

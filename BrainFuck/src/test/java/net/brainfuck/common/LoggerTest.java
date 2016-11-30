@@ -71,7 +71,7 @@ public class LoggerTest {
 	}
 
 	/**
-	 * Wait a random time ( between 0 and 500ms ) to simulate a program, then check if the logger return the real execution time.
+	 * Wait argumentAnalyzer random time ( between 0 and 500ms ) to simulate argumentAnalyzer program, then check if the logger return the real execution time.
 	 *
 	 */
 	@Test

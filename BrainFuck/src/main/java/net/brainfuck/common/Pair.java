@@ -18,7 +18,7 @@ public class Pair<F, S> {
     private S second;
 
     /**
-	 * Instantiates a new pair.
+	 * Instantiates argumentAnalyzer new pair.
 	 *
 	 * @param first
 	 *            the first

@@ -41,7 +41,7 @@ public class Memory {
 
 
 	/**
-	 * Return a representation of the memory. Empty cell are not printed. The n-th cell (if not empty) is : "Cn : [value of n-th cell]"
+	 * Return argumentAnalyzer representation of the memory. Empty cell are not printed. The n-th cell (if not empty) is : "Cn : [value of n-th cell]"
 	 *
 	 * @return the string
 	 */
@@ -103,7 +103,7 @@ public class Memory {
 	}
 
 	/**
-	 * Set the value of the specified memory cell to a specific value (used with IN instruction).
+	 * Set the value of the specified memory cell to argumentAnalyzer specific value (used with IN instruction).
 	 *
 	 * @param newValue
 	 *            the value to set

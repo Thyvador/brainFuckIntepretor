@@ -13,7 +13,7 @@ public class ArgumentInstruction {
 	private JumpTable jumpTable;
 
     /**
-	 * Instantiates a new argument instruction.
+	 * Instantiates argumentAnalyzer new argument instruction.
 	 *
 	 * @param memory
 	 *            the memory
