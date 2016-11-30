@@ -6,6 +6,8 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.ArgumentInstruction;
+import net.brainfuck.common.Memory;
+import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;
@@ -22,14 +24,14 @@ public interface InstructionInterface {
     /**
 	 * Execute a method of Memory Class.
 	 *
-	 * @param args the args
+	 * @param memory the memory
 	 * @throws MemoryOutOfBoundsException throw by memory
 	 * @throws MemoryOverFlowException throw by memory
 	 * @throws IOException throw by memory
 	 * @throws FileNotFoundIn the file not found in
 	 * @throws BracketsParseException throw by JumpInstruction and BackInstruction
 	 */
-    void execute(ArgumentInstruction args) throws MemoryOutOfBoundsException,
+    void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException,
             MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 
     /**
@@ -47,13 +49,13 @@ public interface InstructionInterface {
     /**
 	 * Trace.
 	 *
-	 * @param argumentInstruction the argument instruction
+	 * @param memory the memory
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 * @throws BracketsParseException the brackets parse exception
 	 * @throws MemoryOverFlowException the memory over flow exception
 	 * @throws FileNotFoundIn the file not found in
 	 */
-    void trace(ArgumentInstruction argumentInstruction) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
+    void trace(Memory memory, Reader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
 }
 

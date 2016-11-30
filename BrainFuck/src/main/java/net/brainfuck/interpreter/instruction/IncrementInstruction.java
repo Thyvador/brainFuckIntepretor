@@ -1,6 +1,8 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.ArgumentInstruction;
+import net.brainfuck.common.Memory;
+import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.Language;
@@ -24,13 +26,13 @@ public class IncrementInstruction extends AbstractInstruction {
 	/**
 	 * Execute the "incr" method of Memory Class.
 	 *
-	 * @param argumentInstruction the argument instruction
+	 * @param memory the memory
 	 * @throws MemoryOverFlowException the memory over flow exception
 	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 */
     @Override
-    public void execute(ArgumentInstruction argumentInstruction) throws MemoryOverFlowException, MemoryOutOfBoundsException {
-        argumentInstruction.getMemory().incr();
+    public void execute(Memory memory, Reader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+        memory.incr();
     }
 
 }
