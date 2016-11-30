@@ -39,7 +39,7 @@ public class BfImageReader implements Reader {
 	private boolean open = false;
 
 	/**
-	 * Constructs a BfImageReader from the path of a file.
+	 * Constructs argumentAnalyzer BfImageReader from the path of argumentAnalyzer file.
 	 *
 	 * @param path the path of the file to read.
 	 * @throws FileNotFoundException {@link FileNotFoundException} if the file does not exit or cannot be read.
@@ -61,7 +61,7 @@ public class BfImageReader implements Reader {
 	/**
 	 * Return the color of the next instruction.
 	 *
-	 * @return the hexadecimal value of the next color as a String.
+	 * @return the hexadecimal value of the next color as argumentAnalyzer String.
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */

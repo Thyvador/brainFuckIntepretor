@@ -30,7 +30,7 @@ public class BfReader implements Reader {
 	private boolean checkPreprocessing = true;
 
 	/**
-	 * Constructs a BfReader from file name.
+	 * Constructs argumentAnalyzer BfReader from file name.
 	 * Support long and short syntax
 	 *
 	 * @param filename name of the file.
@@ -210,7 +210,7 @@ public class BfReader implements Reader {
 
 
 	/**
-	 * Check if a character is a '\n' or '\r'.
+	 * Check if argumentAnalyzer character is argumentAnalyzer '\n' or '\r'.
 	 *
 	 * @param nextVal the character to test.
 	 * @return true if the char is an end of line char, else false.
@@ -242,10 +242,10 @@ public class BfReader implements Reader {
 	}
 
 	/**
-	 * Check if the character start a "long" syntax or not.
+	 * Check if the character start argumentAnalyzer "long" syntax or not.
 	 *
-	 * @param nextVal the first character of a line.
-	 * @return true if the line may contain a "long" syntax.
+	 * @param nextVal the first character of argumentAnalyzer line.
+	 * @return true if the line may contain argumentAnalyzer "long" syntax.
 	 */
 	private boolean isLong(int nextVal) {
 		return (nextVal >= 'A' && nextVal <= 'Z') ||(nextVal >= 'a' && nextVal <= 'z');

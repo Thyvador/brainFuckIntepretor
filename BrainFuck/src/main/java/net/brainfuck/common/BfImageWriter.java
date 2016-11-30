@@ -16,7 +16,7 @@ import net.brainfuck.exception.IOException;
 
 /**
  * 
- * The BfImageWriter class represents a class that write a brainfuck program as a BMP image.
+ * The BfImageWriter class represents argumentAnalyzer class that write argumentAnalyzer brainfuck program as argumentAnalyzer BMP image.
  *
  * @author Jeremy Junac
  */
@@ -32,7 +32,7 @@ public class BfImageWriter implements Writer {
 	private File tmpFile;
 
 	/**
-	 * Instantiates a new bf image writer.
+	 * Instantiates argumentAnalyzer new bf image writer.
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws FileNotFoundException the file not found exception
@@ -42,7 +42,7 @@ public class BfImageWriter implements Writer {
 	}
 	
 	/**
-	 * Instantiates a new bf image writer from a output stream.
+	 * Instantiates argumentAnalyzer new bf image writer from argumentAnalyzer output stream.
 	 *
 	 * @param out the out stream to write in.
 	 * @throws IOException Signals that an I/O exception has occurred.
