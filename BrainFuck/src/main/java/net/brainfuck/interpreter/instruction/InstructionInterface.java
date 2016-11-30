@@ -5,7 +5,7 @@
  */
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.ArgumentInstruction;
+import net.brainfuck.common.ExcecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
@@ -31,7 +31,7 @@ public interface InstructionInterface {
 	 * @throws FileNotFoundIn the file not found in
 	 * @throws BracketsParseException throw by JumpInstruction and BackInstruction
 	 */
-    void execute(Memory memory, Reader reader) throws MemoryOutOfBoundsException,
+    void execute(Memory memory, ExcecutionReader reader) throws MemoryOutOfBoundsException,
             MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 
     /**
@@ -56,6 +56,6 @@ public interface InstructionInterface {
 	 * @throws MemoryOverFlowException the memory over flow exception
 	 * @throws FileNotFoundIn the file not found in
 	 */
-    void trace(Memory memory, Reader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
+    void trace(Memory memory, ExcecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
 }
 
