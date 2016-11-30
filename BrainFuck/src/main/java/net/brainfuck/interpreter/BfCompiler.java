@@ -34,6 +34,7 @@ public class BfCompiler {
 	private File tmpFile;
 	private JumpTable jumpTable;
 	private int pos = 0;
+	List<Language> programme = new ArrayList<>();
 	private Map<String, List<Language>> macros = new HashMap<>();
 
 
@@ -290,19 +291,7 @@ public class BfCompiler {
 		return null;
 	}
 
-	/**
-	 * Write.
-	 *
-	 * @param currentInstruction the current instruction
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void write(String currentInstruction) throws IOException {
-		try {
-			writer.write(currentInstruction);
-		} catch (java.io.IOException e) {
-			throw new IOException();
-		}
-	}
+
 
 	/**
 	 * Write.
@@ -312,7 +301,7 @@ public class BfCompiler {
 	 * @throws BracketsParseException the brackets parse exception
 	 */
 	private void write(Language currentInstruction) throws IOException, BracketsParseException {
-		write(currentInstruction.getShortSyntax());
+		programme.add(currentInstruction);
 		jumpTable.addInstruction(currentInstruction, ++pos);
 	}
 
