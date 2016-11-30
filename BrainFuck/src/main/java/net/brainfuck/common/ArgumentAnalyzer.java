@@ -1,8 +1,5 @@
-
 package net.brainfuck.common;
 
-
-import static net.brainfuck.common.ArgumentConstante.*;
 
 import net.brainfuck.exception.IncorrectArgumentException;
 import net.brainfuck.executer.Context;
@@ -105,14 +102,10 @@ public class ArgumentAnalyzer {
 	/**
 	 * Get the argument corresponding to previous argument. Throw an exception if the second argument is null.
 	 *
-	 * @param args
-	 *            arguments of JVM
-	 * @param i
-	 *            the current index of analyze()
-	 * @param position
-	 *            the position in array of arguments where add the argument
-	 * @throws IncorrectArgumentException
-	 *             missing argument
+	 * @param args     arguments of JVM
+	 * @param i        the current index of analyze()
+	 * @param position the position in array of arguments where add the argument
+	 * @throws IncorrectArgumentException missing argument
 	 */
 	private void getDoubleArgument(String[] args, int i, int position) throws IncorrectArgumentException {
 		if (i + 1 >= args.length) {
@@ -121,4 +114,13 @@ public class ArgumentAnalyzer {
 		this.arguments[position] = args[i + 1];
 	}
 
+	/**
+	 * Gets arguments.
+	 *
+	 * @param index the index of the argument
+	 * @return Value of arguments.
+	 */
+	public String getArguments(int index) {
+		return arguments[index];
+	}
 }

@@ -7,9 +7,12 @@ import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.BfCompiler;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
-import net.brainfuck.interpreter.instruction.InstructionInterface;
+import net.brainfuck.interpreter.Language;
 
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 import static net.brainfuck.common.ArgumentConstante.PATH;
 
@@ -76,16 +79,17 @@ public class Initialyzer {
 		analyzeArg();
 		initReader();
 		memory = new Memory();
-		executer = new Executer(argumentAnalyzer, reader, memory);
+		executer = new Executer(argumentAnalyzer);
 		Pair<Reader, JumpTable> readerAndJump = analyzeMacro();
 		jumpTable = readerAndJump.getSecond();
+		Language.setInstructions(getIn(), getOut(), jumpTable);
 		BfImageWriter bfImageWriter = null;
 
 		if (argumentAnalyzer.getFlags().contains(Context.TRANSLATE.getSyntax())) {
 			bfImageWriter = new BfImageWriter();
 		}
-		executer.setArgumentExecuter(new ArgumentExecuter(memory, readerAndJump.getFirst(), bfImageWriter, jumpTable));
-		interpreter = new Interpreter(executer);
+		executer.setArgumentExecuter(memory, bfImageWriter, jumpTable);
+		interpreter = new Interpreter(executer, readerAndJump.getFirst());
 	}
 
 	public Pair<Reader, JumpTable> analyzeMacro() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
@@ -118,6 +122,34 @@ public class Initialyzer {
 	private void initLoggerFromContext(ArgumentAnalyzer argAnalizer) throws IOException {
 		if (argAnalizer.getFlags().contains(Context.TRACE.getSyntax())) {
 			Logger.getInstance().setWriter(argAnalizer.getArgument(PATH));
+		}
+	}
+
+	public InputStreamReader getIn() throws FileNotFoundException {
+		String inputPath = null;
+		try {
+			inputPath = argumentAnalyzer.getArgument(ArgumentConstante.IN_PATH);
+			if (inputPath == null)
+				return new InputStreamReader(System.in);
+
+			return new InputStreamReader(new FileInputStream(inputPath));
+
+		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException(inputPath);
+		}
+	}
+
+	public OutputStreamWriter getOut() throws FileNotFoundException {
+		String inputPath = null;
+		try {
+			inputPath = argumentAnalyzer.getArgument(ArgumentConstante.IN_PATH);
+			if (inputPath == null)
+				return new OutputStreamWriter(System.out);
+
+			return new OutputStreamWriter(new FileOutputStream(inputPath));
+
+		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException(inputPath);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package net.brainfuck.executer;
 
-import net.brainfuck.common.ArgumentExecuter;
+import net.brainfuck.common.ExcecutionReader;
+import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.instruction.BackInstruction;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
@@ -11,50 +12,43 @@ import net.brainfuck.interpreter.instruction.JumpInstruction;
  *
  * @author davidLANG
  */
-class CheckExecuter implements ContextExecuter{
-		
-        static private int cpt = 0;
-        
-        /**
-		 * Execute the AbstractInstruction command according to a context without "--rewrite" and "--check".
-		 *
-		 * @param i
-		 *            the AbstractCommand to execute
-		 * @param argumentExecuter
-		 *            the argument executer
-		 * @throws MemoryOverFlowException
-		 *             throw by memory
-		 * @throws IOException
-		 *             throw by reader
-		 * @throws MemoryOutOfBoundsException
-		 *             throw by memory
-		 * @throws FileNotFoundIn
-		 *             throw by reader
-		 * @throws BracketsParseException
-		 *             throw by JumpInstruction or by BackInstruction
-		 */
-        @Override
-        public void execute(InstructionInterface i, ArgumentExecuter argumentExecuter) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
-            if (i instanceof JumpInstruction) {
-                cpt++;
-            }
-            if (i instanceof BackInstruction) {
-                cpt--;
-                if (cpt < 0) {
-                    throw new BracketsParseException();
-                }
-            }
-        }
+class CheckExecuter implements ContextExecuter {
 
-        /**
-		 * Gets the cpt.
-		 *
-		 * @return the cpt
-		 */
-        int getCpt() {
-            return cpt;
-        }
-    }
+	static private int cpt = 0;
+
+	/**
+	 * Execute the AbstractInstruction command according to a context without "--rewrite" and "--check".
+	 *
+	 * @param i      the AbstractCommand to execute
+	 * @param memory the argument executer
+	 * @throws MemoryOverFlowException    throw by memory
+	 * @throws IOException                throw by reader
+	 * @throws MemoryOutOfBoundsException throw by memory
+	 * @throws FileNotFoundIn             throw by reader
+	 * @throws BracketsParseException     throw by JumpInstruction or by BackInstruction
+	 */
+	@Override
+	public void execute(InstructionInterface i, Memory memory, ExcecutionReader reader) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
+		if (i instanceof JumpInstruction) {
+			cpt++;
+		}
+		if (i instanceof BackInstruction) {
+			cpt--;
+			if (cpt < 0) {
+				throw new BracketsParseException();
+			}
+		}
+	}
+
+	/**
+	 * Gets the cpt.
+	 *
+	 * @return the cpt
+	 */
+	int getCpt() {
+		return cpt;
+	}
+}
 
 
 

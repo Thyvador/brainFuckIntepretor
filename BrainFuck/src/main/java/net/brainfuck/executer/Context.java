@@ -1,5 +1,7 @@
 package net.brainfuck.executer;
 
+import net.brainfuck.common.BfImageWriter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,20 +21,23 @@ public enum Context {
 
     static Map<String, ContextExecuter> contextMap = new HashMap<>();
 
-    static {
-        CHECK.setContextExecuter(new CheckExecuter());
-        UNCHECK.setContextExecuter(new UncheckExecuter());
-        TRANSLATE.setContextExecuter(new TranslateExecuter());
-        REWRITE.setContextExecuter(new RewriteExecuter());
-        TRACE.setContextExecuter(new TraceExecuter());
 
-        for (Context c: Context.values()) {
-            contextMap.put(c.getSyntax(), c.getContextExecuter());
-        }
-    }
 
     private String syntax;
     private ContextExecuter c;
+
+    public static void setExceuter(BfImageWriter writer){
+		CHECK.setContextExecuter(new CheckExecuter());
+		UNCHECK.setContextExecuter(new UncheckExecuter());
+		TRANSLATE.setContextExecuter(new TranslateExecuter(writer));
+		REWRITE.setContextExecuter(new RewriteExecuter());
+		TRACE.setContextExecuter(new TraceExecuter());
+
+		for (Context c: Context.values()) {
+			contextMap.put(c.getSyntax(), c.getContextExecuter());
+		}
+	}
+
 
     /**
 	 * Instantiates a new context.
