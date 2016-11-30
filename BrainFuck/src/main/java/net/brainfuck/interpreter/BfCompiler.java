@@ -1,15 +1,5 @@
 package net.brainfuck.interpreter;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
 import net.brainfuck.common.BfReader;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Pair;
@@ -21,20 +11,28 @@ import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * The Class BfCompiler.
  * Compile and analyze the brainfuck syntax.
- *
  */
 public class BfCompiler {
 
+	List<Language> programme = new ArrayList<>();
 	private Reader reader;
 	private Writer writer;
 	private File tmpFile;
 	private JumpTable jumpTable;
 	private int pos = 0;
-	List<Language> programme = new ArrayList<>();
 	private Map<String, List<Language>> macros = new HashMap<>();
 
 
@@ -42,7 +40,7 @@ public class BfCompiler {
 	 * Instantiates a new bf compiler.
 	 *
 	 * @param reader the reader
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException           Signals that an I/O exception has occurred.
 	 * @throws FileNotFoundException the file not found exception
 	 */
 	public BfCompiler(Reader reader) throws IOException, FileNotFoundException {
@@ -63,10 +61,10 @@ public class BfCompiler {
 	/**
 	 * Initialize the BfCompiler Object
 	 *
-	 * @param r Reader
+	 * @param r                Reader
 	 * @param contextExecuters List of context get by ArgumentAnalyzer
 	 * @throws FileNotFoundException when file is not found
-	 * @throws IOException Throw by bufferedWriter
+	 * @throws IOException           Throw by bufferedWriter
 	 */
 	public BfCompiler(Reader r, List<ContextExecuter> contextExecuters) throws FileNotFoundException, IOException {
 
@@ -88,20 +86,19 @@ public class BfCompiler {
 	 * Get list of instruction of a macro.
 	 *
 	 * @param definitions definition of a macro "++++"
-	 * @param nb the number of time the macro is call
+	 * @param nb          the number of time the macro is call
 	 * @return List of instruction :  N * List of intruction of a macro
 	 */
 	private List<Language> getMacroInstructions(String definitions, int nb) {
 		List<Language> instrList = new ArrayList<>();
 
-		for (int cpt=0; cpt < nb; cpt++) {
+		for (int cpt = 0; cpt < nb; cpt++) {
 			instrList.addAll(macros.get(definitions));
 		}
 		return instrList;
 	}
 
 	/**
-	 *
 	 * Read a string and return the list of instruction corresponding
 	 *
 	 * @param definitions definitions definition of a macro "++++"
@@ -115,9 +112,9 @@ public class BfCompiler {
 		if ((language = Language.languageMap.get(definitions)) != null) {
 			instrList.add(language);
 		} else {
-			for (char inst: definitions.toCharArray()) {
+			for (char inst : definitions.toCharArray()) {
 				if ((language = Language.languageMap.get("" + inst)) == null) {
-					throw  new SyntaxErrorException("Bad macro definition : " + definitions);
+					throw new SyntaxErrorException("Bad macro definition : " + definitions);
 				}
 				instrList.add(language);
 			}
@@ -131,8 +128,7 @@ public class BfCompiler {
 	 * @param str the string to analyze
 	 * @return true, if is numeric
 	 */
-	private boolean isNumeric(String str)
-	{
+	private boolean isNumeric(String str) {
 		return str.matches("^\\d+$");
 	}
 
@@ -148,9 +144,9 @@ public class BfCompiler {
 		List<Language> instrList = new ArrayList<>();
 
 		int length = definitions.length;
-		for (int i=1; i<length; i++) {
+		for (int i = 1; i < length; i++) {
 			if (macros.containsKey(definitions[i])) {
-				if (i+1 < length && this.isNumeric(definitions[i + 1])) {
+				if (i + 1 < length && this.isNumeric(definitions[i + 1])) {
 					int nb = Integer.parseUnsignedInt(definitions[i + 1]);
 					instrList.addAll(getMacroInstructions(definitions[i++], nb));
 				} else {
@@ -168,7 +164,7 @@ public class BfCompiler {
 	 *
 	 * @param instruction the instruction
 	 * @return true, if successful
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
 	 * @throws BracketsParseException the brackets parse exception
 	 */
 	private boolean writeMacro(String instruction) throws IOException, BracketsParseException, SyntaxErrorException {
@@ -178,12 +174,12 @@ public class BfCompiler {
 		if (macros.containsKey(definitions[0])) {
 			int length = definitions.length;
 			if (length > 2) {
-				throw new SyntaxErrorException("Syntax behind macro '"+ definitions[0] + "'");
+				throw new SyntaxErrorException("Syntax behind macro '" + definitions[0] + "'");
 			}
 
 			int number = (length == 2 && this.isNumeric(definitions[1])) ? Integer.parseUnsignedInt(definitions[1]) : 1;
-			for (int i=0; i < number; i++) {
-				for (Language instr: macros.get(definitions[0]))
+			for (int i = 0; i < number; i++) {
+				for (Language instr : macros.get(definitions[0]))
 					write(instr);
 			}
 			return true;
@@ -195,7 +191,7 @@ public class BfCompiler {
 	 * Write instruction and macro.
 	 *
 	 * @param instruction the instruction
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
 	 * @throws BracketsParseException the brackets parse exception
 	 */
 	private void writeInstructionAndMacro(String instruction) throws IOException, BracketsParseException, SyntaxErrorException {
@@ -213,8 +209,8 @@ public class BfCompiler {
 	/**
 	 * Write all.
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
 	 * @throws BracketsParseException the brackets parse exception
 	 */
 	private void writeAll() throws IOException, BracketsParseException, java.io.IOException, SyntaxErrorException {
@@ -229,10 +225,10 @@ public class BfCompiler {
 	/**
 	 * Analyze macro.
 	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
 	 * @throws BracketsParseException the brackets parse exception
-	 * @throws SyntaxErrorException the syntax error exception
+	 * @throws SyntaxErrorException   the syntax error exception
 	 */
 	private void analyzeMacro() throws java.io.IOException, IOException, BracketsParseException, SyntaxErrorException {
 		boolean endofCompile = false;
@@ -255,12 +251,12 @@ public class BfCompiler {
 	 *
 	 * @param contextExecuters the context executers
 	 * @return the pair
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws SyntaxErrorException the syntax error exception
+	 * @throws IOException            Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
+	 * @throws SyntaxErrorException   the syntax error exception
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	public Pair<Reader, JumpTable> compile(List<ContextExecuter> contextExecuters) throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
+	public Pair<List<Language>, JumpTable> compile(List<ContextExecuter> contextExecuters) throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
 		analyzeMacro();
 		writeAll();
 		return endCompile(contextExecuters);
@@ -272,10 +268,10 @@ public class BfCompiler {
 	 * @param contextExecuters the context executers
 	 * @return the pair
 	 * @throws BracketsParseException the brackets parse exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
 	 */
-	private Pair<Reader, JumpTable> endCompile(List<ContextExecuter> contextExecuters) throws BracketsParseException, IOException {
-		if (contextExecuters.contains(Context.CHECK.getContextExecuter())){
+	private Pair<List<Language>, JumpTable> endCompile(List<ContextExecuter> contextExecuters) throws BracketsParseException, IOException {
+		if (contextExecuters.contains(Context.CHECK.getContextExecuter())) {
 			System.out.println(contextExecuters);
 			jumpTable.finish();
 		}
@@ -284,20 +280,15 @@ public class BfCompiler {
 		} catch (java.io.IOException e1) {
 			throw new IOException();
 		}
-		try {
-			return new Pair<>(new BfReader(tmpFile.getName()), jumpTable);
-		} catch (FileNotFoundException e) {
-		}
-		return null;
+		return new Pair<>(programme, jumpTable);
 	}
-
 
 
 	/**
 	 * Write.
 	 *
 	 * @param currentInstruction the current instruction
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
 	 * @throws BracketsParseException the brackets parse exception
 	 */
 	private void write(Language currentInstruction) throws IOException, BracketsParseException {

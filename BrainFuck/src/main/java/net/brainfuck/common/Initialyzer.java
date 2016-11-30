@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.List;
 
 import static net.brainfuck.common.ArgumentConstante.PATH;
 
@@ -78,9 +79,10 @@ public class Initialyzer {
 	private void init(ArgumentAnalyzer argumentAnalyzer) throws FileNotFoundException, IncorrectArgumentException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
 		analyzeArg();
 		initReader();
+		BfCompiler compiler = new BfCompiler(reader, executer.getContextExecuters());
 		memory = new Memory();
 		executer = new Executer(argumentAnalyzer);
-		Pair<Reader, JumpTable> readerAndJump = analyzeMacro();
+		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 		jumpTable = readerAndJump.getSecond();
 		Language.setInstructions(getIn(), getOut(), jumpTable);
 		BfImageWriter bfImageWriter = null;
@@ -89,12 +91,9 @@ public class Initialyzer {
 			bfImageWriter = new BfImageWriter();
 		}
 		executer.setArgumentExecuter(memory, bfImageWriter, jumpTable);
-		interpreter = new Interpreter(executer, readerAndJump.getFirst());
+		interpreter = new Interpreter(executer, new ExcecutionReader(readerAndJump.getFirst()));
 	}
 
-	public Pair<Reader, JumpTable> analyzeMacro() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
-		return new BfCompiler(reader, executer.getContextExecuters()).compile(executer.getContextExecuters());
-	}
 
 	private void initReader() throws FileNotFoundException {
 		if (argumentAnalyzer.getArgument(PATH).endsWith(".bmp")) {

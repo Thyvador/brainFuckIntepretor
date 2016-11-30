@@ -1,7 +1,6 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
@@ -14,65 +13,71 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
+import static net.brainfuck.interpreter.Language.DECR;
+import static net.brainfuck.interpreter.Language.INCR;
 import static org.junit.Assert.assertEquals;
 
 /**
  * @author Alexandre Hiltcher
  */
 public class DecrementInstructionTest {
-	private ArgumentInstruction argumentInstruction;
-	private Memory memory;
-	private Reader reader;
-	private DecrementInstruction instruction;
 	private static String filename;
+	private Memory memory;
+	private ExcecutionReader reader;
+	private DecrementInstruction instruction;
+
+	/**
+	 * Clean up.
+	 */
+	@AfterClass
+	public static void cleanUp() throws IOException {
+		new File("filename.bf").delete();
+		new File("filename.log").delete();
+		new File("test.bmp").delete();
+	}
 
 	/**
 	 * Sets the up.
-	 *
 	 */
 	@Before
 	public void setUp() throws Exception {
 
 		filename = "filename.bf";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename),  Charset.forName("UTF-8"))) {
+		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), Charset.forName("UTF-8"))) {
 			writer.close();
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
-		BfReader reader = new BfReader(filename);
+		reader = new ExcecutionReader(Arrays.asList(INCR, INCR, DECR));
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
 		instruction = new DecrementInstruction();
 	}
 
 	/**
 	 * Decr.
-	 *
 	 */
 	@Test
 	public void decr() throws Exception {
 		memory.set(50);
-		instruction.execute(argumentInstruction);
+		instruction.execute(memory, reader);
 		assertEquals(49, memory.get());
 	}
 
 	/**
 	 * Over flow.
 	 *
-	 * @throws MemoryOverFlowException
-	 *             the memory over flow exception
-	 * @throws MemoryOutOfBoundsException
-	 *             the memory out of bounds exception
+	 * @throws MemoryOverFlowException    the memory over flow exception
+	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 */
 	@Test(expected = MemoryOverFlowException.class)
 	public void OverFlow() throws MemoryOverFlowException, MemoryOutOfBoundsException {
-		instruction.execute(argumentInstruction);
+		instruction.execute(memory, reader);
 	}
 
 	/**
 	 * Rewrite long.
-	 *
 	 */
 	@Test
 	public void rewriteLong() throws Exception {
@@ -84,9 +89,7 @@ public class DecrementInstructionTest {
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
-		reader = new BfReader(filename);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
 		instruction = new DecrementInstruction();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
@@ -97,8 +100,7 @@ public class DecrementInstructionTest {
 	/**
 	 * Rewrite col.
 	 *
-	 * @throws FileNotFoundException
-	 *             the file not found exception
+	 * @throws FileNotFoundException the file not found exception
 	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
@@ -119,7 +121,6 @@ public class DecrementInstructionTest {
 
 	/**
 	 * Translate.
-	 *
 	 */
 	@Test
 	public void translate() throws Exception {
@@ -135,19 +136,6 @@ public class DecrementInstructionTest {
 		memory = new Memory();
 		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
 		instruction = new DecrementInstruction();
-		assertEquals("4b0082",instruction.translate() );
-	}
-
-
-
-	/**
-	 * Clean up.
-	 *
-	 */
-	@AfterClass
-	public static void cleanUp() throws IOException {
-		new File("filename.bf").delete();
-		new File("filename.log").delete();
-		new File("test.bmp").delete();
+		assertEquals("4b0082", instruction.translate());
 	}
 }

@@ -18,13 +18,9 @@ public class ExcecutionReader {
 	private int index = 0;
 	private Stack<Integer> marks;
 
-	public ExcecutionReader() {
-		this.instructions = new ArrayList<>();
+	public ExcecutionReader(List<Language> instructions) {
+		this.instructions = instructions;
 		marks = new Stack<>();
-	}
-
-	public void addInstruction(Language instruction) {
-		instructions.add(instruction);
 	}
 
 
