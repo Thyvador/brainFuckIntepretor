@@ -4,6 +4,8 @@ package net.brainfuck.interpreter;
 import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Executer;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
+import net.brainfuck.interpreter.instruction.InstructionInterface;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +20,7 @@ import java.util.Map;
 public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
 	private Executer executer;
-	private Reader reader;
+	private ExcecutionReader reader;
 
 	/**
 	 * Constructor which initialize attribute.
@@ -27,10 +29,9 @@ public class Interpreter {
 	 * @throws FileNotFoundException throw by setIo()
 	 * @throws IOException throw bt BfImageWriter
 	 */
-	public Interpreter(Executer executer) throws FileNotFoundException, IOException {
+	public Interpreter(Executer executer, ExcecutionReader reader) throws FileNotFoundException, IOException {
 		this.executer = executer;
-		ArgumentExecuter argumentExecuter = executer.getArgumentExecuter();
-		this.reader = argumentExecuter.getReader();
+		this.reader = reader;
 	}
 
 
@@ -50,15 +51,13 @@ public class Interpreter {
 	 */
 	public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
 			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException {
-		String instruction;
-		Language currentInstruction;
+		AbstractInstruction instruction;
 
         while ((instruction = reader.getNext()) != null) {
-            currentInstruction = Language.languageMap.get(instruction);
-            executer.execute(currentInstruction.getInterpreter());
+            executer.execute(instruction, reader);
             Logger.getInstance().countMove();
         }
-        executer.end();
+        executer.end(reader);
     }
 
 

@@ -15,7 +15,7 @@ class UncheckExecuter implements ContextExecuter {
 	 * Execute the AbstractInstruction command according to a context without "--rewrite" and "--check".
 	 *
 	 * @param i the AbstractCommand to execute
-	 * @param argumentExecuter the argument executer
+	 * @param memory the argument executer
 	 * @throws MemoryOverFlowException throw by memory
 	 * @throws IOException throw by reader
 	 * @throws MemoryOutOfBoundsException throw by memory
@@ -23,9 +23,9 @@ class UncheckExecuter implements ContextExecuter {
 	 * @throws BracketsParseException throw by JumpInstruction or by BackInstruction
 	 */
     @Override
-    public void execute(InstructionInterface i, ArgumentExecuter argumentExecuter) throws MemoryOverFlowException,
+    public void execute(InstructionInterface i, Memory memory, ExcecutionReader reader) throws MemoryOverFlowException,
 			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
-    	i.execute(argumentExecuter);
+    	i.execute(memory, reader);
     }
 }
 

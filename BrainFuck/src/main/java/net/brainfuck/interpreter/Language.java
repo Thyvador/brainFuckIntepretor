@@ -2,6 +2,8 @@ package net.brainfuck.interpreter;
 
 import net.brainfuck.interpreter.instruction.*;
 
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,27 +26,6 @@ public enum Language {
 
 	public static Map<String, Language> languageMap = new HashMap<>();
 	
-	static {
-		// Set interpretors
-		INCR.setInterpreter(new IncrementInstruction());
-		DECR.setInterpreter(new DecrementInstruction());
-		RIGHT.setInterpreter(new RightInstruction());
-		LEFT.setInterpreter(new LeftInstruction());
-		IN.setInterpreter(new InInstruction());
-		OUT.setInterpreter(new OutInstruction());
-		JUMP.setInterpreter(new JumpInstruction());
-		BACK.setInterpreter(new BackInstruction());
-		// Init language map
-		Language[] languages = Language.values();
-		for (Language language : languages) {
-			// AbstractInstruction interpreter = language.getInterpreter();
-			String[] aliases = language.getAliases();
-			for (String alias : aliases) {
-				languageMap.put(alias, language);
-			}
-		}
-	}
-
 	private AbstractInstruction interpreter;
 	private String[] aliases;
 
@@ -57,6 +38,29 @@ public enum Language {
 	Language(AbstractInstruction interpreter, String... aliases) {
 		this.interpreter = interpreter;
 		this.aliases = aliases;
+	}
+
+	public static void setInstructions(InputStreamReader inputStreamReader,
+									   OutputStreamWriter outputStreamWriter,
+									   JumpTable jumpTable){
+		// Set interpretors
+		INCR.setInterpreter(new IncrementInstruction());
+		DECR.setInterpreter(new DecrementInstruction());
+		RIGHT.setInterpreter(new RightInstruction());
+		LEFT.setInterpreter(new LeftInstruction());
+		IN.setInterpreter(new InInstruction(inputStreamReader));
+		OUT.setInterpreter(new OutInstruction(outputStreamWriter));
+		JUMP.setInterpreter(new JumpInstruction(jumpTable));
+		BACK.setInterpreter(new BackInstruction(jumpTable));
+		// Init language map
+		Language[] languages = Language.values();
+		for (Language language : languages) {
+			// AbstractInstruction interpreter = language.getInterpreter();
+			String[] aliases = language.getAliases();
+			for (String alias : aliases) {
+				languageMap.put(alias, language);
+			}
+		}
 	}
 
 	/**
