@@ -101,8 +101,15 @@ public class DecrementInstructionTest {
 	 * Rewrite col.
 	 *
 	 * @throws FileNotFoundException the file not found exception
+	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
+	instruction.rewrite();
+	}
+
+
+
+	/*
 		filename = "filename.bmp";
 		String data = "4b0082";
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
