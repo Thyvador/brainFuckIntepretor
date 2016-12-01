@@ -1,6 +1,6 @@
 package net.brainfuck.executer;
 
-import net.brainfuck.common.ExcecutionReader;
+import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
@@ -24,7 +24,7 @@ public class TraceExecuter implements ContextExecuter {
 	 * @throws BracketsParseException     the brackets parse exception
 	 */
 	@Override
-	public void execute(InstructionInterface i, Memory memory, ExcecutionReader reader) throws MemoryOverFlowException,
+	public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
 			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
 		i.trace(memory, reader);
 	}

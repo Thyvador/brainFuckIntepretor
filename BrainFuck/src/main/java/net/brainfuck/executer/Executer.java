@@ -51,7 +51,7 @@ public class Executer {
 	 * @throws FileNotFoundIn             Throw by reader
 	 * @throws IOException                Throw by reader
 	 */
-	public void execute(AbstractInstruction instruction, ExcecutionReader reader) throws MemoryOutOfBoundsException, BracketsParseException,
+	public void execute(AbstractInstruction instruction, ExecutionReader reader) throws MemoryOutOfBoundsException, BracketsParseException,
 			MemoryOverFlowException, FileNotFoundIn, IOException {
 		for (ContextExecuter contextExecuter : contextExecuters) {
 			contextExecuter.execute(instruction, memory, reader);
@@ -69,7 +69,7 @@ public class Executer {
 	 * @throws IOException            throw by reader.closeReader() and imageWrite.close()
 	 * @throws FileNotFoundException  throw by reader.closeReader() and imageWrite.close()
 	 */
-	public void end(ExcecutionReader reader) throws BracketsParseException, IOException, FileNotFoundException {
+	public void end(ExecutionReader reader) throws BracketsParseException, IOException, FileNotFoundException {
 		reader.closeReader();
 
 		int index;

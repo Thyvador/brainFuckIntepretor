@@ -1,6 +1,6 @@
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.ExcecutionReader;
+import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -29,7 +29,7 @@ public class JumpInstruction extends AbstractInstruction {
 	 * @throws IOException                throw by memory
 	 */
 	@Override
-	public void execute(Memory memory, ExcecutionReader reader) throws MemoryOutOfBoundsException, IOException {
+	public void execute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException {
 		// Reach corresponding closing bracket
 		if (memory.get() == 0) {
 			reader.seek(jumpTable.getAssociated(reader.getExecutionPointer()));

@@ -1,9 +1,8 @@
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.ExcecutionReader;
+import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.Language;
 
@@ -49,10 +48,10 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 * @throws MemoryOverFlowException    throw by memory
 	 * @throws FileNotFoundIn             throw by writer
 	 */
-	public final void trace(Memory memory, ExcecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn {
+	public final void trace(Memory memory, ExecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn {
 		execute(memory, reader);
 		Logger.getInstance().write(reader.getExecutionPointer(), memory);
 	}
 
-	public abstract void execute(Memory memory, ExcecutionReader reader) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
+	public abstract void execute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 }

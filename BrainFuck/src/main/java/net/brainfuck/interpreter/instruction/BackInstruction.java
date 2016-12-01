@@ -1,8 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.ExcecutionReader;
+import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
@@ -31,7 +30,7 @@ public class BackInstruction extends AbstractInstruction {
 	 * @throws MemoryOutOfBoundsException the brackets parse exception
 	 */
 	@Override
-	public void execute(Memory memory, ExcecutionReader reader) throws BracketsParseException, IOException, MemoryOutOfBoundsException {
+	public void execute(Memory memory, ExecutionReader reader) throws BracketsParseException, IOException, MemoryOutOfBoundsException {
 		if (memory.get() != 0) {
 			reader.seek(jumpTable.getAssociated(reader.getExecutionPointer()));
 		}

@@ -1,7 +1,7 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.BfImageWriter;
-import net.brainfuck.common.ExcecutionReader;
+import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -30,7 +30,7 @@ class TranslateExecuter implements ContextExecuter {
 	 * @throws MemoryOutOfBoundsException throw by memory
 	 */
 	@Override
-	public void execute(InstructionInterface i, Memory memory, ExcecutionReader reader) throws MemoryOverFlowException,
+	public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
 			IOException, MemoryOutOfBoundsException {
 		writer.write(i.translate());
 	}

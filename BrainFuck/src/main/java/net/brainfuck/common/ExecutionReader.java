@@ -13,12 +13,12 @@ import java.util.Stack;
 /**
  * Created by Alexandre on 30/11/2016.
  */
-public class ExcecutionReader {
+public class ExecutionReader {
 	private List<Language> instructions;
 	private int index = 0;
 	private Stack<Integer> marks;
 
-	public ExcecutionReader(List<Language> instructions) {
+	public ExecutionReader(List<Language> instructions) {
 		this.instructions = instructions;
 		marks = new Stack<>();
 	}

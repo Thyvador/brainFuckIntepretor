@@ -1,8 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.ExcecutionReader;
+import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
@@ -36,7 +35,7 @@ public class InInstruction extends AbstractInstruction {
 	 * @throws FileNotFoundIn             the file not found in
 	 */
 	@Override
-	public void execute(Memory memory, ExcecutionReader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {
+	public void execute(Memory memory, ExecutionReader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException, FileNotFoundIn {
 		int value;
 		try {
 			value = inReader.read();

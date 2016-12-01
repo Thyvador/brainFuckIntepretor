@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 public class DecrementInstructionTest {
 	private static String filename;
 	private Memory memory;
-	private ExcecutionReader reader;
+	private ExecutionReader reader;
 	private DecrementInstruction instruction;
 
 	/**
@@ -50,7 +50,7 @@ public class DecrementInstructionTest {
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
-		reader = new ExcecutionReader(Arrays.asList(INCR, INCR, DECR));
+		reader = new ExecutionReader(Arrays.asList(INCR, INCR, DECR));
 		memory = new Memory();
 		instruction = new DecrementInstruction();
 	}

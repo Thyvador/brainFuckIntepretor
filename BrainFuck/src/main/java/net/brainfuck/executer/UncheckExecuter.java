@@ -23,7 +23,7 @@ class UncheckExecuter implements ContextExecuter {
 	 * @throws BracketsParseException throw by JumpInstruction or by BackInstruction
 	 */
     @Override
-    public void execute(InstructionInterface i, Memory memory, ExcecutionReader reader) throws MemoryOverFlowException,
+    public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
 			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
     	i.execute(memory, reader);
     }

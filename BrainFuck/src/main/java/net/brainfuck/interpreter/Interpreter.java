@@ -5,7 +5,6 @@ import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-import net.brainfuck.interpreter.instruction.InstructionInterface;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +19,7 @@ import java.util.Map;
 public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
 	private Executer executer;
-	private ExcecutionReader reader;
+	private ExecutionReader reader;
 
 	/**
 	 * Constructor which initialize attribute.
@@ -29,7 +28,7 @@ public class Interpreter {
 	 * @throws FileNotFoundException throw by setIo()
 	 * @throws IOException throw bt BfImageWriter
 	 */
-	public Interpreter(Executer executer, ExcecutionReader reader) throws FileNotFoundException, IOException {
+	public Interpreter(Executer executer, ExecutionReader reader) throws FileNotFoundException, IOException {
 		this.executer = executer;
 		this.reader = reader;
 	}

@@ -91,7 +91,7 @@ public class Initialyzer {
 			bfImageWriter = new BfImageWriter();
 		}
 		executer.setArgumentExecuter(memory, bfImageWriter, jumpTable);
-		interpreter = new Interpreter(executer, new ExcecutionReader(readerAndJump.getFirst()));
+		interpreter = new Interpreter(executer, new ExecutionReader(readerAndJump.getFirst()));
 	}
 
 
