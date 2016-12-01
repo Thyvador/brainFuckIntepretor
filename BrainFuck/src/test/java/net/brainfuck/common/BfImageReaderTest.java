@@ -32,9 +32,9 @@ public class BfImageReaderTest {
 	public void setUp() throws Exception {
 		BfImageWriter writer = new BfImageWriter(new FileOutputStream("test.bmp"));
 		instructions = Arrays.asList("0000ff", "0000ff", "0000ff", "0000ff", "000000", "000000","0000ff", "0000ff", "0000ff", "000000", "000000", "000000","0000ff", "0000ff", "0000ff", "000000", "000000", "00ff00");
-			for (int i = 0; i < instructions.size(); i++) {
-				writer.write(instructions.get(i));
-			}
+		for (String instruction : instructions) {
+			writer.write(instruction);
+		}
 		writer.close();
 		reader = new BfImageReader("test.bmp");
 	}

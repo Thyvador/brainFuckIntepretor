@@ -24,7 +24,6 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
 public class Initialyzer {
 	private Memory memory;
 	private Reader reader;
-	private JumpTable jumpTable;
 	private Interpreter interpreter;
 	private Executer executer;
 
@@ -83,7 +82,7 @@ public class Initialyzer {
 		memory = new Memory();
 		executer = new Executer(argumentAnalyzer);
 		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
-		jumpTable = readerAndJump.getSecond();
+		JumpTable jumpTable = readerAndJump.getSecond();
 		Language.setInstructions(getIn(), getOut(), jumpTable);
 		BfImageWriter bfImageWriter = null;
 

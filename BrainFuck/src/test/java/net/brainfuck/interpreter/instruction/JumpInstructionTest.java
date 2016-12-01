@@ -22,7 +22,6 @@ import static org.junit.Assert.*;
 public class JumpInstructionTest {
 	private Memory memory;
 	private ExecutionReader reader;
-	private JumpInstruction instruction;
 
 	/**
 	 * Sets the up.
@@ -131,8 +130,8 @@ public class JumpInstructionTest {
 	 */
 	@Test
 	public void translate() throws Exception {
-		instruction = new JumpInstruction(null);
-		assertEquals("ff7f00",instruction.translate() );
+		JumpInstruction instruction = new JumpInstruction(null);
+		assertEquals("ff7f00", instruction.translate() );
 	}
 
 }

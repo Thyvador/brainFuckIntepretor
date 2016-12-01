@@ -25,7 +25,6 @@ public class OutInstructionTest {
 	private Memory memory;
 	private OutInstruction instruction;
 	private String filename;
-	private ExecutionReader reader;
 
 	/**
 	 * Sets the up.
@@ -37,7 +36,7 @@ public class OutInstructionTest {
 		List<Language> langage = Arrays.asList(Language.LEFT,Language.LEFT);
 
 		instruction = new OutInstruction(outputStream);
-		reader = new ExecutionReader(langage);
+		ExecutionReader reader = new ExecutionReader(langage);
 	}
 
 	/**

@@ -3,6 +3,7 @@ package net.brainfuck.interpreter.instruction;
 import net.brainfuck.common.*;
 import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
+import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import org.junit.Before;
@@ -22,13 +23,14 @@ import static org.junit.Assert.assertEquals;
  */
 public class InInstructionTest {
 	private Memory memory;
-	private InInstruction instruction;
 	private String filename;
 	private ExecutionReader reader;
+	private InInstruction instruction;
 
 	/**
 	 * Sets the up.
 	 *
+	 */
 	@Before
 	public void setUp() throws Exception {
 
@@ -37,20 +39,43 @@ public class InInstructionTest {
 
 		reader = new ExecutionReader(langage);
 		memory = new Memory();
-		instruction = new InInstruction(null);
+		InputStreamReader inStream = new InputStreamReader(new InputStream() {
+			int i = 0;
+			@Override
+			public int read() throws IOException {
+				if(++i < 100) return 5 + i;
+				return '\0';
+			}
+		});
+		instruction = new InInstruction(inStream);
 
 	}
-	 */
 
 	/**
 	 * In.
 	 *
+	 */
 	@Test
 	public void in() throws Exception {
 		instruction.execute(memory,reader);
-		assertEquals('a', memory.get());
+		assertEquals(6, memory.get());
 	}
+
+	/**
+	 * End of In.
+	 *
 	 */
+	@Test(expected = FileNotFoundIn.class)
+	public void endIn() throws Exception {
+		InputStreamReader inStream = new InputStreamReader(new InputStream() {
+			@Override
+			public int read() throws IOException {
+				return -1;
+			}
+		});
+		instruction = new InInstruction(inStream);
+		instruction.execute(memory,reader);
+	}
 
 	/**
 	 * Simule empty file.
@@ -118,8 +143,8 @@ public class InInstructionTest {
 	 */
 	@Test
 	public void translate() throws Exception {
-		instruction = new InInstruction(null);
-		assertEquals("ffff00",instruction.translate() );
+		InInstruction instruction = new InInstruction(null);
+		assertEquals("ffff00", instruction.translate() );
 	}
 
 

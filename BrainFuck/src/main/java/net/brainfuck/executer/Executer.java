@@ -17,7 +17,6 @@ public class Executer {
 	private List<ContextExecuter> contextExecuters = new ArrayList<>();
 	private Memory memory;
 	private BfImageWriter bfImageWriter;
-	private JumpTable jumpTable;
 
 	/**
 	 * Initialize contextExecuters, memory and reader.
@@ -99,6 +98,6 @@ public class Executer {
 	public void setArgumentExecuter(Memory memory, BfImageWriter bfImageWriter, JumpTable jumpTable) {
 		this.memory = memory;
 		this.bfImageWriter = bfImageWriter;
-		this.jumpTable = jumpTable;
+		JumpTable jumpTable1 = jumpTable;
 	}
 }

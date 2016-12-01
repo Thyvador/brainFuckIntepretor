@@ -83,6 +83,11 @@ public class Memory {
 		return memory[index];
 	}
 
+	private Memory setImmediate(int newValue) throws MemoryOverFlowException {
+		Logger.getInstance().countMemoryWrite();
+		memory[index] = (short)newValue;
+		return this;
+	}
 	/**
 	 * Set the value of the specified memory cell.
 	 *
@@ -111,7 +116,7 @@ public class Memory {
 	 *             the memory over flow exception
 	 */
 	public void set(int newValue) throws MemoryOverFlowException {
-		set(index, newValue);
+		setImmediate(newValue);
 	}
 
 	/**

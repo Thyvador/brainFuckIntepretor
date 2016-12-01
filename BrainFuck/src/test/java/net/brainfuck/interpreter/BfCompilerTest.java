@@ -25,8 +25,6 @@ import net.brainfuck.exception.SyntaxErrorException;
  */
 public class BfCompilerTest {
 
-	private BfCompiler compiler;
-
 	/**
 	 * Sets the up.
 	 *
@@ -49,7 +47,7 @@ public class BfCompilerTest {
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
-		compiler = new BfCompiler(new BfReader(filename));
+		BfCompiler compiler = new BfCompiler(new BfReader(filename));
 	}
 
 	/**
