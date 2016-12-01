@@ -35,6 +35,7 @@ public class JumpInstructionTest {
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
 			writer.write(data, 0, data.length());
 		} catch (IOException x) {
+
 			System.err.format("IOException: %s%n", x);
 		}
 		reader = new BfReader(filename);
