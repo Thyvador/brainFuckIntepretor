@@ -5,6 +5,7 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.Language;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,6 +15,8 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,11 +24,10 @@ import static org.junit.Assert.assertEquals;
  * @author Alexandre Hiltcher
  */
 public class RightInstructionTest {
-	ArgumentInstruction argumentInstruction;
+
+	ExecutionReader reader;
 	Memory memory;
-	Reader reader;
 	RightInstruction instruction;
-	private static String filename;
 
 	/**
 	 * Sets the up.
@@ -34,15 +36,11 @@ public class RightInstructionTest {
 	@Before
 	public void setUp() throws Exception {
 
-		filename = "filename.bf";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename),  Charset.forName("UTF-8"))) {
-			writer.close();
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		BfReader reader = new BfReader(filename);
+
+		List<Language> langage = Arrays.asList(Language.RIGHT,Language.RIGHT);
+
+		ExecutionReader reader = new ExecutionReader(langage);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
 		instruction = new RightInstruction();
 	}
 
@@ -52,7 +50,7 @@ public class RightInstructionTest {
 	 */
 	@Test
 	public void right() throws Exception {
-		instruction.execute(argumentInstruction);
+		instruction.execute(memory,reader);
 		assertEquals(1, memory.getIndex());
 	}
 
@@ -65,26 +63,13 @@ public class RightInstructionTest {
 	@Test(expected = MemoryOutOfBoundsException.class)
 	public void OutOfBoundRight() throws MemoryOutOfBoundsException {
 		for (int i = 0; i < 30001; i++) {
-			instruction.execute(argumentInstruction);
+			instruction.execute(memory,reader);
 		}
 	}
-	
-	/**
-	 * Clean up.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	@AfterClass
-	public static void cleanUp() throws IOException {
-		new File(filename).delete();
-	}
-
 
 	/**
 	 * Rewrite long.
 	 *
-	 */
 	@Test
 	public void rewriteLong() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -104,13 +89,13 @@ public class RightInstructionTest {
 		instruction.rewrite();
 		assertEquals(">", outputStream.toString());
 	}
+	*/
 
 	/**
 	 * Rewrite col.
 	 *
 	 * @throws FileNotFoundException
 	 *             the file not found exception
-	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
 		Charset charset = Charset.forName("UTF-8");
@@ -128,11 +113,11 @@ public class RightInstructionTest {
 		instruction.rewrite();
 		assertEquals(">", outputStream.toString());
 	}
+	 */
 
 	/**
 	 * Translate.
 	 *
-	 */
 	@Test
 	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -149,10 +134,6 @@ public class RightInstructionTest {
 		instruction = new RightInstruction();
 		assertEquals("0000ff",instruction.translate() );
 	}
+	 */
 
-	@After
-	public void tearDown() throws Exception {
-		new File(filename).delete();
-
-	}
 }

@@ -5,6 +5,7 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.Language;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,8 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,9 +23,8 @@ import static org.junit.Assert.assertEquals;
  * @author Alexandre Hiltcher
  */
 public class IncrementInstructionTest {
-	private ArgumentInstruction argumentInstruction;
 	private Memory memory;
-	private Reader reader;
+	private ExecutionReader reader;
 	private IncrementInstruction instruction;
 	private static String filename;
 
@@ -35,15 +37,11 @@ public class IncrementInstructionTest {
 	@Before
 	public void setUp() throws Exception {
 
-		filename = "filename.bf";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename),  Charset.forName("UTF-8"))) {
-			writer.close();
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		BfReader reader = new BfReader(filename);
+
+		List<Language> langage = Arrays.asList(Language.RIGHT,Language.RIGHT);
+
+		reader = new ExecutionReader(langage);
 		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
 		instruction = new IncrementInstruction();
 	}
 
@@ -55,7 +53,7 @@ public class IncrementInstructionTest {
 	 */
 	@Test
 	public void incr() throws Exception {
-		instruction.execute(argumentInstruction);
+		instruction.execute(memory,reader);
 		assertEquals(1, memory.get());
 	}
 
@@ -70,7 +68,7 @@ public class IncrementInstructionTest {
 	@Test(expected = MemoryOverFlowException.class)
 	public void OverFlow() throws MemoryOverFlowException, MemoryOutOfBoundsException {
 		for (int i = 0; i < 5000; i++) {
-			instruction.execute(argumentInstruction);
+			instruction.execute(memory,reader);
 		}
 	}
 
@@ -79,7 +77,6 @@ public class IncrementInstructionTest {
 	 *
 	 * @throws Exception
 	 *             the exception
-	 */
 	@Test
 	public void rewriteLong() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -99,6 +96,7 @@ public class IncrementInstructionTest {
 		instruction.rewrite();
 		assertEquals("+", outputStream.toString());
 	}
+	 */
 
 	/**
 	 * Rewrite col.
@@ -107,7 +105,6 @@ public class IncrementInstructionTest {
 	 *             the exception
 	 * @throws FileNotFoundException
 	 *             the file not found exception
-	 */
 	@Test
 	public void rewriteCol() throws Exception, FileNotFoundException {
 		Charset charset = Charset.forName("UTF-8");
@@ -125,13 +122,13 @@ public class IncrementInstructionTest {
 		instruction.rewrite();
 		assertEquals("+", outputStream.toString());
 	}
+	 */
 
 	/**
 	 * Translate.
 	 *
 	 * @throws Exception
 	 *             the exception
-	 */
 	@Test
 	public void translate() throws Exception {
 		Charset charset = Charset.forName("UTF-8");
@@ -148,16 +145,6 @@ public class IncrementInstructionTest {
 		instruction = new IncrementInstruction();
 		assertEquals("ffffff",instruction.translate() );
 	}
-
-	/**
-	 * Clean up.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
-	@AfterClass
-	public static void cleanUp() throws IOException {
-		new File(filename).delete();
-	}
 
 }
