@@ -129,22 +129,11 @@ public class IncrementInstructionTest {
 	 *
 	 * @throws Exception
 	 *             the exception
+	 */
 	@Test
 	public void translate() throws Exception {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bf";
-		String data = "INCR";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-			writer.write(data, 0, data.length());
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		reader = new BfReader(filename);
-		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
 		instruction = new IncrementInstruction();
 		assertEquals("ffffff",instruction.translate() );
 	}
-	 */
 
 }

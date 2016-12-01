@@ -114,24 +114,13 @@ public class InInstructionTest {
 	/**
 	 * Translate.
 	 *
+	 *
+	 */
 	@Test
 	public void translate() throws Exception {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bf";
-		String data = "IN";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-			writer.write(data, 0, data.length());
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		reader = new BfReader(filename);
-		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new InInstruction();
+		instruction = new InInstruction(null);
 		assertEquals("ffff00",instruction.translate() );
 	}
-
-	 */
 
 
 }

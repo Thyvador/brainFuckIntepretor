@@ -56,22 +56,10 @@ public class OutInstructionTest {
 	/**
 	 * Translate.
 	 *
-	@Test
-	public void translate() throws Exception {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bf";
-		String data = "OUT";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-			writer.write(data, 0, data.length());
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		reader = new BfReader(filename);
-		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new OutInstruction();
-		assertEquals("00ff00",instruction.translate() );
-	}
 	 */
+	@Test
+	public void translate() throws Exception{
+	assertEquals("00ff00",instruction.translate());
+	}
 
 }

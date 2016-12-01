@@ -36,7 +36,7 @@ public class LeftInstructionTest {
 	public void setUp() throws Exception {
 		List<Language> langage = Arrays.asList(Language.LEFT,Language.LEFT);
 
-		ExecutionReader reader = new ExecutionReader(langage);
+		reader = new ExecutionReader(langage);
 		memory = new Memory();
 		instruction = new LeftInstruction();
 	}
@@ -118,15 +118,6 @@ public class LeftInstructionTest {
 	 */
 	@Test
 	public void translate() throws Exception {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bf";
-		String data = "LEFT";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-			writer.write(data, 0, data.length());
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		memory = new Memory();
 		instruction = new LeftInstruction();
 		assertEquals("9400d3",instruction.translate() );
 	}

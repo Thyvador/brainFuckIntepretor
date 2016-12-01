@@ -128,24 +128,11 @@ public class JumpInstructionTest {
 	/**
 	 * Translate.
 	 *
+	 */
 	@Test
 	public void translate() throws Exception {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bf";
-		String data = "JUMP";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-			writer.write(data, 0, data.length());
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		reader = new BfReader(filename);
-		memory = new Memory();
-		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
-		JumpTable jumpTable = new BfCompiler(reader,executer.getContextExecuters()).compile(executer.getContextExecuters()).getSecond();
-		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
-		instruction = new JumpInstruction();
+		instruction = new JumpInstruction(null);
 		assertEquals("ff7f00",instruction.translate() );
 	}
-	 */
 
 }
