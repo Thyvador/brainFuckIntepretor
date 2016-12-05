@@ -139,16 +139,16 @@ public class Initialyzer {
 	}
 
 	public OutputStream getOut() throws FileNotFoundException {
-		String inputPath = null;
+		String outputPath = null;
 		try {
-			inputPath = argumentAnalyzer.getArgument(ArgumentConstante.IN_PATH);
-			if (inputPath == null)
+			outputPath = argumentAnalyzer.getArgument(ArgumentConstante.OUT_PATH);
+			if (outputPath == null)
 				return System.out;
 
-			return new FileOutputStream(inputPath);
+			return new FileOutputStream(outputPath);
 
 		} catch (java.io.FileNotFoundException e) {
-			throw new FileNotFoundException(inputPath);
+			throw new FileNotFoundException(outputPath);
 		}
 	}
 
