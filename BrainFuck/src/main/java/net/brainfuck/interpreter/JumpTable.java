@@ -30,37 +30,8 @@ public class JumpTable {
 	/**
 	 * Instantiates a new jump table.
 	 *
-	 * @param reader the reader
-	 * @throws IOException            Signals that an I/O exception has occurred.
-	 * @throws SyntaxErrorException   the syntax error exception
-	 * @throws BracketsParseException the brackets parse exception
 	 */
-	public JumpTable(Reader reader) throws IOException, SyntaxErrorException, BracketsParseException {
-		Stack<Long> jumpStack = new Stack<>();
-		String instruction;
-		Language currentInstruction;
-
-		try {
-			while ((instruction = reader.getNext()) != null) {
-				if ((currentInstruction = Language.languageMap.get(instruction)) == null) {
-					throw new SyntaxErrorException(instruction);
-				}
-				if (currentInstruction == Language.JUMP) {
-					jumpStack.add(reader.getExecutionPointer());
-				} else if (currentInstruction == Language.BACK) {
-					table.put(jumpStack.peek(), reader.getExecutionPointer());
-					table.put(reader.getExecutionPointer(), jumpStack.pop());
-				}
-			}
-			if (!jumpStack.isEmpty() && throwError)
-				throw new BracketsParseException("]");
-		} catch (EmptyStackException e) {
-			if (throwError) {
-				throw new BracketsParseException("[");
-
-			}
-		}
-	}
+	public JumpTable(){}
 
 	/**
 	 * Adds the instruction.
@@ -104,5 +75,7 @@ public class JumpTable {
 	public long getAssociated(long pos) {
 		return table.get(pos);
 	}
+
+
 
 }

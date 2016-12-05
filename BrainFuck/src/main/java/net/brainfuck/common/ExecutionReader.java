@@ -4,9 +4,7 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-import net.brainfuck.interpreter.instruction.InstructionInterface;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -26,7 +24,9 @@ public class ExecutionReader {
 
 	public AbstractInstruction getNext() {
 		if (index >= instructions.size()) return null;
-		return instructions.get(index).getInterpreter();
+		AbstractInstruction instruction = instructions.get(index).getInterpreter();
+		index++;
+		return instruction;
 	}
 
 	public long getExecutionPointer() throws IOException {

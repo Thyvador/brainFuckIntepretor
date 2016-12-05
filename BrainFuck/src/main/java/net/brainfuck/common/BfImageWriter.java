@@ -31,16 +31,7 @@ public class BfImageWriter implements Writer {
 	/** The tmp file. */
 	private File tmpFile;
 
-	/**
-	 * Instantiates argumentAnalyzer new bf image writer.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws FileNotFoundException the file not found exception
-	 */
-	public BfImageWriter() throws IOException, FileNotFoundException {
-		this(System.out);
-	}
-	
+
 	/**
 	 * Instantiates argumentAnalyzer new bf image writer from argumentAnalyzer output stream.
 	 *
