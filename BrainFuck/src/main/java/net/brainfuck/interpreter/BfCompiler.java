@@ -27,8 +27,6 @@ public class BfCompiler {
 
 	List<Language> programme = new ArrayList<>();
 	private Reader reader;
-	private Writer writer;
-	private File tmpFile;
 	private JumpTable jumpTable;
 	private int pos = 0;
 	private Map<String, List<Language>> macros = new HashMap<>();
@@ -47,15 +45,6 @@ public class BfCompiler {
 
 		this.reader = reader;
 		jumpTable = new JumpTable(true);
-		try {
-			tmpFile = new File("compiledBrainFuck.o");
-			tmpFile.deleteOnExit();
-			writer = new BufferedWriter(new FileWriter(tmpFile));
-		} catch (java.io.FileNotFoundException e) {
-			throw new FileNotFoundException();
-		} catch (java.io.IOException e) {
-			throw new IOException();
-		}
 	}
 
 	/**
@@ -76,15 +65,6 @@ public class BfCompiler {
 		jumpTable = new JumpTable(!((contextExecuters.contains(Context.REWRITE.getContextExecuter())
 				|| contextExecuters.contains(Context.TRANSLATE.getContextExecuter()))
 				&& !contextExecuters.contains(Context.CHECK.getContextExecuter())));
-		try {
-			tmpFile = new File("compiledBrainFuck.o");
-			tmpFile.deleteOnExit();
-			writer = new BufferedWriter(new FileWriter(tmpFile));
-		} catch (java.io.FileNotFoundException e) {
-			throw new FileNotFoundException();
-		} catch (java.io.IOException e) {
-			throw new IOException();
-		}
 	}
 
 	/**
@@ -308,11 +288,6 @@ public class BfCompiler {
 		if (contextExecuters.contains(Context.CHECK.getContextExecuter())) {
 			System.out.println(contextExecuters);
 			jumpTable.finish();
-		}
-		try {
-			writer.close();
-		} catch (java.io.IOException e1) {
-			throw new IOException();
 		}
 		return new Pair<>(programme, jumpTable);
 	}
