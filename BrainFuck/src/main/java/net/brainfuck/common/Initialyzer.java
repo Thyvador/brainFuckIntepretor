@@ -78,9 +78,9 @@ public class Initialyzer {
 	private void init(ArgumentAnalyzer argumentAnalyzer) throws FileNotFoundException, IncorrectArgumentException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
 		analyzeArg();
 		initReader();
+		executer = new Executer(argumentAnalyzer);
 		BfCompiler compiler = new BfCompiler(reader, executer.getContextExecuters());
 		memory = new Memory();
-		executer = new Executer(argumentAnalyzer);
 		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 		JumpTable jumpTable = readerAndJump.getSecond();
 		Language.setInstructions(getIn(), getOut(), jumpTable);
