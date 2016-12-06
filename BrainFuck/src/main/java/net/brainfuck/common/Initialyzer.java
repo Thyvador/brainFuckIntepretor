@@ -6,13 +6,16 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
-import net.brainfuck.interpreter.BfCompiler;
+import net.brainfuck.interpreter.compiler.BfCompiler;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.compiler.BfPrecompiler;
+import net.brainfuck.interpreter.compiler.Macro;
 
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 
 import static net.brainfuck.common.ArgumentConstante.PATH;
 
@@ -56,7 +59,7 @@ public class Initialyzer {
 	}
 
 
-	public void analyzeArg() throws IOException {
+	void analyzeArg() throws IOException {
 		if (argumentAnalyzer.getArgument(PATH) == null) {
 			Main.printUsage();
 			System.exit(0);
@@ -84,7 +87,7 @@ public class Initialyzer {
 		Context.setExceuter(bfImageWriter);
 		executer = new Executer(argumentAnalyzer);
 		Language.setInstructions(getIn(), new OutputStreamWriter(getOut()), new JumpTable());
-		BfCompiler compiler = new BfCompiler(reader, executer.getContextExecuters());
+		BfCompiler compiler = initCompiler();
 		memory = new Memory();
 		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 		JumpTable jumpTable = readerAndJump.getSecond();
@@ -94,6 +97,12 @@ public class Initialyzer {
 		interpreter = new Interpreter(executer, new ExecutionReader(readerAndJump.getFirst()));
 	}
 
+	private BfCompiler initCompiler() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+		BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
+		Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
+		String lastInstruction  = bfPrecompiler.getLastInstruction();
+		return new BfCompiler(reader, executer.getContextExecuters(), macros, lastInstruction);
+	}
 
 	private void initReader() throws FileNotFoundException {
 		if (argumentAnalyzer.getArgument(PATH).endsWith(".bmp")) {
@@ -131,6 +140,7 @@ public class Initialyzer {
 			if (inputPath == null)
 				return new InputStreamReader(System.in);
 
+			//TODO est ce qu'on ferme cette inputStreamReader
 			return new InputStreamReader(new FileInputStream(inputPath));
 
 		} catch (java.io.FileNotFoundException e) {
