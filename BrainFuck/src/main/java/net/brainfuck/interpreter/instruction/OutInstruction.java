@@ -37,6 +37,7 @@ public class OutInstruction extends AbstractInstruction {
 	public void execute(Memory memory, ExecutionReader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException, IOException {
 		try {
 			writer.write((char) memory.get());
+			writer.flush();
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
