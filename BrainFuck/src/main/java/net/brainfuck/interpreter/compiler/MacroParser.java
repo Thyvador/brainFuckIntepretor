@@ -20,7 +20,6 @@ class MacroParser {
     }
 
     private String[] getArgument(String str) throws SyntaxErrorException {
-        str = str.substring(0, str.length()-1);
         return str.isEmpty() ? null : str.split(",");
     }
 
@@ -72,17 +71,29 @@ class MacroParser {
         if (tmp.length != 2) {
             throw new SyntaxErrorException("Bad definition of macro '" + instruction + "'");
         }
-        String[] definitions = tmp[1].split("\\s+");
+        String[] definitions = RegexParser.splitSpace(tmp[1]);
 
         int length = definitions.length;
         for (int i = 0; i < length; i++) {
             if (macros.containsKey(definitions[i])) {
                 i = addMacroInstructions(definitions, macro, length, i);
             } else {
-                macro.addInstructions(getListOfInstruction(definitions[i]));
+                i = addInstruction(definitions, macro, length, i);
             }
         }
         macros.put(name, macro);
+    }
+
+    private int addInstruction(String[] definitions, Macro macro, int length, int i) throws SyntaxErrorException {
+        List<Language> instructions = this.getListOfInstruction(definitions[i]);
+
+        if (i + 1 < length && macro.containsArgument(definitions[i+1])) {
+            macro.addInstructionsArgument(instructions, definitions[i+1]);
+            i += 1;
+        } else {
+            macro.addInstructions(instructions);
+        }
+        return i;
     }
 
     /**
@@ -93,10 +104,12 @@ class MacroParser {
      * @param i the current index loop
      * @return the new index loop
      */
-    private int addMacroInstructions(String[] definitions, Macro macro, int length, int i) {
+    private int addMacroInstructions(String[] definitions, Macro macro, int length, int i) throws SyntaxErrorException {
         if (i + 1 < length && RegexParser.isNumeric(definitions[i + 1])) {
             int nb = Integer.parseUnsignedInt(definitions[i + 1]);
             macro.addInstructions(getMacroInstructions(definitions[i++], nb));
+        } else if (i + 1 < length && macro.containsArgument(definitions[i + 1])) {
+            macro.addInstructionsArgument(getMacroInstructions(definitions[i++], 1), definitions[i + 1]);
         } else {
             macro.addInstructions(getMacroInstructions(definitions[i], 1));
         }
@@ -134,7 +147,7 @@ class MacroParser {
      * @param nb the number of time the macro is call
      * @return List of instruction : N * List of intruction of a macro
      */
-    private List<Language> getMacroInstructions(String definitions, int nb) {
+    private List<Language> getMacroInstructions(String definitions, int nb) throws SyntaxErrorException {
         List<Language> instrList = new ArrayList<>();
         Macro macro = macros.get(definitions);
 

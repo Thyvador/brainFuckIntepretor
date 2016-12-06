@@ -99,7 +99,7 @@ public class BfCompiler {
 	}
 
 	private boolean isMacro(String str) {
-		return macroInterpreter.contains(RegexParser.splitSpace(str)[0]);
+		return macroInterpreter.contains(RegexParser.splitSpace(str)[0].split("\\(")[0]);
 	}
 
 	/**

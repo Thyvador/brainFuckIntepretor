@@ -22,6 +22,26 @@ class MacroInterpreter {
     }
 
 
+    private String getMacroName(String definition) {
+        return definition.split("\\(")[0];
+    }
+
+    private List<Integer> getMacroArgument(String definition) throws SyntaxErrorException {
+        List<Integer> values = new ArrayList<>();
+        String strValues = definition.substring(definition.indexOf('(')+1,definition.indexOf(')'));
+
+//        if (tmp.length > 1) {
+//            throw new SyntaxErrorException("Bad macro utilisation " + definition);
+//        }
+        for (String value : strValues.split(",")) {
+            if (!RegexParser.isNumeric(value)) {
+                throw new SyntaxErrorException("illegal macro argument " + value);
+            }
+            values.add(Integer.parseUnsignedInt(value));
+        }
+        return values;
+    }
+
     /**
      * Write macro.
      *
@@ -33,19 +53,19 @@ class MacroInterpreter {
     List<Language> writeMacro(String instruction) throws IOException, BracketsParseException, SyntaxErrorException {
         String[] definitions = RegexParser.splitSpace(instruction);
         List<Language> programme = new ArrayList<>();
+        String macroName = this.getMacroName(definitions[0]);
 
-        if (macros.containsKey(definitions[0])) {
+        if (macros.containsKey(macroName)) {
             int length = definitions.length;
             if (length > 2) {
                 throw new SyntaxErrorException("Syntax behind macro '" + definitions[0] + "'");
             }
 
             int number = (length == 2 && RegexParser.isNumeric(definitions[1])) ? Integer.parseUnsignedInt(definitions[1]) : 1;
-            Macro macro = macros.get(definitions[0]);
-            List<Integer> arguments = new ArrayList<>();
-            arguments.add(1);
+            List<Integer> values = this.getMacroArgument(definitions[0]);
+            Macro macro = macros.get(macroName);
             for (int i = 0; i < number; i++) {
-                programme.addAll(macro.write(arguments));
+                programme.addAll(macro.write(values));
             }
         }
         return programme;
