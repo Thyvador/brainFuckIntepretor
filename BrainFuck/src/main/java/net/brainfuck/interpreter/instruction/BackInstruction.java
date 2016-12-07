@@ -1,5 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
+import javax.management.NotificationListener;
+
 import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
@@ -31,6 +33,18 @@ public class BackInstruction extends AbstractInstruction {
 	 */
 	@Override
 	public void execute(Memory memory, ExecutionReader reader) throws BracketsParseException, IOException, MemoryOutOfBoundsException {
+		linearExecute(memory, reader);
+	}
+
+	private void linearExecute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+		if (memory.get() != 0) {
+			reader.reset();
+		} else {
+			reader.unmark();
+		}
+	}
+
+	private void nonLinearExecute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException {
 		if (memory.get() != 0) {
 			reader.seek(jumpTable.getAssociated(reader.getExecutionPointer()));
 		}
