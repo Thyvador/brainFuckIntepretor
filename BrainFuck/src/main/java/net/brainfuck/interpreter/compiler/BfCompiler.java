@@ -1,6 +1,9 @@
 package net.brainfuck.interpreter.compiler;
 
-import net.brainfuck.common.*;
+import net.brainfuck.common.Logger;
+import net.brainfuck.common.Pair;
+import net.brainfuck.common.Reader;
+import net.brainfuck.common.RegexParser;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
@@ -19,6 +22,7 @@ import java.util.Map;
  */
 public class BfCompiler {
 
+	private Logger logger;
 	private MacroInterpreter macroInterpreter;
 	private String lastInstruction;
 	private List<Language> programme = new ArrayList<>();
@@ -37,7 +41,7 @@ public class BfCompiler {
 	 */
 	public BfCompiler(Reader r, List<ContextExecuter> contextExecuters, Map<String, Macro> macros,
 					  String lastInstruction) throws FileNotFoundException, IOException {
-
+		this.logger = Logger.getInstance();
 		this.reader = r;
 		macroInterpreter = new MacroInterpreter(macros);
 		this.lastInstruction = lastInstruction;
@@ -114,7 +118,7 @@ public class BfCompiler {
 
 		while ((instruction = reader.getNext()) != null) {
 			writeInstructionAndMacro(instruction);
-			Logger.getInstance().incrInstruction();
+			logger.incrInstruction();
 		}
 	}
 

@@ -31,11 +31,13 @@ public class Memory {
 	 * Index of the current cell
 	 */
 	private int index;
+	private Logger logger;
 
 	/**
 	 * Default constructor
 	 */
 	public Memory() {
+		this.logger = Logger.getInstance();
 		clean();
 	}
 
@@ -79,12 +81,12 @@ public class Memory {
 	 */
 	private short get(int index) throws MemoryOutOfBoundsException {
 		checkIndex(index);
-		Logger.getInstance().countMemoryRead();
+		logger.countMemoryRead();
 		return memory[index];
 	}
 
 	private Memory setImmediate(int newValue) throws MemoryOverFlowException {
-		Logger.getInstance().countMemoryWrite();
+		logger.countMemoryWrite();
 		memory[index] = (short)newValue;
 		return this;
 	}
@@ -103,7 +105,7 @@ public class Memory {
 		if (memory[index] > (MAX_VALUE - changeValue) || memory[index] < (MIN_VALUE - changeValue))
 			throw new MemoryOverFlowException("Invalid value " + (memory[index] + changeValue) + " at index " + index);
 		memory[index] += changeValue;
-		Logger.getInstance().countMemoryWrite();
+		logger.countMemoryWrite();
 		return this;
 	}
 
@@ -141,7 +143,7 @@ public class Memory {
 	 */
 	public Memory right() throws MemoryOutOfBoundsException {
 		index++;
-		Logger.getInstance().countMemoryMove();
+		logger.countMemoryMove();
 		checkIndex(index);
 		return this;
 	}
@@ -155,7 +157,7 @@ public class Memory {
 	 */
 	public Memory left() throws MemoryOutOfBoundsException {
 		index--;
-		Logger.getInstance().countMemoryMove();
+		logger.countMemoryMove();
 		checkIndex(index);
 		return this;
 	}

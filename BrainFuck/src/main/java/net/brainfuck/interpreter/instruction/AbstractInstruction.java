@@ -12,6 +12,7 @@ import net.brainfuck.interpreter.Language;
 public abstract class AbstractInstruction implements InstructionInterface {
 
 	private Language languageInstr;
+	private Logger logger;
 
 	/**
 	 * Instantiates a new abstract execute.
@@ -20,6 +21,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 */
 	AbstractInstruction(Language languageInstr) {
 		this.languageInstr = languageInstr;
+		logger = Logger.getInstance();
 	}
 
 	/**
@@ -50,7 +52,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 */
 	public final void trace(Memory memory, ExecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn {
 		execute(memory, reader);
-		Logger.getInstance().write(reader.getExecutionPointer(), memory);
+		logger.write(reader.getExecutionPointer(), memory);
 	}
 
 	public abstract void execute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;

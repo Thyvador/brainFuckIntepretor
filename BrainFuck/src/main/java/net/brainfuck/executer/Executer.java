@@ -17,6 +17,7 @@ public class Executer {
 	private List<ContextExecuter> contextExecuters = new ArrayList<>();
 	private Memory memory;
 	private BfImageWriter bfImageWriter;
+	private Logger logger;
 
 	/**
 	 * Initialize contextExecuters, memory and reader.
@@ -30,6 +31,7 @@ public class Executer {
 	 */
 	public Executer(ArgumentAnalyzer argumentAnalyzer) throws IOException, FileNotFoundException, BracketsParseException, java.io.IOException, SyntaxErrorException {
 		// Initialize context executer
+		this.logger = Logger.getInstance();
 		this.contextExecuters.add(Context.contextMap.get(Context.UNCHECK.getSyntax()));
 		if (argumentAnalyzer.getFlags().size() > 0) {
 			this.contextExecuters.remove(Context.contextMap.get(Context.UNCHECK.getSyntax()));
@@ -81,8 +83,8 @@ public class Executer {
 		if (this.contextExecuters.indexOf(Context.contextMap.get(Context.TRANSLATE.getSyntax())) >= 0) {
 			bfImageWriter.close();
 		}
-		if (Logger.getInstance().isWriterOpen()) {
-			Logger.getInstance().closeWriter();
+		if (logger.isWriterOpen()) {
+			logger.closeWriter();
 		}
 	}
 

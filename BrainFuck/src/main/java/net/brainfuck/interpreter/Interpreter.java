@@ -1,7 +1,8 @@
 
 package net.brainfuck.interpreter;
 
-import net.brainfuck.common.*;
+import net.brainfuck.common.ExecutionReader;
+import net.brainfuck.common.Logger;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
@@ -20,6 +21,7 @@ public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
 	private Executer executer;
 	private ExecutionReader reader;
+	private Logger logger;
 
 	/**
 	 * Constructor which initialize attribute.
@@ -31,6 +33,7 @@ public class Interpreter {
 	public Interpreter(Executer executer, ExecutionReader reader) throws FileNotFoundException, IOException {
 		this.executer = executer;
 		this.reader = reader;
+		this.logger = Logger.getInstance();
 	}
 
 
@@ -54,7 +57,7 @@ public class Interpreter {
 
         while ((instruction = reader.getNext()) != null) {
             executer.execute(instruction, reader);
-            Logger.getInstance().countMove();
+            logger.countMove();
         }
         executer.end(reader);
     }

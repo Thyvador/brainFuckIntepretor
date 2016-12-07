@@ -15,12 +15,14 @@ import java.util.Map;
  */
 public class BfPrecompiler {
 
+    private Logger logger;
     private MacroParser macroParser = new MacroParser();
     private String lastInstruction;
     private Reader reader;
 
     public BfPrecompiler(Reader reader) {
         this.reader = reader;
+        this.logger = Logger.getInstance();
     }
 
 
@@ -43,7 +45,7 @@ public class BfPrecompiler {
                 this.lastInstruction = instruction;
                 endofCompile = true;
             }
-            Logger.getInstance().incrInstruction();
+            logger.incrInstruction();
         }
         return macroParser.getMacros();
     }
