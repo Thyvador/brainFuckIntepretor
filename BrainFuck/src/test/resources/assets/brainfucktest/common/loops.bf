@@ -1,7 +1,6 @@
-!MULTI_INCR +
-!MULTI_DECR -
-!TO_DIGIT MULTI_DECR 48
-
-RIGHT
-MULTI_INCR 49
-TO_DIGIT
++++++[
+>+++[
+>++<-
+]
+<-
+]
