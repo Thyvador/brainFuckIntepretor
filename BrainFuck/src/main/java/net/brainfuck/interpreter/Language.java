@@ -65,7 +65,7 @@ public enum Language {
 
 	public static void setJumpTabel(JumpTable jumpTabel) {
 		Language.JUMP.setInterpreter(new JumpInstruction(jumpTabel));
-		Language.BACK.setInterpreter(new JumpInstruction(jumpTabel));
+		Language.BACK.setInterpreter(new BackInstruction(jumpTabel));
 	}
 
 	/**

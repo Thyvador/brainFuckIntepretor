@@ -1,9 +1,6 @@
 package net.brainfuck.interpreter;
 
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
-import net.brainfuck.exception.IOException;
-import net.brainfuck.exception.SyntaxErrorException;
 
 import java.util.EmptyStackException;
 import java.util.HashMap;
@@ -72,7 +69,7 @@ public class JumpTable {
 	 * @param pos the pos
 	 * @return the associated
 	 */
-	public long getAssociated(long pos) {
+	public int getAssociated(int pos) {
 		return table.get(pos);
 	}
 

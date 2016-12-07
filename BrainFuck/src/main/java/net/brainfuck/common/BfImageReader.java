@@ -32,7 +32,7 @@ public class BfImageReader implements Reader {
 	/**
 	 * The stack that contains all the points corresponding to the JUMP instructions.
 	 */
-	private Stack<Long> marks;
+	private Stack<Integer> marks;
 	/**
 	 * Is the reader open.
 	 */
@@ -102,7 +102,7 @@ public class BfImageReader implements Reader {
 	 * @see net.brainfuck.common.Reader#getExecutionPointer()
 	 */
 	@Override
-	public long getExecutionPointer() {
+	public int getExecutionPointer() {
 		return ((offX / 3) + (offY * width) / 9);
 	}
 
@@ -157,7 +157,7 @@ public class BfImageReader implements Reader {
 	 * @see net.brainfuck.common.Reader#seek(long)
 	 */
 	@Override
-	public void seek(long pos) {
+	public void seek(int pos) {
 		offX = (int) ((pos * 3) % width);
 		offY = (int) ((pos * 9) / width);
 	}
@@ -167,7 +167,7 @@ public class BfImageReader implements Reader {
 	 *
 	 * @return the marks
 	 */
-	public Stack<Long> getMarks() {
+	public Stack<Integer> getMarks() {
 		return marks;
 	}
 }

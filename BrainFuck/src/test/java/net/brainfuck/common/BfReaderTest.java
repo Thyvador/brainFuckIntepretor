@@ -2,7 +2,6 @@ package net.brainfuck.common;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedWriter;
@@ -12,9 +11,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * The Class BfReaderTest tests the <code>BfReader</code> interface.
@@ -170,7 +167,7 @@ public class BfReaderTest {
 	@Test
 	public void mark() throws Exception {
 		BfReader bfReader = new BfReader(filename);
-		long mark = bfReader.getExecutionPointer();
+		int mark = bfReader.getExecutionPointer();
 		bfReader.mark();
 		for (int i = 0; i < data.length(); i++) {
 			bfReader.getNext();
@@ -188,7 +185,7 @@ public class BfReaderTest {
 	@Test
 	public void marks() throws Exception {
 		BfReader bfReader = new BfReader(filename);
-		long mark = bfReader.getExecutionPointer();
+		int mark = bfReader.getExecutionPointer();
 		for (int i = 0; i < data.length(); i++) {
 			bfReader.getNext();
 			bfReader.mark();
@@ -267,7 +264,7 @@ public class BfReaderTest {
 			reader.getNext();
 		}
 		int size = reader.getMarks().size();
-		Long last = reader.getMarks().get(size - 1);
+		Integer last = reader.getMarks().get(size - 1);
 		reader.unmark();
 		assertTrue(!reader.getMarks().contains(last));
 		assertEquals(size - 1, reader.getMarks().size());

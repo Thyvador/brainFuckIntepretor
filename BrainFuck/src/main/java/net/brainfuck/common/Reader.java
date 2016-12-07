@@ -27,7 +27,7 @@ public interface Reader {
 	 * @throws IOException
 	 *             If an I/O exception occurs.
 	 */
-    long getExecutionPointer() throws IOException;
+    int getExecutionPointer() throws IOException;
 
 
     /**
@@ -74,5 +74,5 @@ public interface Reader {
 	 * @throws IOException
 	 *             If an I/O exception occurs.
 	 */
-	void seek(long pos) throws IOException;
+	void seek(int pos) throws IOException;
 }
