@@ -79,8 +79,8 @@ public class BfReader implements Reader {
 	}
 
 	private int ignoreCharacters(int c) throws java.io.IOException {
+		oldvar = c;
 		while (isIgnoredCharacter(c)) {
-			oldvar = c;
 			c = reader.read();
 		}
 		return c;
