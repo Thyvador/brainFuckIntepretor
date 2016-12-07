@@ -95,7 +95,7 @@ public class BfImageReaderTest {
 		for (int i = 0; i < instructions.size(); i++) {
 			reader.getNext();
 			reader.mark();
-			assertTrue(reader.getMarks().contains(new Long(i + 1)));
+			assertTrue(reader.getMarks().contains(new Integer(i + 1)));
 		}
 	}
 

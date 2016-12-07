@@ -74,6 +74,7 @@ public class LoggerTest {
 	 * Wait argumentAnalyzer random time ( between 0 and 500ms ) to simulate argumentAnalyzer program, then check if the logger return the real execution time.
 	 *
 	 */
+	@Ignore
 	@Test
 	public void startExecTime() throws Exception {
 		logger.reset();
