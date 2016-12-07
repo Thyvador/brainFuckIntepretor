@@ -17,8 +17,8 @@ import java.util.Stack;
 public class JumpTable {
 
 	private boolean throwError = true;
-	private Map<Long, Long> table = new HashMap<>();
-	private Stack<Long> jumpStack = new Stack<>();
+	private Map<Integer, Integer> table = new HashMap<>();
+	private Stack<Integer> jumpStack = new Stack<>();
 
 	/**
 	 * Instantiates a new jump table.
@@ -40,7 +40,7 @@ public class JumpTable {
 	 * @param pos                the pos
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	public void addInstruction(Language currentInstruction, long pos) throws BracketsParseException {
+	public void addInstruction(Language currentInstruction, int pos) throws BracketsParseException {
 		try {
 			if (currentInstruction == Language.JUMP) {
 				jumpStack.add(pos);
