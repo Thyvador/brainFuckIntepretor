@@ -114,7 +114,6 @@ public class BfReaderTest {
 	 * @throws Exception
 	 *             the exception
 	 */
-	@Ignore
 	@Test
 	public void testSpace() throws Exception {
 		String file = "filename.bf";
