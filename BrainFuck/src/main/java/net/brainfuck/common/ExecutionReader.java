@@ -29,7 +29,7 @@ public class ExecutionReader {
 		return instruction;
 	}
 
-	public long getExecutionPointer() throws IOException {
+	public int getExecutionPointer() throws IOException {
 		return index;
 	}
 
@@ -66,8 +66,9 @@ public class ExecutionReader {
 	/* (non-Javadoc)
 	 * @see net.brainfuck.common.Reader#seek(long)
 	 */
-	public void seek(long pos) {
-		seek(pos);
+	public void seek(int pos) {
+
+		index = pos;
 	}
 
 	/**

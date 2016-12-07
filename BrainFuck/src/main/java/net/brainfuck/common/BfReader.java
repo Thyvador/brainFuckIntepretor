@@ -1,13 +1,13 @@
 package net.brainfuck.common;
 
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
+
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
-
-import net.brainfuck.exception.BracketsParseException;
-import net.brainfuck.exception.FileNotFoundException;
-import net.brainfuck.exception.IOException;
 
 /**
  * Read file with long and short syntax blended.
@@ -27,7 +27,7 @@ public class BfReader implements Reader {
 
 	private String next = null;
 	private RandomAccessFile reader;
-	private Stack<Long> marks;
+	private Stack<Integer> marks;
 	private int oldvar = LF;
 
 
@@ -213,9 +213,9 @@ public class BfReader implements Reader {
 	 * @see net.brainfuck.common.Reader#getExecutionPointer()
 	 */
 	@Override
-	public long getExecutionPointer() throws IOException {
+	public int getExecutionPointer() throws IOException {
 		try {
-			return reader.getFilePointer();
+			return (int) reader.getFilePointer();
 		} catch (java.io.IOException e) {
 			throw new IOException("Impossible to access file pointer");
 		}
@@ -278,7 +278,7 @@ public class BfReader implements Reader {
 	@Override
 	public void mark() throws IOException {
 		try {
-			marks.push(reader.getFilePointer());
+			marks.push((int) reader.getFilePointer());
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
@@ -308,7 +308,7 @@ public class BfReader implements Reader {
 	 * @see net.brainfuck.common.Reader#seek(long)
 	 */
 	@Override
-	public void seek(long pos) throws IOException {
+	public void seek(int pos) throws IOException {
 		try {
 			reader.seek(pos);
 		} catch (java.io.IOException e) {
@@ -321,7 +321,7 @@ public class BfReader implements Reader {
 	 *
 	 * @return the marks
 	 */
-	Stack<Long> getMarks() {
+	Stack<Integer> getMarks() {
 		return marks;
 	}
 }
