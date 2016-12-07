@@ -9,3 +9,4 @@ compiledBrainFuck.o
 filename.bf
 filename.bmp
 test.bmp
+/target/
