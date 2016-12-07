@@ -57,7 +57,8 @@ public class Macro {
         int nbExecute;
 
         if ((values == null && nbArgument != 0) || values.size() != nbArgument) {
-            throw new SyntaxErrorException("not enought argument in macro");
+            String error = (values == null || values.size() > nbArgument) ? "too much argument" : "not enought argument";
+            throw new SyntaxErrorException(error);
         }
 
         for (Pair pair : listesInstructions) {

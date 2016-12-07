@@ -3,7 +3,7 @@ package net.brainfuck.interpreter.compiler;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Pair;
 import net.brainfuck.common.Reader;
-import net.brainfuck.common.RegexParser;
+import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
@@ -103,7 +103,7 @@ public class BfCompiler {
 	}
 
 	private boolean isMacro(String str) {
-		return macroInterpreter.contains(RegexParser.splitSpace(str)[0].split("\\(")[0]);
+		return macroInterpreter.contains(StringParser.splitSpace(str)[0].split("\\(")[0]);
 	}
 
 	/**

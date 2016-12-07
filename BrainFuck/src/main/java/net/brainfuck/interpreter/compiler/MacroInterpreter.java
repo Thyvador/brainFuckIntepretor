@@ -1,6 +1,6 @@
 package net.brainfuck.interpreter.compiler;
 
-import net.brainfuck.common.RegexParser;
+import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
@@ -26,20 +26,27 @@ class MacroInterpreter {
         return definition.split("\\(")[0];
     }
 
-    private List<Integer> getMacroArgument(String definition) throws SyntaxErrorException {
+    private List<Integer> getMacroArgument(String[] arguments) throws SyntaxErrorException {
         List<Integer> values = new ArrayList<>();
-        String strValues = definition.substring(definition.indexOf('(')+1,definition.indexOf(')'));
 
-//        if (tmp.length > 1) {
-//            throw new SyntaxErrorException("Bad macro utilisation " + definition);
-//        }
-        for (String value : strValues.split(",")) {
-            if (!RegexParser.isNumeric(value)) {
-                throw new SyntaxErrorException("illegal macro argument " + value);
+        if (arguments != null) {
+            for (String value : arguments) {
+                value = value.trim();
+                if (!StringParser.isNumeric(value)) {
+                    throw new SyntaxErrorException("illegal macro argument " + value);
+                }
+                values.add(Integer.parseUnsignedInt(value));
             }
-            values.add(Integer.parseUnsignedInt(value));
         }
         return values;
+    }
+
+    private int getMultiplicator(String str) throws SyntaxErrorException {
+        String multiplicateur = str.trim();
+        if (!StringParser.isNumeric(multiplicateur)) {
+            throw new SyntaxErrorException("bad multiplcator " + multiplicateur);
+        }
+        return Integer.parseUnsignedInt(multiplicateur);
     }
 
     /**
@@ -51,8 +58,22 @@ class MacroInterpreter {
      * @throws BracketsParseException the brackets parse exception
      */
     List<Language> writeMacro(String instruction) throws IOException, BracketsParseException, SyntaxErrorException {
-        String[] definitions = RegexParser.splitSpace(instruction);
+        if (!StringParser.isCorrectParentheses(instruction)) {
+            throw new SyntaxErrorException("Bad parenthesis " + instruction);
+        }
         List<Language> programme = new ArrayList<>();
+        String[] definitions;
+        if (StringParser.containsParenthesis(instruction)) {
+            definitions = instruction.split("\\)");
+        } else {
+            if (!StringParser.containsSpace(instruction)) {
+                throw new SyntaxErrorException("no instruction for macro " + instruction);
+            }
+            definitions = StringParser.splitSpace(instruction);
+        }
+
+        String[] arguments = StringParser.containsParenthesis(instruction) ?
+                StringParser.getArguments(instruction) : null;
         String macroName = this.getMacroName(definitions[0]);
 
         if (macros.containsKey(macroName)) {
@@ -61,8 +82,8 @@ class MacroInterpreter {
                 throw new SyntaxErrorException("Syntax behind macro '" + definitions[0] + "'");
             }
 
-            int number = (length == 2 && RegexParser.isNumeric(definitions[1])) ? Integer.parseUnsignedInt(definitions[1]) : 1;
-            List<Integer> values = this.getMacroArgument(definitions[0]);
+            int number = length == 2 ? getMultiplicator(definitions[1]) : 1;
+            List<Integer> values = this.getMacroArgument(arguments);
             Macro macro = macros.get(macroName);
             for (int i = 0; i < number; i++) {
                 programme.addAll(macro.write(values));

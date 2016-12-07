@@ -1,6 +1,6 @@
 package net.brainfuck.interpreter.compiler;
 
-import net.brainfuck.common.RegexParser;
+import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.interpreter.Language;
 
@@ -19,18 +19,16 @@ class MacroParser {
         return macros;
     }
 
-    private String[] getArgument(String str) throws SyntaxErrorException {
-        return str.isEmpty() ? null : str.split(",");
-    }
 
-    private boolean countainsSpace(String str) {
-        return str.indexOf(' ') != -1 || str.indexOf('\t') != -1;
+
+    private String getMacroName(String str) {
+        return str.substring(1).split("\\(")[0];
     }
 
     private void addArguments(Macro macro, String[] arguments) throws SyntaxErrorException {
         for (String argument :  arguments) {
             argument = argument.trim();
-            if (this.countainsSpace(argument)) {
+            if (StringParser.containsSpace(argument)) {
                 throw new SyntaxErrorException("Argument macro countain space(s) '" + argument + "'");
             }
             if (argument.isEmpty()) {
@@ -41,17 +39,17 @@ class MacroParser {
     }
 
     private String analyzeArguements(Macro macro, String str) throws SyntaxErrorException {
-        String[] macroNameAndArgument = str.split("\\(");
         String name;
-        String[] arguments;
-
-        name = macroNameAndArgument[0];
-        if (macroNameAndArgument.length == 2) {
-            arguments = this.getArgument(macroNameAndArgument[1]);
-            if (arguments != null) {
-                this.addArguments(macro, arguments);
-            }
+        name = this.getMacroName(str);
+        if (name.isEmpty()) {
+            throw new SyntaxErrorException("no name for macro " + str);
         }
+
+        String[] arguments = StringParser.getArguments(str);
+        if (arguments != null) {
+            this.addArguments(macro, arguments);
+        }
+
         return name;
     }
 
@@ -62,16 +60,32 @@ class MacroParser {
      * @throws SyntaxErrorException the syntax error exception
      */
     void saveMacro(String instruction) throws SyntaxErrorException {
-        instruction = instruction.substring(1);
-        String[] tmp = instruction.split("\\)");
-        String macroNameAndArgument = tmp[0];
+        if (!StringParser.isCorrectParentheses(instruction)) {
+            throw new SyntaxErrorException("bad parenthesis" + instruction);
+        }
+        if (!StringParser.containsSpace(instruction)) {
+            throw new SyntaxErrorException("no instruction declared");
+        }
+        String nameAndArguments;
+        String definition;
+        String[] definitions;
+        String name;
         Macro macro = new Macro();
-        String name = analyzeArguements(macro, macroNameAndArgument);
+        if (StringParser.containsParenthesis(instruction)) {
+            nameAndArguments = instruction.substring(0, instruction.indexOf(')') + 1);
+            definition = instruction.substring(instruction.indexOf(')') + 1);
 
-        if (tmp.length != 2) {
+            name = analyzeArguements(macro, nameAndArguments);
+
+        } else {
+            definition = instruction.substring(instruction.indexOf(" "));
+            name = instruction.substring(1, instruction.indexOf(" "));
+        }
+
+        if (definition.isEmpty()) {
             throw new SyntaxErrorException("Bad definition of macro '" + instruction + "'");
         }
-        String[] definitions = RegexParser.splitSpace(tmp[1]);
+        definitions = StringParser.splitSpace(definition);
 
         int length = definitions.length;
         for (int i = 0; i < length; i++) {
@@ -105,7 +119,7 @@ class MacroParser {
      * @return the new index loop
      */
     private int addMacroInstructions(String[] definitions, Macro macro, int length, int i) throws SyntaxErrorException {
-        if (i + 1 < length && RegexParser.isNumeric(definitions[i + 1])) {
+        if (i + 1 < length && StringParser.isNumeric(definitions[i + 1])) {
             int nb = Integer.parseUnsignedInt(definitions[i + 1]);
             macro.addInstructions(getMacroInstructions(definitions[i++], nb));
         } else if (i + 1 < length && macro.containsArgument(definitions[i + 1])) {
