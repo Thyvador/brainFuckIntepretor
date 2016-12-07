@@ -11,3 +11,7 @@
     
     
 ## Automatisation de la construction du logiciel
+ La construction de l'executable se fait a l'aide de la commande
+  ```shell
+ mvn install
+ ```
