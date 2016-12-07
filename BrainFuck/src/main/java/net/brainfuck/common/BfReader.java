@@ -1,6 +1,8 @@
 package net.brainfuck.common;
 
 import java.io.RandomAccessFile;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 import net.brainfuck.exception.BracketsParseException;
@@ -21,6 +23,7 @@ public class BfReader implements Reader {
 	private static final int LF = '\n';
 	private static final int SPACE = ' ';
 	private static final int EOF = -1;
+	private static final List<Integer> ignoredCharacters = Arrays.asList(CR, LF, TAB, SPACE);
 
 	private String next = null;
 	private RandomAccessFile reader;
@@ -55,33 +58,34 @@ public class BfReader implements Reader {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private void readUntilEndOfLine(int val) throws java.io.IOException {
-		next = Character.toString((char) val);
 		boolean comment = false;
 		int c = reader.read();
-		while (!isNewLine(c) && c != EOF) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(Character.toString((char) val));
+
+		while (!isNewLine(c) && c != EOF && !comment) {
 			if (isComment(c))
 				comment = true;
-			if (!comment)
-				next += Character.toString((char) c);
+			stringBuilder.append(Character.toString((char) c));
 			c = reader.read();
 		}
-		next = next.trim();
+		c = ignoreComment();
+		next = stringBuilder.toString().trim();
 		oldvar = c;
 	}
 
-	/**
-	 * Skip new line character(s). End of line character change according OS.
-	 *
-	 * @return The first character of the line.
-	 * @throws java.io.IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	private int ignoreNewLineChar() throws java.io.IOException {
-		int c;
-		while (isNewLine(c = reader.read())) ;
-		oldvar = LF;
+	private boolean isIgnoredCharacter(int c) {
+		return ignoredCharacters.contains(c);
+	}
+
+	private int ignoreCharacters(int c) throws java.io.IOException {
+		while (isIgnoredCharacter(c)) {
+			oldvar = c;
+			c = reader.read();
+		}
 		return c;
 	}
+
 
 	/**
 	 * Skip all character until new line or end of file character is read.
@@ -94,20 +98,6 @@ public class BfReader implements Reader {
 		int c;
 		c = reader.read();
 		while (!isNewLine(c) && c != EOF) c = reader.read();
-		return c;
-	}
-
-	/**
-	 * Skip all space and tabulation charecter until another charecter is read.
-	 *
-	 * @return the current charecter read : could be everything except space or tabulation
-	 * @throws java.io.IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	private int ignoreSpace() throws java.io.IOException {
-		int c;
-		c = reader.read();
-		while (isSpace(c) && c != EOF) c = reader.read();
 		return c;
 	}
 
@@ -126,10 +116,8 @@ public class BfReader implements Reader {
 		while (!end) {
 			if (isComment(nextVal)) {
 				nextVal = ignoreComment();
-			} else if (isSpace(nextVal)) {
-				nextVal = ignoreSpace();
-			} else if (isNewLine(nextVal)){
-				nextVal = ignoreNewLineChar();
+			} else if (isIgnoredCharacter(nextVal)){
+				nextVal = ignoreCharacters(nextVal);
 			} else {
 				end = true;
 			}
@@ -257,17 +245,6 @@ public class BfReader implements Reader {
 	}
 
 	/**
-	 * Checks if is space.
-	 *
-	 * @param nextVal
-	 *            the next val
-	 * @return true, if is space
-	 */
-	private boolean isSpace(int nextVal) {
-		return nextVal == TAB || nextVal == SPACE;
-	}
-
-	/**
 	 * Check if the character start argumentAnalyzer "long" syntax or not.
 	 *
 	 * @param nextVal the first character of argumentAnalyzer line.
@@ -344,7 +321,7 @@ public class BfReader implements Reader {
 	 *
 	 * @return the marks
 	 */
-	public Stack<Long> getMarks() {
+	Stack<Long> getMarks() {
 		return marks;
 	}
 }

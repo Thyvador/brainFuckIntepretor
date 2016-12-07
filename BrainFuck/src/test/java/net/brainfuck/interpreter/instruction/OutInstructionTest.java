@@ -31,15 +31,20 @@ public class OutInstructionTest {
 	/**
 	 * Sets the up.
 	 *
+	 */
 	@Before
 	public void setUp() throws Exception {
 
 		List<Language> langage = Arrays.asList(Language.LEFT,Language.LEFT);
-		instruction = new OutInstruction(new OutputStreamWriter());
+		instruction = new OutInstruction(new OutputStreamWriter(new OutputStream() {
+			@Override
+			public void write(int b) throws IOException {
+				out.add(b);
+			}
+		}));
 		memory = new Memory();
 		reader = new ExecutionReader(langage);
 	}
-	 */
 
 	/**
 	 * Out.
@@ -50,11 +55,7 @@ public class OutInstructionTest {
 	public void out() throws Exception {
 		memory.set('a');
 		 instruction.execute(memory,reader);
-		 instruction.execute(memory,reader);
-		 instruction.execute(memory,reader);
-		 instruction.execute(memory,reader);
-		 System.out.println(out);
-		//assertEquals("a",out.get(0));
+		assertEquals('a',(int)out.get(0));
 	}
 
 
