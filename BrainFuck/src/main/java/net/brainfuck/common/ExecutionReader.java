@@ -15,6 +15,7 @@ public class ExecutionReader {
 	private List<Language> instructions;
 	private int index = 0;
 	private Stack<Integer> marks;
+	private Logger logger = Logger.getInstance();
 
 	public ExecutionReader(List<Language> instructions) {
 		this.instructions = instructions;
@@ -25,6 +26,7 @@ public class ExecutionReader {
 	public AbstractInstruction getNext() {
 		if (index >= instructions.size()) return null;
 		AbstractInstruction instruction = instructions.get(index).getInterpreter();
+		logger.countMove();
 		index++;
 		return instruction;
 	}

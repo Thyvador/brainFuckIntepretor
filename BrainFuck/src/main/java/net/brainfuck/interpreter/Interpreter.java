@@ -57,7 +57,6 @@ public class Interpreter {
 
         while ((instruction = reader.getNext()) != null) {
             executer.execute(instruction, reader);
-            logger.countMove();
         }
         executer.end(reader);
     }
