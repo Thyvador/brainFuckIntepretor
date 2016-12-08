@@ -6,10 +6,10 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
-import net.brainfuck.interpreter.compiler.BfCompiler;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.compiler.BfCompiler;
 import net.brainfuck.interpreter.compiler.BfPrecompiler;
 import net.brainfuck.interpreter.compiler.Macro;
 
@@ -101,6 +101,7 @@ public class Initialyzer {
 		BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
 		Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
 		String lastInstruction  = bfPrecompiler.getLastInstruction();
+		if (Language.languageMap.get(lastInstruction) == null) System.exit(0);
 		return new BfCompiler(reader, executer.getContextExecuters(), macros, lastInstruction);
 	}
 

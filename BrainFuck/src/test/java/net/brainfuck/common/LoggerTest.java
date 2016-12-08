@@ -1,6 +1,8 @@
 package net.brainfuck.common;
 
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -74,7 +76,6 @@ public class LoggerTest {
 	 * Wait argumentAnalyzer random time ( between 0 and 500ms ) to simulate argumentAnalyzer program, then check if the logger return the real execution time.
 	 *
 	 */
-	@Ignore
 	@Test
 	public void startExecTime() throws Exception {
 		logger.reset();

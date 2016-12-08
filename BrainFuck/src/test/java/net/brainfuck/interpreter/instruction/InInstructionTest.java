@@ -1,18 +1,15 @@
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.*;
-import net.brainfuck.common.Reader;
+import net.brainfuck.common.ExecutionReader;
+import net.brainfuck.common.Memory;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.FileNotFoundIn;
-import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -81,6 +78,8 @@ public class InInstructionTest {
 	 * Simule empty file.
 	 * An FileNotFoundIn Exception may happens.
 	 *
+	 */
+	@Ignore
 	@Test(expected = net.brainfuck.exception.FileNotFoundIn.class)
 	public void badIn() throws Exception {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -88,7 +87,7 @@ public class InInstructionTest {
 		System.setIn(inputStream);
 		instruction.execute(memory,reader);
 	}
-	 */
+
 
 // TODO : test ici
 	/**
