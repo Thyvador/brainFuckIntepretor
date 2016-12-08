@@ -33,7 +33,7 @@ public class BackInstruction extends AbstractInstruction {
 	 */
 	@Override
 	public void execute(Memory memory, ExecutionReader reader) throws BracketsParseException, IOException, MemoryOutOfBoundsException {
-		linearExecute(memory, reader);
+		nonLinearExecute(memory, reader);
 	}
 
 	private void linearExecute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException {

@@ -53,10 +53,10 @@ public class Interpreter {
 	 */
 	public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
 			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException {
-		AbstractInstruction instruction;
+		Language instruction;
 
         while ((instruction = reader.getNext()) != null) {
-            executer.execute(instruction, reader);
+            executer.execute(instruction.getInterpreter(), reader);
         }
         executer.end(reader);
     }

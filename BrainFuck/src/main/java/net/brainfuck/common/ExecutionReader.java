@@ -23,9 +23,9 @@ public class ExecutionReader {
 	}
 
 
-	public AbstractInstruction getNext() {
+	public Language getNext() {
 		if (index >= instructions.size()) return null;
-		AbstractInstruction instruction = instructions.get(index).getInterpreter();
+		Language instruction = instructions.get(index);
 		logger.countMove();
 		index++;
 		return instruction;
