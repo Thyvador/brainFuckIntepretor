@@ -1,0 +1,10 @@
+Test nb d'instruction non exec:
+	[++...++]
+ 
+Beacoup de boucle imbriqué:
+	+++++[>+++++[>+++++[-]<-]<-]
+ 
+Boucle bcp de fois:
+	++...++[+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+]
+ 
+ 
