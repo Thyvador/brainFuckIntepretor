@@ -3,7 +3,7 @@ import os
 import re
 
 FILE_NAME = "bench.bf"
-JAR_NAME = "bfck-l.jar"
+JAR_NAME = "bfck-nl.jar"
 TEST_ITER = 10
 MAX_RANGE = 255
 
@@ -14,7 +14,7 @@ def bench(bf_file, stats_file):
     return [int(m.group(1)), m.group(2)]
 
 def init_stats(f):
-    f.write("n; Temps d'exécution (ms); Mouvements du pointeur d'exécution\n")
+    f.write("n; Temps d'exécution (micro s); Mouvements du pointeur d'exécution\n")
 
 
 def write_unexecuted(f, n):
@@ -44,6 +44,6 @@ def main():
             average_time += bench(bf_file, stats_file)[0]
         average_time /= TEST_ITER;
         stats_file.write('{0};{1};{2}\n'.format(str(n), str(average_time).replace(".",","), first[1]))
-    print("[INFO] Benchmarking done.")
+    print("[INFO] Bench done.")
 
 main()
