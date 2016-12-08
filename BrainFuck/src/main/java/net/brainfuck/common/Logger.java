@@ -106,7 +106,7 @@ public class Logger {
 	 */
 	public String showResume(Memory m) {
 		String retour = m + "PROG_SIZE : " + numInstructions + "\n";
-		retour += "EXEC_TIME : " + (System.currentTimeMillis() - start) + " ms\n";
+		retour += "EXEC_TIME : " + (System.nanoTime() - start)/1000 + " micro s\n";
 		retour += "EXEC_MOVE : " + numExecMove + "\n";
 		retour += "DATA_MOVE : " + numMemoryMove + "\n";
 		retour += "DATA_WRITE : " + numMemoryWrite + "\n";
@@ -127,7 +127,7 @@ public class Logger {
 	 * Useful to calculate the exec time with argumentAnalyzer subtraction.
 	 */
 	public void startExecTime() {
-		start = System.currentTimeMillis();
+		start = System.nanoTime();
 	}
 
 	/**

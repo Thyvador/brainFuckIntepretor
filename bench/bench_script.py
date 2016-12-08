@@ -3,16 +3,14 @@ import os
 import re
 
 FILE_NAME = "bench.bf"
-JAR_NAME = "bfck-nl.jar"
-TEST_ITER = 5
+JAR_NAME = "bfck-l.jar"
+TEST_ITER = 10
 MAX_RANGE = 255
 
 def bench(bf_file, stats_file):
     java_out =java_out = subprocess.check_output("java -jar "+JAR_NAME+" -p "+FILE_NAME, shell=True)
-    #os.system("java -jar bfck.jar -p bench.bf")
-    #print("out"+os.system("java -jar bfck.jar -p bench.bf"))
     line = java_out.decode('UTF-8')
-    m = re.search(r".*EXEC_TIME : (\d*) ms.*EXEC_MOVE : (\d*)", line, re.M | re.S)
+    m = re.search(r".*EXEC_TIME : (\d*) micro s.*EXEC_MOVE : (\d*)", line, re.M | re.S)
     return [int(m.group(1)), m.group(2)]
 
 def init_stats(f):
@@ -20,13 +18,13 @@ def init_stats(f):
 
 
 def write_unexecuted(f, n):
-    f.write("[" + "+"*n + "]")
+    f.write("[" + "+"*1000*n + "]")
 
 def write_file(f, n):
     write_unexecuted(f, n)
 
 def main():
-    print("[INFO] Start benchmarking\n")
+    print("[INFO] Start benchmarking...")
     stats_file = open("bench-result.csv", "w")
     init_stats(stats_file);
 
@@ -45,7 +43,7 @@ def main():
         for i in range(0,TEST_ITER-1):
             average_time += bench(bf_file, stats_file)[0]
         average_time /= TEST_ITER;
-        stats_file.write('{0};{1};{2}\n'.format(str(n), str(average_time), first[1]))
-
+        stats_file.write('{0};{1};{2}\n'.format(str(n), str(average_time).replace(".",","), first[1]))
+    print("[INFO] Benchmarking done.")
 
 main()
