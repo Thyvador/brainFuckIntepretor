@@ -1,7 +1,6 @@
 import subprocess
 import os
 import re
-from _stat import FILE_ATTRIBUTE_ARCHIVE
 
 FILE_NAME = "bench.bf"
 JAR_NAME = "bfck-nl.jar"
