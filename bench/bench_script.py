@@ -20,8 +20,16 @@ def init_stats(f):
 def write_unexecuted(f, n):
     f.write("[" + "+"*1000*n + "]")
 
+def write_executed(f, n):
+    f.write("+"*n+">["+"+-"*100+"<-]")
+
+def write_nested(f, n):
+    ITER_LOOP = "+"*5 #MauvaiseIdee
+    NESTED_LOOP = "[>"+ITER_LOOP
+    f.write(ITER_LOOP+NESTED_LOOP*n+"[-]"+"<-]"*n)
+
 def write_file(f, n):
-    write_unexecuted(f, n)
+    write_nested(f, n)
 
 def main():
     print("[INFO] Start benchmarking...")
