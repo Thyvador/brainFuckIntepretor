@@ -21,10 +21,10 @@ def write_unexecuted(f, n):
     f.write("[" + "+"*1000*n + "]")
 
 def write_executed(f, n):
-    f.write("+"*n+">["+"+-"*100+"<-]")
+    f.write("+"*n+"[>"+"+-"*100+"<-]")
 
 def write_nested(f, n):
-    ITER_LOOP = "+"*5 #MauvaiseIdee
+    ITER_LOOP = "+"*2
     NESTED_LOOP = "[>"+ITER_LOOP
     f.write(ITER_LOOP+NESTED_LOOP*n+"[-]"+"<-]"*n)
 
