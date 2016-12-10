@@ -94,7 +94,7 @@ class MacroParser {
 
             if (macros.containsKey(definitions[i])) {
                 i = addMacroInstructions(definitions, macro, length, i);
-            } else if (macros.containsKey(this.getMacroNameInArgument(definition))) {
+            } else if (macros.containsKey(this.getMacroNameInArgument(definitions[i]))) {
                 i = addMacroArgumentInstruction(definitions, macro, length, i);
             }else {
                 i = addInstruction(definitions, macro, length, i);
