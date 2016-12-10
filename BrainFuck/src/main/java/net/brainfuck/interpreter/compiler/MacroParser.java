@@ -21,8 +21,13 @@ class MacroParser {
 
 
 
-    private String getMacroName(String str) {
-        return str.substring(1).split("\\(")[0];
+    private String getMacroName(String str) throws SyntaxErrorException {
+        String name;
+        name = str.substring(1).split("\\(")[0];
+        if (name.isEmpty()) {
+            throw new SyntaxErrorException("no name for macro " + str);
+        }
+        return name;
     }
 
     private void addArguments(Macro macro, String[] arguments) throws SyntaxErrorException {
@@ -38,19 +43,16 @@ class MacroParser {
         }
     }
 
-    private String analyzeArguements(Macro macro, String str) throws SyntaxErrorException {
-        String name;
-        name = this.getMacroName(str);
-        if (name.isEmpty()) {
-            throw new SyntaxErrorException("no name for macro " + str);
-        }
-
-        String[] arguments = StringParser.getArguments(str);
+    private void analyzeArguements(Macro macro, String[] arguments) throws SyntaxErrorException {
         if (arguments != null) {
             this.addArguments(macro, arguments);
         }
+    }
 
-        return name;
+    private void checkCorrectSyntax(String instruction) throws SyntaxErrorException {
+        if (!StringParser.isCorrectParentheses(instruction) || !StringParser.containsSpace(instruction)) {
+            throw new SyntaxErrorException("bad parenthesis" + instruction);
+        }
     }
 
     /**
@@ -60,33 +62,20 @@ class MacroParser {
      * @throws SyntaxErrorException the syntax error exception
      */
     void saveMacro(String instruction) throws SyntaxErrorException {
-        if (!StringParser.isCorrectParentheses(instruction)) {
-            throw new SyntaxErrorException("bad parenthesis" + instruction);
-        }
-        if (!StringParser.containsSpace(instruction)) {
-            throw new SyntaxErrorException("no instruction declared");
-        }
-        String nameAndArguments;
-        String definition;
-        String[] definitions;
-        String name;
+
+        // Vérifie que la macro est bien parenthésé et contient des instructions à sauvegarder
+        this.checkCorrectSyntax(instruction);
+
+        // Création d'une nouvelle macro
+        // Analyze des argument de la macro (ce qui est entre parenthèse) et ajout ceux ci dans la macro
+        // Récupération du nom et de la définition de la macro
         Macro macro = new Macro();
-        if (StringParser.containsParenthesis(instruction)) {
-            nameAndArguments = instruction.substring(0, instruction.indexOf(')') + 1);
-            definition = instruction.substring(instruction.indexOf(')') + 1);
+        analyzeArguements(macro, StringParser.getArguments(instruction));
+        String name = this.getMacroName(instruction);
+        String definition = getDefinition(instruction);
+        String[] definitions = StringParser.splitSpace(definition);
 
-            name = analyzeArguements(macro, nameAndArguments);
-
-        } else {
-            definition = instruction.substring(instruction.indexOf(" "));
-            name = instruction.substring(1, instruction.indexOf(" "));
-        }
-
-        if (definition.isEmpty()) {
-            throw new SyntaxErrorException("Bad definition of macro '" + instruction + "'");
-        }
-        definitions = StringParser.splitSpace(definition);
-
+        // Ajout des instruction dans la macro
         int length = definitions.length;
         for (int i = 0; i < length; i++) {
             if (macros.containsKey(definitions[i])) {
@@ -96,6 +85,17 @@ class MacroParser {
             }
         }
         macros.put(name, macro);
+    }
+
+    private String getDefinition(String instruction) throws SyntaxErrorException {
+        String definition = StringParser.containsParenthesis(instruction) ?
+                instruction.substring(instruction.indexOf(')') + 1) :
+                instruction.substring(instruction.indexOf(" "));
+
+        if (definition.isEmpty()) {
+            throw new SyntaxErrorException("Bad definition of macro '" + instruction + "'");
+        }
+        return definition;
     }
 
     private int addInstruction(String[] definitions, Macro macro, int length, int i) throws SyntaxErrorException {

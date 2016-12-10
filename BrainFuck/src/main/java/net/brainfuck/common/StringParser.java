@@ -25,8 +25,13 @@ public final class StringParser {
 
 
     public static String[] getArguments(String str) {
-        String tmp = str.substring(str.indexOf("(")+1,str.indexOf(")"));
-        return tmp.isEmpty() ? null : tmp.split(",");
+        String[] res = null;
+        if (isCorrectParentheses(str)) {
+            String tmp = str.substring(str.indexOf("(")+1,str.indexOf(")"));
+            res = tmp.isEmpty() ? null : tmp.split(",");
+        }
+
+        return res;
     }
 
     public static boolean isCorrectParentheses(String str) {

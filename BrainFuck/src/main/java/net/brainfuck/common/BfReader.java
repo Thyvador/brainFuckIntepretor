@@ -199,7 +199,8 @@ public class BfReader implements Reader {
 				readUntilEndOfLine(nextVal);
 				return next;
 			}
-			return this.getInstruction(nextVal);
+
+			return !isEndOfFile(nextVal) ? this.getInstruction(nextVal) : null;
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}

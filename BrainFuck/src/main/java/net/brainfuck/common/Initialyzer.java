@@ -14,6 +14,7 @@ import net.brainfuck.interpreter.compiler.BfPrecompiler;
 import net.brainfuck.interpreter.compiler.Macro;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,6 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
 
 /**
  * @author Francois Melkonian
- * @date 30/11/2016
  */
 public class Initialyzer {
 	private Memory memory;
@@ -59,7 +59,7 @@ public class Initialyzer {
 	}
 
 
-	void analyzeArg() throws IOException {
+	private void analyzeArg() throws IOException {
 		if (argumentAnalyzer.getArgument(PATH) == null) {
 			Main.printUsage();
 			System.exit(0);
@@ -90,18 +90,23 @@ public class Initialyzer {
 		BfCompiler compiler = initCompiler();
 		memory = new Memory();
 		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
-		JumpTable jumpTable = readerAndJump.getSecond();
-		Language.setJumpTabel(jumpTable);
 
+		JumpTable jumpTable = null;
+		List<Language> instructions = new ArrayList<>();
+		if (readerAndJump != null) {
+			jumpTable = readerAndJump.getSecond();
+			Language.setJumpTabel(jumpTable);
+			instructions = readerAndJump.getFirst();
+		}
 		executer.setArgumentExecuter(memory, bfImageWriter, jumpTable);
-		interpreter = new Interpreter(executer, new ExecutionReader(readerAndJump.getFirst()));
+		interpreter = new Interpreter(executer, new ExecutionReader(instructions));
 	}
 
 	private BfCompiler initCompiler() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
 		BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
 		Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
 		String lastInstruction  = bfPrecompiler.getLastInstruction();
-		if (Language.languageMap.get(lastInstruction) == null) System.exit(0);
+		//if (Language.languageMap.get(lastInstruction) == null) System.exit(0);
 		return new BfCompiler(reader, executer.getContextExecuters(), macros, lastInstruction);
 	}
 

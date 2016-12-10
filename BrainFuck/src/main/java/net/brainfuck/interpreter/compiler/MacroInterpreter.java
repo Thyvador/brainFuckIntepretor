@@ -26,7 +26,12 @@ class MacroInterpreter {
         return definition.split("\\(")[0];
     }
 
-    private List<Integer> getMacroArgument(String[] arguments) throws SyntaxErrorException {
+    private String[] getArgumentText(String instruction) {
+        return StringParser.containsParenthesis(instruction) ?
+                StringParser.getArguments(instruction) : null;
+    }
+
+    private List<Integer> getArgumentValue(String[] arguments) throws SyntaxErrorException {
         List<Integer> values = new ArrayList<>();
 
         if (arguments != null) {
@@ -42,11 +47,24 @@ class MacroInterpreter {
     }
 
     private int getMultiplicator(String str) throws SyntaxErrorException {
-        String multiplicateur = str.trim();
-        if (!StringParser.isNumeric(multiplicateur)) {
-            throw new SyntaxErrorException("bad multiplcator " + multiplicateur);
+
+        // Récupération de ce qui se trouve derrière la macro (ex: macro 2 => 2  ou macro(2,3) 3 => 3)
+        String[] definitions = StringParser.containsParenthesis(str) ? str.split("\\)") : StringParser.splitSpace(str);
+        int length = definitions.length;
+        if (length > 2 ) throw new SyntaxErrorException("Bad definition of macro " + str);
+
+        // Cas ou la ligne contient un multiplicateur de macro (ex: macroname 2 ou macroname(2,3) 3)
+        if (length == 2) {
+            String multiplicateur = definitions[1].trim();
+            // Le multiplacteur n'est pas un entier positif
+            if (!StringParser.isNumeric(multiplicateur)) {
+                throw new SyntaxErrorException("bad multiplcator " + multiplicateur);
+            }
+            return Integer.parseUnsignedInt(multiplicateur);
         }
-        return Integer.parseUnsignedInt(multiplicateur);
+
+        // cas ou la ligne ne contient pas de multiplcateur
+        return 1;
     }
 
     /**
@@ -58,38 +76,27 @@ class MacroInterpreter {
      * @throws BracketsParseException the brackets parse exception
      */
     List<Language> writeMacro(String instruction) throws IOException, BracketsParseException, SyntaxErrorException {
+        // Verification de parenthese : throw une erreur si c'est mal parenthese
+        this.checkParentheses(instruction);
+
+        // Récupération du multiplicateur, des valeurs des arguments, et de l'objet macro a écrire
+        int number = getMultiplicator(instruction);
+        List<Integer> values = this.getArgumentValue(this.getArgumentText(instruction));
+        Macro macro = macros.get(this.getMacroName(instruction));
+
+        // Récupération des instruction à executer
+        List<Language> programme = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            programme.addAll(macro.write(values));
+        }
+
+        return programme;
+    }
+
+    private void checkParentheses(String instruction) throws SyntaxErrorException {
         if (!StringParser.isCorrectParentheses(instruction)) {
             throw new SyntaxErrorException("Bad parenthesis " + instruction);
         }
-        List<Language> programme = new ArrayList<>();
-        String[] definitions;
-        if (StringParser.containsParenthesis(instruction)) {
-            definitions = instruction.split("\\)");
-        } else {
-            if (!StringParser.containsSpace(instruction)) {
-                throw new SyntaxErrorException("no instruction for macro " + instruction);
-            }
-            definitions = StringParser.splitSpace(instruction);
-        }
-
-        String[] arguments = StringParser.containsParenthesis(instruction) ?
-                StringParser.getArguments(instruction) : null;
-        String macroName = this.getMacroName(definitions[0]);
-
-        if (macros.containsKey(macroName)) {
-            int length = definitions.length;
-            if (length > 2) {
-                throw new SyntaxErrorException("Syntax behind macro '" + definitions[0] + "'");
-            }
-
-            int number = length == 2 ? getMultiplicator(definitions[1]) : 1;
-            List<Integer> values = this.getMacroArgument(arguments);
-            Macro macro = macros.get(macroName);
-            for (int i = 0; i < number; i++) {
-                programme.addAll(macro.write(values));
-            }
-        }
-        return programme;
     }
 
     public boolean contains(String key) {

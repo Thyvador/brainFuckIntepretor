@@ -77,9 +77,12 @@ public class BfCompiler {
 	 */
 	public Pair<List<Language>, JumpTable> compile(List<ContextExecuter> contextExecuters)
 			throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
-		writeInstructionAndMacro(lastInstruction);
-		writeAll();
-		return endCompile(contextExecuters);
+		if (lastInstruction != null) {
+			writeInstructionAndMacro(lastInstruction);
+			writeAll();
+			return endCompile(contextExecuters);
+		}
+		return null;
 	}
 
 	/**
