@@ -23,7 +23,11 @@ class MacroInterpreter {
 
 
     private String getMacroName(String definition) {
-        return definition.split("\\(")[0];
+        if (StringParser.containsParenthesis(definition))
+            return definition.substring(0, definition.indexOf("("));
+        if (StringParser.containsSpace(definition))
+            return definition.substring(0, definition.indexOf(" "));
+        return definition;
     }
 
     private String[] getArgumentText(String instruction) {

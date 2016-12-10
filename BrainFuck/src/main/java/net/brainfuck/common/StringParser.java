@@ -28,7 +28,14 @@ public final class StringParser {
         String[] res = null;
         if (isCorrectParentheses(str) && containsParenthesis(str)) {
             String tmp = str.substring(str.indexOf("(")+1,str.indexOf(")"));
-            res = tmp.isEmpty() ? null : tmp.split(",");
+            if (!tmp.isEmpty()) {
+                res = tmp.split(",");
+                for (int i=0; i < res.length; i++) {
+                    res[i] = res[i].trim();
+                }
+            }
+
+            //res = tmp.isEmpty() ? null : tmp.split(",");
         }
 
         return res;
@@ -38,7 +45,7 @@ public final class StringParser {
         long leftParenthesis  = str.chars().filter(num -> num == '(').count();
         long rightParenthesis= str.chars().filter(num -> num == ')').count();
         return (leftParenthesis == 0 && rightParenthesis == 0) ||
-                (leftParenthesis == 1 && rightParenthesis == 1 && str.indexOf('(') < str.indexOf(')'));
+                (leftParenthesis == rightParenthesis  && str.indexOf('(') < str.indexOf(')'));
     }
 
 
