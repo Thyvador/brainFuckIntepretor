@@ -64,16 +64,10 @@ public class Macro {
             throw new SyntaxErrorException(error);
         }
 
-        String argumentPair, argument;
+        String argument;
 
         for (Pair pair : macroPairs) {
-           // argumentPair = pair.argument !=  null ? argumentsName.get(macro.argumentsName.indexOf(pair.argument)) : null;
             for (Pair pairInstruction : (List<Pair>)pair.instructions) {
-//                if (pairInstruction.instructions != null) {
-//                    if (!arguments.contains(pairInstruction.argument)) {
-//                        throw new SyntaxErrorException("Bad argument " + pairInstruction.)
-//                    }
-//                }
                 argument = pairInstruction.instructions != null ? arguments.get(macro.argumentsName.indexOf(pairInstruction.argument)) : null;
                 if (!argumentsName.contains(argument))
                     throw new SyntaxErrorException("Unrecognyze argument " + argument);
