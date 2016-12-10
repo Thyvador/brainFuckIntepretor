@@ -26,7 +26,7 @@ public final class StringParser {
 
     public static String[] getArguments(String str) {
         String[] res = null;
-        if (isCorrectParentheses(str)) {
+        if (isCorrectParentheses(str) && containsParenthesis(str)) {
             String tmp = str.substring(str.indexOf("(")+1,str.indexOf(")"));
             res = tmp.isEmpty() ? null : tmp.split(",");
         }

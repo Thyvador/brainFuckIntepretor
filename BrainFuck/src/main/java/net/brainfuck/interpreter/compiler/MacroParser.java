@@ -22,8 +22,8 @@ class MacroParser {
 
 
     private String getMacroName(String str) throws SyntaxErrorException {
-        String name;
-        name = str.substring(1).split("\\(")[0];
+        String name = StringParser.containsParenthesis(str) ?
+                str.substring(1).split("\\(")[0]: str.substring(1, str.indexOf(" ")) ;
         if (name.isEmpty()) {
             throw new SyntaxErrorException("no name for macro " + str);
         }
@@ -73,7 +73,7 @@ class MacroParser {
         analyzeArguements(macro, StringParser.getArguments(instruction));
         String name = this.getMacroName(instruction);
         String definition = getDefinition(instruction);
-        String[] definitions = StringParser.splitSpace(definition);
+        String[] definitions = StringParser.splitSpace(definition.trim());
 
         // Ajout des instruction dans la macro
         int length = definitions.length;
