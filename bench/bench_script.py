@@ -23,7 +23,7 @@ def bench(bf_file):
     return [int(m.group(1)), m.group(2)]
 
 '''
-Intialize the specified file for statistics
+Initialize the specified file for statistics
 
 Params:
     f - The file that will contains statistics
