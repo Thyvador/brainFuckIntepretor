@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter.compiler;
+package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.BracketsParseException;

@@ -1,10 +1,10 @@
-package net.brainfuck.interpreter.compiler;
+package net.brainfuck.interpreter.processing;
 
+import net.brainfuck.common.Pair;
 import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.interpreter.Language;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -12,21 +12,21 @@ import java.util.List;
  */
 public class Macro {
 
-    private class Pair<T> {
-        T instructions;
-        String argument;
-
-        Pair(T instructions, String argument) {
-            this.instructions = instructions;
-            this.argument = argument;
-        }
-    }
+//    private class Pair<T> {
+//        T instructions;
+//        String argument;
+//
+//        Pair(T instructions, String argument) {
+//            this.instructions = instructions;
+//            this.argument = argument;
+//        }
+//    }
 
 
     private int nbArgument = 0;
     private List<String>  argumentsName = new ArrayList<>();
-    private List<Pair<List<Language>>> currentList = new ArrayList<>();
-    private List<Pair>  listesInstructions = new ArrayList<>();
+    private List<Pair<List<Language>, String>> currentList = new ArrayList<>();
+    private List<Pair<Language, String>>  listesInstructions = new ArrayList<>();
 
 
 
@@ -55,7 +55,7 @@ public class Macro {
     }
 
     void addMacroInstruction(Macro macro, List<String> arguments, String argumentMacro) throws SyntaxErrorException {
-        List<Pair> macroPairs = macro.listesInstructions;
+        List<Pair<Language, String>> macroPairs = macro.listesInstructions;
 
         currentList = new ArrayList<>();
         listesInstructions.add(new Pair(currentList, argumentMacro));
@@ -67,11 +67,11 @@ public class Macro {
         String argument;
 
         for (Pair pair : macroPairs) {
-            for (Pair pairInstruction : (List<Pair>)pair.instructions) {
-                argument = pairInstruction.instructions != null ? arguments.get(macro.argumentsName.indexOf(pairInstruction.argument)) : null;
+            for (Pair pairInstruction : (List<Pair>)pair.getFirst()) {
+                argument = pairInstruction.getFirst() != null ? arguments.get(macro.argumentsName.indexOf(pairInstruction.getSecond())) : null;
                 if (!argumentsName.contains(argument))
                     throw new SyntaxErrorException("Unrecognyze argument " + argument);
-                currentList.add(new Pair<List<Language>>((List<Language>)pairInstruction.instructions, argument));
+                currentList.add(new Pair<List<Language>, String>((List<Language>)pairInstruction.getFirst(), argument));
             }
         }
 
@@ -95,12 +95,12 @@ public class Macro {
         }
 
         for (Pair instructions : listesInstructions) {
-            nbExecuteInstructions = instructions.argument == null ? 1 : this.getArgumentValue(values, instructions.argument);
+            nbExecuteInstructions = instructions.getSecond() == null ? 1 : this.getArgumentValue(values, (String) instructions.getSecond());
             for (int i = 0; i < nbExecuteInstructions; i++) {
-                for (Pair pair : (List<Pair>) (instructions.instructions)) {
-                    nbExecute = pair.argument == null ? 1 : this.getArgumentValue(values, pair.argument);
+                for (Pair pair : (List<Pair>) (instructions.getFirst())) {
+                    nbExecute = pair.getSecond() == null ? 1 : this.getArgumentValue(values, (String) pair.getSecond());
                     for (int j = 0; j < nbExecute; j++) {
-                        macroExecution.addAll((List<Language>)pair.instructions);
+                        macroExecution.addAll((List<Language>)pair.getFirst());
                     }
                 }
             }

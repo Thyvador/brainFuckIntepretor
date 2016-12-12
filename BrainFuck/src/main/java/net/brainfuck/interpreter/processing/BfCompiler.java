@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter.compiler;
+package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Pair;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The Class BfCompiler. Compile and analyze the brainfuck syntax.
+ * The Class BfCompiler. Analyze the brainfuck syntax.
  */
 public class BfCompiler {
 
@@ -52,7 +52,7 @@ public class BfCompiler {
 
 
 	/**
-	 * Instantiates a new bf compiler.
+	 * Instantiates a new bf processing.
 	 *
 	 * @param reader the reader
 	 * @throws IOException Signals that an I/O exception has occurred.

@@ -1,10 +1,9 @@
-package net.brainfuck.interpreter.compiler;
+package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.interpreter.Language;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**

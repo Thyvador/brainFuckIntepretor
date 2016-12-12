@@ -9,9 +9,9 @@ import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
-import net.brainfuck.interpreter.compiler.BfCompiler;
-import net.brainfuck.interpreter.compiler.BfPrecompiler;
-import net.brainfuck.interpreter.compiler.Macro;
+import net.brainfuck.interpreter.processing.BfCompiler;
+import net.brainfuck.interpreter.processing.BfPrecompiler;
+import net.brainfuck.interpreter.processing.Macro;
 
 import java.io.*;
 import java.util.ArrayList;
