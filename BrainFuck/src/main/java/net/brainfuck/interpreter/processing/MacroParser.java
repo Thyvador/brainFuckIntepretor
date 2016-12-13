@@ -26,7 +26,7 @@ class MacroParser {
     }
 
     private String getMacroName(String str) throws SyntaxErrorException {
-        String name = null;
+        String name;
 
         if (StringParser.containsParenthesis(str) &&
                 !StringParser.containsSpace(str.substring(0, str.indexOf("(")))) {
@@ -39,6 +39,14 @@ class MacroParser {
             throw new SyntaxErrorException("no name for macro " + str);
         }
         return name;
+    }
+
+    private  String[] getArguments(String instruction) {
+        if (StringParser.containsParenthesis(instruction) &&
+                instruction.indexOf(' ') > instruction.indexOf('(')) {
+            return StringParser.getArguments(instruction);
+        }
+        return null;
     }
 
     private void addArguments(Macro macro, String[] arguments) throws SyntaxErrorException {
@@ -82,7 +90,7 @@ class MacroParser {
         // Analyze des argument de la macro (ce qui est entre parenthèse) et ajout ceux ci dans la macro
         // Récupération du nom et de la définition de la macro
         Macro macro = new Macro();
-        addArguementsToMacro(macro, StringParser.getArguments(instruction));
+        addArguementsToMacro(macro, this.getArguments(instruction));
         String name = this.getMacroName(instruction.substring(1));
         String definition = getDefinition(instruction);
         String[] definitions = StringParser.splitSpace(definition.trim());
@@ -105,7 +113,7 @@ class MacroParser {
 
 
     private String getDefinition(String instruction) throws SyntaxErrorException {
-        String definition = null;
+        String definition;
 
         if (StringParser.containsParenthesis(instruction) &&
                 !StringParser.containsSpace(instruction.substring(0, instruction.indexOf("(")))) {

@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.Pair;
+import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.interpreter.Language;
 
@@ -53,13 +54,22 @@ public class Macro {
 		}
 
 		String argument;
-
+		int nbExecute;
 		for (Pair pair : macroPairs) {
 			for (Pair pairInstruction : (List<Pair>) pair.getFirst()) {
 				argument = pairInstruction.getFirst() != null ? arguments.get(macro.argumentsName.indexOf(pairInstruction.getSecond())) : null;
-				if (!argumentsName.contains(argument))
-					throw new SyntaxErrorException("Unrecognyze argument " + argument);
-				currentList.add(new Pair<List<Language>, String>((List<Language>) pairInstruction.getFirst(), argument));
+				if (!argumentsName.contains(argument)) {
+					if (StringParser.isNumeric(argument)) {
+						nbExecute = Integer.parseUnsignedInt(argument);
+						for (int i = 0; i < nbExecute; i++)
+							currentList.add(new Pair<List<Language>, String>((List<Language>) pairInstruction.getFirst(), null));
+					} else {
+						throw new SyntaxErrorException("Unrecognyze argument " + argument);
+
+					}
+				} else {
+					currentList.add(new Pair<List<Language>, String>((List<Language>) pairInstruction.getFirst(), argument));
+				}
 			}
 		}
 
