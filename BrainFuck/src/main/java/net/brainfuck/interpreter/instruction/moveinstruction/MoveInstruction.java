@@ -1,6 +1,5 @@
 package net.brainfuck.interpreter.instruction.moveinstruction;
 
-import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.Language;
@@ -15,5 +14,5 @@ abstract public class MoveInstruction extends AbstractInstruction {
         super(language);
     }
 
-    abstract public void execute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
+    abstract public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 }

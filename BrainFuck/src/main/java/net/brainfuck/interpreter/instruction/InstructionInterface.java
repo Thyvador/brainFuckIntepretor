@@ -30,7 +30,7 @@ public interface InstructionInterface {
 	 * @throws FileNotFoundIn the file not found in
 	 * @throws BracketsParseException throw by JumpInstruction and BackInstruction
 	 */
-    void execute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException,
+    void execute(Memory memory) throws MemoryOutOfBoundsException,
             MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 
     /**

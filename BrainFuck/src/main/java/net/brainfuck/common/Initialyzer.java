@@ -92,14 +92,18 @@ public class Initialyzer {
 		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 
 		JumpTable jumpTable = null;
+
 		List<Language> instructions = new ArrayList<>();
+		ExecutionReader executionReader = null;
 		if (readerAndJump != null) {
 			jumpTable = readerAndJump.getSecond();
-			Language.setJumpTabel(jumpTable);
 			instructions = readerAndJump.getFirst();
+			executionReader = new ExecutionReader(instructions);
+			Language.setJumpTabel(jumpTable, executionReader);
 		}
+
 		executer.setArgumentExecuter(memory, bfImageWriter, jumpTable);
-		interpreter = new Interpreter(executer, new ExecutionReader(instructions));
+		interpreter = new Interpreter(executer, executionReader);
 	}
 
 	private BfCompiler initCompiler() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {

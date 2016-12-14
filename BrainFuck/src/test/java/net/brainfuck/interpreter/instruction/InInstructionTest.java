@@ -55,7 +55,7 @@ public class InInstructionTest {
 	 */
 	@Test
 	public void in() throws Exception {
-		instruction.execute(memory,reader);
+		instruction.execute(memory);
 		assertEquals(6, memory.get());
 	}
 
@@ -72,7 +72,7 @@ public class InInstructionTest {
 			}
 		});
 		instruction = new InInstruction(inStream);
-		instruction.execute(memory,reader);
+		instruction.execute(memory);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class InInstructionTest {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 		System.setIn(inputStream);
-		instruction.execute(memory,reader);
+		instruction.execute(memory);
 	}
 
 

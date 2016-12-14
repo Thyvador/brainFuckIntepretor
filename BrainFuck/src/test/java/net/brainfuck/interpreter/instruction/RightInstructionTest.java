@@ -44,7 +44,7 @@ public class RightInstructionTest {
 	 */
 	@Test
 	public void right() throws Exception {
-		instruction.execute(memory,reader);
+		instruction.execute(memory);
 		assertEquals(1, memory.getIndex());
 	}
 
@@ -57,7 +57,7 @@ public class RightInstructionTest {
 	@Test(expected = MemoryOutOfBoundsException.class)
 	public void OutOfBoundRight() throws MemoryOutOfBoundsException {
 		for (int i = 0; i < 30001; i++) {
-			instruction.execute(memory,reader);
+			instruction.execute(memory);
 		}
 	}
 

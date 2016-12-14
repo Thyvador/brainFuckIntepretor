@@ -51,9 +51,9 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 * @throws FileNotFoundIn             throw by writer
 	 */
 	public final void trace(Memory memory, ExecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn {
-		execute(memory, reader);
+		execute(memory);
 		logger.write(reader.getExecutionPointer(), memory);
 	}
 
-	public abstract void execute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
+	public abstract void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 }

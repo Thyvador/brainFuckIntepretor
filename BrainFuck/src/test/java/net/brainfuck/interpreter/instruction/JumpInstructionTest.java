@@ -122,7 +122,7 @@ public class JumpInstructionTest {
 	 */
 	@Test
 	public void translate() throws Exception {
-		JumpInstruction instruction = new JumpInstruction(null);
+		JumpInstruction instruction = new JumpInstruction(null, null);
 		assertEquals("ff7f00", instruction.translate() );
 	}
 

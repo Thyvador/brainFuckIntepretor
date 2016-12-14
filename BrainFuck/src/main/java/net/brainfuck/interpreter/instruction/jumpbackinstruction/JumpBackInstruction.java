@@ -12,14 +12,16 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
  */
 public abstract class JumpBackInstruction extends AbstractInstruction {
     protected JumpTable jumpTable;
+    protected ExecutionReader reader;
 
     /**
      * Instantiates a new back instruction.
      */
-    public JumpBackInstruction(Language language, JumpTable jumpTable) {
+    public JumpBackInstruction(Language language, JumpTable jumpTable, ExecutionReader executionReader) {
         super(language);
         this.jumpTable = jumpTable;
+        this.reader = executionReader;
     }
 
-    abstract public void execute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException;
+    abstract public void execute(Memory memory) throws MemoryOutOfBoundsException, IOException, BracketsParseException;
 }

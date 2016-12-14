@@ -61,7 +61,7 @@ public class DecrementInstructionTest {
 	@Test
 	public void decr() throws Exception {
 		memory.set(50);
-		instruction.execute(memory, reader);
+		instruction.execute(memory);
 		assertEquals(49, memory.get());
 	}
 
@@ -73,7 +73,7 @@ public class DecrementInstructionTest {
 	 */
 	@Test(expected = MemoryOverFlowException.class)
 	public void OverFlow() throws MemoryOverFlowException, MemoryOutOfBoundsException {
-		instruction.execute(memory, reader);
+		instruction.execute(memory);
 	}
 
 	/**

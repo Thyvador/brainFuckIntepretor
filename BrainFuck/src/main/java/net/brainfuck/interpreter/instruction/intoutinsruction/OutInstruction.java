@@ -1,12 +1,10 @@
 package net.brainfuck.interpreter.instruction.intoutinsruction;
 
-import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.Language;
-import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.io.OutputStreamWriter;
 
@@ -35,7 +33,7 @@ public class OutInstruction extends InOutInstruction {
 	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 */
 	@Override
-	public void execute(Memory memory, ExecutionReader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException, IOException {
+	public void execute(Memory memory) throws MemoryOverFlowException, MemoryOutOfBoundsException, IOException {
 		try {
 			writer.write((char) memory.get());
 			writer.flush();

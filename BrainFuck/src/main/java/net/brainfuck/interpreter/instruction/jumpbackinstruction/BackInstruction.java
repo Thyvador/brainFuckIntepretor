@@ -1,13 +1,10 @@
 package net.brainfuck.interpreter.instruction.jumpbackinstruction;
 
-import javax.management.NotificationListener;
-
 import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
-import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 
 /**
@@ -18,8 +15,8 @@ public class BackInstruction extends JumpBackInstruction {
 	/**
 	 * Instantiates a new back instruction.
 	 */
-	public BackInstruction(JumpTable jumpTable) {
-		super(Language.BACK, jumpTable);
+	public BackInstruction(JumpTable jumpTable, ExecutionReader executionReader) {
+		super(Language.BACK, jumpTable, executionReader);
 	}
 
 	/**
@@ -31,7 +28,7 @@ public class BackInstruction extends JumpBackInstruction {
 	 * @throws MemoryOutOfBoundsException the brackets parse exception
 	 */
 	@Override
-	public void execute(Memory memory, ExecutionReader reader) throws BracketsParseException, IOException, MemoryOutOfBoundsException {
+	public void execute(Memory memory) throws BracketsParseException, IOException, MemoryOutOfBoundsException {
 		nonLinearExecute(memory, reader);
 	}
 

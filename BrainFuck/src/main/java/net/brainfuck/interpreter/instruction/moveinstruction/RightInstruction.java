@@ -1,10 +1,8 @@
 package net.brainfuck.interpreter.instruction.moveinstruction;
 
-import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.Language;
-import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
  * Representation of RIGHT instruction ">" "RIGHT".
@@ -27,7 +25,7 @@ public class RightInstruction extends MoveInstruction {
 	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 */
     @Override
-    public void execute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException {
+    public void execute(Memory memory) throws MemoryOutOfBoundsException {
         memory.right();
     }
 

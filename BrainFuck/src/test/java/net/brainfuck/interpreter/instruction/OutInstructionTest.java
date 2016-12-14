@@ -50,7 +50,7 @@ public class OutInstructionTest {
 	 @Test
 	public void out() throws Exception {
 		memory.set('a');
-		 instruction.execute(memory,reader);
+		 instruction.execute(memory);
 		assertEquals('a',(int)out.get(0));
 	}
 

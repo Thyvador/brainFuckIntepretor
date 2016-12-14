@@ -1,6 +1,5 @@
 package net.brainfuck.interpreter.instruction.operationinstruction;
 
-import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
@@ -13,7 +12,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
  *
  * @author davidLANG
  */
-public class DecrementInstruction extends DecrementIncrementInstruction {
+public class DecrementInstruction extends AbstractInstruction {
 
 	/**
 	 * Instantiates a new decrement instruction.
@@ -30,7 +29,7 @@ public class DecrementInstruction extends DecrementIncrementInstruction {
 	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 */
 	@Override
-	public void execute(Memory memory, ExecutionReader reader) throws MemoryOverFlowException, MemoryOutOfBoundsException {
+	public void execute(Memory memory) throws MemoryOverFlowException, MemoryOutOfBoundsException {
 		memory.decr();
 	}
 

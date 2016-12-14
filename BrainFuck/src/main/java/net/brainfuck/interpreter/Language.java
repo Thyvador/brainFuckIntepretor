@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.interpreter.instruction.*;
 import net.brainfuck.interpreter.instruction.intoutinsruction.InInstruction;
 import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
@@ -58,8 +59,8 @@ public enum Language {
 		LEFT.setInterpreter(new LeftInstruction());
 		IN.setInterpreter(new InInstruction(inputStreamReader));
 		OUT.setInterpreter(new OutInstruction(outputStreamWriter));
-		JUMP.setInterpreter(new JumpInstruction(jumpTable));
-		BACK.setInterpreter(new BackInstruction(jumpTable));
+		JUMP.setInterpreter(new JumpInstruction(jumpTable, null));
+		BACK.setInterpreter(new BackInstruction(jumpTable, null));
 		// Init language map
 		Language[] languages = Language.values();
 		for (Language language : languages) {
@@ -71,9 +72,9 @@ public enum Language {
 		}
 	}
 
-	public static void setJumpTabel(JumpTable jumpTabel) {
-		Language.JUMP.setInterpreter(new JumpInstruction(jumpTabel));
-		Language.BACK.setInterpreter(new BackInstruction(jumpTabel));
+	public static void setJumpTabel(JumpTable jumpTabel, ExecutionReader executionReader) {
+		Language.JUMP.setInterpreter(new JumpInstruction(jumpTabel, executionReader));
+		Language.BACK.setInterpreter(new BackInstruction(jumpTabel, executionReader));
 	}
 
 	/**

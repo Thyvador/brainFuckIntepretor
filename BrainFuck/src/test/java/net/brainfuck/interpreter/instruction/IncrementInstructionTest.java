@@ -48,7 +48,7 @@ public class IncrementInstructionTest {
 	 */
 	@Test
 	public void incr() throws Exception {
-		instruction.execute(memory,reader);
+		instruction.execute(memory);
 		assertEquals(1, memory.get());
 	}
 
@@ -63,7 +63,7 @@ public class IncrementInstructionTest {
 	@Test(expected = MemoryOverFlowException.class)
 	public void OverFlow() throws MemoryOverFlowException, MemoryOutOfBoundsException {
 		for (int i = 0; i < 5000; i++) {
-			instruction.execute(memory,reader);
+			instruction.execute(memory);
 		}
 	}
 
