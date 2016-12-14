@@ -1,18 +1,13 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.moveinstruction.LeftInstruction;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 

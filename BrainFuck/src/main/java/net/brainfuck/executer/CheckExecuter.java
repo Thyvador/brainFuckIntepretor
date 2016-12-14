@@ -3,9 +3,9 @@ package net.brainfuck.executer;
 import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.instruction.BackInstruction;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
-import net.brainfuck.interpreter.instruction.JumpInstruction;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 
 /**
  * Execute the AbstractInstruction command according to the "--trace" context.

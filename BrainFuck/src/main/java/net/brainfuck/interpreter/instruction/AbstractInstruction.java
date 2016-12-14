@@ -19,7 +19,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 *
 	 * @param languageInstr the language instr
 	 */
-	AbstractInstruction(Language languageInstr) {
+	protected AbstractInstruction(Language languageInstr) {
 		this.languageInstr = languageInstr;
 		logger = Logger.getInstance();
 	}

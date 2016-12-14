@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 import org.junit.Test;
 
 import java.io.*;

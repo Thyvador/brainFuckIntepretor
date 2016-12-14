@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter.instruction;
+package net.brainfuck.interpreter.instruction.intoutinsruction;
 
 import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
@@ -6,6 +6,7 @@ import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.io.InputStreamReader;
 
@@ -15,7 +16,7 @@ import java.io.InputStreamReader;
  *
  * @author François Melkonian IN_PATH
  */
-public class InInstruction extends AbstractInstruction {
+public class InInstruction extends InOutInstruction {
 	InputStreamReader inReader;
 
 	/**

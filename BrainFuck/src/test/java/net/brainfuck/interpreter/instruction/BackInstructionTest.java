@@ -1,24 +1,9 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
-import net.brainfuck.common.Reader;
-import net.brainfuck.exception.*;
-import net.brainfuck.exception.Exception;
-import net.brainfuck.executer.Executer;
-import net.brainfuck.interpreter.*;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
 
-import java.io.*;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * The Class BackInstructionTest.

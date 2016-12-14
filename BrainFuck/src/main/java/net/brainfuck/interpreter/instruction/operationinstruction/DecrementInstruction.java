@@ -1,10 +1,11 @@
-package net.brainfuck.interpreter.instruction;
+package net.brainfuck.interpreter.instruction.operationinstruction;
 
 import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 
 /**
@@ -12,7 +13,7 @@ import net.brainfuck.interpreter.Language;
  *
  * @author davidLANG
  */
-public class DecrementInstruction extends AbstractInstruction {
+public class DecrementInstruction extends DecrementIncrementInstruction {
 
 	/**
 	 * Instantiates a new decrement instruction.

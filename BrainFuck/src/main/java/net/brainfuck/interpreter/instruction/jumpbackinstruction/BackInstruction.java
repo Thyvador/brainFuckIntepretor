@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter.instruction;
+package net.brainfuck.interpreter.instruction.jumpbackinstruction;
 
 import javax.management.NotificationListener;
 
@@ -7,20 +7,19 @@ import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 
 /**
  * Representation of Back instruction "]" "BACK".
  */
-public class BackInstruction extends AbstractInstruction {
-	JumpTable jumpTable;
+public class BackInstruction extends JumpBackInstruction {
 
 	/**
 	 * Instantiates a new back instruction.
 	 */
 	public BackInstruction(JumpTable jumpTable) {
-		super(Language.BACK);
-		this.jumpTable = jumpTable;
+		super(Language.BACK, jumpTable);
 	}
 
 	/**

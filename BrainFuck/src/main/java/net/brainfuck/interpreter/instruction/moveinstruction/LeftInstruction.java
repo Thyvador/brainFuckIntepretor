@@ -1,16 +1,17 @@
-package net.brainfuck.interpreter.instruction;
+package net.brainfuck.interpreter.instruction.moveinstruction;
 
 import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
  * Representation of LEFT instruction "<" "LEFT".
  *
  * @author davidLANG
  */
-public class LeftInstruction extends AbstractInstruction {
+public class LeftInstruction extends MoveInstruction {
 
 	/**
 	 * Instantiates a new left instruction.

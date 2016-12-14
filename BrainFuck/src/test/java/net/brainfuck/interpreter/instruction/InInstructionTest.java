@@ -5,6 +5,7 @@ import net.brainfuck.common.Memory;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.intoutinsruction.InInstruction;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

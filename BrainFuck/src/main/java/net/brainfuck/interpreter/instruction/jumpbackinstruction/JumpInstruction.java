@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter.instruction;
+package net.brainfuck.interpreter.instruction.jumpbackinstruction;
 
 import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
@@ -7,19 +7,17 @@ import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
  * Representation of JUMP instruction "[" "JUMP".
  */
-public class JumpInstruction extends AbstractInstruction {
-	JumpTable jumpTable;
-
+public class JumpInstruction extends JumpBackInstruction {
 	/**
 	 * Instantiates a new jump instruction.
 	 */
 	public JumpInstruction(JumpTable jumpTable) {
-		super(Language.JUMP);
-		this.jumpTable = jumpTable;
+		super(Language.JUMP, jumpTable);
 	}
 
 	/**

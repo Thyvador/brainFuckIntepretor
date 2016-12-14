@@ -4,7 +4,7 @@ import net.brainfuck.common.*;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.instruction.operationinstruction.DecrementInstruction;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;

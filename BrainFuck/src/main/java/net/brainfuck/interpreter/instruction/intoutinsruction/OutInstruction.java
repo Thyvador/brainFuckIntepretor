@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter.instruction;
+package net.brainfuck.interpreter.instruction.intoutinsruction;
 
 import net.brainfuck.common.ExecutionReader;
 import net.brainfuck.common.Memory;
@@ -6,6 +6,7 @@ import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.io.OutputStreamWriter;
 
@@ -15,7 +16,7 @@ import java.io.OutputStreamWriter;
  *
  * @author François Melkonian
  */
-public class OutInstruction extends AbstractInstruction {
+public class OutInstruction extends InOutInstruction {
 	OutputStreamWriter writer;
 
 	/**

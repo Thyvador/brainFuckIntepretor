@@ -1,6 +1,14 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.interpreter.instruction.*;
+import net.brainfuck.interpreter.instruction.intoutinsruction.InInstruction;
+import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
+import net.brainfuck.interpreter.instruction.moveinstruction.LeftInstruction;
+import net.brainfuck.interpreter.instruction.moveinstruction.RightInstruction;
+import net.brainfuck.interpreter.instruction.operationinstruction.DecrementInstruction;
+import net.brainfuck.interpreter.instruction.operationinstruction.IncrementInstruction;
 
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
