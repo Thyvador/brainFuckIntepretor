@@ -57,8 +57,8 @@ public class Macro {
 		int nbExecute;
 		for (Pair pair : macroPairs) {
 			for (Pair pairInstruction : (List<Pair>) pair.getFirst()) {
-				argument = pairInstruction.getFirst() != null ? arguments.get(macro.argumentsName.indexOf(pairInstruction.getSecond())) : null;
-				if (!argumentsName.contains(argument)) {
+				argument = pairInstruction.getSecond() != null ? arguments.get(macro.argumentsName.indexOf(pairInstruction.getSecond())) : null;
+				if (argument != null && !argumentsName.contains(argument)) {
 					if (StringParser.isNumeric(argument)) {
 						nbExecute = Integer.parseUnsignedInt(argument);
 						for (int i = 0; i < nbExecute; i++)
