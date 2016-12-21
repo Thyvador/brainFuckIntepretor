@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by thyvador on 21/12/16.
  */
-public class Procedures extends Executables {
+public class Procedures extends Executable {
 
     public Procedures(List<Language> instructions, JumpTable jumpTable, Memory memory) {
         super(instructions, jumpTable);

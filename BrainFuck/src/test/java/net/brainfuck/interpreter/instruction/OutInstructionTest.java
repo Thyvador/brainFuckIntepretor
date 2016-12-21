@@ -40,7 +40,7 @@ public class OutInstructionTest {
 			}
 		}));
 		memory = new Memory();
-		reader = new ExecutionReader(langage, jumpTable);
+		reader = new ExecutionReader(langage, null);
 	}
 
 	/**

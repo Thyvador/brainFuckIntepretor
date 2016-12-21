@@ -36,7 +36,7 @@ public class IncrementInstructionTest {
 
 		List<Language> langage = Arrays.asList(Language.RIGHT,Language.RIGHT);
 
-		reader = new ExecutionReader(langage, jumpTable);
+		reader = new ExecutionReader(langage, null);
 		memory = new Memory();
 		instruction = new IncrementInstruction();
 	}

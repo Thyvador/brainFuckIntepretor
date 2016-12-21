@@ -35,7 +35,7 @@ public class InInstructionTest {
 
 		List<Language> langage = Arrays.asList(Language.RIGHT,Language.RIGHT);
 
-		reader = new ExecutionReader(langage, jumpTable);
+		reader = new ExecutionReader(langage, null);
 		memory = new Memory();
 		InputStreamReader inStream = new InputStreamReader(new InputStream() {
 			int i = 0;

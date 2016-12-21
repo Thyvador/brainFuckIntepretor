@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by thyvador on 21/12/16.
  */
-public class Functions extends Executables {
+public class Functions extends Executable {
 
 
     public Functions(List<Language> instructions, JumpTable jumpTable, Memory memory) {

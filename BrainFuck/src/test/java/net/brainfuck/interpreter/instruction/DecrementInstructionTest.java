@@ -51,7 +51,7 @@ public class DecrementInstructionTest {
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
-		reader = new ExecutionReader(Arrays.asList(INCR, INCR, DECR), jumpTable);
+		reader = new ExecutionReader(Arrays.asList(INCR, INCR, DECR), null);
 		memory = new Memory();
 		instruction = new DecrementInstruction();
 	}

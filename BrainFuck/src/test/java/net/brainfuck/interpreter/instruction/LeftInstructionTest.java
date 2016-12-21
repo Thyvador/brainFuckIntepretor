@@ -32,7 +32,7 @@ public class LeftInstructionTest {
 	public void setUp() throws Exception {
 		List<Language> langage = Arrays.asList(Language.LEFT,Language.LEFT);
 
-		reader = new ExecutionReader(langage, jumpTable);
+		reader = new ExecutionReader(langage, null);
 		memory = new Memory();
 		instruction = new LeftInstruction();
 	}

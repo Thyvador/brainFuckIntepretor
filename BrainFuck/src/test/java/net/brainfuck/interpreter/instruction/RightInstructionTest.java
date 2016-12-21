@@ -34,7 +34,7 @@ public class RightInstructionTest {
 
 		List<Language> langage = Arrays.asList(Language.RIGHT,Language.RIGHT);
 
-		ExecutionReader reader = new ExecutionReader(langage, jumpTable);
+		ExecutionReader reader = new ExecutionReader(langage, null);
 		memory = new Memory();
 		instruction = new RightInstruction();
 	}

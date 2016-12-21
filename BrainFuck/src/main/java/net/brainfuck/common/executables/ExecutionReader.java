@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Alexandre on 30/11/2016.
  */
-public class ExecutionReader extends Executables {
+public class ExecutionReader extends Executable {
 
     public ExecutionReader(List<Language> instructions, JumpTable jumpTable) {
         super(instructions, jumpTable);
