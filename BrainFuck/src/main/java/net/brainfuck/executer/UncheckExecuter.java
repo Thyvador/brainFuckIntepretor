@@ -1,6 +1,7 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
 

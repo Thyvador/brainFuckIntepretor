@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
 
 import java.io.IOException;

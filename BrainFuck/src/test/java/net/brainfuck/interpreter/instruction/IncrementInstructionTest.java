@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.Language;
@@ -35,7 +36,7 @@ public class IncrementInstructionTest {
 
 		List<Language> langage = Arrays.asList(Language.RIGHT,Language.RIGHT);
 
-		reader = new ExecutionReader(langage);
+		reader = new ExecutionReader(langage, jumpTable);
 		memory = new Memory();
 		instruction = new IncrementInstruction();
 	}

@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
@@ -50,7 +51,7 @@ public class DecrementInstructionTest {
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
-		reader = new ExecutionReader(Arrays.asList(INCR, INCR, DECR));
+		reader = new ExecutionReader(Arrays.asList(INCR, INCR, DECR), jumpTable);
 		memory = new Memory();
 		instruction = new DecrementInstruction();
 	}

@@ -1,12 +1,11 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 import org.junit.Test;
 
 import java.io.*;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Alexandre Hiltcher,François Melkonian

@@ -1,6 +1,6 @@
 package net.brainfuck.executer;
 
-import net.brainfuck.common.ExecutionReader;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;

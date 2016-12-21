@@ -1,11 +1,10 @@
 
 package net.brainfuck.interpreter;
 
-import net.brainfuck.common.ExecutionReader;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Logger;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Executer;
-import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.util.HashMap;
 import java.util.Map;

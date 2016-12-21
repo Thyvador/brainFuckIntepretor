@@ -5,7 +5,7 @@
  */
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.ExecutionReader;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundIn;

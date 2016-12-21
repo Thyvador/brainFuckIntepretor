@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
@@ -39,7 +40,7 @@ public class OutInstructionTest {
 			}
 		}));
 		memory = new Memory();
-		reader = new ExecutionReader(langage);
+		reader = new ExecutionReader(langage, jumpTable);
 	}
 
 	/**
