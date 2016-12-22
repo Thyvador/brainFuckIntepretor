@@ -49,9 +49,10 @@ public class Interpreter {
 	 * @throws FileNotFoundIn the file not found in
 	 * @throws BracketsParseException throw by executer
 	 * @throws FileNotFoundException the file not found exception
+	 * @throws SegmentationFaultException 
 	 */
 	public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
-			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException {
+			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException, SegmentationFaultException {
 		Language instruction;
 
         while ((instruction = reader.getNext()) != null) {

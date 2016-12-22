@@ -1,12 +1,12 @@
 package net.brainfuck.executer;
 
-import net.brainfuck.common.BfImageWriter;
 import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
+import net.brainfuck.io.BfImageWriter;
 
 /**
  * Execute the AbstractInstruction command according to the "--translate" context.

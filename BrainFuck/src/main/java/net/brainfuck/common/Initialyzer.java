@@ -1,7 +1,6 @@
 package net.brainfuck.common;
 
 import net.brainfuck.Main;
-import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
@@ -13,6 +12,10 @@ import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.processing.BfCompiler;
 import net.brainfuck.interpreter.processing.BfPrecompiler;
 import net.brainfuck.interpreter.processing.Macro;
+import net.brainfuck.io.BfImageReader;
+import net.brainfuck.io.BfImageWriter;
+import net.brainfuck.io.BfReader;
+import net.brainfuck.io.Reader;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ public class Initialyzer {
             Logger.getInstance().startExecTime();
             interpreter.interprate();
             System.out.println(Logger.getInstance().showResume(memory));
-        } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
+        } catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException | SegmentationFaultException e) {
             // Exit code not set
             System.exit(5);
         } catch (MemoryOutOfBoundsException e) {
@@ -57,42 +60,42 @@ public class Initialyzer {
         }
         System.exit(0);
 
-    }
+	}
 
 
-    private void analyzeArg() throws IOException {
-        if (argumentAnalyzer.getArgument(PATH) == null) {
-            Main.printUsage();
-            System.exit(0);
-        }
-        initLoggerFromContext(argumentAnalyzer);
-    }
+	private void analyzeArg() throws IOException {
+		if (argumentAnalyzer.getArgument(PATH) == null) {
+			Main.printUsage();
+			System.exit(0);
+		}
+		initLoggerFromContext(argumentAnalyzer);
+	}
 
-    /**
-     * Inits the.
-     *
-     * @param argumentAnalyzer
-     * @throws FileNotFoundException  the file not found exception
-     * @throws IOException            Signals that an I/O exception has occurred.
-     * @throws IOException            Signals that an I/O exception has occurred.
-     * @throws SyntaxErrorException   the syntax error exception
-     * @throws BracketsParseException the brackets parse exception
-     */
-    private void init(ArgumentAnalyzer argumentAnalyzer) throws FileNotFoundException, IncorrectArgumentException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
-        analyzeArg();
-        initReader();
-        BfImageWriter bfImageWriter = null;
-        if (argumentAnalyzer.getFlags().contains(Context.TRANSLATE.getSyntax())) {
-            bfImageWriter = new BfImageWriter(getOut());
-        }
-        Context.setExceuter(bfImageWriter);
-        executer = new Executer(argumentAnalyzer);
-        Language.setInstructions(getIn(), new OutputStreamWriter(getOut()), new JumpTable());
-        BfCompiler compiler = initCompiler();
-        memory = new Memory();
-        Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
+	/**
+	 * Inits the.
+	 *
+	 * @param argumentAnalyzer
+	 * @throws FileNotFoundException  the file not found exception
+	 * @throws IOException            Signals that an I/O exception has occurred.
+	 * @throws IOException            Signals that an I/O exception has occurred.
+	 * @throws SyntaxErrorException   the syntax error exception
+	 * @throws BracketsParseException the brackets parse exception
+	 */
+	private void init(ArgumentAnalyzer argumentAnalyzer) throws FileNotFoundException, IncorrectArgumentException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+		analyzeArg();
+		initReader();
+		BfImageWriter bfImageWriter = null;
+		if (argumentAnalyzer.getFlags().contains(Context.TRANSLATE.getSyntax())) {
+			bfImageWriter = new BfImageWriter(getOut());
+		}
+		Context.setExceuter(bfImageWriter);
+		executer = new Executer(argumentAnalyzer);
+		Language.setInstructions(getIn(), new OutputStreamWriter(getOut()), new JumpTable());
+		BfCompiler compiler = initCompiler();
+		memory = new Memory();
+		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 
-        JumpTable jumpTable = null;
+		JumpTable jumpTable = null;
 
         List<Language> instructions = new ArrayList<>();
         ExecutionReader executionReader = null;
@@ -103,75 +106,75 @@ public class Initialyzer {
             Language.setJumpTabel(executionReader);
         }
 
-        executer.setArgumentExecuter(memory, bfImageWriter, jumpTable);
-        interpreter = new Interpreter(executer, executionReader);
-    }
+		executer.setArgumentExecuter(memory, bfImageWriter, jumpTable);
+		interpreter = new Interpreter(executer, executionReader);
+	}
 
-    private BfCompiler initCompiler() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
-        BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
-        Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
-        String lastInstruction = bfPrecompiler.getLastInstruction();
-        //if (Language.languageMap.get(lastInstruction) == null) System.exit(0);
-        return new BfCompiler(reader, executer.getContextExecuters(), macros, lastInstruction);
-    }
+	private BfCompiler initCompiler() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+		BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
+		Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
+		String lastInstruction  = bfPrecompiler.getLastInstruction();
+		//if (Language.languageMap.get(lastInstruction) == null) System.exit(0);
+		return new BfCompiler(reader, executer.getContextExecuters(), macros, lastInstruction);
+	}
 
-    private void initReader() throws FileNotFoundException {
-        if (argumentAnalyzer.getArgument(PATH).endsWith(".bmp")) {
-            reader = new BfImageReader(argumentAnalyzer.getArgument(PATH));
-        } else {
-            reader = new BfReader(argumentAnalyzer.getArgument(PATH));
-        }
-    }
+	private void initReader() throws FileNotFoundException {
+		if (argumentAnalyzer.getArgument(PATH).endsWith(".bmp")) {
+			reader = new BfImageReader(argumentAnalyzer.getArgument(PATH));
+		} else {
+			reader = new BfReader(argumentAnalyzer.getArgument(PATH));
+		}
+	}
 
-    public void analyzeFonctions() {
-        // TODO : déplacer la méthode ici
-    }
+	public void analyzeFonctions() {
+		// TODO : déplacer la méthode ici
+	}
 
-    public void analyzeSemantic() {
-        // TODO : déplacer la méthode ici
-    }
+	public void analyzeSemantic() {
+		// TODO : déplacer la méthode ici
+	}
 
-    /**
-     * Initialise the logger from context.
-     * Useful when --trace args is used
-     *
-     * @param argAnalizer the arg analizer
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
-    private void initLoggerFromContext(ArgumentAnalyzer argAnalizer) throws IOException {
-        if (argAnalizer.getFlags().contains(Context.TRACE.getSyntax())) {
-            Logger.getInstance().setWriter(argAnalizer.getArgument(PATH));
-        }
-    }
+	/**
+	 * Initialise the logger from context.
+	 * Useful when --trace args is used
+	 *
+	 * @param argAnalizer the arg analizer
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	private void initLoggerFromContext(ArgumentAnalyzer argAnalizer) throws IOException {
+		if (argAnalizer.getFlags().contains(Context.TRACE.getSyntax())) {
+			Logger.getInstance().setWriter(argAnalizer.getArgument(PATH));
+		}
+	}
 
-    public InputStreamReader getIn() throws FileNotFoundException {
-        String inputPath = null;
-        try {
-            inputPath = argumentAnalyzer.getArgument(ArgumentConstante.IN_PATH);
-            if (inputPath == null)
-                return new InputStreamReader(System.in);
+	public InputStreamReader getIn() throws FileNotFoundException {
+		String inputPath = null;
+		try {
+			inputPath = argumentAnalyzer.getArgument(ArgumentConstante.IN_PATH);
+			if (inputPath == null)
+				return new InputStreamReader(System.in);
 
-            //TODO est ce qu'on ferme cette inputStreamReader
-            return new InputStreamReader(new FileInputStream(inputPath));
+			//TODO est ce qu'on ferme cette inputStreamReader
+			return new InputStreamReader(new FileInputStream(inputPath));
 
-        } catch (java.io.FileNotFoundException e) {
-            throw new FileNotFoundException(inputPath);
-        }
-    }
+		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException(inputPath);
+		}
+	}
 
-    public OutputStream getOut() throws FileNotFoundException {
-        String outputPath = null;
-        try {
-            outputPath = argumentAnalyzer.getArgument(ArgumentConstante.OUT_PATH);
-            if (outputPath == null)
-                return System.out;
+	public OutputStream getOut() throws FileNotFoundException {
+		String outputPath = null;
+		try {
+			outputPath = argumentAnalyzer.getArgument(ArgumentConstante.OUT_PATH);
+			if (outputPath == null)
+				return System.out;
 
-            return new FileOutputStream(outputPath);
+			return new FileOutputStream(outputPath);
 
-        } catch (java.io.FileNotFoundException e) {
-            throw new FileNotFoundException(outputPath);
-        }
-    }
+		} catch (java.io.FileNotFoundException e) {
+			throw new FileNotFoundException(outputPath);
+		}
+	}
 
 
 }

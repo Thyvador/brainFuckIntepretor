@@ -22,10 +22,11 @@ public class TraceExecuter implements ContextExecuter {
 	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
 	 * @throws FileNotFoundIn             the file not found in
 	 * @throws BracketsParseException     the brackets parse exception
+	 * @throws SegmentationFaultException 
 	 */
 	@Override
 	public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
-			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
+			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
 		i.trace(memory, reader);
 	}
 }

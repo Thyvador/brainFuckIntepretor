@@ -1,9 +1,9 @@
 package net.brainfuck.executer;
 
-import net.brainfuck.common.BfImageWriter;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.brainfuck.io.BfImageWriter;
 
 /**
  * The Enum Context.

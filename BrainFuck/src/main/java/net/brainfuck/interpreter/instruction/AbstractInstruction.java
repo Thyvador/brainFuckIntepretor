@@ -49,11 +49,12 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 * @throws BracketsParseException     throw by interpreter
 	 * @throws MemoryOverFlowException    throw by memory
 	 * @throws FileNotFoundIn             throw by writer
+	 * @throws SegmentationFaultException 
 	 */
-	public final void trace(Memory memory, ExecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn {
+	public final void trace(Memory memory, ExecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
 		execute(memory);
 		logger.write(reader.getExecutionPointer(), memory);
 	}
 
-	public abstract void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
+	public abstract void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
 }

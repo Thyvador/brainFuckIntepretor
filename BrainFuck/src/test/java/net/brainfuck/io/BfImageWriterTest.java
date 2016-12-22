@@ -1,7 +1,9 @@
-package net.brainfuck.common;
+package net.brainfuck.io;
 
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
+import net.brainfuck.io.BfImageWriter;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;

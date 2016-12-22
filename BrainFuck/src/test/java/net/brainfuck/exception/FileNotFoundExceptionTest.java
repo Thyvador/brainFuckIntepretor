@@ -1,7 +1,8 @@
 package net.brainfuck.exception;
 
-import net.brainfuck.common.BfReader;
 import org.junit.Test;
+
+import net.brainfuck.io.BfReader;
 
 /**
  * The Class FileNotFoundExceptionTest.

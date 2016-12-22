@@ -5,6 +5,7 @@ import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
+import net.brainfuck.io.BfImageWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +53,10 @@ public class Executer {
 	 * @throws MemoryOverFlowException    Throw by memory
 	 * @throws FileNotFoundIn             Throw by reader
 	 * @throws IOException                Throw by reader
+	 * @throws SegmentationFaultException 
 	 */
 	public void execute(AbstractInstruction instruction, ExecutionReader reader) throws MemoryOutOfBoundsException, BracketsParseException,
-			MemoryOverFlowException, FileNotFoundIn, IOException {
+			MemoryOverFlowException, FileNotFoundIn, IOException, SegmentationFaultException {
 		for (ContextExecuter contextExecuter : contextExecuters) {
 			contextExecuter.execute(instruction, memory, reader);
 
