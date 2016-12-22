@@ -44,7 +44,7 @@ public class Initialyzer {
 			Logger.getInstance().startExecTime();
 			interpreter.interprate();
 			System.out.println(Logger.getInstance().showResume(memory));
-		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
+		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException | SegmentationFaultException e) {
 			// Exit code not set
 			System.exit(5);
 		} catch (MemoryOutOfBoundsException e) {

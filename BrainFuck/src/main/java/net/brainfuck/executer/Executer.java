@@ -52,9 +52,10 @@ public class Executer {
 	 * @throws MemoryOverFlowException    Throw by memory
 	 * @throws FileNotFoundIn             Throw by reader
 	 * @throws IOException                Throw by reader
+	 * @throws SegmentationFaultException 
 	 */
 	public void execute(AbstractInstruction instruction, ExecutionReader reader) throws MemoryOutOfBoundsException, BracketsParseException,
-			MemoryOverFlowException, FileNotFoundIn, IOException {
+			MemoryOverFlowException, FileNotFoundIn, IOException, SegmentationFaultException {
 		for (ContextExecuter contextExecuter : contextExecuters) {
 			contextExecuter.execute(instruction, memory, reader);
 

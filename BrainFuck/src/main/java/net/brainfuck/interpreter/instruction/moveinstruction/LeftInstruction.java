@@ -2,6 +2,7 @@ package net.brainfuck.interpreter.instruction.moveinstruction;
 
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.SegmentationFaultException;
 import net.brainfuck.interpreter.Language;
 
 /**
@@ -23,9 +24,10 @@ public class LeftInstruction extends MoveInstruction {
 	 *
 	 * @param memory the memory
 	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
+	 * @throws SegmentationFaultException 
 	 */
 	@Override
-	public void execute(Memory memory) throws MemoryOutOfBoundsException {
+	public void execute(Memory memory) throws MemoryOutOfBoundsException, SegmentationFaultException {
 		memory.left();
 	}
 

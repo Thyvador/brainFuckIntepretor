@@ -21,10 +21,11 @@ class UncheckExecuter implements ContextExecuter {
 	 * @throws MemoryOutOfBoundsException throw by memory
 	 * @throws FileNotFoundIn throw by reader
 	 * @throws BracketsParseException throw by JumpInstruction or by BackInstruction
+     * @throws SegmentationFaultException 
 	 */
     @Override
     public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
-			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
+			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
     	i.execute(memory);
     }
 }

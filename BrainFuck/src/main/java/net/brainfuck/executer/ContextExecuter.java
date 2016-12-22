@@ -22,7 +22,8 @@ public interface ContextExecuter {
 	 * @throws MemoryOutOfBoundsException throw by memory
 	 * @throws FileNotFoundIn             throw by reader
 	 * @throws BracketsParseException     throw by JumpInstruction or by BackInstruction
+	 * @throws SegmentationFaultException 
 	 */
-	void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException;
+	void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
 }
 

@@ -55,7 +55,7 @@ public class LeftInstructionTest {
 	 *             the memory out of bounds exception
 	 */
 	@Test(expected = MemoryOutOfBoundsException.class)
-	public void OutOfBoundLeft() throws MemoryOutOfBoundsException {
+	public void OutOfBoundLeft() throws Exception {
 		instruction.execute(memory);
 
 	}

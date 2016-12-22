@@ -1,7 +1,13 @@
 package net.brainfuck.common;
 
+import java.util.EmptyStackException;
+import java.util.List;
+import java.util.Stack;
+
+import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
 
 /**
  * The <code>Memory</code> class represents the memory of the BrainFuck interpreter.
@@ -31,6 +37,7 @@ public class Memory {
 	 * Index of the current cell
 	 */
 	private int index;
+	private Stack<Integer> scope;
 	private Logger logger;
 
 	/**
@@ -38,25 +45,36 @@ public class Memory {
 	 */
 	public Memory() {
 		this.logger = Logger.getInstance();
+		scope = new Stack<>();
 		clean();
 	}
 
 	/**
-	 * Return argumentAnalyzer representation of the memory. Empty cell are not printed. The n-th cell (if not empty) is : "Cn : [value of
-	 * n-th cell]"
+	 * Return the memory index.
 	 *
-	 * @return the string
+	 * @return the memory index.
 	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		short current;
-		for (int i = 0; i < MAX_CAPACITY; i++) {
-			if ((current = memory[i]) != 0) {
-				builder.append("C").append(i).append(": ").append(current).append("\n");
-			}
+	public int getIndex() {
+		return index;
+	}
+
+	/**
+	 * Sets the index.
+	 *
+	 * @param index            the new index
+	 * @throws MemoryOutOfBoundsException             the memory out of bounds exception
+	 * @throws SegmentationFaultException the segmentation fault exception
+	 */
+	private void setIndex(int index) throws MemoryOutOfBoundsException, SegmentationFaultException {
+		try {
+			if (index < scope.peek())
+				throw new SegmentationFaultException();
+		} catch (EmptyStackException e) {
+			// The stack is empty, we are in the "main", so np
 		}
-		return builder.toString();
+		this.index = index;
+		logger.countMemoryMove();
+		checkIndex(index);
 	}
 
 	/**
@@ -97,8 +115,6 @@ public class Memory {
 	 *             if the value overflow or underflow the cell capacity
 	 */
 	private Memory set(int index, int changeValue) throws MemoryOverFlowException {
-		if (memory[index] > (MAX_VALUE - changeValue) || memory[index] < (MIN_VALUE - changeValue))
-			throw new MemoryOverFlowException("Invalid value " + (memory[index] + changeValue) + " at index " + index);
 		return set(memory[index] + changeValue);
 	}
 
@@ -112,6 +128,8 @@ public class Memory {
 	 *             the memory over flow exception
 	 */
 	public Memory set(int newValue) throws MemoryOverFlowException {
+		if (newValue > MAX_VALUE || newValue < MIN_VALUE)
+			throw new MemoryOverFlowException("Invalid value " + newValue + " at index " + index);
 		logger.countMemoryWrite();
 		memory[index] = (short) newValue;
 		return this;
@@ -136,11 +154,14 @@ public class Memory {
 	 * @return the current memory
 	 * @throws MemoryOutOfBoundsException
 	 *             if the pointer move out of the memory
+	 * @throws SegmentationFaultException 
 	 */
 	public Memory right() throws MemoryOutOfBoundsException {
-		index++;
-		logger.countMemoryMove();
-		checkIndex(index);
+		try {
+			setIndex(index + 1);
+		} catch (SegmentationFaultException e) {
+			// Might not append
+		}
 		return this;
 	}
 
@@ -150,11 +171,10 @@ public class Memory {
 	 * @return the current memory
 	 * @throws MemoryOutOfBoundsException
 	 *             if the pointer move out of the memory
+	 * @throws SegmentationFaultException 
 	 */
-	public Memory left() throws MemoryOutOfBoundsException {
-		index--;
-		logger.countMemoryMove();
-		checkIndex(index);
+	public Memory left() throws MemoryOutOfBoundsException, SegmentationFaultException {
+		setIndex(index - 1);
 		return this;
 	}
 
@@ -192,11 +212,86 @@ public class Memory {
 	}
 
 	/**
-	 * Return the memory index.
+	 * Lock the memory scope and move the pointer to the right.
 	 *
-	 * @return the memory index.
+	 * @return the memory
+	 * @throws MemoryOutOfBoundsException
+	 *             the memory out of bounds exception
 	 */
-	public int getIndex() {
-		return index;
+	public Memory lock() throws MemoryOutOfBoundsException {
+		right();
+		scope.push(getIndex());
+		return this;
+	}
+
+	/**
+	 * Unlock the memory scope and copy the eventual return value in the cell at the right of the cell before the call
+	 *
+	 * @param returnValue
+	 *            if there is a return value
+	 * @return the memory
+	 * @throws MemoryOutOfBoundsException
+	 *             the memory out of bounds exception
+	 */
+	public Memory unlock(boolean returnValue) throws MemoryOutOfBoundsException {
+		short tmp = get();
+		try {
+			setIndex(scope.pop());
+			if (returnValue)
+				set(tmp);
+		} catch (SegmentationFaultException | MemoryOverFlowException e1) {
+			// Might not append
+		}
+		return this;
+	}
+	
+	/**
+	 * Sets the arguments.
+	 *
+	 * @param args the args
+	 * @return the memory
+	 * @throws MemoryOutOfBoundsException 
+	 * @throws MemoryOverFlowException 
+	 */
+	public Memory setArguments(short... args) throws MemoryOutOfBoundsException, MemoryOverFlowException {
+		for (short s: args) {
+			set(s);
+			right();
+		}
+		return this;
+	}
+	
+	/**
+	 * Sets the arguments.
+	 *
+	 * @param args the args
+	 * @return the memory
+	 * @throws MemoryOverFlowException 
+	 * @throws MemoryOutOfBoundsException 
+	 */
+	public Memory setArguments(List<Short> args) throws MemoryOutOfBoundsException, MemoryOverFlowException {
+		short[] res = new short[args.size()];
+		for (int i = 0; i < res.length; i++) {
+			res[i] = args.get(i);
+		}
+		return setArguments(res);
+	}
+
+	/**
+	 * Return argumentAnalyzer representation of the memory. Empty cell are not printed. The n-th cell (if not empty) is : "Cn : [value of
+	 * n-th cell]"
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		short current;
+		for (int i = 0; i < MAX_CAPACITY; i++) {
+			if ((current = memory[i]) != 0) {
+				builder.append("C").append(i).append(": ").append(current).append("\n");
+			}
+		}
+		return builder.toString();
 	}
 }
