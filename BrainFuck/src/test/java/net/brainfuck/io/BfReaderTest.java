@@ -1,4 +1,4 @@
-package net.brainfuck.common;
+package net.brainfuck.io;
 
 import org.junit.After;
 import org.junit.Before;

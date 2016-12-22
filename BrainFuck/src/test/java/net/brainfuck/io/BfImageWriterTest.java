@@ -1,4 +1,4 @@
-package net.brainfuck.common;
+package net.brainfuck.io;
 
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
