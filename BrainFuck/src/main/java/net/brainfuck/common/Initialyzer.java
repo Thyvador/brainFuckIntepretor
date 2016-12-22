@@ -12,6 +12,10 @@ import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.processing.BfCompiler;
 import net.brainfuck.interpreter.processing.BfPrecompiler;
 import net.brainfuck.interpreter.processing.Macro;
+import net.brainfuck.io.BfImageReader;
+import net.brainfuck.io.BfImageWriter;
+import net.brainfuck.io.BfReader;
+import net.brainfuck.io.Reader;
 
 import java.io.*;
 import java.util.ArrayList;

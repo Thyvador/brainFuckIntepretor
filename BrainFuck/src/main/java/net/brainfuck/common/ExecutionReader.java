@@ -11,6 +11,7 @@ import java.util.Stack;
 /**
  * Created by Alexandre on 30/11/2016.
  */
+//TODO: Pas ouf de pas implem Reader, faudra trouver une solution. Peut etre un generics ?
 public class ExecutionReader {
 	private List<Language> instructions;
 	private int index = 0;

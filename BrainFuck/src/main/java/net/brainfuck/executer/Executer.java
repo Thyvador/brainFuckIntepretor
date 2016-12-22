@@ -4,6 +4,7 @@ import net.brainfuck.common.*;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
+import net.brainfuck.io.BfImageWriter;
 
 import java.util.ArrayList;
 import java.util.List;

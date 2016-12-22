@@ -1,12 +1,12 @@
 package net.brainfuck.interpreter.processing;
 
-import net.brainfuck.common.BfReader;
 import net.brainfuck.common.Logger;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.io.BfReader;
+import net.brainfuck.io.Reader;
 
 import java.util.Map;
 

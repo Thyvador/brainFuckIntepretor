@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.brainfuck.io.BfImageReader;
+import net.brainfuck.io.BfImageWriter;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
