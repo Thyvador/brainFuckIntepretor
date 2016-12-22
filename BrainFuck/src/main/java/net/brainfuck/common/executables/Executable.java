@@ -3,6 +3,7 @@ package net.brainfuck.common.executables;
 import net.brainfuck.common.Logger;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 
@@ -51,7 +52,7 @@ public abstract class Executable {
      *
      * @throws BracketsParseException
      */
-    public void closeReader() throws BracketsParseException {
+    public void closeReader() throws BracketsParseException, MemoryOutOfBoundsException {
         if (!marks.isEmpty())
             throw new BracketsParseException();
     }
