@@ -41,9 +41,9 @@ public class Memory {
 		clean();
 	}
 
-
 	/**
-	 * Return argumentAnalyzer representation of the memory. Empty cell are not printed. The n-th cell (if not empty) is : "Cn : [value of n-th cell]"
+	 * Return argumentAnalyzer representation of the memory. Empty cell are not printed. The n-th cell (if not empty) is : "Cn : [value of
+	 * n-th cell]"
 	 *
 	 * @return the string
 	 */
@@ -85,11 +85,6 @@ public class Memory {
 		return memory[index];
 	}
 
-	private Memory setImmediate(int newValue) throws MemoryOverFlowException {
-		logger.countMemoryWrite();
-		memory[index] = (short)newValue;
-		return this;
-	}
 	/**
 	 * Set the value of the specified memory cell.
 	 *
@@ -104,9 +99,7 @@ public class Memory {
 	private Memory set(int index, int changeValue) throws MemoryOverFlowException {
 		if (memory[index] > (MAX_VALUE - changeValue) || memory[index] < (MIN_VALUE - changeValue))
 			throw new MemoryOverFlowException("Invalid value " + (memory[index] + changeValue) + " at index " + index);
-		memory[index] += changeValue;
-		logger.countMemoryWrite();
-		return this;
+		return set(memory[index] + changeValue);
 	}
 
 	/**
@@ -114,11 +107,14 @@ public class Memory {
 	 *
 	 * @param newValue
 	 *            the value to set
+	 * @return the current memory
 	 * @throws MemoryOverFlowException
 	 *             the memory over flow exception
 	 */
-	public void set(int newValue) throws MemoryOverFlowException {
-		setImmediate(newValue);
+	public Memory set(int newValue) throws MemoryOverFlowException {
+		logger.countMemoryWrite();
+		memory[index] = (short) newValue;
+		return this;
 	}
 
 	/**
