@@ -15,7 +15,7 @@ public class Main {
 	public Main(String[] args) {
 
 		if (args.length == 0) {
-			this.printUsage();
+			printUsage();
 			System.exit(0);
 		}
 		new Initialyzer(args);

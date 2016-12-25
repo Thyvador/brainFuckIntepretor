@@ -158,8 +158,8 @@ public class BfImageReader implements Reader {
 	 */
 	@Override
 	public void seek(int pos) {
-		offX = (int) ((pos * 3) % width);
-		offY = (int) ((pos * 9) / width);
+		offX = (pos * 3) % width;
+		offY = (pos * 9) / width;
 	}
 
 	/**

@@ -213,7 +213,7 @@ public class BfReaderTest {
 		bfReader.mark();
 		bfReader.getNext();
 		bfReader.reset();
-		assertSame((int) pointer, (int) bfReader.getExecutionPointer());
+		assertSame((int) pointer, bfReader.getExecutionPointer());
 
 	}
 
