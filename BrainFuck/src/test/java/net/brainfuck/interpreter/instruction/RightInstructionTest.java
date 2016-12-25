@@ -16,32 +16,25 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author Alexandre Hiltcher
+ * @author Alexandre Hiltcher, Francois Melkonian
  */
 public class RightInstructionTest {
 
-	ExecutionReader reader;
 	Memory memory;
 	RightInstruction instruction;
 
 	/**
-	 * Sets the up.
+	 * Setup memory and the instruction to test
 	 *
 	 */
 	@Before
 	public void setUp() throws Exception {
-
-
-		List<Language> langage = Arrays.asList(Language.RIGHT,Language.RIGHT);
-
-		ExecutionReader reader = new ExecutionReader(langage, null);
 		memory = new Memory();
 		instruction = new RightInstruction();
 	}
 
 	/**
 	 * Right.
-	 *
 	 */
 	@Test
 	public void right() throws Exception {
@@ -56,59 +49,11 @@ public class RightInstructionTest {
 	 *             the memory out of bounds exception
 	 */
 	@Test(expected = MemoryOutOfBoundsException.class)
-	public void OutOfBoundRight() throws MemoryOutOfBoundsException {
+	public void OutOfBoundRight() throws Exception {
 		for (int i = 0; i < 30001; i++) {
 			instruction.execute(memory);
 		}
 	}
-
-	/**
-	 * Rewrite long.
-	 *
-	@Test
-	public void rewriteLong() throws Exception {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bf";
-		String data = "RIGHT";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-			writer.write(data, 0, data.length());
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		reader = new BfReader(filename);
-		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new RightInstruction();
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outputStream));
-		instruction.rewrite();
-		assertEquals(">", outputStream.toString());
-	}
-	*/
-
-	/**
-	 * Rewrite col.
-	 *
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	@Test
-	public void rewriteCol() throws Exception, FileNotFoundException {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bmp";
-		String data = "0000ff";
-		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
-		writer.write(data);
-		writer.close();
-		reader = new BfImageReader(filename);
-		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new RightInstruction();
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outputStream));
-		instruction.rewrite();
-		assertEquals(">", outputStream.toString());
-	}
-	 */
 
 	/**
 	 * Translate.

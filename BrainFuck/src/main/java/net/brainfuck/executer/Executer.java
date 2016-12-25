@@ -73,7 +73,7 @@ public class Executer {
 	 * @throws IOException            throw by reader.closeReader() and imageWrite.close()
 	 * @throws FileNotFoundException  throw by reader.closeReader() and imageWrite.close()
 	 */
-	public void end(ExecutionReader reader) throws BracketsParseException, IOException, FileNotFoundException {
+	public void end(ExecutionReader reader) throws BracketsParseException, IOException, FileNotFoundException, MemoryOutOfBoundsException {
 		reader.closeReader();
 
 		int index;

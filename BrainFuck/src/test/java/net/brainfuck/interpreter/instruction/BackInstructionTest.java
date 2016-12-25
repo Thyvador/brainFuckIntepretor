@@ -25,9 +25,6 @@ public class BackInstructionTest {
     private Memory memory;
     private ExecutionReader reader;
     private BackInstruction instruction;
-    private String filename;
-
-// TODO : ici
 
     /**
      * Create a.
@@ -35,9 +32,7 @@ public class BackInstructionTest {
     @Before
     public void setUp() throws Exception {
 
-
         List<Language> langage = Arrays.asList(Language.RIGHT, Language.RIGHT);
-
         reader = new ExecutionReader(langage, null);
         memory = new Memory();
         instruction = new BackInstruction(reader);
@@ -62,7 +57,6 @@ public class BackInstructionTest {
         memory.set(2);
         reader.seek();
         instruction.execute(memory);
-
         assertEquals(3, reader.getExecutionPointer());
     }
 
@@ -89,58 +83,6 @@ public class BackInstructionTest {
     }
 
     /**
-     * Rewrite long.
-     */
-    @Test
-    public void rewriteLong() throws Exception, IOException {
-//		Charset charset = Charset.forName("UTF-8");
-//		filename = "filename.bf";
-//		String data = "JUMP\nBACK";
-//		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-//			writer.write(data, 0, data.length());
-//		} catch (IOException x) {
-//			System.err.format("IOException: %s%n", x);
-//		}
-//		reader = new BfReader(filename);
-//		memory = new Memory();
-//		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
-//		JumpTable jumpTable = new BfCompiler(reader,executer.getContextExecuters()).compile(executer.getContextExecuters()).getSecond();
-//		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
-//		instruction = new BackInstruction();
-//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(outputStream));
-//		reader.getNext();
-//		instruction.rewrite();
-//		assertEquals("]", outputStream.toString());
-        // TODO: 21/12/16 A revoire
-    }
-
-    /**
-     * Write "back" in a bmp file and read its
-     */
-    @Test
-    public void rewriteCol() throws Exception, IOException {
-//		filename = "filename.bmp";
-//		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
-//		writer.write("ff7f00");
-//		writer.write("4b0082");
-//		writer.close();
-//		reader = new BfImageReader(filename);
-//		memory = new Memory();
-//		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bmp"}));
-//		JumpTable jumpTable = new BfCompiler(reader,executer.getContextExecuters()).compile(executer.getContextExecuters()).getSecond();
-//		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
-//		instruction = new BackInstruction();
-//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(outputStream));
-//		reader.getNext();
-//		instruction.rewrite();
-//		assertEquals("]", outputStream.toString());
-        // TODO: 21/12/16 A revoir
-    }
-
-
-    /**
      * Translate.
      *
      * @throws IOException Signals that an I/O exception has occurred.
@@ -152,12 +94,4 @@ public class BackInstructionTest {
         assertEquals("ff0000", instruction.translate());
     }
 
-    /**
-     * Delete test file
-     */
-    @After
-    public void tearDown() throws Exception {
-        new File(filename).delete();
-
-    }
 }

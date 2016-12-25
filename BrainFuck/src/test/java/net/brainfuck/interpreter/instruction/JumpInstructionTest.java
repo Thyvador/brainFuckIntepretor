@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.io.*;
 
 import static org.junit.Assert.assertEquals;
-
+// TODO : mettre à jour les tests sur les JUMP
 /**
  * @author Alexandre Hiltcher,François Melkonian
  */
@@ -64,66 +64,6 @@ public class JumpInstructionTest {
 		assertEquals(3, reader.getExecutionPointer());
 	}
 
-//TODO : ici
-
-	/**
-	 * Rewrite long.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 *
-	 */
-	@Test
-	@Ignore
-	public void rewriteLong() throws Exception, IOException {
-//		Charset charset = Charset.forName("UTF-8");
-//		filename = "filename.bf";
-//		String data = "JUMP";
-//		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-//			writer.write(data, 0, data.length());
-//		} catch (IOException x) {
-//			System.err.format("IOException: %s%n", x);
-//		}
-//		reader = new BfReader(filename);
-//		memory = new Memory();
-//		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
-//		JumpTable jumpTable = new BfCompiler(reader,executer.getContextExecuters()).compile(executer.getContextExecuters()).getSecond();
-//		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
-//		instruction = new JumpInstruction();
-//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(outputStream));
-//		instruction.rewrite();
-//		assertEquals("[", outputStream.toString());
-	}
-
-	/**
-	 * Rewrite col.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 *
-	 */
-	@Test
-	public void rewriteCol() throws Exception {
-//		Charset charset = Charset.forName("UTF-8");
-//		filename = "filename.bmp";
-//		String data = "ff7f00";
-//		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
-//		writer.write(data);
-//		writer.close();
-//		reader = new BfImageReader(filename);
-//		memory = new Memory();
-//		Executer executer = new Executer(new ArgumentAnalyzer(new String[]{"-p", "filename.bf"}));
-//		JumpTable jumpTable = new BfCompiler(reader,executer.getContextExecuters()).compile(executer.getContextExecuters()).getSecond();
-//		argumentInstruction = new ArgumentInstruction(memory, reader, jumpTable);
-//		instruction = new JumpInstruction();
-//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(outputStream));
-//		instruction.rewrite();
-//		assertEquals("[", outputStream.toString());
-	}
-
-	//TODO : ici
 	/**
 	 * Translate.
 	 *
