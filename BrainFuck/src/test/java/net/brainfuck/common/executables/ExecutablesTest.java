@@ -24,7 +24,7 @@ public class ExecutablesTest {
     @Before
     public void setUp() throws Exception {
         list = Arrays.asList(RIGHT, LEFT, INCR, DECR, JUMP, BACK);
-        jumpTable = new JumpTable();
+        jumpTable = new JumpTable(true);
         jumpTable.addInstruction(JUMP,4);
         jumpTable.addInstruction(BACK, 5);
         executable = new Executable(list, jumpTable) {

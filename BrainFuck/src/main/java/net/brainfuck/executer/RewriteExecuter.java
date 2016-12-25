@@ -26,7 +26,7 @@ class RewriteExecuter implements ContextExecuter {
 	 */
 	@Override
 	public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
-			IOException, MemoryOutOfBoundsException {
+IOException, MemoryOutOfBoundsException {
 		i.rewrite();
 	}
 }

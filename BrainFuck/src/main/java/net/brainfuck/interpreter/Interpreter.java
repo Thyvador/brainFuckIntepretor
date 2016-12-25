@@ -26,10 +26,11 @@ public class Interpreter {
 	 * Constructor which initialize attribute.
 	 *
 	 * @param executer the executer
+	 * @param reader the reader
 	 * @throws FileNotFoundException throw by setIo()
 	 * @throws IOException throw bt BfImageWriter
 	 */
-	public Interpreter(Executer executer, ExecutionReader reader) throws FileNotFoundException, IOException {
+	public Interpreter(Executer executer, ExecutionReader reader) throws  IOException {
 		this.executer = executer;
 		this.reader = reader;
 		this.logger = Logger.getInstance();
@@ -52,7 +53,7 @@ public class Interpreter {
 	 * @throws SegmentationFaultException 
 	 */
 	public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
-			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException, SegmentationFaultException {
+			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
 		Language instruction;
 
         while ((instruction = reader.getNext()) != null) {

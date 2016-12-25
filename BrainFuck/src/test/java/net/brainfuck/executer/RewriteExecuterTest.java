@@ -32,7 +32,7 @@ public class RewriteExecuterTest {
 	@Before
 	public void setUp() throws Exception {
 		outContent = "";
-		Language.setInstructions(null,null,null);
+		Language.setInstructions(null,null);
 		System.setOut(new PrintStream(new OutputStream() {
 			@Override
 			public void write(int b) throws IOException {

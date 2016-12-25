@@ -3,7 +3,6 @@ package net.brainfuck.executer;
 import net.brainfuck.common.*;
 import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.io.BfImageWriter;
 
@@ -63,12 +62,15 @@ public class Executer {
 		}
 	}
 
+
+
 	/**
 	 * This function must be called when all instruction have been read and execute
 	 * She throw an error if the program has no enough parenthesis
 	 * She close the Reader.*
 	 * She close the imageWriter if the long argument "--translate" have been passed
 	 *
+	 *  @param reader reader to close
 	 * @throws BracketsParseException throw if the program have more "[" than "]"
 	 * @throws IOException            throw by reader.closeReader() and imageWrite.close()
 	 * @throws FileNotFoundException  throw by reader.closeReader() and imageWrite.close()
@@ -100,9 +102,13 @@ public class Executer {
 		return contextExecuters;
 	}
 
-	public void setArgumentExecuter(Memory memory, BfImageWriter bfImageWriter, JumpTable jumpTable) {
+	/**
+	 * Set the argument executer
+	 * @param memory the memory
+	 * @param bfImageWriter the image writer
+	 */
+	public void setArgumentExecuter(Memory memory, BfImageWriter bfImageWriter) {
 		this.memory = memory;
 		this.bfImageWriter = bfImageWriter;
-		JumpTable jumpTable1 = jumpTable;
 	}
 }

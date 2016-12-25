@@ -97,7 +97,9 @@ public class BfReader implements Reader {
 	private int ignoreComment() throws java.io.IOException {
 		int c;
 		c = reader.read();
-		while (!isNewLine(c) && c != EOF) c = reader.read();
+		while (!isNewLine(c) && c != EOF) {
+			c = reader.read();
+		}
 		return c;
 	}
 

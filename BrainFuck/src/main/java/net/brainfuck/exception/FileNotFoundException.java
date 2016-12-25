@@ -7,7 +7,7 @@ package net.brainfuck.exception;
  *
  * @author Alexandre Hiltcher
  */
-public class FileNotFoundException extends Exception {
+public class FileNotFoundException extends IOException {
 
 	private static final long serialVersionUID = -4105585133694610831L;
 

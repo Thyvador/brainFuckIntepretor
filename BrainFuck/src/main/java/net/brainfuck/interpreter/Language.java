@@ -50,8 +50,7 @@ public enum Language {
     }
 
     public static void setInstructions(InputStreamReader inputStreamReader,
-                                       OutputStreamWriter outputStreamWriter,
-                                       JumpTable jumpTable) {
+                                       OutputStreamWriter outputStreamWriter) {
         // Set interpretors
         INCR.setInterpreter(new IncrementInstruction());
         DECR.setInterpreter(new DecrementInstruction());
