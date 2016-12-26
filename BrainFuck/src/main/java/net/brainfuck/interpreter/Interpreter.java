@@ -1,6 +1,7 @@
 
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.executables.Executable;
 import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Logger;
 import net.brainfuck.exception.*;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
 	private Executer executer;
-	private ExecutionReader reader;
+	private Executable reader;
 	private Logger logger;
 
 	/**
@@ -30,7 +31,7 @@ public class Interpreter {
 	 * @throws FileNotFoundException throw by setIo()
 	 * @throws IOException throw bt BfImageWriter
 	 */
-	public Interpreter(Executer executer, ExecutionReader reader) throws  IOException {
+	public Interpreter(Executer executer, Executable reader) throws  IOException {
 		this.executer = executer;
 		this.reader = reader;
 		this.logger = Logger.getInstance();

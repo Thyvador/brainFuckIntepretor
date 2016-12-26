@@ -1,5 +1,6 @@
 package net.brainfuck.executer;
 
+import net.brainfuck.common.executables.Executable;
 import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
@@ -25,7 +26,7 @@ public class TraceExecuter implements ContextExecuter {
 	 * @throws SegmentationFaultException 
 	 */
 	@Override
-	public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
+	public void execute(InstructionInterface i, Memory memory, Executable reader) throws MemoryOverFlowException,
 			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
 		i.trace(memory, reader);
 	}

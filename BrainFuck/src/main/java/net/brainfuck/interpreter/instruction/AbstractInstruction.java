@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter.instruction;
 
+import net.brainfuck.common.executables.Executable;
 import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
@@ -51,7 +52,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 * @throws FileNotFoundIn             throw by writer
 	 * @throws SegmentationFaultException 
 	 */
-	public final void trace(Memory memory, ExecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
+	public final void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
 		execute(memory);
 		logger.write(reader.getExecutionPointer(), memory);
 	}

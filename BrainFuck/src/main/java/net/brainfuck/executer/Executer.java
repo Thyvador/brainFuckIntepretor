@@ -1,6 +1,7 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.Executable;
 import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
@@ -54,7 +55,7 @@ public class Executer {
 	 * @throws IOException                Throw by reader
 	 * @throws SegmentationFaultException 
 	 */
-	public void execute(AbstractInstruction instruction, ExecutionReader reader) throws MemoryOutOfBoundsException, BracketsParseException,
+	public void execute(AbstractInstruction instruction, Executable reader) throws MemoryOutOfBoundsException, BracketsParseException,
 			MemoryOverFlowException, FileNotFoundIn, IOException, SegmentationFaultException {
 		for (ContextExecuter contextExecuter : contextExecuters) {
 			contextExecuter.execute(instruction, memory, reader);
@@ -75,7 +76,7 @@ public class Executer {
 	 * @throws IOException            throw by reader.closeReader() and imageWrite.close()
 	 * @throws FileNotFoundException  throw by reader.closeReader() and imageWrite.close()
 	 */
-	public void end(ExecutionReader reader) throws BracketsParseException, IOException, FileNotFoundException, MemoryOutOfBoundsException {
+	public void end(Executable reader) throws BracketsParseException, IOException, FileNotFoundException, MemoryOutOfBoundsException {
 		reader.closeReader();
 
 		int index;

@@ -5,6 +5,7 @@
  */
 package net.brainfuck.interpreter.instruction;
 
+import net.brainfuck.common.executables.Executable;
 import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.BracketsParseException;
@@ -58,6 +59,6 @@ public interface InstructionInterface {
 	 * @throws FileNotFoundIn the file not found in
      * @throws SegmentationFaultException 
 	 */
-    void trace(Memory memory, ExecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException;
+    void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException;
 }
 

@@ -1,5 +1,6 @@
 package net.brainfuck.executer;
 
+import net.brainfuck.common.executables.Executable;
 import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
@@ -24,6 +25,6 @@ public interface ContextExecuter {
 	 * @throws BracketsParseException     throw by JumpInstruction or by BackInstruction
 	 * @throws SegmentationFaultException 
 	 */
-	void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
+	void execute(InstructionInterface i, Memory memory, Executable reader) throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
 }
 
