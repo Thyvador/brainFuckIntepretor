@@ -85,26 +85,38 @@ public class Macro {
 
 	public List<Language> write(List<Integer> values) throws SyntaxErrorException {
 		List<Language> macroExecution = new ArrayList<>();
-		int nbExecute, nbExecuteInstructions;
+		int  nbExecuteInstructions;
 
-		if ((values == null && nbArgument != 0) || values.size() != nbArgument) {
-			String error = (values == null || values.size() > nbArgument) ? "too much argument" : "not enought argument";
-			throw new SyntaxErrorException(error);
-		}
+		this.checkArgument(values);
 
 		for (Pair instructions : listesInstructions) {
 			nbExecuteInstructions = instructions.getSecond() == null ? 1 : this.getArgumentValue(values, (String) instructions.getSecond());
 			for (int i = 0; i < nbExecuteInstructions; i++) {
-				for (Pair pair : (List<Pair>) (instructions.getFirst())) {
-					nbExecute = pair.getSecond() == null ? 1 : this.getArgumentValue(values, (String) pair.getSecond());
-					for (int j = 0; j < nbExecute; j++) {
-						macroExecution.addAll((List<Language>) pair.getFirst());
-					}
-				}
+				macroExecution.addAll(writePairs((List<Pair>)instructions.getFirst(), values));
 			}
 
 		}
 		return macroExecution;
+	}
+
+	private void checkArgument(List<Integer> values) throws SyntaxErrorException {
+		if ((values == null && nbArgument != 0) || values.size() != nbArgument) {
+			String error = (values == null || values.size() > nbArgument) ? "too much argument" : "not enought argument";
+			throw new SyntaxErrorException(error);
+		}
+	}
+
+	private List<Language> writePairs(List<Pair> pairs, List<Integer> values) {
+		int nbExecute;
+		List<Language> instructions = new ArrayList<>();
+
+		for (Pair pair : pairs) {
+			nbExecute = pair.getSecond() == null ? 1 : this.getArgumentValue(values, (String) pair.getSecond());
+			for (int j = 0; j < nbExecute; j++) {
+				instructions.addAll((List<Language>) pair.getFirst());
+			}
+		}
+		return instructions;
 	}
 
 	private int getArgumentValue(List<Integer> values, String argument) {

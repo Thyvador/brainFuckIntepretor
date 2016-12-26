@@ -5,6 +5,8 @@ import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
 
 import java.io.RandomAccessFile;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
@@ -58,20 +60,21 @@ public class BfReader implements Reader {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private void readUntilEndOfLine(int val) throws java.io.IOException {
-		boolean comment = false;
 		int c = reader.read();
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(Character.toString((char) val));
 
-		while (!isNewLine(c) && c != EOF && !comment) {
-			if (isComment(c))
-				comment = true;
+		while (!isEndOfLine(c)) {
 			stringBuilder.append(Character.toString((char) c));
 			c = reader.read();
 		}
 		c = ignoreComment();
 		next = stringBuilder.toString().trim();
 		oldvar = c;
+	}
+
+	private boolean isEndOfLine(int c) {
+		return isNewLine(c) || isEndOfFile(c) || isComment(c);
 	}
 
 	private boolean isIgnoredCharacter(int c) {
@@ -185,6 +188,54 @@ public class BfReader implements Reader {
 		return next;
 	}
 
+
+	public List<String> getNextProcedure() throws IOException {
+		try {
+			List<String> instructions = new ArrayList<>();
+			//StringBuilder stringBuilder = new StringBuilder();
+			int pos = (int)reader.getFilePointer();
+			int nextVal = reader.read();
+			nextVal = ignore(nextVal);
+			if (isProcedure(nextVal)) {
+				readUntilEndOfLine(nextVal);
+				instructions.add(next);
+				next = this.getNext();
+				while (!isEnd(next)) {
+					instructions.add(next);
+					next = this.getNext();
+				}
+				return instructions;
+			}
+			reader.seek(pos);
+			return null;
+		} catch (java.io.IOException e) {
+			throw new IOException();
+		}
+	}
+
+	private boolean isEnd(String nextVal) throws java.io.IOException {
+		if (Character.toString((char)PREPROCESSING).equals(nextVal)) {
+			int pos = (int) reader.getFilePointer();
+			this.readUntilEndOfLine(nextVal.charAt(0));
+			if (next.matches("^!end"))
+				return true;
+			reader.seek(pos);
+		}
+		return false;
+
+	}
+
+	private boolean isProcedure(int nextVal) throws java.io.IOException {
+		if (nextVal == PREPROCESSING) {
+			int pos = (int) reader.getFilePointer();
+			this.readUntilEndOfLine(nextVal);
+			reader.seek(pos);
+			return next.matches("\\A!procedure.*");
+		}
+		return false;
+	}
+
+
 	/**
 	 * Get the next Macro. Warning if it's not a macro return the next instruction
 	 *
@@ -193,21 +244,29 @@ public class BfReader implements Reader {
 	 */
 	public String getNextMacro() throws IOException {
 		try {
+			int pos = (int)reader.getFilePointer();
 			int nextVal = reader.read();
 			nextVal = ignore(nextVal);
 			if (isMacro(nextVal)) {
 				readUntilEndOfLine(nextVal);
 				return next;
 			}
-
-			return !isEndOfFile(nextVal) ? this.getInstruction(nextVal) : null;
+			reader.seek(pos);
+			return null;
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
 	}
 
-	private boolean isMacro(int nextVal) {
-		return nextVal == PREPROCESSING;
+	private boolean isMacro(int nextVal) throws java.io.IOException, IOException {
+		if (nextVal == PREPROCESSING) {
+			int pos = (int) reader.getFilePointer();
+			this.readUntilEndOfLine(nextVal);
+			this.seek(pos);
+			return !next.matches("!procedure.*");
+		}
+		return false;
+		//return nextVal == PREPROCESSING;
 	}
 
 	/* (non-Javadoc)
@@ -231,7 +290,7 @@ public class BfReader implements Reader {
 	 * @return true if the char is an end of line char, else false.
 	 */
 	private boolean isNewLine(int nextVal) {
-		return nextVal == CR || nextVal == LF;
+		return nextVal == CR || nextVal == LF || nextVal == EOF;
 	}
 
 	/**
@@ -252,7 +311,7 @@ public class BfReader implements Reader {
 	 * @return true if the line may contain argumentAnalyzer "long" syntax.
 	 */
 	private boolean isLong(int nextVal) {
-		return (nextVal >= 'A' && nextVal <= 'Z') ||(nextVal >= 'a' && nextVal <= 'z');
+		return Character.isLetter(nextVal);
 	}
 
 

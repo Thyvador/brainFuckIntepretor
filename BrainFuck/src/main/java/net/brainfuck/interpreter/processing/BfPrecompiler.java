@@ -6,8 +6,11 @@ import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
+import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.processing.procedure.ProcedureParser;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,7 +20,6 @@ public class BfPrecompiler {
 
     private Logger logger;
     private MacroParser macroParser = new MacroParser();
-    private String lastInstruction;
     private Reader reader;
 
     public BfPrecompiler(Reader reader) {
@@ -35,22 +37,29 @@ public class BfPrecompiler {
      * @throws SyntaxErrorException the syntax error exception
      */
     public Map<String, Macro> analyzeMacro() throws java.io.IOException, IOException, BracketsParseException, SyntaxErrorException {
-        boolean endofCompile = false;
         String instruction;
 
-        while (!endofCompile && (instruction = ((BfReader) reader).getNextMacro()) != null) {
+        while ((instruction = ((BfReader) reader).getNextMacro()) != null) {
             if (Language.languageMap.get(instruction) == null && instruction.charAt(0) == BfReader.PREPROCESSING) {
                 macroParser.saveMacro(instruction);
-            } else {
-                this.lastInstruction = instruction;
-                endofCompile = true;
+                logger.incrInstruction();
             }
-            logger.incrInstruction();
         }
         return macroParser.getMacros();
     }
 
-    public String getLastInstruction() {
-        return lastInstruction;
+    public void analyzeProcedure(List<ContextExecuter> contextExecuters, Map<String, Macro> macros) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+        List<String> instructions;
+        String definition;
+        ProcedureParser procedureParser = new ProcedureParser(contextExecuters, macros);
+
+        while ((instructions = ((BfReader) reader).getNextProcedure()) != null)  {
+            definition = instructions.remove(0);
+            procedureParser.parse(instructions, definition);
+            //for (String instruction : instructions) {
+            //    System.out.println(instruction);
+            //}
+        }
     }
+
 }

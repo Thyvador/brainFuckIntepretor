@@ -39,13 +39,16 @@ public class BfCompiler {
 	 * @throws FileNotFoundException when file is not found
 	 * @throws IOException Throw by bufferedWriter
 	 */
-	public BfCompiler(Reader r, List<ContextExecuter> contextExecuters, Map<String, Macro> macros,
-					  String lastInstruction) throws FileNotFoundException, IOException {
-		this.logger = Logger.getInstance();
+	public BfCompiler(Reader r, List<ContextExecuter> contextExecuters, Map<String, Macro> macros)
+			throws FileNotFoundException, IOException {
+		this(contextExecuters, macros);
 		this.reader = r;
-		macroInterpreter = new MacroInterpreter(macros);
-		this.lastInstruction = lastInstruction;
-		jumpTable = new JumpTable(!((contextExecuters.contains(Context.REWRITE.getContextExecuter())
+	}
+
+	public BfCompiler(List<ContextExecuter> contextExecuters, Map<String, Macro> macros) {
+		this.logger = Logger.getInstance();
+		this.macroInterpreter = new MacroInterpreter(macros);
+		this.jumpTable = new JumpTable(!((contextExecuters.contains(Context.REWRITE.getContextExecuter())
 				|| contextExecuters.contains(Context.TRANSLATE.getContextExecuter()))
 				&& !contextExecuters.contains(Context.CHECK.getContextExecuter())));
 	}
@@ -76,13 +79,25 @@ public class BfCompiler {
 	 * @throws BracketsParseException the brackets parse exception
 	 */
 	public Pair<List<Language>, JumpTable> compile(List<ContextExecuter> contextExecuters)
+		throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
+		writeAll();
+		return endCompile(contextExecuters);
+	}
+
+	/**
+	 * Compile.
+	 *
+	 * @param contextExecuters the context executers
+	 * @return the pair
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SyntaxErrorException the syntax error exception
+	 * @throws BracketsParseException the brackets parse exception
+	 */
+	public Pair<List<Language>, JumpTable> compile(List<ContextExecuter> contextExecuters, List<String> instructions)
 			throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
-		if (lastInstruction != null) {
-			writeInstructionAndMacro(lastInstruction);
-			writeAll();
-			return endCompile(contextExecuters);
-		}
-		return null;
+		writeAll(instructions);
+		return endCompile(contextExecuters);
 	}
 
 	/**
@@ -120,6 +135,14 @@ public class BfCompiler {
 		String instruction;
 
 		while ((instruction = reader.getNext()) != null) {
+			writeInstructionAndMacro(instruction);
+			logger.incrInstruction();
+		}
+	}
+
+	public void writeAll(List<String> instructions) throws SyntaxErrorException, IOException, BracketsParseException {
+
+		for (String instruction : instructions) {
 			writeInstructionAndMacro(instruction);
 			logger.incrInstruction();
 		}

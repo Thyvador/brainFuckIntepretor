@@ -109,9 +109,10 @@ public class Initialyzer {
 	private BfCompiler initCompiler() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
 		BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
 		Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
-		String lastInstruction  = bfPrecompiler.getLastInstruction();
+		bfPrecompiler.analyzeProcedure(executer.getContextExecuters(), macros);
+		//String lastInstruction  = bfPrecompiler.getLastInstruction();
 		//if (Language.languageMap.get(lastInstruction) == null) System.exit(0);
-		return new BfCompiler(reader, executer.getContextExecuters(), macros, lastInstruction);
+		return new BfCompiler(reader, executer.getContextExecuters(), macros);
 	}
 
 	private void initReader() throws FileNotFoundException {

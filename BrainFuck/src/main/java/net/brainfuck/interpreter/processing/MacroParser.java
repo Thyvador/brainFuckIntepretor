@@ -159,14 +159,11 @@ class MacroParser {
             int nb = Integer.parseUnsignedInt(definitions[i + 1]);
             macro.addMacroInstruction(macros.get(name), Arrays.asList(arguments), nb);
             i += 1;
-            //macro.addInstructions(getMacroInstructions(definitions[i++], nb));
         } else if (i + 1 < length && macro.containsArgument(definitions[i + 1])) {
             macro.addMacroInstruction(macros.get(name), Arrays.asList(arguments), definitions[i + 1]);
             i =+ 1;
-            //macro.addInstructionsArgument(getMacroInstructions(definitions[i++], 1), definitions[i + 1]);
         } else {
             macro.addMacroInstruction(macros.get(name), Arrays.asList(arguments), 1);
-           // macro.addInstructions(getMacroInstructions(definitions[i], 1));
         }
 
 
