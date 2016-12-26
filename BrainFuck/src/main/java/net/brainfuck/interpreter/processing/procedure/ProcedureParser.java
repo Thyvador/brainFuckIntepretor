@@ -1,8 +1,6 @@
 package net.brainfuck.interpreter.processing.procedure;
 
-import net.brainfuck.common.BfReader;
 import net.brainfuck.common.Pair;
-import net.brainfuck.common.Reader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
@@ -12,7 +10,6 @@ import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.processing.BfCompiler;
 import net.brainfuck.interpreter.processing.Macro;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +26,8 @@ public class ProcedureParser {
         this.macros = macros;
     }
 
-    public String parseName(String definition) {
+    public String parseName(String definition) throws SyntaxErrorException {
+        this.checkSyntax(definition);
         String name = definition.split("\\s")[1];
         name = name.substring(0, name.indexOf('('));
 
@@ -47,14 +45,11 @@ public class ProcedureParser {
         }
     }
 
-    public List<Language> parse(List<String> instructions, String definition) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
-        checkSyntax(definition);
-        String name = this.parseName(definition);
+    public Pair<List<Language>, JumpTable> parse(List<String> instructions, String definition) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
         Pair<List<Language>, JumpTable> compiledProcedure;
         BfCompiler bfCompiler = new BfCompiler(contextExecuters, macros);
 
-        compiledProcedure = bfCompiler.compile(contextExecuters, instructions);
-        return null;
+        return compiledProcedure = bfCompiler.compile(contextExecuters, instructions);
     }
 
 }
