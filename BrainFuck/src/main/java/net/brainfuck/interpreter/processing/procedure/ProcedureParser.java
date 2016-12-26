@@ -40,7 +40,7 @@ public class ProcedureParser {
 
 
     private void checkSyntax(String definition) throws SyntaxErrorException {
-        if ( !definition.matches("^!procedure\\s+[\\w\\d]+\\(.*\\)\\s*")) {
+        if ( !definition.matches("^!procedure\\s+[\\w\\d]+\\(.*\\)\\s*&")) {
             throw new SyntaxErrorException("Bad definition of procedure");
         }
     }

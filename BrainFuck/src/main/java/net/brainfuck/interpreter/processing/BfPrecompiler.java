@@ -64,7 +64,6 @@ public class BfPrecompiler {
             // ICI ICI ICI
             procedureName = procedureParser.parseName(definition);
             procedure = procedureParser.parse(instructions);
-            System.out.println("toto");
         }
     }
 
