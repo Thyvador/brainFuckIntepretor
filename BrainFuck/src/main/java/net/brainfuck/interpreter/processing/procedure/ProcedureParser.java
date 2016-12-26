@@ -45,7 +45,7 @@ public class ProcedureParser {
         }
     }
 
-    public Pair<List<Language>, JumpTable> parse(List<String> instructions, String definition) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+    public Pair<List<Language>, JumpTable> parse(List<String> instructions) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
         Pair<List<Language>, JumpTable> compiledProcedure;
         BfCompiler bfCompiler = new BfCompiler(contextExecuters, macros);
 
