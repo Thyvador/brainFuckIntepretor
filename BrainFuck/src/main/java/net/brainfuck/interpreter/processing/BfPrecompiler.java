@@ -1,9 +1,12 @@
 package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.Logger;
+import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
+import net.brainfuck.common.executables.Procedure;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
@@ -50,7 +53,7 @@ public class BfPrecompiler {
         return macroParser.getMacros();
     }
 
-    public void analyzeProcedure(List<ContextExecuter> contextExecuters, Map<String, Macro> macros) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+    public void analyzeProcedure(List<ContextExecuter> contextExecuters, Map<String, Macro> macros, Memory memory) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException, MemoryOutOfBoundsException {
         List<String> instructions;
         String definition;
         Pair<List<Language>, JumpTable> procedure;
@@ -60,10 +63,11 @@ public class BfPrecompiler {
         while ((instructions = ((BfReader) reader).getNextProcedure()) != null)  {
             definition = instructions.remove(0);
 
-            // TODO ALEX
+            // TODO ALEX/Fr
             // ICI ICI ICI
             procedureName = procedureParser.parseName(definition);
             procedure = procedureParser.parse(instructions, definition);
+            new Procedure(procedureName,procedure.getFirst(),procedure.getSecond(),memory);
             System.out.println("toto");
         }
     }

@@ -3,7 +3,6 @@ package net.brainfuck.interpreter;
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.executables.Executable;
-import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.executables.Procedure;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
@@ -22,7 +21,7 @@ public class InterpreterTest {
     public void test() throws Exception{
         Memory m = new Memory();
         Language.setInstructions(null,null);
-        Executable executable = new Procedure( Arrays.asList(RIGHT, INCR, INCR, LEFT, RIGHT, RIGHT),new JumpTable(false),m);
+        Executable executable = new Procedure("yoloproc", Arrays.asList(RIGHT, INCR, INCR, LEFT, RIGHT, RIGHT),new JumpTable(false),m);
         ArgumentAnalyzer arg = new ArgumentAnalyzer(new String[]{"-p","yolo"});
         Context.setExceuter(null);
         Executer e = new Executer(arg);
