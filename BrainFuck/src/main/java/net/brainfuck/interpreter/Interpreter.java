@@ -1,11 +1,11 @@
 
 package net.brainfuck.interpreter;
 
-import net.brainfuck.common.ExecutionReader;
+import net.brainfuck.common.executables.Executable;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Logger;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Executer;
-import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,17 +20,18 @@ import java.util.Map;
 public class Interpreter {
 	private Map<String, Language> interpretorExecuter = new HashMap<>();
 	private Executer executer;
-	private ExecutionReader reader;
+	private Executable reader;
 	private Logger logger;
 
 	/**
 	 * Constructor which initialize attribute.
 	 *
 	 * @param executer the executer
+	 * @param reader the reader
 	 * @throws FileNotFoundException throw by setIo()
 	 * @throws IOException throw bt BfImageWriter
 	 */
-	public Interpreter(Executer executer, ExecutionReader reader) throws FileNotFoundException, IOException {
+	public Interpreter(Executer executer, Executable reader) throws  IOException {
 		this.executer = executer;
 		this.reader = reader;
 		this.logger = Logger.getInstance();
@@ -50,9 +51,10 @@ public class Interpreter {
 	 * @throws FileNotFoundIn the file not found in
 	 * @throws BracketsParseException throw by executer
 	 * @throws FileNotFoundException the file not found exception
+	 * @throws SegmentationFaultException 
 	 */
 	public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
-			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, FileNotFoundException {
+			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
 		Language instruction;
 
         while ((instruction = reader.getNext()) != null) {

@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
@@ -15,23 +16,19 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author Alexandre Hiltcher
+ * @author Alexandre Hiltcher, Francois Melkonian
  */
 public class OutInstructionTest {
 	private Memory memory;
 	private OutInstruction instruction;
 	static List<Integer>out = new ArrayList();
-	private ExecutionReader reader;
 
-	// TODO : test des Out
 	/**
 	 * Sets the up.
 	 *
 	 */
 	@Before
 	public void setUp() throws Exception {
-
-		List<Language> langage = Arrays.asList(Language.LEFT,Language.LEFT);
 		instruction = new OutInstruction(new OutputStreamWriter(new OutputStream() {
 			@Override
 			public void write(int b) throws IOException {
@@ -39,7 +36,6 @@ public class OutInstructionTest {
 			}
 		}));
 		memory = new Memory();
-		reader = new ExecutionReader(langage);
 	}
 
 	/**
@@ -50,7 +46,7 @@ public class OutInstructionTest {
 	 @Test
 	public void out() throws Exception {
 		memory.set('a');
-		 instruction.execute(memory);
+		instruction.execute(memory);
 		assertEquals('a',(int)out.get(0));
 	}
 

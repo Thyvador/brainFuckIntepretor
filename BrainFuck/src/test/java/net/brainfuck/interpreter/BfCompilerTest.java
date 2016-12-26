@@ -1,11 +1,12 @@
 package net.brainfuck.interpreter;
 
-import net.brainfuck.common.BfReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IncorrectArgumentException;
 import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.interpreter.processing.BfCompiler;
+import net.brainfuck.io.BfReader;
+
 import org.junit.Before;
 
 import java.io.BufferedWriter;

@@ -1,4 +1,4 @@
-package net.brainfuck.common;
+package net.brainfuck.io;
 
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
@@ -100,7 +100,9 @@ public class BfReader implements Reader {
 	private int ignoreComment() throws java.io.IOException {
 		int c;
 		c = reader.read();
-		while (!isNewLine(c) && c != EOF) c = reader.read();
+		while (!isNewLine(c) && c != EOF) {
+			c = reader.read();
+		}
 		return c;
 	}
 

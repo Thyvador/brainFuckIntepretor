@@ -6,12 +6,12 @@ package net.brainfuck.common;
  *
  * @author davidLANG
  */
-public class ArgumentConstante {
-    final static String PATH_SYNTAX = "-p";
-    final static String IN_SYNTAX  = "-i";
-    final static String OUT_SYNTAX  = "-o";
+class ArgumentConstante {
+	static final String PATH_SYNTAX = "-p";
+	static final String IN_SYNTAX = "-i";
+	static final String OUT_SYNTAX = "-o";
 
-    public final static int PATH = 0;
-    public final static int IN_PATH = 1;
-    public final static int OUT_PATH = 2;
+	static final int PATH = 0;
+	static final int IN_PATH = 1;
+	static final int OUT_PATH = 2;
 }

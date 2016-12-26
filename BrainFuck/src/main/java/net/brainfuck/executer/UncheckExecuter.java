@@ -1,6 +1,8 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.Executable;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
 
@@ -21,10 +23,11 @@ class UncheckExecuter implements ContextExecuter {
 	 * @throws MemoryOutOfBoundsException throw by memory
 	 * @throws FileNotFoundIn throw by reader
 	 * @throws BracketsParseException throw by JumpInstruction or by BackInstruction
+     * @throws SegmentationFaultException 
 	 */
     @Override
-    public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
-			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException {
+    public void execute(InstructionInterface i, Memory memory, Executable reader) throws MemoryOverFlowException,
+			IOException, MemoryOutOfBoundsException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
     	i.execute(memory);
     }
 }

@@ -1,9 +1,9 @@
 package net.brainfuck.executer;
 
-import net.brainfuck.common.BfImageWriter;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.brainfuck.io.BfImageWriter;
 
 /**
  * The Enum Context.
@@ -19,7 +19,7 @@ public enum Context {
     REWRITE("--rewrite"),
     TRACE("--trace");
 
-    static Map<String, ContextExecuter> contextMap = new HashMap<>();
+    public static Map<String, ContextExecuter> contextMap = new HashMap<>();
 
 
 

@@ -1,4 +1,4 @@
-package net.brainfuck.common;
+package net.brainfuck.io;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 

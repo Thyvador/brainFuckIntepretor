@@ -24,11 +24,6 @@ public class JumpTable {
 		this.throwError = throwError;
 	}
 
-	/**
-	 * Instantiates a new jump table.
-	 *
-	 */
-	public JumpTable(){}
 
 	/**
 	 * Adds the instruction.

@@ -114,13 +114,4 @@ public class ArgumentAnalyzer {
 		this.arguments[position] = args[i + 1];
 	}
 
-	/**
-	 * Gets arguments.
-	 *
-	 * @param index the index of the argument
-	 * @return Value of arguments.
-	 */
-	public String getArguments(int index) {
-		return arguments[index];
-	}
 }

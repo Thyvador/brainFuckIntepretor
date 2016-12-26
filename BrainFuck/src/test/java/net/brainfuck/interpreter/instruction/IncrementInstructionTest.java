@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.Language;
@@ -15,13 +16,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author Alexandre Hiltcher
+ * @author Alexandre Hiltcher,François Melkonian
  */
 public class IncrementInstructionTest {
 	private Memory memory;
-	private ExecutionReader reader;
 	private IncrementInstruction instruction;
-	private static String filename;
 
 	/**
 	 * Sets the up.
@@ -31,11 +30,6 @@ public class IncrementInstructionTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-
-
-		List<Language> langage = Arrays.asList(Language.RIGHT,Language.RIGHT);
-
-		reader = new ExecutionReader(langage);
 		memory = new Memory();
 		instruction = new IncrementInstruction();
 	}
@@ -62,62 +56,10 @@ public class IncrementInstructionTest {
 	 */
 	@Test(expected = MemoryOverFlowException.class)
 	public void OverFlow() throws MemoryOverFlowException, MemoryOutOfBoundsException {
-		for (int i = 0; i < 5000; i++) {
-			instruction.execute(memory);
-		}
+		memory.set(255);
+		instruction.execute(memory);
 	}
 
-	/**
-	 * Rewrite long.
-	 *
-	 * @throws Exception
-	 *             the exception
-	@Test
-	public void rewriteLong() throws Exception {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bf";
-		String data = "INCR";
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-			writer.write(data, 0, data.length());
-		} catch (IOException x) {
-			System.err.format("IOException: %s%n", x);
-		}
-		reader = new BfReader(filename);
-		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new IncrementInstruction();
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outputStream));
-		instruction.rewrite();
-		assertEquals("+", outputStream.toString());
-	}
-	 */
-
-	/**
-	 * Rewrite col.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	@Test
-	public void rewriteCol() throws Exception, FileNotFoundException {
-		Charset charset = Charset.forName("UTF-8");
-		filename = "filename.bmp";
-		String data = "ffffff";
-		BfImageWriter writer = new BfImageWriter(new FileOutputStream(filename));
-		writer.write(data);
-		writer.close();
-		reader = new BfImageReader(filename);
-		memory = new Memory();
-		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-		instruction = new IncrementInstruction();
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outputStream));
-		instruction.rewrite();
-		assertEquals("+", outputStream.toString());
-	}
-	 */
 
 	/**
 	 * Translate.
@@ -128,7 +70,7 @@ public class IncrementInstructionTest {
 	@Test
 	public void translate() throws Exception {
 		instruction = new IncrementInstruction();
-		assertEquals("ffffff",instruction.translate() );
+		assertEquals("ffffff",instruction.translate());
 	}
 
 }

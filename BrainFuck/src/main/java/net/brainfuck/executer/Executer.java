@@ -1,9 +1,11 @@
 package net.brainfuck.executer;
 
 import net.brainfuck.common.*;
+import net.brainfuck.common.executables.Executable;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
+import net.brainfuck.io.BfImageWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,14 +53,17 @@ public class Executer {
 	 * @throws MemoryOverFlowException    Throw by memory
 	 * @throws FileNotFoundIn             Throw by reader
 	 * @throws IOException                Throw by reader
+	 * @throws SegmentationFaultException 
 	 */
-	public void execute(AbstractInstruction instruction, ExecutionReader reader) throws MemoryOutOfBoundsException, BracketsParseException,
-			MemoryOverFlowException, FileNotFoundIn, IOException {
+	public void execute(AbstractInstruction instruction, Executable reader) throws MemoryOutOfBoundsException, BracketsParseException,
+			MemoryOverFlowException, FileNotFoundIn, IOException, SegmentationFaultException {
 		for (ContextExecuter contextExecuter : contextExecuters) {
 			contextExecuter.execute(instruction, memory, reader);
 
 		}
 	}
+
+
 
 	/**
 	 * This function must be called when all instruction have been read and execute
@@ -66,11 +71,12 @@ public class Executer {
 	 * She close the Reader.*
 	 * She close the imageWriter if the long argument "--translate" have been passed
 	 *
+	 *  @param reader reader to close
 	 * @throws BracketsParseException throw if the program have more "[" than "]"
 	 * @throws IOException            throw by reader.closeReader() and imageWrite.close()
 	 * @throws FileNotFoundException  throw by reader.closeReader() and imageWrite.close()
 	 */
-	public void end(ExecutionReader reader) throws BracketsParseException, IOException, FileNotFoundException {
+	public void end(Executable reader) throws BracketsParseException, IOException, FileNotFoundException, MemoryOutOfBoundsException {
 		reader.closeReader();
 
 		int index;
@@ -97,9 +103,13 @@ public class Executer {
 		return contextExecuters;
 	}
 
-	public void setArgumentExecuter(Memory memory, BfImageWriter bfImageWriter, JumpTable jumpTable) {
+	/**
+	 * Set the argument executer
+	 * @param memory the memory
+	 * @param bfImageWriter the image writer
+	 */
+	public void setArgumentExecuter(Memory memory, BfImageWriter bfImageWriter) {
 		this.memory = memory;
 		this.bfImageWriter = bfImageWriter;
-		JumpTable jumpTable1 = jumpTable;
 	}
 }

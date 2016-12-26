@@ -1,7 +1,7 @@
 package net.brainfuck.interpreter;
 
-import net.brainfuck.common.ExecutionReader;
-import net.brainfuck.interpreter.instruction.*;
+import net.brainfuck.common.executables.ExecutionReader;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.instruction.intoutinsruction.InInstruction;
 import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
@@ -23,103 +23,102 @@ import java.util.Map;
  * @author davidLANG
  */
 public enum Language {
-	// Declaration de l'enum
-	INCR(null, "+", "INCR", "ffffff"),
-	DECR(null, "-", "DECR", "4b0082"),
-	RIGHT(null, ">", "RIGHT", "0000ff"),
-	LEFT(null, "<", "LEFT", "9400d3"),
-	IN(null, ",", "IN", "ffff00"),
-	OUT(null, ".", "OUT", "00ff00"),
-	JUMP(null, "[", "JUMP", "ff7f00"),
-	BACK(null, "]", "BACK", "ff0000");
+    // Declaration de l'enum
+    INCR(null, "+", "INCR", "ffffff"),
+    DECR(null, "-", "DECR", "4b0082"),
+    RIGHT(null, ">", "RIGHT", "0000ff"),
+    LEFT(null, "<", "LEFT", "9400d3"),
+    IN(null, ",", "IN", "ffff00"),
+    OUT(null, ".", "OUT", "00ff00"),
+    JUMP(null, "[", "JUMP", "ff7f00"),
+    BACK(null, "]", "BACK", "ff0000");
 
-	public static Map<String, Language> languageMap = new HashMap<>();
-	
-	private AbstractInstruction interpreter;
-	private String[] aliases;
+    public static Map<String, Language> languageMap = new HashMap<>();
 
-	/**
-	 * Instantiates a new language.
-	 *
-	 * @param interpreter InstructionInterface corresponding to syntax
-	 * @param aliases au moins 2 string : {String shortSyntax, String longSyntax}
-	 */
-	Language(AbstractInstruction interpreter, String... aliases) {
-		this.interpreter = interpreter;
-		this.aliases = aliases;
-	}
+    private AbstractInstruction interpreter;
+    private String[] aliases;
 
-	public static void setInstructions(InputStreamReader inputStreamReader,
-									   OutputStreamWriter outputStreamWriter,
-									   JumpTable jumpTable){
-		// Set interpretors
-		INCR.setInterpreter(new IncrementInstruction());
-		DECR.setInterpreter(new DecrementInstruction());
-		RIGHT.setInterpreter(new RightInstruction());
-		LEFT.setInterpreter(new LeftInstruction());
-		IN.setInterpreter(new InInstruction(inputStreamReader));
-		OUT.setInterpreter(new OutInstruction(outputStreamWriter));
-		JUMP.setInterpreter(new JumpInstruction(jumpTable, null));
-		BACK.setInterpreter(new BackInstruction(jumpTable, null));
-		// Init language map
-		Language[] languages = Language.values();
-		for (Language language : languages) {
-			// AbstractInstruction interpreter = language.getInterpreter();
-			String[] aliases = language.getAliases();
-			for (String alias : aliases) {
-				languageMap.put(alias, language);
-			}
-		}
-	}
+    /**
+     * Instantiates a new language.
+     *
+     * @param interpreter InstructionInterface corresponding to syntax
+     * @param aliases     au moins 2 string : {String shortSyntax, String longSyntax}
+     */
+    Language(AbstractInstruction interpreter, String... aliases) {
+        this.interpreter = interpreter;
+        this.aliases = aliases;
+    }
 
-	public static void setJumpTabel(JumpTable jumpTabel, ExecutionReader executionReader) {
-		Language.JUMP.setInterpreter(new JumpInstruction(jumpTabel, executionReader));
-		Language.BACK.setInterpreter(new BackInstruction(jumpTabel, executionReader));
-	}
+    public static void setInstructions(InputStreamReader inputStreamReader,
+                                       OutputStreamWriter outputStreamWriter) {
+        // Set interpretors
+        INCR.setInterpreter(new IncrementInstruction());
+        DECR.setInterpreter(new DecrementInstruction());
+        RIGHT.setInterpreter(new RightInstruction());
+        LEFT.setInterpreter(new LeftInstruction());
+        IN.setInterpreter(new InInstruction(inputStreamReader));
+        OUT.setInterpreter(new OutInstruction(outputStreamWriter));
+        JUMP.setInterpreter(new JumpInstruction(null));
+        BACK.setInterpreter(new BackInstruction(null));
+        // Init language map
+        Language[] languages = Language.values();
+        for (Language language : languages) {
+            // AbstractInstruction interpreter = language.getInterpreter();
+            String[] aliases = language.getAliases();
+            for (String alias : aliases) {
+                languageMap.put(alias, language);
+            }
+        }
+    }
 
-	/**
-	 * Gets the aliases.
-	 *
-	 * @return the aliases
-	 */
-	private String[] getAliases() {
-		return aliases;
-	}
+    public static void setJumpTabel(ExecutionReader executionReader) {
+        Language.JUMP.setInterpreter(new JumpInstruction(executionReader));
+        Language.BACK.setInterpreter(new BackInstruction(executionReader));
+    }
 
-	/**
-	 * Gets the interpreter.
-	 *
-	 * @return the interpreter
-	 */
-	public AbstractInstruction getInterpreter() {
-		return interpreter;
-	}
+    /**
+     * Gets the aliases.
+     *
+     * @return the aliases
+     */
+    private String[] getAliases() {
+        return aliases;
+    }
 
-	/**
-	 * Sets the interpreter.
-	 *
-	 * @param interpreter the new interpreter
-	 */
-	private void setInterpreter(AbstractInstruction interpreter) {
-		this.interpreter = interpreter;
-	}
+    /**
+     * Gets the interpreter.
+     *
+     * @return the interpreter
+     */
+    public AbstractInstruction getInterpreter() {
+        return interpreter;
+    }
 
-	/**
-	 * Gets the short syntax.
-	 *
-	 * @return the short syntax
-	 */
-	public String getShortSyntax() {
-		return this.aliases[0];
-	}
+    /**
+     * Sets the interpreter.
+     *
+     * @param interpreter the new interpreter
+     */
+    private void setInterpreter(AbstractInstruction interpreter) {
+        this.interpreter = interpreter;
+    }
 
-	/**
-	 * Gets the color syntax.
-	 *
-	 * @return the color syntax
-	 */
-	public String getColorSyntax() {
-		return aliases[2];
-	}
+    /**
+     * Gets the short syntax.
+     *
+     * @return the short syntax
+     */
+    public String getShortSyntax() {
+        return this.aliases[0];
+    }
+
+    /**
+     * Gets the color syntax.
+     *
+     * @return the color syntax
+     */
+    public String getColorSyntax() {
+        return aliases[2];
+    }
 
 }

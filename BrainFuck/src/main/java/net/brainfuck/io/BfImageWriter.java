@@ -1,4 +1,4 @@
-package net.brainfuck.common;
+package net.brainfuck.io;
 
 import java.awt.image.BufferedImage;
 import java.io.DataInputStream;

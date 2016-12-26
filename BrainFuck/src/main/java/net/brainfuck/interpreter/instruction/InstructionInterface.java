@@ -5,13 +5,15 @@
  */
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.ExecutionReader;
+import net.brainfuck.common.executables.Executable;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
 
 /**
  *  The interface of instruction.
@@ -29,9 +31,10 @@ public interface InstructionInterface {
 	 * @throws IOException throw by memory
 	 * @throws FileNotFoundIn the file not found in
 	 * @throws BracketsParseException throw by JumpInstruction and BackInstruction
+     * @throws SegmentationFaultException 
 	 */
     void execute(Memory memory) throws MemoryOutOfBoundsException,
-            MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
+            MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
 
     /**
 	 * Print the short syntax of the command which implement this interface.
@@ -54,7 +57,8 @@ public interface InstructionInterface {
 	 * @throws BracketsParseException the brackets parse exception
 	 * @throws MemoryOverFlowException the memory over flow exception
 	 * @throws FileNotFoundIn the file not found in
+     * @throws SegmentationFaultException 
 	 */
-    void trace(Memory memory, ExecutionReader reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn;
+    void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException;
 }
 

@@ -1,12 +1,13 @@
 package net.brainfuck.executer;
 
-import net.brainfuck.common.BfImageWriter;
-import net.brainfuck.common.ExecutionReader;
+import net.brainfuck.common.executables.Executable;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
+import net.brainfuck.io.BfImageWriter;
 
 /**
  * Execute the AbstractInstruction command according to the "--translate" context.
@@ -30,7 +31,7 @@ class TranslateExecuter implements ContextExecuter {
 	 * @throws MemoryOutOfBoundsException throw by memory
 	 */
 	@Override
-	public void execute(InstructionInterface i, Memory memory, ExecutionReader reader) throws MemoryOverFlowException,
+	public void execute(InstructionInterface i, Memory memory, Executable reader) throws MemoryOverFlowException,
 			IOException, MemoryOutOfBoundsException {
 		writer.write(i.translate());
 	}

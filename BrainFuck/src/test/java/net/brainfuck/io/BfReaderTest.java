@@ -1,8 +1,10 @@
-package net.brainfuck.common;
+package net.brainfuck.io;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import net.brainfuck.io.BfReader;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -211,7 +213,7 @@ public class BfReaderTest {
 		bfReader.mark();
 		bfReader.getNext();
 		bfReader.reset();
-		assertSame((int) pointer, (int) bfReader.getExecutionPointer());
+		assertSame((int) pointer, bfReader.getExecutionPointer());
 
 	}
 

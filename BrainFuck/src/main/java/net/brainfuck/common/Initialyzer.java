@@ -1,6 +1,7 @@
 package net.brainfuck.common;
 
 import net.brainfuck.Main;
+import net.brainfuck.common.executables.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
@@ -12,9 +13,12 @@ import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.processing.BfCompiler;
 import net.brainfuck.interpreter.processing.BfPrecompiler;
 import net.brainfuck.interpreter.processing.Macro;
+import net.brainfuck.io.BfImageReader;
+import net.brainfuck.io.BfImageWriter;
+import net.brainfuck.io.BfReader;
+import net.brainfuck.io.Reader;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,37 +28,41 @@ import static net.brainfuck.common.ArgumentConstante.PATH;
  * @author Francois Melkonian
  */
 public class Initialyzer {
-	private Memory memory;
-	private Reader reader;
-	private Interpreter interpreter;
-	private Executer executer;
+    private Memory memory;
+    private Reader reader;
+    private Interpreter interpreter;
+    private Executer executer;
 
 
-	private ArgumentAnalyzer argumentAnalyzer;
+    private ArgumentAnalyzer argumentAnalyzer;
 
+	/**
+	 * Initialise and run the clever code
+	 * @param args the JVM args
+	 */
 	public Initialyzer(String[] args) {
-		try {
-			argumentAnalyzer = new ArgumentAnalyzer(args);
-			init(argumentAnalyzer);
+        try {
+            argumentAnalyzer = new ArgumentAnalyzer(args);
+            init(argumentAnalyzer);
 
-			Logger.getInstance().startExecTime();
-			interpreter.interprate();
-			System.out.println(Logger.getInstance().showResume(memory));
-		} catch (IOException | SyntaxErrorException | FileNotFoundException | IncorrectArgumentException e) {
-			// Exit code not set
-			System.exit(5);
-		} catch (MemoryOutOfBoundsException e) {
-			System.exit(1);
-		} catch (MemoryOverFlowException e) {
-			System.exit(2);
-		} catch (FileNotFoundIn e) {
-			System.exit(3);
-		} catch (BracketsParseException e) {
-			System.exit(4);
-		} catch (java.io.IOException e) {
-			e.printStackTrace();
-		}
-		System.exit(0);
+            Logger.getInstance().startExecTime();
+            interpreter.interprate();
+            System.out.println(Logger.getInstance().showResume(memory));
+        } catch (IOException | SyntaxErrorException | IncorrectArgumentException | SegmentationFaultException e) {
+            // Exit code not set
+            System.exit(5);
+        } catch (MemoryOutOfBoundsException e) {
+            System.exit(1);
+        } catch (MemoryOverFlowException e) {
+            System.exit(2);
+        } catch (FileNotFoundIn e) {
+            System.exit(3);
+        } catch (BracketsParseException e) {
+            System.exit(4);
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
 
 	}
 
@@ -86,27 +94,24 @@ public class Initialyzer {
 		}
 		Context.setExceuter(bfImageWriter);
 		executer = new Executer(argumentAnalyzer);
-		Language.setInstructions(getIn(), new OutputStreamWriter(getOut()), new JumpTable());
+		Language.setInstructions(getIn(), new OutputStreamWriter(getOut()));
 		BfCompiler compiler = initCompiler();
 		memory = new Memory();
 		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 
-		JumpTable jumpTable = null;
+        ExecutionReader executionReader = null;
+        if (readerAndJump != null) {
+	        JumpTable jumpTable = readerAndJump.getSecond();
+	        List<Language> instructions = readerAndJump.getFirst();
+            executionReader = new ExecutionReader(instructions, jumpTable);
+            Language.setJumpTabel(executionReader);
+        }
 
-		List<Language> instructions = new ArrayList<>();
-		ExecutionReader executionReader = null;
-		if (readerAndJump != null) {
-			jumpTable = readerAndJump.getSecond();
-			instructions = readerAndJump.getFirst();
-			executionReader = new ExecutionReader(instructions);
-			Language.setJumpTabel(jumpTable, executionReader);
-		}
-
-		executer.setArgumentExecuter(memory, bfImageWriter, jumpTable);
+		executer.setArgumentExecuter(memory, bfImageWriter);
 		interpreter = new Interpreter(executer, executionReader);
 	}
 
-	private BfCompiler initCompiler() throws FileNotFoundException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+	private BfCompiler initCompiler() throws  IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
 		BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
 		Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
 		bfPrecompiler.analyzeProcedure(executer.getContextExecuters(), macros);
@@ -121,14 +126,6 @@ public class Initialyzer {
 		} else {
 			reader = new BfReader(argumentAnalyzer.getArgument(PATH));
 		}
-	}
-
-	public void analyzeFonctions() {
-		// TODO : déplacer la méthode ici
-	}
-
-	public void analyzeSemantic() {
-		// TODO : déplacer la méthode ici
 	}
 
 	/**

@@ -2,7 +2,6 @@ package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Pair;
-import net.brainfuck.common.Reader;
 import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
@@ -12,6 +11,7 @@ import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.io.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
