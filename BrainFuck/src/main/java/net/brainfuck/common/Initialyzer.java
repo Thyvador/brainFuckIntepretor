@@ -85,7 +85,7 @@ public class Initialyzer {
 	 * @throws SyntaxErrorException   the syntax error exception
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	private void init(ArgumentAnalyzer argumentAnalyzer) throws FileNotFoundException, IncorrectArgumentException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+	private void init(ArgumentAnalyzer argumentAnalyzer) throws FileNotFoundException, IncorrectArgumentException, IOException, SyntaxErrorException, java.io.IOException, BracketsParseException, MemoryOutOfBoundsException {
 		analyzeArg();
 		initReader();
 		BfImageWriter bfImageWriter = null;
@@ -95,8 +95,8 @@ public class Initialyzer {
 		Context.setExceuter(bfImageWriter);
 		executer = new Executer(argumentAnalyzer);
 		Language.setInstructions(getIn(), new OutputStreamWriter(getOut()));
-		BfCompiler compiler = initCompiler();
 		memory = new Memory();
+		BfCompiler compiler = initCompiler(memory);
 		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 
         ExecutionReader executionReader = null;
@@ -111,10 +111,10 @@ public class Initialyzer {
 		interpreter = new Interpreter(executer, executionReader);
 	}
 
-	private BfCompiler initCompiler() throws  IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
+	private BfCompiler initCompiler(Memory memory) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException, MemoryOutOfBoundsException {
 		BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
 		Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
-		bfPrecompiler.analyzeProcedure(executer.getContextExecuters(), macros);
+		bfPrecompiler.analyzeProcedure(executer.getContextExecuters(), macros,memory);
 		//String lastInstruction  = bfPrecompiler.getLastInstruction();
 		//if (Language.languageMap.get(lastInstruction) == null) System.exit(0);
 		return new BfCompiler(reader, executer.getContextExecuters(), macros);
