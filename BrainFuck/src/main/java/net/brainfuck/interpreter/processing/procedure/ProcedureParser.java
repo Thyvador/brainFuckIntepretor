@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter.processing.procedure;
 
 import net.brainfuck.common.Pair;
+import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
@@ -34,16 +35,22 @@ public class ProcedureParser {
         return name;
     }
 
-    public String[] parseArgument(String definition) {
-        String[] arguments;
+    private void checkArgumentsSyntaxe(String[] arguments) throws SyntaxErrorException {
+        for (String argument : arguments) {
+            if (!argument.matches("^[\\w\\d]+"))
+                throw new SyntaxErrorException("Bad argument in procedure : " + argument);
+        }
+    }
 
-        arguments = definition.split("\\s*,\\s*");
+    public String[] parseArgument(String definition) throws SyntaxErrorException {
+        String[] arguments = StringParser.getArguments(definition);
+        this.checkArgumentsSyntaxe(arguments);
         return arguments;
     }
 
 
     private void checkSyntax(String definition) throws SyntaxErrorException {
-        if ( !definition.matches("^!procedure\\s+[\\w\\d]+\\(.*\\)\\s*&")) {
+        if ( !definition.matches("^!procedure\\s+[\\w\\d]+\\(.*\\)\\s*")) {
             throw new SyntaxErrorException("Bad definition of procedure");
         }
     }

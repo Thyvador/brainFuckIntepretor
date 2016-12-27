@@ -29,13 +29,11 @@ public final class StringParser {
         if (isCorrectParentheses(str) && containsParenthesis(str)) {
             String tmp = str.substring(str.indexOf("(")+1,str.indexOf(")"));
             if (!tmp.isEmpty()) {
-                res = tmp.split(",");
+                res = tmp.split("\\s*,\\s*");
                 for (int i=0; i < res.length; i++) {
                     res[i] = res[i].trim();
                 }
             }
-
-            //res = tmp.isEmpty() ? null : tmp.split(",");
         }
 
         return res;

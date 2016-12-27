@@ -70,7 +70,6 @@ public class BfPrecompiler {
             procedureArgument = procedureParser.parseArgument(definition);
 	        procedure = procedureParser.parse(instructions);
 	        new Procedure(procedureName,procedure.getFirst(),procedure.getSecond(),memory);
-            System.out.println("toto");
         }
     }
 
