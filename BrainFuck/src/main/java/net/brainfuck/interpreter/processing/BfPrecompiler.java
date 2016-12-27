@@ -58,6 +58,7 @@ public class BfPrecompiler {
         String definition;
         Pair<List<Language>, JumpTable> procedure;
         String procedureName;
+        String[] procedureArgument;
         ProcedureParser procedureParser = new ProcedureParser(contextExecuters, macros);
 
         while ((instructions = ((BfReader) reader).getNextProcedure()) != null)  {
@@ -66,6 +67,7 @@ public class BfPrecompiler {
             // TODO ALEX
             // ICI ICI ICI
             procedureName = procedureParser.parseName(definition);
+            procedureArgument = procedureParser.parseArgument(definition);
 	        procedure = procedureParser.parse(instructions);
 	        new Procedure(procedureName,procedure.getFirst(),procedure.getSecond(),memory);
             System.out.println("toto");
