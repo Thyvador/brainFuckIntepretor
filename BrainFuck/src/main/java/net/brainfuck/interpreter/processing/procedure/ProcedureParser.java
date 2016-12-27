@@ -34,8 +34,11 @@ public class ProcedureParser {
         return name;
     }
 
-    private void parseArgument() {
-        //TODO pour les procédures avec arguments
+    private String[] parseArgument(String definition) {
+        String[] arguments;
+
+        arguments = definition.split("\\s*,\\s*");
+        return arguments;
     }
 
 
