@@ -1,7 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
-import net.brainfuck.common.executables.ExecutionReader;
+import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 import org.junit.Before;

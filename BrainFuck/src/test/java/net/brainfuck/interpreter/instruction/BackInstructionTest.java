@@ -1,7 +1,7 @@
 package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.Memory;
-import net.brainfuck.common.executables.ExecutionReader;
+import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;

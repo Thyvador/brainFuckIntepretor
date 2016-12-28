@@ -1,5 +1,6 @@
 package net.brainfuck.common.executables;
 
+import net.brainfuck.common.executable.Executable;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.JumpTable;

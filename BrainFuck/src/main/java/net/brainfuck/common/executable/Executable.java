@@ -1,4 +1,4 @@
-package net.brainfuck.common.executables;
+package net.brainfuck.common.executable;
 
 import net.brainfuck.common.Logger;
 import net.brainfuck.exception.BracketsParseException;

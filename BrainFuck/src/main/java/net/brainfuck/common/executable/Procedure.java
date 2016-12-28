@@ -1,4 +1,4 @@
-package net.brainfuck.common.executables;
+package net.brainfuck.common.executable;
 
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.BracketsParseException;
@@ -13,28 +13,32 @@ import java.util.List;
  *
  * @author Alexandre HILTCHER
  */
-public class Function extends Executable {
+public class Procedure extends Executable {
+    private final String name;
     Memory memory;
+
     /**
-     * Constructs a default function.
+     * Constructs a default procedure.
+     *
+     * @param procedureName
      * @param instructions the instruction list f the function.
-     * @param jumpTable the jumpTable of the function.
-     * @param memory the memory of the program.
+     * @param jumpTable    the jumpTable of the function.
+     * @param memory       the memory of the program.
      */
-    public Function(List<Language> instructions, JumpTable jumpTable, Memory memory) throws MemoryOutOfBoundsException {
+    public Procedure(String procedureName, List<Language> instructions, JumpTable jumpTable, Memory memory) throws MemoryOutOfBoundsException {
         super(instructions, jumpTable);
+        name = procedureName;
         this.memory = memory;
         memory.lock();
     }
 
-
     /**
-     * @see Executable
      * @throws BracketsParseException
+     * @see Executable
      */
     @Override
     public void closeReader() throws BracketsParseException, MemoryOutOfBoundsException {
         super.closeReader();
-        memory.unlock(true);
+        memory.unlock(false);
     }
 }

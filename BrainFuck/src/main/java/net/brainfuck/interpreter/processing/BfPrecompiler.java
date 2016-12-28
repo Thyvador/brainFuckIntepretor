@@ -3,7 +3,7 @@ package net.brainfuck.interpreter.processing;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
-import net.brainfuck.common.executables.Procedure;
+import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;

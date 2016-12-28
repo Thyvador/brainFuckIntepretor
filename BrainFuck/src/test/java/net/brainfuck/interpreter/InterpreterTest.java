@@ -2,8 +2,8 @@ package net.brainfuck.interpreter;
 
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.Memory;
-import net.brainfuck.common.executables.Executable;
-import net.brainfuck.common.executables.Procedure;
+import net.brainfuck.common.executable.Executable;
+import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
 import org.junit.Test;
