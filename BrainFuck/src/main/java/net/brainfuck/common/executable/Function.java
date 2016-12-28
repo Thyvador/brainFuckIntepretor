@@ -40,11 +40,4 @@ public class Function extends Executable {
         super.closeReader();
         memory.unlock(true);
     }
-
-    @Override
-    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
-        for (Language instruction : instructions) {
-            instruction.getInterpreter().execute(memory);
-        }
-    }
 }

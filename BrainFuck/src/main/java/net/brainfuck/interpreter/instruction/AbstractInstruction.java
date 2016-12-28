@@ -32,7 +32,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 * Print the short syntax of the command which implement this interface.
 	 */
 	@Override
-	public final String rewrite() {
+	public String rewrite() {
 		return languageInstr.getShortSyntax();
 	}
 
@@ -42,12 +42,12 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 * @return String hexa wich represent the color of the current instruction
 	 */
 	@Override
-	public final String translate() {
+	public String translate() {
 		return languageInstr.getColorSyntax();
 	}
 	
 	@Override
-	public final String generate() {
+	public String generate() {
 		return languageInstr.getCSyntax();
 	}
 
@@ -63,7 +63,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	 * @throws SegmentationFaultException 
 	 */
 	@Override
-	public final void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
+	public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
 		execute(memory);
 		logger.write(reader.getExecutionPointer(), memory);
 	}

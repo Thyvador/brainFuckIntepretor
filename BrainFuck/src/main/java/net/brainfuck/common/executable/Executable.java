@@ -1,9 +1,8 @@
 package net.brainfuck.common.executable;
 
 import net.brainfuck.common.Logger;
-import net.brainfuck.exception.BracketsParseException;
-import net.brainfuck.exception.IOException;
-import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.common.Memory;
+import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
@@ -126,4 +125,58 @@ public abstract class Executable extends AbstractInstruction{
     public Stack<Integer> getMarks() {
         return marks;
     }
+
+    @Override
+    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+        for (Language instruction : instructions) {
+            instruction.getInterpreter().execute(memory);
+        }
+    }
+
+    public String rewrite() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Language instruction : instructions) {
+            stringBuilder.append(instruction.getShortSyntax());
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Return the color (in hexa) which represent the instruction
+     *
+     * @return String hexa wich represent the color of the current instruction
+     */
+    @Override
+    public String translate() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Language instruction : instructions) {
+            stringBuilder.append(instruction.getColorSyntax());
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String generate() {
+        // TODO: 28/12/2016 A faire
+        return null;
+    }
+
+    /**
+     * Execute the instruction and write the trace.
+     *
+     * @param memory the memory
+     * @throws IOException                throw by inReader
+     * @throws MemoryOutOfBoundsException throw by memory
+     * @throws BracketsParseException     throw by interpreter
+     * @throws MemoryOverFlowException    throw by memory
+     * @throws FileNotFoundIn             throw by writer
+     * @throws SegmentationFaultException
+     */
+    @Override
+    public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
+        execute(memory);
+        logger.write(reader.getExecutionPointer(), memory);
+    }
+
+
 }

@@ -19,7 +19,7 @@ public class ExecutionReader extends Executable {
      * @param jumpTable    the jumpTable.
      */
     public ExecutionReader(List<Language> instructions, JumpTable jumpTable) {
-        super(instructions, jumpTable);
+        super(null, instructions, jumpTable);
     }
 
 
