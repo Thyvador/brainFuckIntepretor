@@ -117,7 +117,7 @@ public class BfCompiler {
 
 
 	private boolean isInstruction(String instruction) {
-		return Language.languageMap.containsKey(instruction);
+		return Language.instructionMap.containsKey(instruction);
 	}
 
 	private boolean isMacro(String str) {

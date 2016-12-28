@@ -28,7 +28,7 @@ public class ExecutablesTest {
         jumpTable = new JumpTable(true);
         jumpTable.addInstruction(JUMP,4);
         jumpTable.addInstruction(BACK, 5);
-        executable = new Executable(list, jumpTable) {
+        executable = new Executable(null, list, jumpTable) {
             @Override
             public Language getNext() {
                 return super.getNext();

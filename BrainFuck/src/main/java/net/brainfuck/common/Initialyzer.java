@@ -116,7 +116,7 @@ public class Initialyzer {
 		Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
 		bfPrecompiler.analyzeProcedure(executer.getContextExecuters(), macros,memory);
 		//String lastInstruction  = bfPrecompiler.getLastInstruction();
-		//if (Language.languageMap.get(lastInstruction) == null) System.exit(0);
+		//if (Language.instructionMap.get(lastInstruction) == null) System.exit(0);
 		return new BfCompiler(reader, executer.getContextExecuters(), macros);
 	}
 
