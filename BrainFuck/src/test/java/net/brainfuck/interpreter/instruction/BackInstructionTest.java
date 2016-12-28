@@ -34,7 +34,7 @@ public class BackInstructionTest {
     @Before
     public void setUp() throws Exception {
 
-        List<Language> langage = Arrays.asList(Language.RIGHT, Language.RIGHT);
+        List<AbstractInstruction> langage = Arrays.asList(Language.RIGHT.getInterpreter(), Language.RIGHT.getInterpreter());
         reader = new ExecutionReader(langage, null);
         memory = new Memory();
         instruction = new BackInstruction(reader);

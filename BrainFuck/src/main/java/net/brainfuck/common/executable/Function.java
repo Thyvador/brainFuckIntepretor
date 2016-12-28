@@ -4,6 +4,7 @@ import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
 
 import java.util.List;
@@ -22,13 +23,27 @@ public class Function extends Executable {
      * @param jumpTable the jumpTable of the function.
      * @param memory the memory of the program.
      */
-    public Function(String functionName, List<Language> instructions, JumpTable jumpTable, Memory memory) {
-        super(functionName, instructions, jumpTable);
+    public Function(String functionName, List<AbstractInstruction> instructions, JumpTable jumpTable, Memory memory, List<String> argument) {
+        super(functionName, instructions, jumpTable, argument);
         this.memory = memory;
     }
 
     public void start() throws MemoryOutOfBoundsException {
         memory.lock();
+    }
+
+    @Override
+    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+        start();
+        super.execute(memory);
+        memory.unlock(true);
+    }
+
+    @Override
+    public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
+        start();
+        super.trace(memory, reader);
+        memory.unlock(true);
     }
 
     /**

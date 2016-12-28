@@ -3,6 +3,8 @@ package net.brainfuck.interpreter.processing;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Pair;
 import net.brainfuck.common.StringParser;
+import net.brainfuck.common.executable.Executable;
+import net.brainfuck.common.executable.ProcedureFunctionExecute;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
 import net.brainfuck.exception.IOException;
@@ -11,6 +13,7 @@ import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.io.Reader;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class BfCompiler {
 	private Logger logger;
 	private MacroInterpreter macroInterpreter;
 	private String lastInstruction;
-	private List<Language> programme = new ArrayList<>();
+	private List<AbstractInstruction> programme = new ArrayList<>();
 	private Reader reader;
 	private JumpTable jumpTable;
 	private int pos = 0;
@@ -78,7 +81,7 @@ public class BfCompiler {
 	 * @throws SyntaxErrorException the syntax error exception
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	public Pair<List<Language>, JumpTable> compile(List<ContextExecuter> contextExecuters)
+	public Pair<List<AbstractInstruction>, JumpTable> compile(List<ContextExecuter> contextExecuters)
 		throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
 		writeAll();
 		return endCompile(contextExecuters);
@@ -94,7 +97,7 @@ public class BfCompiler {
 	 * @throws SyntaxErrorException the syntax error exception
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	public Pair<List<Language>, JumpTable> compile(List<ContextExecuter> contextExecuters, List<String> instructions)
+	public Pair<List<AbstractInstruction>, JumpTable> compile(List<ContextExecuter> contextExecuters, List<String> instructions)
 			throws IOException, SyntaxErrorException, BracketsParseException, java.io.IOException {
 		writeAll(instructions);
 		return endCompile(contextExecuters);
@@ -107,7 +110,7 @@ public class BfCompiler {
 	 * @return the pair
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	private Pair<List<Language>, JumpTable> endCompile(List<ContextExecuter> contextExecuters)
+	private Pair<List<AbstractInstruction>, JumpTable> endCompile(List<ContextExecuter> contextExecuters)
 			throws BracketsParseException {
 		if (contextExecuters.contains(Context.CHECK.getContextExecuter())) {
 			jumpTable.finish();
@@ -162,9 +165,34 @@ public class BfCompiler {
 			writeInstruction(instruction);
 		} else if (isMacro(instruction)) {
 			writeMacro(instruction);
+		} else if (instruction.matches("^[\\w\\d]+\\(.*\\).*")) {
+			writeProcedureFunction(instruction);
 		} else {
 			throw new SyntaxErrorException(instruction);
 		}
+	}
+
+	private void writeProcedureFunction(String instruction) throws SyntaxErrorException, IOException, BracketsParseException {
+		String[] arguments = StringParser.getArguments(instruction);
+		String name = instruction.substring(0, instruction.indexOf('('));
+
+
+		if (!Language.instructionMap.containsKey(name)) {
+			throw new SyntaxErrorException("Unknow function or procedure : " + name);
+		}
+		List<Integer> values = new ArrayList<>();
+		for (String argument : arguments) {
+			if (!StringParser.isNumeric(argument))
+				throw new SyntaxErrorException("bad argument " + argument);
+			values.add(Integer.parseUnsignedInt(argument));
+		}
+		ProcedureFunctionExecute procedureFunctionExecute = new ProcedureFunctionExecute(
+				values,
+				(Executable)Language.instructionMap.get(name)
+		);
+		write(procedureFunctionExecute);
+		//System.out.println(name);
+		//System.out.println("");
 	}
 
 	/**
@@ -174,7 +202,7 @@ public class BfCompiler {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	private void write(Language currentInstruction) throws IOException, BracketsParseException {
+	private void write(AbstractInstruction currentInstruction) throws IOException, BracketsParseException {
 		programme.add(currentInstruction);
 		jumpTable.addInstruction(currentInstruction, ++pos);
 	}
@@ -184,13 +212,13 @@ public class BfCompiler {
 		List<Language> instructions = macroInterpreter.writeMacro(str);
 
 		for (Language instruction : instructions) {
-			write(instruction);
+			write(instruction.getInterpreter());
 		}
 	}
 
 	private void writeInstruction(String str) throws IOException, BracketsParseException {
 		Language currentInstruction = Language.languageMap.get(str);
-		write(currentInstruction);
+		write(currentInstruction.getInterpreter());
 	}
 
 }

@@ -10,6 +10,7 @@ import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.processing.BfCompiler;
 import net.brainfuck.interpreter.processing.BfPrecompiler;
 import net.brainfuck.interpreter.processing.Macro;
@@ -97,12 +98,12 @@ public class Initialyzer {
 		Language.setInstructions(getIn(), new OutputStreamWriter(getOut()));
 		memory = new Memory();
 		BfCompiler compiler = initCompiler(memory);
-		Pair<List<Language>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
+		Pair<List<AbstractInstruction>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 
         ExecutionReader executionReader = null;
         if (readerAndJump != null) {
 	        JumpTable jumpTable = readerAndJump.getSecond();
-	        List<Language> instructions = readerAndJump.getFirst();
+	        List<AbstractInstruction> instructions = readerAndJump.getFirst();
             executionReader = new ExecutionReader(instructions, jumpTable);
             Language.setJumpTabel(executionReader);
         }

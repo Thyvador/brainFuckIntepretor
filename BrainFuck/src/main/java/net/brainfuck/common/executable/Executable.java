@@ -18,11 +18,14 @@ import java.util.Stack;
  */
 public abstract class Executable extends AbstractInstruction{
     private final String name;
-    protected List<Language> instructions;
+    protected List<AbstractInstruction> instructions;
     protected int index = 0;
     protected Stack<Integer> marks;
     protected JumpTable jumpTable;
     protected Logger logger = Logger.getInstance();
+    protected List<String> argument;
+
+
 
     /**
      * Constructs a default Executable.
@@ -30,12 +33,13 @@ public abstract class Executable extends AbstractInstruction{
      * @param instructions
      * @param jumpTable
      */
-    public Executable(String name, List<Language> instructions, JumpTable jumpTable) {
+    public Executable(String name, List<AbstractInstruction> instructions, JumpTable jumpTable, List<String> argument) {
         super();
         Language.addInstruction(this, name);
         this.name = name;
         this.instructions = instructions;
         this.jumpTable = jumpTable;
+        this.argument = argument;
         marks = new Stack<>();
     }
 
@@ -44,9 +48,9 @@ public abstract class Executable extends AbstractInstruction{
      *
      * @return the next instruction.
      */
-    public Language getNext() {
+    public AbstractInstruction getNext() {
         if (index >= instructions.size()) return null;
-        Language instruction = instructions.get(index);
+        AbstractInstruction instruction = instructions.get(index);
         logger.countMove();
         index++;
         return instruction;
@@ -128,15 +132,15 @@ public abstract class Executable extends AbstractInstruction{
 
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
-        for (Language instruction : instructions) {
-            instruction.getInterpreter().execute(memory);
+        for (AbstractInstruction instruction : instructions) {
+            instruction.execute(memory);
         }
     }
 
     public String rewrite() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Language instruction : instructions) {
-            stringBuilder.append(instruction.getShortSyntax());
+        for (AbstractInstruction instruction : instructions) {
+            stringBuilder.append(instruction.rewrite());
         }
         return stringBuilder.toString();
     }
@@ -149,8 +153,8 @@ public abstract class Executable extends AbstractInstruction{
     @Override
     public String translate() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Language instruction : instructions) {
-            stringBuilder.append(instruction.getColorSyntax());
+        for (AbstractInstruction instruction : instructions) {
+            stringBuilder.append(instruction.translate());
         }
         return stringBuilder.toString();
     }
@@ -158,8 +162,8 @@ public abstract class Executable extends AbstractInstruction{
     @Override
     public String generate() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Language instruction : instructions) {
-            stringBuilder.append(instruction.getInterpreter().generate());
+        for (AbstractInstruction instruction : instructions) {
+            stringBuilder.append(instruction.generate());
         }
         return stringBuilder.toString();
     }
@@ -177,11 +181,14 @@ public abstract class Executable extends AbstractInstruction{
      */
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
-        for (Language instruction : instructions) {
-            instruction.getInterpreter().execute(memory);
+        for (AbstractInstruction instruction : instructions) {
+            instruction.execute(memory);
             logger.write(reader.getExecutionPointer(), memory);
         }
     }
 
+    public List<String> getArgument() {
+        return argument;
+    }
 
 }

@@ -25,13 +25,27 @@ public class Procedure extends Executable {
      * @param memory       the memory of the program.
      * @throws MemoryOutOfBoundsException
      */
-    public Procedure(String procedureName, List<Language> instructions, JumpTable jumpTable, Memory memory){
-        super(procedureName, instructions, jumpTable);
+    public Procedure(String procedureName, List<AbstractInstruction> instructions, JumpTable jumpTable, Memory memory, List<String> argument){
+        super(procedureName, instructions, jumpTable, argument);
         this.memory = memory;
     }
 
     public void start() throws MemoryOutOfBoundsException {
         memory.lock();
+    }
+
+    @Override
+    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+        start();
+        super.execute(memory);
+        memory.unlock(false);
+    }
+
+    @Override
+    public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
+        start();
+        super.trace(memory, reader);
+        memory.unlock(false);
     }
 
     /**

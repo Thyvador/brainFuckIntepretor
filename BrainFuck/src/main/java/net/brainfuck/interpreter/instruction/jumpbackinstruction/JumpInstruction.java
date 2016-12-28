@@ -7,6 +7,7 @@ import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
  * Representation of JUMP instruction "[" "JUMP".
@@ -40,15 +41,15 @@ public class JumpInstruction extends JumpBackInstruction {
 			reader.mark();
 		} else {
 			int cpt = 1;
-			Language instruction;
+			AbstractInstruction instruction;
 			while (cpt > 0) {
 				instruction = reader.getNext();
 				if (instruction == null) {
 					throw new BracketsParseException("]");
 				}
-				if (instruction == Language.JUMP) {
+				if (instruction.equals(Language.JUMP.getInterpreter())) {
 					cpt++;
-				} else if (instruction == Language.BACK) {
+				} else if (instruction.equals(Language.BACK.getInterpreter())) {
 					cpt--;
 				}
 			}

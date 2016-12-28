@@ -2,6 +2,7 @@ package net.brainfuck.common.executable;
 
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class ExecutionReader extends Executable {
      * @param instructions the list of instructions.
      * @param jumpTable    the jumpTable.
      */
-    public ExecutionReader(List<Language> instructions, JumpTable jumpTable) {
-        super(null, instructions, jumpTable);
+    public ExecutionReader(List<AbstractInstruction> instructions, JumpTable jumpTable) {
+        super(null, instructions, jumpTable, null);
     }
 
 

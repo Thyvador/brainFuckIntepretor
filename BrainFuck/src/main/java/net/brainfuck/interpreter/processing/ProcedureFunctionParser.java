@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter.processing.procedure;
+package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.Pair;
 import net.brainfuck.common.StringParser;
@@ -8,21 +8,24 @@ import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.processing.BfCompiler;
 import net.brainfuck.interpreter.processing.Macro;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by davidLANG on 21/12/2016.
  */
-public class ProcedureParser {
+public class ProcedureFunctionParser {
     List<ContextExecuter> contextExecuters;
     Map<String, Macro> macros;
 
 
-    public ProcedureParser(List<ContextExecuter> contextExecuters, Map<String, Macro> macros) {
+    public ProcedureFunctionParser(List<ContextExecuter> contextExecuters, Map<String, Macro> macros) {
         this.contextExecuters = contextExecuters;
         this.macros = macros;
     }
@@ -42,24 +45,25 @@ public class ProcedureParser {
         }
     }
 
-    public String[] parseArgument(String definition) throws SyntaxErrorException {
+    public List<String> parseArgument(String definition) throws SyntaxErrorException {
+
         String[] arguments = StringParser.getArguments(definition);
         this.checkArgumentsSyntaxe(arguments);
-        return arguments;
+
+        return Arrays.asList(arguments);
     }
 
 
     private void checkSyntax(String definition) throws SyntaxErrorException {
-        if ( !definition.matches("^!procedure\\s+[\\w\\d]+\\(.*\\)\\s*")) {
+        if ( !definition.matches("^![\\w\\d]+\\s+[\\w\\d]+\\(.*\\)\\s*")) {
             throw new SyntaxErrorException("Bad definition of procedure");
         }
     }
 
-    public Pair<List<Language>, JumpTable> parse(List<String> instructions) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
-        Pair<List<Language>, JumpTable> compiledProcedure;
+    public Pair<List<AbstractInstruction>, JumpTable> parse(List<String> instructions) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
         BfCompiler bfCompiler = new BfCompiler(contextExecuters, macros);
 
-        return compiledProcedure = bfCompiler.compile(contextExecuters, instructions);
+        return bfCompiler.compile(contextExecuters, instructions);
     }
 
 }

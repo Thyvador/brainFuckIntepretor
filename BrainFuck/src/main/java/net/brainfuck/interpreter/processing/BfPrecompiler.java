@@ -3,6 +3,7 @@ package net.brainfuck.interpreter.processing;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
+import net.brainfuck.common.executable.Function;
 import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
@@ -11,7 +12,7 @@ import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
-import net.brainfuck.interpreter.processing.procedure.ProcedureParser;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.io.BfReader;
 import net.brainfuck.io.Reader;
 
@@ -56,10 +57,10 @@ public class BfPrecompiler {
     public void analyzeProcedure(List<ContextExecuter> contextExecuters, Map<String, Macro> macros, Memory memory) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException, MemoryOutOfBoundsException {
         List<String> instructions;
         String definition;
-        Pair<List<Language>, JumpTable> procedure;
+        Pair<List<AbstractInstruction>, JumpTable> procedure;
         String procedureName;
-        String[] procedureArgument;
-        ProcedureParser procedureParser = new ProcedureParser(contextExecuters, macros);
+        List<String> procedureArgument;
+        ProcedureFunctionParser procedureParser = new ProcedureFunctionParser(contextExecuters, macros);
 
         while ((instructions = ((BfReader) reader).getNextProcedure()) != null)  {
             definition = instructions.remove(0);
@@ -69,7 +70,14 @@ public class BfPrecompiler {
             procedureName = procedureParser.parseName(definition);
             procedureArgument = procedureParser.parseArgument(definition);
 	        procedure = procedureParser.parse(instructions);
-	        new Procedure(procedureName,procedure.getFirst(),procedure.getSecond(),memory);
+            AbstractInstruction abstractInstruction;
+            if (definition.matches("^!procedure.*"))
+                abstractInstruction = new Procedure(procedureName,procedure.getFirst(),
+                        procedure.getSecond(),memory, procedureArgument);
+            else
+                abstractInstruction = new Function(procedureName,procedure.getFirst(),
+                        procedure.getSecond(),memory, procedureArgument);
+            Language.addInstruction(abstractInstruction, procedureName);
         }
     }
 

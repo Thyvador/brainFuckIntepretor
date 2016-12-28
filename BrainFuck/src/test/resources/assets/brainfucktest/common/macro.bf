@@ -1,9 +1,17 @@
 !toto(arg) +[-] arg
-!pipi toto(1)
+!pipi +
 
-!procedure toto(toto, titi  , titi ) #toto
+!procedure toto42(toto, titi  , titi ) #toto
 
-toto(42)
+#toto(42)
 pipi 42
 
 !end
+
+
+!function titi(toto)
+>++
+!end
+
+toto42(42, 42, 42)
+titi(3)

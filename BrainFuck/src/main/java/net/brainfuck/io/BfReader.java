@@ -198,7 +198,7 @@ public class BfReader implements Reader {
 			int pos = (int)reader.getFilePointer();
 			int nextVal = reader.read();
 			nextVal = ignore(nextVal);
-			if (isProcedure(nextVal)) {
+			if (isProcedureFunction(nextVal)) {
 				readUntilEndOfLine(nextVal);
 				instructions.add(next);
 				next = this.getNext();
@@ -227,12 +227,12 @@ public class BfReader implements Reader {
 
 	}
 
-	private boolean isProcedure(int nextVal) throws java.io.IOException {
+	private boolean isProcedureFunction(int nextVal) throws java.io.IOException {
 		if (nextVal == PREPROCESSING) {
 			int pos = (int) reader.getFilePointer();
 			this.readUntilEndOfLine(nextVal);
 			reader.seek(pos);
-			return next.matches("\\A!procedure.*");
+			return next.matches("\\A!procedure.*") || next.matches("\\A!function.*");
 		}
 		return false;
 	}

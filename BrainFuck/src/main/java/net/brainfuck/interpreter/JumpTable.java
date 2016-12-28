@@ -1,6 +1,7 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.util.EmptyStackException;
 import java.util.HashMap;
@@ -32,11 +33,11 @@ public class JumpTable {
 	 * @param pos                the pos
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	public void addInstruction(Language currentInstruction, int pos) throws BracketsParseException {
+	public void addInstruction(AbstractInstruction currentInstruction, int pos) throws BracketsParseException {
 		try {
-			if (currentInstruction == Language.JUMP) {
+			if (currentInstruction.equals(Language.JUMP.getInterpreter())) {
 				jumpStack.add(pos);
-			} else if (currentInstruction == Language.BACK) {
+			} else if (currentInstruction.equals(Language.BACK.getInterpreter())) {
 				table.put(jumpStack.peek(), pos);
 				table.put(pos, jumpStack.pop());
 			}

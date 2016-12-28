@@ -6,6 +6,7 @@ import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Executer;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,10 +56,10 @@ public class Interpreter {
 	 */
 	public void interprate() throws IOException, SyntaxErrorException, MemoryOutOfBoundsException,
 			MemoryOverFlowException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
-		Language instruction;
+		AbstractInstruction instruction;
 
         while ((instruction = reader.getNext()) != null) {
-            executer.execute(instruction.getInterpreter(), reader);
+            executer.execute(instruction, reader);
         }
         executer.end(reader);
     }

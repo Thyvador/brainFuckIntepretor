@@ -5,6 +5,7 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,18 +20,25 @@ import static org.junit.Assert.assertEquals;
  */
 public class ExecutablesTest {
     private Executable executable;
-    private List<Language> list;
+    private List<AbstractInstruction> list;
     private JumpTable jumpTable;
 
     @Before
     public void setUp() throws Exception {
-        list = Arrays.asList(RIGHT, LEFT, INCR, DECR, JUMP, BACK);
+        list = Arrays.asList(
+                RIGHT.getInterpreter(),
+                LEFT.getInterpreter(),
+                INCR.getInterpreter(),
+                DECR.getInterpreter(),
+                JUMP.getInterpreter(),
+                BACK.getInterpreter()
+        );
         jumpTable = new JumpTable(true);
-        jumpTable.addInstruction(JUMP,4);
-        jumpTable.addInstruction(BACK, 5);
-        executable = new Executable(null, list, jumpTable) {
+        jumpTable.addInstruction(JUMP.getInterpreter(),4);
+        jumpTable.addInstruction(BACK.getInterpreter(), 5);
+        executable = new Executable(null, list, jumpTable, null) {
             @Override
-            public Language getNext() {
+            public AbstractInstruction getNext() {
                 return super.getNext();
             }
 
