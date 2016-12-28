@@ -1,10 +1,10 @@
 package net.brainfuck.common.executable;
 
 import net.brainfuck.common.Memory;
-import net.brainfuck.exception.BracketsParseException;
-import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.util.List;
 
@@ -14,7 +14,6 @@ import java.util.List;
  * @author Alexandre HILTCHER
  */
 public class Procedure extends Executable {
-    private final String name;
     private Memory memory;
 
     /**
@@ -26,10 +25,12 @@ public class Procedure extends Executable {
      * @param memory       the memory of the program.
      * @throws MemoryOutOfBoundsException
      */
-    public Procedure(String procedureName, List<Language> instructions, JumpTable jumpTable, Memory memory) throws MemoryOutOfBoundsException {
-        super(instructions, jumpTable);
-        name = procedureName;
+    public Procedure(String procedureName, List<Language> instructions, JumpTable jumpTable, Memory memory){
+        super(procedureName, instructions, jumpTable);
         this.memory = memory;
+    }
+
+    public void start() throws MemoryOutOfBoundsException {
         memory.lock();
     }
 
@@ -41,5 +42,12 @@ public class Procedure extends Executable {
     public void closeReader() throws BracketsParseException, MemoryOutOfBoundsException {
         super.closeReader();
         memory.unlock(false);
+    }
+
+    @Override
+    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+        for (Language instruction : instructions) {
+            instruction.getInterpreter().execute(memory);
+        }
     }
 }

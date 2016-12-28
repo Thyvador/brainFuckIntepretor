@@ -1,5 +1,6 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.StringParser;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.instruction.intoutinsruction.InInstruction;
@@ -33,7 +34,7 @@ public enum Language {
     JUMP(null, "[", "JUMP", "ff7f00", "while(*ptr) {"),
     BACK(null, "]", "BACK", "ff0000", "}");
 
-    public static Map<String, Language> languageMap = new HashMap<>();
+    public static Map<String, AbstractInstruction> languageMap = new HashMap<>();
 
     private AbstractInstruction interpreter;
     private String[] aliases;
@@ -47,6 +48,10 @@ public enum Language {
     Language(AbstractInstruction interpreter, String... aliases) {
         this.interpreter = interpreter;
         this.aliases = aliases;
+    }
+
+    public static void addInstruction(AbstractInstruction interpreter, String aliase){
+        languageMap.put(aliase, interpreter);
     }
 
     public static void setInstructions(InputStreamReader inputStreamReader,
@@ -66,7 +71,7 @@ public enum Language {
             // AbstractInstruction interpreter = language.getInterpreter();
             String[] aliases = language.getAliases();
             for (String alias : aliases) {
-                languageMap.put(alias, language);
+                languageMap.put(alias, language.interpreter);
             }
         }
     }

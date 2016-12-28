@@ -6,6 +6,8 @@ import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
+import sun.reflect.generics.reflectiveObjects.LazyReflectiveObjectGenerator;
 
 import java.util.List;
 import java.util.Stack;
@@ -15,7 +17,8 @@ import java.util.Stack;
  *
  * @author Alexandre HILTCHER
  */
-public abstract class Executable {
+public abstract class Executable extends AbstractInstruction{
+    private final String name;
     protected List<Language> instructions;
     protected int index = 0;
     protected Stack<Integer> marks;
@@ -28,7 +31,10 @@ public abstract class Executable {
      * @param instructions
      * @param jumpTable
      */
-    public Executable(List<Language> instructions, JumpTable jumpTable) {
+    public Executable(String name, List<Language> instructions, JumpTable jumpTable) {
+        super();
+        Language.addInstruction(this, name);
+        this.name = name;
         this.instructions = instructions;
         this.jumpTable = jumpTable;
         marks = new Stack<>();

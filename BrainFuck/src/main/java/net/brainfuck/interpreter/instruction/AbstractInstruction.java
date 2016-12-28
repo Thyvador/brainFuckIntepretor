@@ -25,6 +25,9 @@ public abstract class AbstractInstruction implements InstructionInterface {
 		logger = Logger.getInstance();
 	}
 
+    public AbstractInstruction() {
+    }
+
 	/**
 	 * Print the short syntax of the command which implement this interface.
 	 */
