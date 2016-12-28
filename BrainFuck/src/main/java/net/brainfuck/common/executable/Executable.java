@@ -157,8 +157,11 @@ public abstract class Executable extends AbstractInstruction{
 
     @Override
     public String generate() {
-        // TODO: 28/12/2016 A faire
-        return null;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Language instruction : instructions) {
+            stringBuilder.append(instruction.getInterpreter().generate());
+        }
+        return stringBuilder.toString();
     }
 
     /**
@@ -174,8 +177,10 @@ public abstract class Executable extends AbstractInstruction{
      */
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
-        execute(memory);
-        logger.write(reader.getExecutionPointer(), memory);
+        for (Language instruction : instructions) {
+            instruction.getInterpreter().execute(memory);
+            logger.write(reader.getExecutionPointer(), memory);
+        }
     }
 
 
