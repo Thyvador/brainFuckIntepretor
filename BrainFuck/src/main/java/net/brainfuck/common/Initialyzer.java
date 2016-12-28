@@ -92,7 +92,7 @@ public class Initialyzer {
 		if (argumentAnalyzer.getFlags().contains(Context.TRANSLATE.getSyntax())) {
 			bfImageWriter = new BfImageWriter(getOut());
 		}
-		Context.setExceuter(bfImageWriter);
+		Context.setExecuter(bfImageWriter, new OutputStreamWriter(getOut()));
 		executer = new Executer(argumentAnalyzer);
 		Language.setInstructions(getIn(), new OutputStreamWriter(getOut()));
 		memory = new Memory();

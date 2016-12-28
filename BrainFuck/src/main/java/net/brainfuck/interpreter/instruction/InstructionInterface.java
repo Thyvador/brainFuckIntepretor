@@ -38,8 +38,9 @@ public interface InstructionInterface {
 
     /**
 	 * Print the short syntax of the command which implement this interface.
+     * @return 
 	 */
-    void rewrite();
+    String rewrite();
 
     /**
 	 * Translate.
@@ -60,5 +61,7 @@ public interface InstructionInterface {
      * @throws SegmentationFaultException 
 	 */
     void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException;
+
+	String generate();
 }
 

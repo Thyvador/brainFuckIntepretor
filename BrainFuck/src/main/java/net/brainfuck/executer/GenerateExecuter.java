@@ -4,7 +4,6 @@ import java.io.Writer;
 
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.executable.Executable;
-import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;
@@ -12,17 +11,13 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.exception.SegmentationFaultException;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
+import net.brainfuck.io.BfImageWriter;
 
-/**
- * Execute the AbstractInstruction command according to the "--rewrite" context.
- *
- * @author davidLANG
- */
-class RewriteExecuter implements ContextExecuter {
+public class GenerateExecuter implements ContextExecuter {
 
 	private Writer writer;
 
-	public RewriteExecuter(Writer writer) {
+	public GenerateExecuter(Writer writer) {
 		this.writer = writer;
 	}
 
@@ -31,9 +26,10 @@ class RewriteExecuter implements ContextExecuter {
 			throws MemoryOverFlowException, IOException, MemoryOutOfBoundsException, FileNotFoundIn,
 			BracketsParseException, SegmentationFaultException {
 		try {
-			writer.write(i.rewrite());
+			writer.write(i.generate());
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
 	}
+
 }

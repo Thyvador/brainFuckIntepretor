@@ -23,7 +23,7 @@ public class InterpreterTest {
         Language.setInstructions(null,null);
         Executable executable = new Procedure("yoloproc", Arrays.asList(RIGHT, INCR, INCR, LEFT, RIGHT, RIGHT),new JumpTable(false),m);
         ArgumentAnalyzer arg = new ArgumentAnalyzer(new String[]{"-p","yolo"});
-        Context.setExceuter(null);
+        Context.setExecuter(null, null);
         Executer e = new Executer(arg);
 	    e.setArgumentExecuter(m,null);
 	    System.out.println(e.getContextExecuters());

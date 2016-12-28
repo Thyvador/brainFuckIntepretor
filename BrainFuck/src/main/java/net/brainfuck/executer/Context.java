@@ -1,5 +1,6 @@
 package net.brainfuck.executer;
 
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,8 @@ public enum Context {
     UNCHECK("--uncheck"),
     TRANSLATE("--translate"),
     REWRITE("--rewrite"),
-    TRACE("--trace");
+    TRACE("--trace"),
+    GENERATE("--generate");
 
     public static Map<String, ContextExecuter> contextMap = new HashMap<>();
 
@@ -26,12 +28,13 @@ public enum Context {
     private String syntax;
     private ContextExecuter c;
 
-    public static void setExceuter(BfImageWriter writer){
+    public static void setExecuter(BfImageWriter writer, OutputStreamWriter outputStreamWriter){
 		CHECK.setContextExecuter(new CheckExecuter());
 		UNCHECK.setContextExecuter(new UncheckExecuter());
 		TRANSLATE.setContextExecuter(new TranslateExecuter(writer));
-		REWRITE.setContextExecuter(new RewriteExecuter());
+		REWRITE.setContextExecuter(new RewriteExecuter(outputStreamWriter));
 		TRACE.setContextExecuter(new TraceExecuter());
+		GENERATE.setContextExecuter(new GenerateExecuter(outputStreamWriter));
 
 		for (Context c: Context.values()) {
 			contextMap.put(c.getSyntax(), c.getContextExecuter());
