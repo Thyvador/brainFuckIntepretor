@@ -16,25 +16,6 @@ import java.util.List;
 public class Function extends Executable {
     private final String name;
     private Memory memory;
-    private List<String> argumentsName;
-    private List<Integer> arguments;
-
-    /**
-     *
-     * Constructs a default function.
-     *
-     * @param functionName the function name.
-     * @param instructions the instruction list f the function.
-     * @param jumpTable the jumpTable of the function.
-     * @param memory the memory of the program.
-     * @param arguments the list of arguments.
-     */
-    public Function(String functionName, List<Language> instructions, JumpTable jumpTable, Memory memory, List<String> arguments) {
-        super(instructions, jumpTable);
-        this.name = functionName;
-        this.memory = memory;
-        this.argumentsName = arguments;
-    }
 
     /**
      * Constructs a default function.
