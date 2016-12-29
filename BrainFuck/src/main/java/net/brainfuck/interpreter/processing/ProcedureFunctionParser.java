@@ -48,8 +48,9 @@ public class ProcedureFunctionParser {
     public List<String> parseArgument(String definition) throws SyntaxErrorException {
 
         String[] arguments = StringParser.getArguments(definition);
+        if (arguments == null)
+            return new ArrayList<>();
         this.checkArgumentsSyntaxe(arguments);
-
         return Arrays.asList(arguments);
     }
 

@@ -217,8 +217,8 @@ public class BfCompiler {
 	}
 
 	private void writeInstruction(String str) throws IOException, BracketsParseException {
-		Language currentInstruction = Language.languageMap.get(str);
-		write(currentInstruction.getInterpreter());
+		AbstractInstruction currentInstruction = Language.instructionMap.get(str);
+		write(currentInstruction);
 	}
 
 }
