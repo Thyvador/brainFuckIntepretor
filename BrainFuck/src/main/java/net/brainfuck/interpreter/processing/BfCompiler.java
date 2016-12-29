@@ -4,6 +4,8 @@ import net.brainfuck.common.Logger;
 import net.brainfuck.common.Pair;
 import net.brainfuck.common.StringParser;
 import net.brainfuck.common.executable.Executable;
+import net.brainfuck.common.executable.Function;
+import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.common.executable.ProcedureFunctionExecute;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
@@ -180,19 +182,20 @@ public class BfCompiler {
 		if (!Language.instructionMap.containsKey(name)) {
 			throw new SyntaxErrorException("Unknow function or procedure : " + name);
 		}
-		List<Integer> values = new ArrayList<>();
-		for (String argument : arguments) {
-			if (!StringParser.isNumeric(argument))
-				throw new SyntaxErrorException("bad argument " + argument);
-			values.add(Integer.parseUnsignedInt(argument));
+		List<Short> values = new ArrayList<>();
+		if (arguments != null) {
+			for (String argument : arguments) {
+				if (!StringParser.isNumeric(argument))
+					throw new SyntaxErrorException("bad argument " + argument);
+				values.add(Short.parseShort(argument));
+			}
 		}
+
 		ProcedureFunctionExecute procedureFunctionExecute = new ProcedureFunctionExecute(
 				values,
 				(Executable)Language.instructionMap.get(name)
 		);
 		write(procedureFunctionExecute);
-		//System.out.println(name);
-		//System.out.println("");
 	}
 
 	/**
@@ -216,8 +219,10 @@ public class BfCompiler {
 		}
 	}
 
-	private void writeInstruction(String str) throws IOException, BracketsParseException {
+	private void writeInstruction(String str) throws IOException, BracketsParseException, SyntaxErrorException {
 		AbstractInstruction currentInstruction = Language.instructionMap.get(str);
+		if (currentInstruction instanceof Executable)
+			throw new SyntaxErrorException("not parentheses to function " + str);
 		write(currentInstruction);
 	}
 
