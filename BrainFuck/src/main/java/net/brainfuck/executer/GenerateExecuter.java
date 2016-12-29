@@ -27,6 +27,7 @@ public class GenerateExecuter implements ContextExecuter {
 			BracketsParseException, SegmentationFaultException {
 		try {
 			writer.write(i.generate());
+			writer.flush();
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}
