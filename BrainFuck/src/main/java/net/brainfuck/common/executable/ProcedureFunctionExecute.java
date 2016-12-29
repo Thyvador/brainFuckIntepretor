@@ -46,7 +46,7 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 
     @Override
     public String generate() {
-        return super.generate();
+        return compositeInstruction.generate();
     }
 
 }
