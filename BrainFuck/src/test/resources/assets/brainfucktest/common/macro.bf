@@ -1,4 +1,4 @@
-!function titi(arg,arg,arg)
+!function titi(arg, arg, arg)
 ++
 !end
 

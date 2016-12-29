@@ -80,8 +80,8 @@ public enum Language {
     }
 
     public static void setJumpTable(Executable executionReader) {
-        Language.JUMP.setInterpreter(new JumpInstruction(executionReader));
-        Language.BACK.setInterpreter(new BackInstruction(executionReader));
+        ((JumpInstruction) Language.JUMP.getInterpreter()).setReader(executionReader);
+        ((BackInstruction) Language.BACK.getInterpreter()).setReader(executionReader);
     }
 
     /**

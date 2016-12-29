@@ -70,5 +70,8 @@ public class JumpTable {
 	}
 
 
-
+	@Override
+	public String toString() {
+		return table.toString();
+	}
 }

@@ -28,12 +28,12 @@ public class ExecutableTest {
 
     @Before
     public void setUp() throws Exception {
+        Language.setInstructions(null, null);
         list = Arrays.asList(RIGHT.getInterpreter(), LEFT.getInterpreter(), INCR.getInterpreter(), DECR.getInterpreter(),
                 JUMP.getInterpreter(), RIGHT.getInterpreter(), BACK.getInterpreter());
         jumpTable = new JumpTable(true);
         jumpTable.addInstruction(JUMP.getInterpreter(), 6);
         jumpTable.addInstruction(BACK.getInterpreter(), 4);
-        Language.setInstructions(null, null);
         executable = new Executable(null, list, jumpTable, null) {
             @Override
             public AbstractInstruction getNext() {
@@ -71,13 +71,13 @@ public class ExecutableTest {
 
     @Test
     public void getNext() throws Exception {
-        assertEquals(RIGHT, executable.getNext());
-        assertEquals(LEFT, executable.getNext());
-        assertEquals(INCR, executable.getNext());
-        assertEquals(DECR, executable.getNext());
-        assertEquals(JUMP, executable.getNext());
-        assertEquals(RIGHT, executable.getNext());
-        assertEquals(BACK, executable.getNext());
+        assertEquals(RIGHT.getInterpreter(), executable.getNext());
+        assertEquals(LEFT.getInterpreter(), executable.getNext());
+        assertEquals(INCR.getInterpreter(), executable.getNext());
+        assertEquals(DECR.getInterpreter(), executable.getNext());
+        assertEquals(JUMP.getInterpreter(), executable.getNext());
+        assertEquals(RIGHT.getInterpreter(), executable.getNext());
+        assertEquals(BACK.getInterpreter(), executable.getNext());
         assertEquals(null, executable.getNext());
     }
 
@@ -136,7 +136,7 @@ public class ExecutableTest {
     public void seek2() throws Exception {
         for (int i = 0; i < 7; i++) executable.getNext();
         executable.seek();
-        assertEquals(RIGHT, executable.getNext());
+        assertEquals(RIGHT.getInterpreter(), executable.getNext());
     }
 
 

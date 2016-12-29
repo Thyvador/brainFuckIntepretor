@@ -265,10 +265,9 @@ public class BfReader implements Reader {
 			int pos = (int) reader.getFilePointer();
 			this.readUntilEndOfLine(nextVal);
 			this.seek(pos);
-			return !next.matches("!procedure.*");
+			return !(next.matches("!procedure.*") || next.matches("!function.*"));
 		}
 		return false;
-		//return nextVal == PREPROCESSING;
 	}
 
 	/* (non-Javadoc)
