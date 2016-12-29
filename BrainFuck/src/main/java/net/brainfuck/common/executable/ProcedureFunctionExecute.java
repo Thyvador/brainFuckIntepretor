@@ -41,12 +41,12 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 
     @Override
     public String translate() {
-        return super.translate();
+        return compositeInstruction.translate();
     }
 
     @Override
     public String generate() {
-        return super.generate();
+        return compositeInstruction.generate();
     }
 
 }
