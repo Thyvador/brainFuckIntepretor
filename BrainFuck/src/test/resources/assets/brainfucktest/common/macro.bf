@@ -10,8 +10,9 @@ pipi 42
 
 
 !function titi(toto)
-<
+>
 !end
 
 toto42(42, 42, 42)
 titi(3)
++++

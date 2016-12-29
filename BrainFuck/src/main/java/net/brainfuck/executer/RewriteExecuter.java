@@ -32,6 +32,7 @@ class RewriteExecuter implements ContextExecuter {
 			BracketsParseException, SegmentationFaultException {
 		try {
 			writer.write(i.rewrite());
+			writer.flush();
 		} catch (java.io.IOException e) {
 			throw new IOException();
 		}

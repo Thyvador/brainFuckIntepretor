@@ -33,4 +33,20 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
         //todo memory à gérer
         compositeInstruction.execute(memory);
     }
+
+    @Override
+    public String rewrite() {
+        return compositeInstruction.rewrite();
+    }
+
+    @Override
+    public String translate() {
+        return super.translate();
+    }
+
+    @Override
+    public String generate() {
+        return super.generate();
+    }
+
 }
