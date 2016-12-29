@@ -55,7 +55,10 @@ public class Procedure extends Executable {
 
 	@Override
 	public String generate() {
-		System.out.println("Procedure.generate()");
-		return name + getArgumentString() + ";";
+		StringBuilder stringBuilder = new StringBuilder().append(String.format("void %s %s {\n",
+				name, getArgumentString()));
+		for (AbstractInstruction instr: instructions)
+			stringBuilder.append(instr.generate());
+		return stringBuilder.append("\n}\n\n").toString();
 	}
 }

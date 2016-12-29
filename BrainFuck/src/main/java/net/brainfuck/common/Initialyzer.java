@@ -1,6 +1,7 @@
 package net.brainfuck.common;
 
 import net.brainfuck.Main;
+import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.exception.FileNotFoundException;
@@ -152,6 +153,14 @@ public class Initialyzer {
 			    executionReader = new ExecutionReader(instructions, jumpTable);
 			    Language.setJumpTable(executionReader);
 			}
+			
+	        if (argumentAnalyzer.getFlags().contains(Context.GENERATE.getSyntax())) {
+	        	Writer wrt = new OutputStreamWriter(getOut());
+	        	for(Executable e: Executable.getExecutableRegistry()) {
+	        		wrt.write(e.generate());
+	        	}
+	        	wrt.close();
+	        }
 
 			executer.setArgumentExecuter(memory, bfImageWriter);
 			interpreter = new Interpreter(executer, executionReader);

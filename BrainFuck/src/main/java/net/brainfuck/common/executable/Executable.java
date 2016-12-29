@@ -6,8 +6,8 @@ import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-import sun.reflect.generics.reflectiveObjects.LazyReflectiveObjectGenerator;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -17,6 +17,9 @@ import java.util.Stack;
  * @author Alexandre HILTCHER
  */
 public abstract class Executable extends AbstractInstruction {
+	
+	private static List<Executable> executableRegistry = new LinkedList<>();
+	
     protected final String name;
     protected List<AbstractInstruction> instructions;
     protected int index = -1;
@@ -40,6 +43,7 @@ public abstract class Executable extends AbstractInstruction {
         this.jumpTable = jumpTable;
         this.argument = argument;
         marks = new Stack<>();
+        executableRegistry.add(this);
     }
 
     /**
@@ -61,10 +65,21 @@ public abstract class Executable extends AbstractInstruction {
     
     public String getArgumentString() {
 	    StringBuilder res = new StringBuilder().append("(");
+	    boolean first = true;
 	    for (String arg : argument) {
-			res.append(arg).append(",");
+	    	if (!first)
+	    		res.append(",");
+			res.append(arg);
+			first = false;
 		}
 	    return res.append(")").toString();
+	}
+
+	/**
+	 * @return the executableRegistry
+	 */
+	public static List<Executable> getExecutableRegistry() {
+		return executableRegistry;
 	}
 
 	/**
@@ -149,7 +164,8 @@ public abstract class Executable extends AbstractInstruction {
         }
     }
 
-    public String rewrite() {
+    @Override
+	public String rewrite() {
         StringBuilder stringBuilder = new StringBuilder();
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {

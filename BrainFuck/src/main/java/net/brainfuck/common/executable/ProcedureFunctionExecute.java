@@ -64,7 +64,19 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 				compositeInstruction.generate()));
 		return stringBuilder.toString();*/
 		//TODO: changer les noms des arguments par leurs valeurs
-		return compositeInstruction.name + compositeInstruction.getArgumentString() + ";";
+		//return compositeInstruction.name + compositeInstruction.getArgumentString() + ";";
+		StringBuilder res = new StringBuilder();
+		if (compositeInstruction.getClass() == Function.class)
+			res.append("(*ptr) = ");
+		res.append(compositeInstruction.name).append("(");
+		boolean first = true;
+	    for (Short v : values) {
+	    	if (!first)
+	    		res.append(",");
+			res.append(String.format("memory[%d]", v));
+			first = false;
+		}
+	    return res.append(");").toString();
 	}
 
 }

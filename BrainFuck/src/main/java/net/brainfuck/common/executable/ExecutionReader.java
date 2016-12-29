@@ -4,6 +4,7 @@ import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,13 +21,18 @@ public class ExecutionReader extends Executable {
      * @param jumpTable    the jumpTable.
      */
     public ExecutionReader(List<AbstractInstruction> instructions, JumpTable jumpTable) {
-        super(null, instructions, jumpTable, null);
+        super("main", instructions, jumpTable, new ArrayList<>());
     }
 
 	@Override
 	public String generate() {
-		System.out.println("ExecutionReader.generate()");
-		return name + getArgumentString() + ";";
+		StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s %s {\n",
+				name, getArgumentString()));
+		stringBuilder.append("int memory[30000] = {};\n");
+		stringBuilder.append("int *ptr = *memory;\n");
+		for (AbstractInstruction instr: instructions)
+			stringBuilder.append(instr.generate());
+		return stringBuilder.append("return 0;\n}\n\n").toString();
 	}
 
 
