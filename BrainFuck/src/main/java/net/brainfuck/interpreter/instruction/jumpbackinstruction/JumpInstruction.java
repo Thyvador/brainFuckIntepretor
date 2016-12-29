@@ -34,7 +34,7 @@ public class JumpInstruction extends JumpBackInstruction {
 	 */
 	@Override
 	public void execute(Memory memory) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
-		nonLinearExecute(memory, reader);
+		nonLinearExecute(memory);
 	}
 
 	private void linearExecute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
@@ -58,7 +58,7 @@ public class JumpInstruction extends JumpBackInstruction {
 		}
 	}
 
-	private void nonLinearExecute(Memory memory, Executable reader)
+	private void nonLinearExecute(Memory memory)
 			throws MemoryOutOfBoundsException, IOException {
 		// Reach corresponding closing bracket
 		if (memory.get() == 0) {
