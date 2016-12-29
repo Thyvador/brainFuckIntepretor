@@ -19,7 +19,7 @@ import java.util.Stack;
 public abstract class Executable extends AbstractInstruction{
     private final String name;
     protected List<AbstractInstruction> instructions;
-    protected int index = 0;
+    protected int index = -1;
     protected Stack<Integer> marks;
     protected JumpTable jumpTable;
     protected Logger logger = Logger.getInstance();
@@ -49,10 +49,10 @@ public abstract class Executable extends AbstractInstruction{
      * @return the next instruction.
      */
     public AbstractInstruction getNext() {
+        index++;
         if (index >= instructions.size()) return null;
         AbstractInstruction instruction = instructions.get(index);
         logger.countMove();
-        index++;
         return instruction;
     }
 

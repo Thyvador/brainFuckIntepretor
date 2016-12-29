@@ -21,5 +21,9 @@ public abstract class JumpBackInstruction extends AbstractInstruction {
         this.reader = executionReader;
     }
 
+    public void setReader(Executable reader) {
+        this.reader = reader;
+    }
+
     abstract public void execute(Memory memory) throws MemoryOutOfBoundsException, IOException, BracketsParseException;
 }
