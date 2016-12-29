@@ -1,6 +1,8 @@
 package net.brainfuck.interpreter;
 
+import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.ExecutionReader;
+import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.instruction.intoutinsruction.InInstruction;
 import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
@@ -77,7 +79,7 @@ public enum Language {
         }
     }
 
-    public static void setJumpTabel(ExecutionReader executionReader) {
+    public static void setJumpTable(Executable executionReader) {
         Language.JUMP.setInterpreter(new JumpInstruction(executionReader));
         Language.BACK.setInterpreter(new BackInstruction(executionReader));
     }

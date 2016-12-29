@@ -105,7 +105,7 @@ public class Initialyzer {
 	        JumpTable jumpTable = readerAndJump.getSecond();
 	        List<AbstractInstruction> instructions = readerAndJump.getFirst();
             executionReader = new ExecutionReader(instructions, jumpTable);
-            Language.setJumpTabel(executionReader);
+            Language.setJumpTable(executionReader);
         }
 
 		executer.setArgumentExecuter(memory, bfImageWriter);
