@@ -16,7 +16,7 @@ import java.util.Stack;
  *
  * @author Alexandre HILTCHER
  */
-public abstract class Executable extends AbstractInstruction{
+public abstract class Executable extends AbstractInstruction {
     private final String name;
     protected List<AbstractInstruction> instructions;
     protected int index = -1;
@@ -24,7 +24,6 @@ public abstract class Executable extends AbstractInstruction{
     protected JumpTable jumpTable;
     protected Logger logger = Logger.getInstance();
     protected List<String> argument;
-
 
 
     /**
@@ -132,14 +131,16 @@ public abstract class Executable extends AbstractInstruction{
 
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
-        for (AbstractInstruction instruction : instructions) {
+        AbstractInstruction instruction;
+        while ((instruction = getNext()) != null) {
             instruction.execute(memory);
         }
     }
 
     public String rewrite() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (AbstractInstruction instruction : instructions) {
+        AbstractInstruction instruction;
+        while ((instruction = getNext()) != null) {
             stringBuilder.append(instruction.rewrite());
         }
         return stringBuilder.toString();
@@ -153,7 +154,8 @@ public abstract class Executable extends AbstractInstruction{
     @Override
     public String translate() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (AbstractInstruction instruction : instructions) {
+        AbstractInstruction instruction;
+        while ((instruction = getNext()) != null) {
             stringBuilder.append(instruction.translate());
         }
         return stringBuilder.toString();
@@ -162,7 +164,8 @@ public abstract class Executable extends AbstractInstruction{
     @Override
     public String generate() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (AbstractInstruction instruction : instructions) {
+        AbstractInstruction instruction;
+        while ((instruction = getNext()) != null) {
             stringBuilder.append(instruction.generate());
         }
         return stringBuilder.toString();
@@ -181,7 +184,8 @@ public abstract class Executable extends AbstractInstruction{
      */
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
-        for (AbstractInstruction instruction : instructions) {
+        AbstractInstruction instruction;
+        while ((instruction = getNext()) != null) {
             instruction.execute(memory);
             logger.write(reader.getExecutionPointer(), memory);
         }

@@ -134,7 +134,7 @@ public class ExecutableTest {
         assertEquals(RIGHT.getInterpreter(), executable.getNext());
     }
 
-    @Ignore
+
     @Test
     public void execute() throws Exception {
         Memory memory = new Memory();
