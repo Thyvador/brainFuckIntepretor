@@ -57,4 +57,9 @@ public class Procedure extends Executable {
         super.closeReader();
         memory.unlock(false);
     }
+
+	@Override
+	public String generate() {
+		return name + getArgumentString() + ";";
+	}
 }

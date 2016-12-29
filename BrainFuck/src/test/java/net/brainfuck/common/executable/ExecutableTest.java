@@ -59,6 +59,11 @@ public class ExecutableTest {
             public void seek() {
                 super.seek();
             }
+
+			@Override
+			public String generate() {
+				return null;
+			}
         };
         Language.setJumpTable(executable);
 

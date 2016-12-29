@@ -59,7 +59,6 @@ public class Executer {
 			MemoryOverFlowException, FileNotFoundIn, IOException, SegmentationFaultException {
 		for (ContextExecuter contextExecuter : contextExecuters) {
 			contextExecuter.execute(instruction, memory, reader);
-
 		}
 	}
 

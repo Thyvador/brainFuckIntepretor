@@ -23,6 +23,11 @@ public class ExecutionReader extends Executable {
         super(null, instructions, jumpTable, null);
     }
 
+	@Override
+	public String generate() {
+		return name + getArgumentString() + ";";
+	}
+
 
 }
 

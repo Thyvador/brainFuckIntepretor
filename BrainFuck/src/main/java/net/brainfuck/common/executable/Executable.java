@@ -17,7 +17,7 @@ import java.util.Stack;
  * @author Alexandre HILTCHER
  */
 public abstract class Executable extends AbstractInstruction{
-    private final String name;
+    protected final String name;
     protected List<AbstractInstruction> instructions;
     protected int index = 0;
     protected Stack<Integer> marks;
@@ -56,7 +56,19 @@ public abstract class Executable extends AbstractInstruction{
         return instruction;
     }
 
-    /**
+    public List<String> getArgument() {
+	    return argument;
+	}
+    
+    public String getArgumentString() {
+	    StringBuilder res = new StringBuilder().append("(");
+	    for (String arg : argument) {
+			res.append(arg).append(",");
+		}
+	    return res.append(")").toString();
+	}
+
+	/**
      * CLose the reader and check the brackets.
      *
      * @throws BracketsParseException
@@ -160,13 +172,7 @@ public abstract class Executable extends AbstractInstruction{
     }
 
     @Override
-    public String generate() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (AbstractInstruction instruction : instructions) {
-            stringBuilder.append(instruction.generate());
-        }
-        return stringBuilder.toString();
-    }
+    public abstract String generate();
 
     /**
      * Execute the instruction and write the trace.
@@ -185,10 +191,6 @@ public abstract class Executable extends AbstractInstruction{
             instruction.execute(memory);
             logger.write(reader.getExecutionPointer(), memory);
         }
-    }
-
-    public List<String> getArgument() {
-        return argument;
     }
 
 }

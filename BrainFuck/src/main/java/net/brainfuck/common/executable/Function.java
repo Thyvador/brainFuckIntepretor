@@ -55,4 +55,9 @@ public class Function extends Executable {
         super.closeReader();
         memory.unlock(true);
     }
+
+	@Override
+	public String generate() {
+        return name + getArgumentString() + ";";
+	}
 }
