@@ -54,8 +54,7 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 
 	@Override
 	public String generate() {
-		System.out.println("ProcedureFunctionExecute.generate()");
-		String returnType;
+		/*String returnType;
 		if (compositeInstruction.getClass() == Procedure.class)
 			returnType = "void";
 		else
@@ -63,7 +62,9 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 		StringBuilder stringBuilder = new StringBuilder().append(String.format("%s %s %s {\n%s\n}\n\n", returnType,
 				compositeInstruction.name, compositeInstruction.getArgumentString(),
 				compositeInstruction.generate()));
-		return stringBuilder.toString();
+		return stringBuilder.toString();*/
+		//TODO: changer les noms des arguments par leurs valeurs
+		return compositeInstruction.name + compositeInstruction.getArgumentString() + ";";
 	}
 
 }

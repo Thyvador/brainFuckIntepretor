@@ -108,6 +108,10 @@ public class Initialyzer {
             Language.setJumpTable(executionReader);
         }
 
+		if (argumentAnalyzer.getFlags().contains(Context.GENERATE.getSyntax())) {
+			// mettre les def de fonction ici
+		}
+        
 		executer.setArgumentExecuter(memory, bfImageWriter);
 		interpreter = new Interpreter(executer, executionReader);
 	}

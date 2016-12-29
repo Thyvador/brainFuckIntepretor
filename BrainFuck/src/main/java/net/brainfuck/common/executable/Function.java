@@ -54,6 +54,7 @@ public class Function extends Executable {
 
 	@Override
 	public String generate() {
+		System.out.println("Function.generate()");
         return name + getArgumentString() + ";";
 	}
 }

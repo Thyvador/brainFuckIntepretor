@@ -55,6 +55,7 @@ public class Procedure extends Executable {
 
 	@Override
 	public String generate() {
+		System.out.println("Procedure.generate()");
 		return name + getArgumentString() + ";";
 	}
 }

@@ -5,6 +5,7 @@ import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
+import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
@@ -63,7 +64,7 @@ public class ProcedureFunctionParser {
 
     public Pair<List<AbstractInstruction>, JumpTable> parse(List<String> instructions) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
         BfCompiler bfCompiler = new BfCompiler(contextExecuters, macros);
-
+        
         return bfCompiler.compile(contextExecuters, instructions);
     }
 

@@ -16,6 +16,7 @@ import net.brainfuck.interpreter.instruction.operationinstruction.IncrementInstr
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -53,7 +54,7 @@ public enum Language {
     }
 
     public static void addInstruction(AbstractInstruction interpreter, String aliase){
-        instructionMap.put(aliase, interpreter);
+    	instructionMap.put(aliase, interpreter);
     }
 
     public static void setInstructions(InputStreamReader inputStreamReader,

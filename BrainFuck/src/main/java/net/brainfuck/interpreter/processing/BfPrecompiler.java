@@ -9,6 +9,7 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.SyntaxErrorException;
+import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
@@ -77,6 +78,11 @@ public class BfPrecompiler {
             else
                 abstractInstruction = new Function(procedureName,procedure.getFirst(),
                         procedure.getSecond(),memory, procedureArgument);
+
+            if (contextExecuters.contains(Context.GENERATE)) {
+            	
+            }
+            
             Language.addInstruction(abstractInstruction, procedureName);
         }
     }

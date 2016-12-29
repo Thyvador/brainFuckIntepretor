@@ -25,6 +25,7 @@ public class ExecutionReader extends Executable {
 
 	@Override
 	public String generate() {
+		System.out.println("ExecutionReader.generate()");
 		return name + getArgumentString() + ";";
 	}
 
