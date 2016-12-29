@@ -74,14 +74,34 @@ public class BfImageWriter implements Writer {
 	 */
 	@Override
 	public void write(String hexaChain) throws IOException {
-		try {
-			tmpOs.writeInt(Integer.parseInt(hexaChain, 16));
-			tmpOs.flush();
-		} catch (NumberFormatException e) {
-			// Should not append
-			e.printStackTrace();
-		} catch (java.io.IOException e) {
-			throw new IOException();
+		if (hexaChain.length() > 6) {
+			writeLongChain(hexaChain);
+		}else {
+			try {
+				tmpOs.writeInt(Integer.parseInt(hexaChain, 16));
+				tmpOs.flush();
+			} catch (NumberFormatException e) {
+				// Should not append
+				e.printStackTrace();
+			} catch (java.io.IOException e) {
+				throw new IOException();
+			}
+		}
+	}
+
+	private void writeLongChain(String hexaChain) throws IOException {
+		while(hexaChain.length() > 6){
+			try {
+				String hexa = hexaChain.substring(0,6);
+				hexaChain = hexaChain.substring(6);
+				tmpOs.writeInt(Integer.parseInt(hexa, 16));
+				tmpOs.flush();
+			} catch (NumberFormatException e) {
+				// Should not append
+				e.printStackTrace();
+			} catch (java.io.IOException e) {
+				throw new IOException();
+			}
 		}
 	}
 
