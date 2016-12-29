@@ -127,6 +127,14 @@ public class TestMemory {
 		memory.left();
 	}
 	
+	@Test
+	public void testLock2() throws Exception {
+		for (int i = 0; i < 3; i++) 
+			memory.right();
+		memory.lock();
+		memory.right();
+	}
+	
 	@Test(expected=MemoryOutOfBoundsException.class)
 	public void testLockOutOfBounds() throws Exception {
 		for (int i = 0; i < 30000; i++) 
@@ -166,4 +174,32 @@ public class TestMemory {
 		memory.lock().setArguments((short) 1, (short) 2, (short) 3);
 	}
 
+	@Test
+	public void testUnlock() throws Exception {
+		for (int i = 0; i < 3; i++) 
+			memory.right();
+		memory.lock();
+		memory.unlock(false);
+		memory.left();
+		memory.left();
+		memory.right();
+		memory.right();
+		memory.right();
+		memory.right();
+	}
+	
+	@Test
+	public void testUnlock2() throws Exception {
+		for (int i = 0; i < 3; i++) 
+			memory.right();
+		memory.lock();
+		memory.unlock(true);
+		memory.left();
+		memory.left();
+		memory.right();
+		memory.right();
+		memory.right();
+		memory.right();
+	}
+	
 }
