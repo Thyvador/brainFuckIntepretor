@@ -30,8 +30,16 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+        memory.lock();
         memory.setArguments(values);
         compositeInstruction.execute(memory);
+    }
+
+    @Override
+    public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
+        memory.lock();
+        memory.setArguments(values);
+        super.trace(memory, reader);
     }
 
     @Override

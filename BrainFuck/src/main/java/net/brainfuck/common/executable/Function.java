@@ -28,20 +28,16 @@ public class Function extends Executable {
         this.memory = memory;
     }
 
-    public void start() throws MemoryOutOfBoundsException {
-        memory.lock();
-    }
+
 
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
-        start();
         super.execute(memory);
         memory.unlock(true);
     }
 
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
-        start();
         super.trace(memory, reader);
         memory.unlock(true);
     }
