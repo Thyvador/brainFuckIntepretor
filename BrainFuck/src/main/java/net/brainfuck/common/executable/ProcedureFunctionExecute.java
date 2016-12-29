@@ -11,16 +11,16 @@ import java.util.List;
  * Created by davidLANG on 28/12/2016.
  */
 public class ProcedureFunctionExecute extends AbstractInstruction {
-    private List<Integer> values;
+    private List<Short> values;
     private Executable compositeInstruction;
 
-    public ProcedureFunctionExecute(List<Integer> values, Executable compositeInstruction) throws SyntaxErrorException {
+    public ProcedureFunctionExecute(List<Short> values, Executable compositeInstruction) throws SyntaxErrorException {
         checkNumberOfArgument(values, compositeInstruction);
         this.values = values;
         this.compositeInstruction = compositeInstruction;
     }
 
-    private void checkNumberOfArgument(List<Integer> values, Executable compositeInstruction) throws SyntaxErrorException {
+    private void checkNumberOfArgument(List<Short> values, Executable compositeInstruction) throws SyntaxErrorException {
         int size1 = values.size();
         int size2 = compositeInstruction.getArgument() != null ?
                 compositeInstruction.getArgument().size() : -1;
@@ -30,7 +30,7 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
-        //todo memory à gérer
+        memory.setArguments(values);
         compositeInstruction.execute(memory);
     }
 
