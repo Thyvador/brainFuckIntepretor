@@ -1,9 +1,9 @@
 package net.brainfuck.interpreter.instruction.jumpbackinstruction;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 
 
@@ -14,8 +14,9 @@ public class BackInstruction extends JumpBackInstruction {
 
 	/**
 	 * Instantiates a new back instruction.
+	 * @param executionReader
 	 */
-	public BackInstruction(ExecutionReader executionReader) {
+	public BackInstruction(Executable executionReader) {
 		super(Language.BACK, executionReader);
 	}
 
@@ -40,7 +41,7 @@ public class BackInstruction extends JumpBackInstruction {
 		}
 	}
 
-	private void nonLinearExecute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException {
+	private void nonLinearExecute(Memory memory, Executable reader) throws MemoryOutOfBoundsException, IOException {
 		if (memory.get() != 0) {
 			reader.seek();
 		}

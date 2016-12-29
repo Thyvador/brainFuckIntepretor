@@ -1,41 +1,39 @@
-package net.brainfuck.common.executables;
+package net.brainfuck.common.executable;
 
-import net.brainfuck.common.executable.Executable;
+import net.brainfuck.common.Memory;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static net.brainfuck.interpreter.Language.*;
-import static org.junit.Assert.assertEquals;
+import static net.brainfuck.interpreter.Language.BACK;
+import static net.brainfuck.interpreter.Language.JUMP;
+import static org.junit.Assert.*;
 
 /**
- * Created by thyvador on 21/12/16.
+ * Created by alexh on 29/12/2016.
  */
-public class ExecutablesTest {
+public class ExecutableTest {
     private Executable executable;
     private List<AbstractInstruction> list;
     private JumpTable jumpTable;
 
     @Before
     public void setUp() throws Exception {
-        list = Arrays.asList(
-                RIGHT.getInterpreter(),
-                LEFT.getInterpreter(),
-                INCR.getInterpreter(),
-                DECR.getInterpreter(),
-                JUMP.getInterpreter(),
-                BACK.getInterpreter()
-        );
+        list = Arrays.asList(RIGHT.getInterpreter(), LEFT.getInterpreter(), INCR.getInterpreter(), DECR.getInterpreter(),
+                JUMP.getInterpreter(), RIGHT.getInterpreter(), BACK.getInterpreter());
         jumpTable = new JumpTable(true);
-        jumpTable.addInstruction(JUMP.getInterpreter(),4);
-        jumpTable.addInstruction(BACK.getInterpreter(), 5);
+        jumpTable.addInstruction(JUMP.getInterpreter(), 6);
+        jumpTable.addInstruction(BACK.getInterpreter(), 4);
+        Language.setInstructions(null, null);
         executable = new Executable(null, list, jumpTable, null) {
             @Override
             public AbstractInstruction getNext() {
@@ -62,6 +60,7 @@ public class ExecutablesTest {
                 super.seek();
             }
         };
+        Language.setJumpTable(executable);
 
     }
 
@@ -72,6 +71,7 @@ public class ExecutablesTest {
         assertEquals(INCR, executable.getNext());
         assertEquals(DECR, executable.getNext());
         assertEquals(JUMP, executable.getNext());
+        assertEquals(RIGHT, executable.getNext());
         assertEquals(BACK, executable.getNext());
         assertEquals(null, executable.getNext());
     }
@@ -89,10 +89,10 @@ public class ExecutablesTest {
 
     @Test
     public void mark() throws Exception {
-        for (int i = 0; i <list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
+            executable.getNext();
             executable.mark();
             assertEquals(i, (int) executable.getMarks().peek());
-            executable.getNext();
         }
     }
 
@@ -122,8 +122,43 @@ public class ExecutablesTest {
 
     @Test
     public void seek() throws Exception {
-
+        for (int i = 0; i < 5; i++) executable.getNext();
+        executable.seek();
+        assertEquals(null, executable.getNext());
     }
 
+    @Test
+    public void seek2() throws Exception {
+        for (int i = 0; i < 7; i++) executable.getNext();
+        executable.seek();
+        assertEquals(RIGHT, executable.getNext());
+    }
+
+
+    @Test
+    public void execute() throws Exception {
+        Memory memory = new Memory();
+        executable.execute(memory);
+        for (int i = 0; i < 29999; i++) {
+            assertEquals(0, memory.get());
+            memory.right();
+        }
+    }
+
+    @Test
+    public void rewrite() throws Exception {
+        assertEquals("><+-[>]", executable.rewrite());
+    }
+
+    @Test
+    public void translate() throws Exception {
+        assertEquals("0000ff9400d3ffffff4b0082ff7f000000ffff0000", executable.translate());
+    }
+
+    @Ignore
+    @Test
+    public void generate() throws Exception {
+
+    }
 
 }

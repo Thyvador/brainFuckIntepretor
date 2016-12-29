@@ -9,7 +9,7 @@ pipi 42
 !end
 
 
-!function titi(toto)
+!function titi(arg)
 >
 !end
 

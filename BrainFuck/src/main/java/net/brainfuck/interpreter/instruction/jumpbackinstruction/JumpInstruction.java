@@ -1,11 +1,11 @@
 package net.brainfuck.interpreter.instruction.jumpbackinstruction;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
@@ -15,8 +15,9 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
 public class JumpInstruction extends JumpBackInstruction {
 	/**
 	 * Instantiates a new jump instruction.
+	 * @param executionReader
 	 */
-	public JumpInstruction(ExecutionReader executionReader) {
+	public JumpInstruction(Executable executionReader) {
 		super(Language.JUMP, executionReader);
 	}
 
@@ -57,7 +58,7 @@ public class JumpInstruction extends JumpBackInstruction {
 		}
 	}
 
-	private void nonLinearExecute(Memory memory, ExecutionReader reader)
+	private void nonLinearExecute(Memory memory, Executable reader)
 			throws MemoryOutOfBoundsException, IOException {
 		// Reach corresponding closing bracket
 		if (memory.get() == 0) {
