@@ -71,15 +71,14 @@ public class BfPrecompiler {
             // ICI ICI ICI
             procedureName = procedureParser.parseName(definition);
             procedureArgument = procedureParser.parseArgument(definition);
-            procedure = procedureParser.parse(instructions);
             Executable executable;
             if (definition.matches("^!procedure.*"))
                 executable = new Procedure(procedureName, memory, procedureArgument);
             else
                 executable = new Function(procedureName,memory, procedureArgument);
-
+            //Language.addInstruction(executable, procedureName);
+            procedure = procedureParser.parse(instructions);
             executable.addPair(procedure);
-            Language.addInstruction(executable, procedureName);
             if (contextExecuters.contains(Context.GENERATE)) {
             	
             }
