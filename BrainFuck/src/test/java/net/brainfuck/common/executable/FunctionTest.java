@@ -57,9 +57,10 @@ public class FunctionTest {
 	@Test
 	public void testExecute() throws MemoryOutOfBoundsException, BracketsParseException, SegmentationFaultException, MemoryOverFlowException, FileNotFoundIn, IOException {
 		Memory memory = new Memory();
-		function = new Function("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
-				new IncrementInstruction()}),null, memory, new ArrayList<String>());
-
+		function = new Function("test", memory, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null);
+		function.addPair(pair);
 		memory.lock();
 		function.execute(memory);
 		assertEquals(2, memory.get());
@@ -68,16 +69,20 @@ public class FunctionTest {
 	@Test(expected = BracketsParseException.class)
 	public void testCloseReader() throws BracketsParseException, MemoryOutOfBoundsException {
 		Memory memory = new Memory();
-		function = new Function("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
-				new IncrementInstruction()}),null, memory, new ArrayList<String>());
+		function = new Function("test", memory, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null);
+		function.addPair(pair);
 		function.closeReader();
 	}
 
 	@Test
 	public void testCloseReader2() throws BracketsParseException, MemoryOutOfBoundsException {
 		Memory memory = new Memory();
-		function = new Function("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
-				new IncrementInstruction()}),null, memory, new ArrayList<String>());
+		function = new Function("test", memory, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null);
+		function.addPair(pair);
 		memory.lock();
 		function.closeReader();
 		assertTrue(memory.isScopeEmpty());

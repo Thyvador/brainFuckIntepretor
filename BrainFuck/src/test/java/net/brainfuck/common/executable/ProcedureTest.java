@@ -10,6 +10,7 @@ import java.util.EmptyStackException;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
 import net.brainfuck.exception.*;
+import net.brainfuck.common.Pair;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -55,9 +56,10 @@ public class ProcedureTest {
 	@Test
 	public void testExecute() throws MemoryOutOfBoundsException, BracketsParseException, SegmentationFaultException, MemoryOverFlowException, FileNotFoundIn, IOException {
 		Memory memory = new Memory();
-		procedure= new Procedure("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
-				new IncrementInstruction()}),null, memory, new ArrayList<String>());
-
+		procedure= new Procedure("test", memory, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null);
+		procedure.addPair(pair);
 		memory.lock();
 		procedure.execute(memory);
 		assertEquals(2, memory.get());
@@ -66,16 +68,20 @@ public class ProcedureTest {
 	@Test(expected = BracketsParseException.class)
 	public void testCloseReader() throws BracketsParseException, MemoryOutOfBoundsException {
 		Memory memory = new Memory();
-		procedure = new Procedure("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
-				new IncrementInstruction()}),null, memory, new ArrayList<String>());
+		procedure = new Procedure("test",  memory, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null);
+		procedure.addPair(pair);
 		procedure.closeReader();
 	}
 
 	@Test
 	public void testCloseReader2() throws BracketsParseException, MemoryOutOfBoundsException {
 		Memory memory = new Memory();
-		procedure = new Procedure("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
-				new IncrementInstruction()}),null, memory, new ArrayList<String>());
+		procedure = new Procedure("test", memory, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null);
+		procedure.addPair(pair);
 		memory.lock();
 		procedure.closeReader();
 		assertTrue(memory.isScopeEmpty());
