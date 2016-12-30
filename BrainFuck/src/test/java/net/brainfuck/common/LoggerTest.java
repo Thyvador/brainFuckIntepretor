@@ -74,13 +74,13 @@ public class LoggerTest {
 	}
 
 	/**
-	 * Wait argumentAnalyzer random time ( between 0 and 500ms ) to simulate argumentAnalyzer program, then check if the logger return the real execution time.
+	 * Wait argumentAnalyzer random time ( between 0 and 500ms ) to simulate argumentAnalyzer program,
+	 * then check if the logger return the real execution time.
 	 *
 	 */
-	//TODO : ce test ne marche pas sur tout les pc
-	@Ignore
 	@Test
 	public void startExecTime() throws Exception {
+		Memory mem = new Memory();
 		logger.reset();
 		long temps = System.currentTimeMillis();
 		logger.startExecTime();
@@ -88,9 +88,9 @@ public class LoggerTest {
 		while (System.currentTimeMillis() - temps<randomTimeExec){
 		}
 
-		String str = logger.showResume(new Memory());
-		System.out.println(str);
-		assertTrue(str.contains("EXEC_TIME : "+(System.currentTimeMillis()-temps)+" ms"));
+		String str = logger.showResume(mem);
+		int time = Integer.parseInt(str.split("EXEC_TIME : ")[1].split(" ms")[0]);
+		assertEquals(randomTimeExec,time,50);
 	}
 
 	/**
