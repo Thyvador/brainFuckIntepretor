@@ -144,45 +144,49 @@ public class TestMemory {
 	
 	@Test
 	public void testSetArguments() throws Exception {
-		for (int i = 0; i < 3; i++) 
-			memory.right();
-		memory.lock().setArguments((short) 1, (short) 2);
+		memory.right();
+		for (int i=0; i<3; i++)
+			memory.incr();
+		memory.right();
+		for (int i=0; i<4; i++)
+			memory.incr();
+		memory.lock().setArguments(1, 2);
 		memory.left();
-		assertSame(memory.get(), (short)2);
+		assertSame(memory.get(), (short) 4);
 		memory.left();
-		assertSame(memory.get(), (short)1);
+		assertSame(memory.get(), (short) 3);
 	}
 	
 	@Test
 	public void testSetArguments2() throws Exception {
 		for (int i = 0; i < 3; i++) 
 			memory.right();
-		memory.lock().setArguments((short) 1, (short) 256);
+		memory.lock().setArguments(1, 256);
 		memory.left();
-		assertSame(memory.get(), (short)256);
+		assertSame(memory.get(), (short) 0);
 		memory.left();
-		assertSame(memory.get(), (short)1);
+		assertSame(memory.get(), (short) 0);
 	}
 	
 	@Test(expected=MemoryOutOfBoundsException.class)
 	public void testSetArgumentsOverflow() throws Exception {
 		for (int i = 0; i < 3; i++) 
 			memory.right();
-		memory.lock().setArguments((short) 1, (short) 30000);
+		memory.lock().setArguments(1, 30000);
 	}
 	
 	@Test(expected=MemoryOutOfBoundsException.class)
 	public void testSetArgumentsOverflow2() throws Exception {
 		for (int i = 0; i < 3; i++) 
 			memory.right();
-		memory.lock().setArguments((short) 1, (short) -1);
+		memory.lock().setArguments(1, -1);
 	}
 	
 	@Test(expected=MemoryOutOfBoundsException.class)
 	public void testSetArgumentsOutOfBounds() throws Exception {
 		for (int i = 0; i < 30000-2; i++) 
 			memory.right();
-		memory.lock().setArguments((short) 1, (short) 2, (short) 3);
+		memory.lock().setArguments(1, 2, 3);
 	}
 
 	@Test
