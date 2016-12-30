@@ -2,6 +2,7 @@ package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
 import net.brainfuck.common.executable.ExecutionReader;
+import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.interpreter.Language;
@@ -71,6 +72,11 @@ public class IncrementInstructionTest {
 	public void translate() throws Exception {
 		instruction = new IncrementInstruction();
 		assertEquals("ffffff",instruction.translate());
+	}
+	
+	@Test
+	public void testGenerate() throws Exception {
+		assertEquals("(*ptr)++;",instruction.generate() );
 	}
 
 }

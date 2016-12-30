@@ -85,5 +85,9 @@ public class InInstructionTest {
 		assertEquals("ffff00", instruction.translate() );
 	}
 
+	@Test
+	public void testGenerate() throws Exception {
+		assertEquals("(*ptr) = getchar();",instruction.generate() );
+	}
 
 }

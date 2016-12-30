@@ -2,6 +2,7 @@ package net.brainfuck.interpreter.instruction;
 
 import net.brainfuck.common.*;
 import net.brainfuck.common.executable.ExecutionReader;
+import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 import org.junit.Before;
@@ -72,6 +73,11 @@ public class JumpInstructionTest {
 	public void translate() throws Exception {
 		JumpInstruction instruction = new JumpInstruction(null);
 		assertEquals("ff7f00", instruction.translate() );
+	}
+	
+	@Test
+	public void testGenerate() throws Exception {
+		assertEquals("while(*ptr) {",instruction.generate() );
 	}
 
 }

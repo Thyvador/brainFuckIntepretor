@@ -64,4 +64,9 @@ public class DecrementInstructionTest {
 	public void translate() throws Exception {
 		assertEquals("4b0082", instruction.translate());
 	}
+	
+	@Test
+	public void testGenerate() throws Exception {
+		assertEquals("(*ptr)--;",instruction.generate() );
+	}
 }

@@ -59,5 +59,10 @@ public class OutInstructionTest {
 	public void translate() throws Exception{
 	assertEquals("00ff00",instruction.translate());
 	}
+	
+	@Test
+	public void testGenerate() throws Exception {
+		assertEquals("putchar(*ptr);",instruction.generate() );
+	}
 
 }

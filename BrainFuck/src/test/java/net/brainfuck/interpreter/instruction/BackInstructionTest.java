@@ -3,6 +3,7 @@ package net.brainfuck.interpreter.instruction;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
 import org.junit.After;
@@ -98,5 +99,10 @@ public class BackInstructionTest {
         instruction = new BackInstruction(reader);
         assertEquals("ff0000", instruction.translate());
     }
+    
+	@Test
+	public void testGenerate() throws Exception {
+		assertEquals("}",instruction.generate() );
+	}
 
 }

@@ -9,14 +9,14 @@ import net.brainfuck.interpreter.instruction.moveinstruction.LeftInstruction;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 import java.io.BufferedWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * @author Alexandre Hiltcher, Francois Melkonian
@@ -69,4 +69,9 @@ public class LeftInstructionTest {
 		assertEquals("9400d3",instruction.translate() );
 	}
 
+	@Test
+	public void testGenerate() throws Exception {
+		assertEquals("ptr--;",instruction.generate() );
+	}
+	
 }

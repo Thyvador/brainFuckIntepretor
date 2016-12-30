@@ -63,5 +63,10 @@ public class RightInstructionTest {
 	public void translate() throws Exception {
 		assertEquals("0000ff",instruction.translate() );
 	}
-
+	
+	@Test
+	public void testGenerate() throws Exception {
+		assertEquals("ptr++;", instruction.generate() );
+	}
+	
 }
