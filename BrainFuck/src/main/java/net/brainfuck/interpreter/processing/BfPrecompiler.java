@@ -3,6 +3,7 @@ package net.brainfuck.interpreter.processing;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
+import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.Function;
 import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.exception.BracketsParseException;
@@ -70,20 +71,20 @@ public class BfPrecompiler {
             // ICI ICI ICI
             procedureName = procedureParser.parseName(definition);
             procedureArgument = procedureParser.parseArgument(definition);
-	        procedure = procedureParser.parse(instructions);
-            AbstractInstruction abstractInstruction;
+            procedure = procedureParser.parse(instructions);
+            Executable executable;
             if (definition.matches("^!procedure.*"))
-                abstractInstruction = new Procedure(procedureName,procedure.getFirst(),
-                        procedure.getSecond(),memory, procedureArgument);
+                executable = new Procedure(procedureName, memory, procedureArgument);
             else
-                abstractInstruction = new Function(procedureName,procedure.getFirst(),
-                        procedure.getSecond(),memory, procedureArgument);
+                executable = new Function(procedureName,memory, procedureArgument);
 
+            executable.addPair(procedure);
+            Language.addInstruction(executable, procedureName);
             if (contextExecuters.contains(Context.GENERATE)) {
             	
             }
             
-            Language.addInstruction(abstractInstruction, procedureName);
+
         }
     }
 

@@ -68,7 +68,7 @@ public class BfReader implements Reader {
 			stringBuilder.append(Character.toString((char) c));
 			c = reader.read();
 		}
-		c = ignoreComment();
+		c = ignoreComment(c);
 		next = stringBuilder.toString().trim();
 		oldvar = c;
 	}
@@ -97,9 +97,8 @@ public class BfReader implements Reader {
 	 * @throws java.io.IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	private int ignoreComment() throws java.io.IOException {
-		int c;
-		c = reader.read();
+	private int ignoreComment(int nextVal) throws java.io.IOException {
+		int c = nextVal;
 		while (!isNewLine(c) && c != EOF) {
 			c = reader.read();
 		}
@@ -120,7 +119,7 @@ public class BfReader implements Reader {
 
 		while (!end) {
 			if (isComment(nextVal)) {
-				nextVal = ignoreComment();
+				nextVal = ignoreComment(nextVal);
 			} else if (isIgnoredCharacter(nextVal)){
 				nextVal = ignoreCharacters(nextVal);
 			} else {
