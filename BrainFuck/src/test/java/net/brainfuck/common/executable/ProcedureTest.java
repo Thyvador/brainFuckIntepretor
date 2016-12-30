@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.EmptyStackException;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.Pair;
 import net.brainfuck.exception.*;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -32,7 +33,7 @@ public class ProcedureTest {
 				+ "(*ptr)++;(*ptr)++;\n"
 				+ "}\n\n", procedure.generate());
 	}
-	
+
 	@Test
 	public void testGenerateWithArgs() {
 		Procedure procedure = new Procedure("test",  null, Arrays.asList(new String[] {"arg1", "arg2"}));
