@@ -70,4 +70,23 @@ public abstract class AbstractInstruction implements InstructionInterface {
 
 	@Override
 	public abstract void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof AbstractInstruction)) return false;
+
+		AbstractInstruction that = (AbstractInstruction) o;
+
+		if (languageInstr != that.languageInstr) return false;
+		return logger != null ? logger.equals(that.logger) : that.logger == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = languageInstr != null ? languageInstr.hashCode() : 0;
+		result = 31 * result + (logger != null ? logger.hashCode() : 0);
+		return result;
+	}
 }

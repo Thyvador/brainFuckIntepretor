@@ -19,12 +19,10 @@ public class Function extends Executable {
 
     /**
      * Constructs a default function.
-     * @param instructions the instruction list f the function.
-     * @param jumpTable the jumpTable of the function.
      * @param memory the memory of the program.
      */
-    public Function(String functionName, List<AbstractInstruction> instructions, JumpTable jumpTable, Memory memory, List<String> argument) {
-        super(functionName, instructions, jumpTable, argument);
+    public Function(String functionName, Memory memory, List<String> argument) {
+        super(functionName, argument);
         this.memory = memory;
     }
 

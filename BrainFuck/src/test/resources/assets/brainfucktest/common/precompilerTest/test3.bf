@@ -3,15 +3,10 @@
 # Utiliser par les tests #
 ##########################
 
-!function titi(arg1, arg2, arg3)
-++
+!procedure test(arg1, arg2, arg3)
+++>++
 !end
 
-!procedure da(arg)
-<
-OUT
+!function test2(arg1, arg2, arg3)
+++>++
 !end
-
-#titi(42,42,42)
-toto(33)
-da(0)

@@ -1,6 +1,7 @@
 package net.brainfuck.common.executable;
 
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.Pair;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
@@ -20,15 +21,15 @@ public class Procedure extends Executable {
      * Constructs a default procedure.
      *
      * @param procedureName the procedure name
-     * @param instructions the instruction list f the function.
-     * @param jumpTable    the jumpTable of the function.
+
      * @param memory       the memory of the program.
      * @throws MemoryOutOfBoundsException
      */
-    public Procedure(String procedureName, List<AbstractInstruction> instructions, JumpTable jumpTable, Memory memory, List<String> argument){
-        super(procedureName, instructions, jumpTable, argument);
+    public Procedure(String procedureName, Memory memory, List<String> argument){
+        super(procedureName, argument);
         this.memory = memory;
     }
+
 
 
 

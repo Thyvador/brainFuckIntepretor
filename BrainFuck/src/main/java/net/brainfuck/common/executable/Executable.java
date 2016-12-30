@@ -2,6 +2,7 @@ package net.brainfuck.common.executable;
 
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.Pair;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
@@ -32,18 +33,30 @@ public abstract class Executable extends AbstractInstruction {
     /**
      * Constructs a default Executable.
      *
+     */
+    public Executable(String name, List<String> argument) {
+        super();
+        this.name = name;
+        this.argument = argument;
+        marks = new Stack<>();
+        executableRegistry.add(this);
+    }
+
+    /**
+     * Constructs a default Executable.
+     *
      * @param instructions
      * @param jumpTable
      */
     public Executable(String name, List<AbstractInstruction> instructions, JumpTable jumpTable, List<String> argument) {
-        super();
-        Language.addInstruction(this, name);
-        this.name = name;
-        this.instructions = instructions;
+        this(name, argument);
         this.jumpTable = jumpTable;
-        this.argument = argument;
-        marks = new Stack<>();
-        executableRegistry.add(this);
+        this.instructions = instructions;
+    }
+
+    public void addPair(Pair<List<AbstractInstruction>, JumpTable> pair) {
+        this.jumpTable = pair.getSecond();
+        this.instructions = pair.getFirst();
     }
 
     /**

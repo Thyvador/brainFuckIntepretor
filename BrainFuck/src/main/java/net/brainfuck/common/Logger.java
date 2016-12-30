@@ -121,6 +121,10 @@ public class Logger {
 		numInstructions++;
 	}
 
+	/**
+	 * Count the number of instruction read.
+	 */
+	public void incrInstruction(int n) { numInstructions += n; }
 
 	/**
 	 * Save the current timestamp of the start of the program
