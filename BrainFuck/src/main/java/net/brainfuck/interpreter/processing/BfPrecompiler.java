@@ -76,13 +76,9 @@ public class BfPrecompiler {
                 executable = new Procedure(procedureName, memory, procedureArgument);
             else
                 executable = new Function(procedureName,memory, procedureArgument);
-            //Language.addInstruction(executable, procedureName);
+            Language.addInstruction(executable, procedureName);
             procedure = procedureParser.parse(instructions);
             executable.addPair(procedure);
-            if (contextExecuters.contains(Context.GENERATE)) {
-            	
-            }
-            
 
         }
     }

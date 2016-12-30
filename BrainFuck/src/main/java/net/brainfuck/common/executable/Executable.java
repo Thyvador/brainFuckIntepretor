@@ -36,7 +36,6 @@ public abstract class Executable extends AbstractInstruction {
      */
     public Executable(String name, List<String> argument) {
         super();
-        Language.addInstruction(this, name);
         this.name = name;
         this.argument = argument;
         marks = new Stack<>();
