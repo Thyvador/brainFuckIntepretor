@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import net.brainfuck.common.Pair;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
@@ -20,11 +21,13 @@ public class ProcedureFunctionExecuteTest {
 	public void setUp() throws Exception {
 	}
 
+	@Ignore
 	@Test
 	public void testRewrite() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testTranslate() {
 		fail("Not yet implemented");
@@ -70,11 +73,13 @@ public class ProcedureFunctionExecuteTest {
 		assertEquals("ptr++;(*ptr) = test(ptr, memory[1], memory[2]);", pfe.generate());
 	}
 
+	@Ignore
 	@Test
 	public void testTrace() {
 		fail("Not yet implemented");
 	}
 
+	@Ignore
 	@Test
 	public void testExecute() {
 		fail("Not yet implemented");
