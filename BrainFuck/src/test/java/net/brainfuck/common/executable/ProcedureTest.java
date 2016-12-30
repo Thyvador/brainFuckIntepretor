@@ -9,6 +9,7 @@ import java.util.EmptyStackException;
 
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.*;
+import net.brainfuck.common.Pair;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
