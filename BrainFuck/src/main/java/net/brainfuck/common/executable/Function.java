@@ -56,8 +56,7 @@ public class Function extends Executable {
 	public String generate() {
 		StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s %s {\n",
 				name, getArgumentString()));
-		for (AbstractInstruction instr: instructions)
-			stringBuilder.append(instr.generate());
-		return stringBuilder.append("\n}\n\n").toString();
+		stringBuilder.append(super.generate());
+		return stringBuilder.append("return *ptr;\n}\n\n").toString();
 	}
 }

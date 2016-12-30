@@ -57,8 +57,7 @@ public class Procedure extends Executable {
 	public String generate() {
 		StringBuilder stringBuilder = new StringBuilder().append(String.format("void %s %s {\n",
 				name, getArgumentString()));
-		for (AbstractInstruction instr: instructions)
-			stringBuilder.append(instr.generate());
+		stringBuilder.append(super.generate());
 		return stringBuilder.append("\n}\n\n").toString();
 	}
 }

@@ -64,13 +64,9 @@ public abstract class Executable extends AbstractInstruction {
 	}
     
     public String getArgumentString() {
-	    StringBuilder res = new StringBuilder().append("(");
-	    boolean first = true;
+	    StringBuilder res = new StringBuilder().append("(int *ptr");
 	    for (String arg : argument) {
-	    	if (!first)
-	    		res.append(",");
-			res.append(arg);
-			first = false;
+	    	res.append(", int ").append(arg);
 		}
 	    return res.append(")").toString();
 	}
@@ -190,7 +186,15 @@ public abstract class Executable extends AbstractInstruction {
     }
 
     @Override
-    public abstract String generate();
+    public String generate() {
+    	StringBuilder stringBuilder = new StringBuilder();
+		for (String arg: argument)
+			stringBuilder.append(String.format("(*(ptr++)) = %s;", arg));
+		stringBuilder.append("\n");
+		for (AbstractInstruction instr: instructions)
+			stringBuilder.append(instr.generate());
+		return stringBuilder.toString();
+    }
 
     /**
      * Execute the instruction and write the trace.

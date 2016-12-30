@@ -26,13 +26,13 @@ public class ExecutionReader extends Executable {
 
 	@Override
 	public String generate() {
-		StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s %s {\n",
-				name, getArgumentString()));
+		StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s () {\n",
+				name));
 		stringBuilder.append("int memory[30000] = {};\n");
-		stringBuilder.append("int *ptr = *memory;\n");
+		stringBuilder.append("int *ptr = *memory;\n\n");
 		for (AbstractInstruction instr: instructions)
 			stringBuilder.append(instr.generate());
-		return stringBuilder.append("return 0;\n}\n\n").toString();
+		return stringBuilder.append("\nreturn 0;\n}\n\n").toString();
 	}
 
 

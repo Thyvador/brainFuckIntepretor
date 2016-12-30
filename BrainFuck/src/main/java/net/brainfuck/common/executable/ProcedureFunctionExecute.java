@@ -69,12 +69,9 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 		if (compositeInstruction.getClass() == Function.class)
 			res.append("(*ptr) = ");
 		res.append(compositeInstruction.name).append("(");
-		boolean first = true;
-	    for (Short v : values) {
-	    	if (!first)
-	    		res.append(",");
-			res.append(String.format("memory[%d]", v));
-			first = false;
+		res.append("ptr");
+		for (Short v : values) {
+			res.append(String.format(", memory[%d]", v));
 		}
 	    return res.append(");").toString();
 	}
