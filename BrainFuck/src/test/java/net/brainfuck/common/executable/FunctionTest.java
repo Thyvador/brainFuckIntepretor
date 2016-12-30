@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import net.brainfuck.common.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,8 +22,9 @@ public class FunctionTest {
 
 	@Test
 	public void testGenerateWithoutArgs() {
-		function = new Function("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), 
-				null, null, new ArrayList<String>());
+		Function function = new Function("test",  null, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
+		function.addPair(pair);
 		assertEquals("int test (int *ptr) {\n\n"
 				+ "(*ptr)++;(*ptr)++;\n"
 				+ "return *ptr;\n"
@@ -31,8 +33,9 @@ public class FunctionTest {
 	
 	@Test
 	public void testGenerateWithArgs() {
-		function = new Function("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), 
-				null, null, Arrays.asList(new String[] {"arg1", "arg2"}));
+		Function function = new Function("test",  null, Arrays.asList(new String[] {"arg1", "arg2"}));
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
+		function.addPair(pair);
 		assertEquals("int test (int *ptr, int arg1, int arg2) {\n"
 				+ "(*(ptr++)) = arg1;(*(ptr++)) = arg2;\n"
 				+ "(*ptr)++;(*ptr)++;\n"

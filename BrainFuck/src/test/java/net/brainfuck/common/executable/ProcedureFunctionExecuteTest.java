@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import net.brainfuck.common.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,32 +32,40 @@ public class ProcedureFunctionExecuteTest {
 	
 	@Test
 	public void testGenerateProcedureWithoutArgs() throws Exception {
-		pfe = new ProcedureFunctionExecute(new ArrayList<Integer>(), new Procedure("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), 
-				null, null, new ArrayList<String>()));
+		Procedure procedure = new Procedure("test",  null, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
+		procedure.addPair(pair);
+		pfe = new ProcedureFunctionExecute(new ArrayList<Integer>(), procedure);
 		System.out.println(pfe.generate());
 		assertEquals("ptr++;test(ptr);", pfe.generate());
 	}
 
 	@Test
 	public void testGenerateProcedureWithArgs() throws Exception {
-		pfe = new ProcedureFunctionExecute(Arrays.asList(new Integer[]{1, 2}), new Procedure("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), 
-				null, null, Arrays.asList(new String[] {"arg1", "arg2"})));
+		Procedure procedure = new Procedure("test", null, Arrays.asList(new String[] {"arg1", "arg2"}));
+		Pair pair = new Pair( Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
+		procedure.addPair(pair);
+		pfe = new ProcedureFunctionExecute(Arrays.asList(new Integer[]{1, 2}), procedure);
 		System.out.println(pfe.generate());
 		assertEquals("ptr++;test(ptr, memory[1], memory[2]);", pfe.generate());
 	}
 	
 	@Test
 	public void testGenerateFunctionWithoutArgs() throws Exception {
-		pfe = new ProcedureFunctionExecute(new ArrayList<Integer>(), new Function("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), 
-				null, null, new ArrayList<String>()));
+		Function function = new Function("test",  null, new ArrayList<String>());
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
+		function.addPair(pair);
+		pfe = new ProcedureFunctionExecute(new ArrayList<Integer>(), function);
 		System.out.println(pfe.generate());
 		assertEquals("ptr++;(*ptr) = test(ptr);", pfe.generate());
 	}
 
 	@Test
 	public void testGenerateFunctionWithArgs() throws Exception {
-		pfe = new ProcedureFunctionExecute(Arrays.asList(new Integer[]{1, 2}), new Function("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), 
-				null, null, Arrays.asList(new String[] {"arg1", "arg2"})));
+		Function function =  new Function("test",  null, Arrays.asList(new String[] {"arg1", "arg2"}));
+		Pair pair = new Pair(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
+		function.addPair(pair);
+		pfe = new ProcedureFunctionExecute(Arrays.asList(new Integer[]{1, 2}), function);
 		System.out.println(pfe.generate());
 		assertEquals("ptr++;(*ptr) = test(ptr, memory[1], memory[2]);", pfe.generate());
 	}
