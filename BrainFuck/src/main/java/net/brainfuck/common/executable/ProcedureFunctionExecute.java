@@ -54,17 +54,6 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 
 	@Override
 	public String generate() {
-		/*String returnType;
-		if (compositeInstruction.getClass() == Procedure.class)
-			returnType = "void";
-		else
-			returnType = "int";
-		StringBuilder stringBuilder = new StringBuilder().append(String.format("%s %s %s {\n%s\n}\n\n", returnType,
-				compositeInstruction.name, compositeInstruction.getArgumentString(),
-				compositeInstruction.generate()));
-		return stringBuilder.toString();*/
-		//TODO: changer les noms des arguments par leurs valeurs
-		//return compositeInstruction.name + compositeInstruction.getArgumentString() + ";";
 		StringBuilder res = new StringBuilder("ptr++;");
 		if (compositeInstruction.getClass() == Function.class)
 			res.append("(*ptr) = ");
