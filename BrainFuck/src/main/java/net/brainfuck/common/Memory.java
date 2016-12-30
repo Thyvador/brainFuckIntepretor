@@ -4,10 +4,8 @@ import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
+import net.brainfuck.exception.*;
 import net.brainfuck.exception.Exception;
-import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.exception.MemoryOverFlowException;
-import net.brainfuck.exception.SegmentationFaultException;
 
 /**
  * The <code>Memory</code> class represents the memory of the BrainFuck interpreter.
@@ -233,7 +231,7 @@ public class Memory {
 	 * @throws MemoryOutOfBoundsException
 	 *             the memory out of bounds exception
 	 */
-	public Memory unlock(boolean returnValue) throws MemoryOutOfBoundsException {
+	public Memory unlock(boolean returnValue) throws MemoryOutOfBoundsException, BracketsParseException {
 		short tmp = get();
 		try {
 			setIndex(scope.pop());
@@ -241,6 +239,8 @@ public class Memory {
 				set(tmp);
 		} catch (SegmentationFaultException | MemoryOverFlowException e1) {
 			// Might not append
+		} catch (EmptyStackException e){
+			throw new BracketsParseException();
 		}
 		return this;
 	}
@@ -293,5 +293,13 @@ public class Memory {
 			}
 		}
 		return builder.toString();
+	}
+
+	/**
+	 * Return true if the scope stack is empty, false otherwise.
+	 * @return true if the scope stack is empty.
+	 */
+	public boolean isScopeEmpty(){
+		return scope.isEmpty();
 	}
 }

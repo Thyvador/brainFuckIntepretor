@@ -6,6 +6,7 @@ import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
+import net.brainfuck.executer.TraceExecuter;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import org.junit.Test;
 
@@ -42,7 +43,9 @@ public class InterpreterTest {
 	    e.setArgumentExecuter(m,null);
         Interpreter i = new Interpreter(e,executable);
         i.interprate();
+        m.right();
         assertEquals(2, m.get());
     }
+
 
 }

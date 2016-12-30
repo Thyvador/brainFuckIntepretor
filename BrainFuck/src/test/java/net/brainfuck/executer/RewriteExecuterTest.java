@@ -5,6 +5,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.instruction.moveinstruction.LeftInstruction;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -62,6 +63,7 @@ public class RewriteExecuterTest {
 	 * Check if one instruction works
 	 * @throws Exception
 	 */
+	@Ignore
 	@Test
 	public void left() throws Exception {
 		AbstractInstruction c = new LeftInstruction();

@@ -33,13 +33,13 @@ public class Function extends Executable {
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
         super.execute(memory);
-        memory.unlock(true);
+        closeReader();
     }
 
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
         super.trace(memory, reader);
-        memory.unlock(true);
+        closeReader();
     }
 
     /**

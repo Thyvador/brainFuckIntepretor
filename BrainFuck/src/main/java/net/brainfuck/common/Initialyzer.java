@@ -3,9 +3,16 @@ package net.brainfuck.common;
 import net.brainfuck.Main;
 import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.ExecutionReader;
-import net.brainfuck.exception.*;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.IncorrectArgumentException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
+import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.Interpreter;
@@ -20,7 +27,15 @@ import net.brainfuck.io.BfImageWriter;
 import net.brainfuck.io.BfReader;
 import net.brainfuck.io.Reader;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
@@ -51,9 +66,10 @@ public class Initialyzer {
 
             Logger.getInstance().startExecTime();
             interpreter.interprate();
-            BufferedWriter writer = new BufferedWriter( new OutputStreamWriter(out));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             try {
-                writer.write(Logger.getInstance().showResume(memory));writer.close();
+                writer.write(Logger.getInstance().showResume(memory));
+                writer.close();
             } catch (java.io.IOException e) {
                 throw new IOException();
             }
@@ -65,15 +81,23 @@ public class Initialyzer {
             }
         } catch (IOException | SyntaxErrorException | IncorrectArgumentException | SegmentationFaultException e) {
             // Exit code not set
+            System.err.println(e.getMessage());
             System.exit(5);
         } catch (MemoryOutOfBoundsException e) {
+            System.err.println(e.getMessage());
             System.exit(1);
         } catch (MemoryOverFlowException e) {
+            System.err.println(e.getMessage());
             System.exit(2);
         } catch (FileNotFoundIn e) {
+            System.err.println(e.getMessage());
             System.exit(3);
         } catch (BracketsParseException e) {
+            System.err.println(e.getMessage());
             System.exit(4);
+        } catch (Exception e) {
+            System.err.println("An unknown error occured.");
+            System.exit(6);
         }
         System.exit(0);
 
@@ -140,46 +164,46 @@ public class Initialyzer {
         }
         Context.setExecuter(bfImageWriter, new OutputStreamWriter(getOut()));
         try {
-			executer = new Executer(argumentAnalyzer);
-			Language.setInstructions(new InputStreamReader(getIn()), new OutputStreamWriter(getOut()));
-			memory = new Memory();
-			BfCompiler compiler = initCompiler(memory);
-			Pair<List<AbstractInstruction>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
+            executer = new Executer(argumentAnalyzer);
+            Language.setInstructions(new InputStreamReader(getIn()), new OutputStreamWriter(getOut()));
+            memory = new Memory();
+            BfCompiler compiler = initCompiler(memory);
+            Pair<List<AbstractInstruction>, JumpTable> readerAndJump = compiler.compile(executer.getContextExecuters());
 
-			ExecutionReader executionReader = null;
-			if (readerAndJump != null) {
-			    JumpTable jumpTable = readerAndJump.getSecond();
-			    List<AbstractInstruction> instructions = readerAndJump.getFirst();
-			    executionReader = new ExecutionReader(instructions, jumpTable);
-			    Language.setJumpTable(executionReader);
-			}
-			
-	        if (argumentAnalyzer.getFlags().contains(Context.GENERATE.getSyntax())) {
-	        	Writer wrt = new OutputStreamWriter(getOut());
-	        	wrt.write("#include <stdio.h>\n\n");
-	        	wrt.write("int memory[30000] = {};\n\n");
-	        	for(Executable e: Executable.getExecutableRegistry()) {
-	        		wrt.write(e.generate());
-	        	}
-	        	wrt.close();
-	        }
+            ExecutionReader executionReader = null;
+            if (readerAndJump != null) {
+                JumpTable jumpTable = readerAndJump.getSecond();
+                List<AbstractInstruction> instructions = readerAndJump.getFirst();
+                executionReader = new ExecutionReader(instructions, jumpTable);
+                Language.setJumpTable(executionReader);
+            }
 
-			executer.setArgumentExecuter(memory, bfImageWriter);
-			interpreter = new Interpreter(executer, executionReader);
-		} catch (java.io.IOException e) {
-			throw new IOException();
-		}
+            if (argumentAnalyzer.getFlags().contains(Context.GENERATE.getSyntax())) {
+                Writer wrt = new OutputStreamWriter(getOut());
+                wrt.write("#include <stdio.h>\n\n");
+                wrt.write("int memory[30000] = {};\n\n");
+                for (Executable e : Executable.getExecutableRegistry()) {
+                    wrt.write(e.generate());
+                }
+                wrt.close();
+            }
+
+            executer.setArgumentExecuter(memory, bfImageWriter);
+            interpreter = new Interpreter(executer, executionReader);
+        } catch (java.io.IOException e) {
+            throw new IOException();
+        }
     }
 
     private BfCompiler initCompiler(Memory memory) throws IOException, SyntaxErrorException, BracketsParseException, MemoryOutOfBoundsException {
         try {
-			BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
-			Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
-			bfPrecompiler.analyzeProcedure(executer.getContextExecuters(), macros, memory);
-			return new BfCompiler(reader, executer.getContextExecuters(), macros);
-		} catch (java.io.IOException e) {
-			throw new IOException();
-		}
+            BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
+            Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
+            bfPrecompiler.analyzeProcedure(executer.getContextExecuters(), macros, memory);
+            return new BfCompiler(reader, executer.getContextExecuters(), macros);
+        } catch (java.io.IOException e) {
+            throw new IOException();
+        }
     }
 
     private void initReader() throws FileNotFoundException {

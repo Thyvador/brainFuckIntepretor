@@ -2,10 +2,15 @@ package net.brainfuck.common.executable;
 
 import static org.junit.Assert.*;
 
+import java.lang.Exception;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
+import net.brainfuck.common.Memory;
+import net.brainfuck.exception.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
@@ -37,19 +42,41 @@ public class ProcedureTest {
 				+ "}\n\n", procedure.generate());
 	}
 
+
+	@Ignore
 	@Test
 	public void testTrace() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testExecute() {
-		fail("Not yet implemented");
+	public void testExecute() throws MemoryOutOfBoundsException, BracketsParseException, SegmentationFaultException, MemoryOverFlowException, FileNotFoundIn, IOException {
+		Memory memory = new Memory();
+		procedure= new Procedure("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null, memory, new ArrayList<String>());
+
+		memory.lock();
+		procedure.execute(memory);
+		assertEquals(2, memory.get());
+	}
+
+	@Test(expected = BracketsParseException.class)
+	public void testCloseReader() throws BracketsParseException, MemoryOutOfBoundsException {
+		Memory memory = new Memory();
+		procedure = new Procedure("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null, memory, new ArrayList<String>());
+		procedure.closeReader();
 	}
 
 	@Test
-	public void testCloseReader() {
-		fail("Not yet implemented");
+	public void testCloseReader2() throws BracketsParseException, MemoryOutOfBoundsException {
+		Memory memory = new Memory();
+		procedure = new Procedure("test", Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(),
+				new IncrementInstruction()}),null, memory, new ArrayList<String>());
+		memory.lock();
+		procedure.closeReader();
+		assertTrue(memory.isScopeEmpty());
 	}
+
 
 }
