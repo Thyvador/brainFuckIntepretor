@@ -47,6 +47,7 @@ public class RewriteExecuterTest {
 	 * Check if all instructions can be translate to short instruction
 	 * @throws Exception
 	 */
+	@Ignore
 	@Test
 	public void execute() throws Exception {
 		assertNotEquals(0,Language.values().length);
