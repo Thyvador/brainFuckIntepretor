@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.Memory;
@@ -9,6 +9,8 @@ import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.exception.*;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
+import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.processing.BfPrecompiler;
 import net.brainfuck.io.BfReader;
@@ -25,7 +27,7 @@ import static net.brainfuck.interpreter.Language.RIGHT;
 
 
 /**
- * Created by davidLANG on 30/12/2016.
+ * @author davidLANG
  */
 public class BfPrecompilerTest {
     private Map<String, AbstractInstruction> instructionMap;
@@ -38,7 +40,7 @@ public class BfPrecompilerTest {
     public void init() throws net.brainfuck.exception.IOException, IncorrectArgumentException, SyntaxErrorException, BracketsParseException, IOException, MemoryOutOfBoundsException {
         String name = "test";
         memory = new Memory();
-        List<String> argument = Arrays.asList("arg1, arg2, arg3");
+        List<String> argument = Arrays.asList("arg1", "arg2", "arg3");
         List<AbstractInstruction> instructions = Arrays.asList(
                 INCR.getInterpreter(),
                 INCR.getInterpreter(),

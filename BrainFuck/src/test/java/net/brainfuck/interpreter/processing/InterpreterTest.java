@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.Memory;
@@ -7,6 +7,9 @@ import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
+import net.brainfuck.interpreter.Interpreter;
+import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpBackInstruction;
 import org.junit.Ignore;

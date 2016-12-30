@@ -1,4 +1,4 @@
-package net.brainfuck.interpreter;
+package net.brainfuck.interpreter.processing;
 
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
