@@ -55,7 +55,7 @@ public class Procedure extends Executable {
 
 	@Override
 	public String generate() {
-		StringBuilder stringBuilder = new StringBuilder().append(String.format("void %s %s {\n",
+		StringBuilder stringBuilder = new StringBuilder().append(String.format("void %s %s {\n\n",
 				name, getArgumentString()));
 		stringBuilder.append(super.generate());
 		return stringBuilder.append("\n}\n\n").toString();
