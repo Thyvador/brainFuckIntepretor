@@ -153,14 +153,25 @@ public class TestMemory {
 		assertSame(memory.get(), (short)1);
 	}
 	
-	@Test(expected=MemoryOverFlowException.class)
-	public void testSetArgumentsOverflow() throws Exception {
+	@Test
+	public void testSetArguments2() throws Exception {
 		for (int i = 0; i < 3; i++) 
 			memory.right();
 		memory.lock().setArguments((short) 1, (short) 256);
+		memory.left();
+		assertSame(memory.get(), (short)256);
+		memory.left();
+		assertSame(memory.get(), (short)1);
 	}
 	
-	@Test(expected=MemoryOverFlowException.class)
+	@Test(expected=MemoryOutOfBoundsException.class)
+	public void testSetArgumentsOverflow() throws Exception {
+		for (int i = 0; i < 3; i++) 
+			memory.right();
+		memory.lock().setArguments((short) 1, (short) 30000);
+	}
+	
+	@Test(expected=MemoryOutOfBoundsException.class)
 	public void testSetArgumentsOverflow2() throws Exception {
 		for (int i = 0; i < 3; i++) 
 			memory.right();
