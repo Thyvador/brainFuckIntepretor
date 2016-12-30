@@ -156,6 +156,8 @@ public class Initialyzer {
 			
 	        if (argumentAnalyzer.getFlags().contains(Context.GENERATE.getSyntax())) {
 	        	Writer wrt = new OutputStreamWriter(getOut());
+	        	wrt.write("#include <stdio.h>\n\n");
+	        	wrt.write("int memory[30000] = {};\n\n");
 	        	for(Executable e: Executable.getExecutableRegistry()) {
 	        		wrt.write(e.generate());
 	        	}

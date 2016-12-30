@@ -29,10 +29,10 @@ public enum Language {
     // Declaration de l'enum
     INCR(null, "+", "INCR", "ffffff", "(*ptr)++;"),
     DECR(null, "-", "DECR", "4b0082", "(*ptr)--;"),
-    RIGHT(null, ">", "RIGHT", "0000ff", "ptr++"),
-    LEFT(null, "<", "LEFT", "9400d3", "ptr--"),
+    RIGHT(null, ">", "RIGHT", "0000ff", "ptr++;"),
+    LEFT(null, "<", "LEFT", "9400d3", "ptr--;"),
     IN(null, ",", "IN", "ffff00", "(*ptr) = getchar();"),
-    OUT(null, ".", "OUT", "00ff00", "putchar(*ptr)"),
+    OUT(null, ".", "OUT", "00ff00", "putchar(*ptr);"),
     JUMP(null, "[", "JUMP", "ff7f00", "while(*ptr) {"),
     BACK(null, "]", "BACK", "ff0000", "}");
 

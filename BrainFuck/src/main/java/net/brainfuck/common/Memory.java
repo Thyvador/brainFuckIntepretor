@@ -253,9 +253,9 @@ public class Memory {
 	 * @throws MemoryOutOfBoundsException 
 	 * @throws MemoryOverFlowException 
 	 */
-	public Memory setArguments(short... args) throws MemoryOutOfBoundsException, MemoryOverFlowException {
-		for (short s: args) {
-			set(s);
+	public Memory setArguments(int... args) throws MemoryOutOfBoundsException, MemoryOverFlowException {
+		for (int s: args) {
+			set(get(s));
 			right();
 		}
 		return this;
@@ -269,8 +269,8 @@ public class Memory {
 	 * @throws MemoryOverFlowException 
 	 * @throws MemoryOutOfBoundsException 
 	 */
-	public Memory setArguments(List<Short> args) throws MemoryOutOfBoundsException, MemoryOverFlowException {
-		short[] res = new short[args.size()];
+	public Memory setArguments(List<Integer> args) throws MemoryOutOfBoundsException, MemoryOverFlowException {
+		int[] res = new int[args.size()];
 		for (int i = 0; i < res.length; i++) {
 			res[i] = args.get(i);
 		}

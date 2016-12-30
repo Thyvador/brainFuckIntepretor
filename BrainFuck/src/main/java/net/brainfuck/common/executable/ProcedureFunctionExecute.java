@@ -11,17 +11,17 @@ import java.util.List;
  * Created by davidLANG on 28/12/2016.
  */
 public class ProcedureFunctionExecute extends AbstractInstruction {
-    private List<Short> values;
+    private List<Integer> values;
     private Executable compositeInstruction;
 
-    public ProcedureFunctionExecute(List<Short> values, Executable compositeInstruction) throws SyntaxErrorException {
+    public ProcedureFunctionExecute(List<Integer> values, Executable compositeInstruction) throws SyntaxErrorException {
         checkNumberOfArgument(values, compositeInstruction);
         this.values = values;
         this.compositeInstruction = compositeInstruction;
     }
 
-    private void checkNumberOfArgument(List<Short> values, Executable compositeInstruction) throws SyntaxErrorException {
-        int size1 = values.size();
+    private void checkNumberOfArgument(List<Integer> values2, Executable compositeInstruction) throws SyntaxErrorException {
+        int size1 = values2.size();
         int size2 = compositeInstruction.getArgument() != null ?
                 compositeInstruction.getArgument().size() : -1;
         if (size1 != size2)
@@ -65,12 +65,12 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 		return stringBuilder.toString();*/
 		//TODO: changer les noms des arguments par leurs valeurs
 		//return compositeInstruction.name + compositeInstruction.getArgumentString() + ";";
-		StringBuilder res = new StringBuilder();
+		StringBuilder res = new StringBuilder("ptr++;");
 		if (compositeInstruction.getClass() == Function.class)
 			res.append("(*ptr) = ");
 		res.append(compositeInstruction.name).append("(");
 		res.append("ptr");
-		for (Short v : values) {
+		for (Integer v : values) {
 			res.append(String.format(", memory[%d]", v));
 		}
 	    return res.append(");").toString();

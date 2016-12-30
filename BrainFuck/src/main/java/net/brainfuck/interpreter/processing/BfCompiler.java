@@ -182,12 +182,12 @@ public class BfCompiler {
 		if (!Language.instructionMap.containsKey(name)) {
 			throw new SyntaxErrorException("Unknow function or procedure : " + name);
 		}
-		List<Short> values = new ArrayList<>();
+		List<Integer> values = new ArrayList<>();
 		if (arguments != null) {
 			for (String argument : arguments) {
 				if (!StringParser.isNumeric(argument))
 					throw new SyntaxErrorException("bad argument " + argument);
-				values.add(Short.parseShort(argument));
+				values.add(Integer.parseInt(argument));
 			}
 		}
 
