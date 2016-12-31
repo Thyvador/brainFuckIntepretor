@@ -22,8 +22,6 @@ import static org.junit.Assert.*;
  * @author Francois Melkonian
  */
 public class RewriteExecuterTest {
-	private List<Language> liste;
-	private String outContent;
 
 	/**
 	 * We change Output to save all data what have been written
@@ -32,44 +30,32 @@ public class RewriteExecuterTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		outContent = "";
 		Language.setInstructions(null,null);
-		System.setOut(new PrintStream(new OutputStream() {
-			@Override
-			public void write(int b) throws IOException {
-				outContent += String.valueOf((char)b);
-			}
-		}));
-		liste = new ArrayList<>();
 	}
 
 	/**
 	 * Check if all instructions can be translate to short instruction
 	 * @throws Exception
 	 */
-	@Ignore
 	@Test
 	public void execute() throws Exception {
 		assertNotEquals(0,Language.values().length);
 		for (Language g : Language.values()){
 			AbstractInstruction i = g.getInterpreter();
 			i.rewrite();
-			assertTrue(outContent.endsWith(g.getShortSyntax()));
+			assertEquals(g.getShortSyntax(),i.rewrite());
 		}
 
-		System.setOut(System.out);
 	}
 
 	/**
 	 * Check if one instruction works
 	 * @throws Exception
 	 */
-	@Ignore
 	@Test
 	public void left() throws Exception {
 		AbstractInstruction c = new LeftInstruction();
-		c.rewrite();
-		assertEquals("<",outContent);
+		assertEquals("<",c.rewrite());
 
 	}
 
