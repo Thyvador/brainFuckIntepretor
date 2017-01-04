@@ -160,10 +160,5 @@ public class ExecutableTest {
         assertEquals("0000ff9400d3ffffff4b0082ff7f000000ffff0000", executable.translate());
     }
 
-    @Ignore
-    @Test
-    public void generate() throws Exception {
-
-    }
 
 }

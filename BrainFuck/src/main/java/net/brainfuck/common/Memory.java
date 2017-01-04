@@ -252,10 +252,23 @@ public class Memory {
 	 * @return the memory
 	 * @throws MemoryOutOfBoundsException 
 	 * @throws MemoryOverFlowException 
+	 * @throws SegmentationFaultException 
 	 */
-	public Memory setArguments(int... args) throws MemoryOutOfBoundsException, MemoryOverFlowException {
+	public Memory setArguments(int... args) throws MemoryOutOfBoundsException, MemoryOverFlowException, SegmentationFaultException {
 		for (int s: args) {
-			set(get(s));
+			int tmp = scope.pop();
+			if (tmp + s < 0 || tmp + s >= MAX_CAPACITY)
+				throw new MemoryOutOfBoundsException();
+			if (s < 0 || s >= tmp)
+				throw new SegmentationFaultException();
+			int startScope = 0;
+			try {
+				startScope = scope.peek();
+			} catch (EmptyStackException e) {
+			}
+			
+			set(get(s+startScope));
+			scope.push(tmp);
 			right();
 		}
 		return this;
@@ -268,8 +281,9 @@ public class Memory {
 	 * @return the memory
 	 * @throws MemoryOverFlowException 
 	 * @throws MemoryOutOfBoundsException 
+	 * @throws SegmentationFaultException 
 	 */
-	public Memory setArguments(List<Integer> args) throws MemoryOutOfBoundsException, MemoryOverFlowException {
+	public Memory setArguments(List<Integer> args) throws MemoryOutOfBoundsException, MemoryOverFlowException, SegmentationFaultException {
 		int[] res = new int[args.size()];
 		for (int i = 0; i < res.length; i++) {
 			res[i] = args.get(i);
