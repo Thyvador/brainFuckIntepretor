@@ -175,7 +175,7 @@ public class Initialyzer {
                 JumpTable jumpTable = readerAndJump.getSecond();
                 List<AbstractInstruction> instructions = readerAndJump.getFirst();
                 executionReader = new ExecutionReader(instructions, jumpTable);
-                Language.setJumpTable(executionReader);
+                Language.setExecutable(executionReader);
             }
 
             if (argumentAnalyzer.getFlags().contains(Context.GENERATE.getSyntax())) {
@@ -227,6 +227,5 @@ public class Initialyzer {
             Logger.getInstance().setWriter(argAnalizer.getArgument(PATH));
         }
     }
-
 
 }
