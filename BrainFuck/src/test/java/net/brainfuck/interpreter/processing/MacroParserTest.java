@@ -27,10 +27,10 @@ public class MacroParserTest {
         assertTrue(macroParser.getMacros().containsKey("test"));
     }
 
-    @Test(expected = SyntaxErrorException.class)
-    public void saveBadMacros() throws Exception{
-        macroParser.saveMacro("!test(arg) + arg2");
-    }
+	@Test(expected = SyntaxErrorException.class)
+	public void saveBadMacros() throws Exception{
+		macroParser.saveMacro("!test(arg) + arg2");
+	}
 
 	@Test
 	public void saveLongMacro() throws Exception{

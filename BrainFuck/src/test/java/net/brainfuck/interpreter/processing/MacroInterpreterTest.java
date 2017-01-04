@@ -39,32 +39,32 @@ public class MacroInterpreterTest {
 
 	@Test(expected = SyntaxErrorException.class)
 	public void writeBadMacro() throws Exception {
-		List<Language> z = inter.writeMacro("test()");
+		inter.writeMacro("test()");
 	}
 
 	@Test(expected = SyntaxErrorException.class)
 	public void writeBadMacroMultiplicateur() throws Exception {
-		List<Language> z = inter.writeMacro("test() 2");
+		inter.writeMacro("test() 2");
 	}
 
 	@Test(expected = SyntaxErrorException.class)
 	public void writeNoParenthesisMultiplicateur() throws Exception {
-		List<Language> z = inter.writeMacro("test 2");
+		inter.writeMacro("test 2");
 	}
 
 	@Test(expected = SyntaxErrorException.class)
 	public void writeWithALotArgMultiplicateur() throws Exception {
-		List<Language> z = inter.writeMacro("test(2,3) 2");
+		 inter.writeMacro("test(2,3) 2");
 	}
 
 	@Test(expected = SyntaxErrorException.class)
 	public void writeNoParenthesis() throws Exception {
-		List<Language> z = inter.writeMacro("test");
+		inter.writeMacro("test");
 	}
 
 	@Test(expected = SyntaxErrorException.class)
 	public void writeWithALotArg() throws Exception {
-		List<Language> z = inter.writeMacro("test(2,3)");
+		inter.writeMacro("test(2,3)");
 	}
 
 	@Test
