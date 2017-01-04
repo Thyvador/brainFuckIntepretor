@@ -34,7 +34,13 @@ public enum Language {
     JUMP(null, "[", "JUMP", "ff7f00", "while(*ptr) {"),
     BACK(null, "]", "BACK", "ff0000", "}");
 
+    /**
+     * Map of language
+     */
     public static Map<String, Language> languageMap = new HashMap<>();
+    /**
+     * Map of instructions, procedure and functions
+     */
     public static Map<String, AbstractInstruction> instructionMap = new HashMap<>();
 
     private AbstractInstruction interpreter;
@@ -51,10 +57,15 @@ public enum Language {
         this.aliases = aliases;
     }
 
-    public static void addInstruction(AbstractInstruction interpreter, String aliase) {
-        instructionMap.put(aliase, interpreter);
+    public static void addInstruction(AbstractInstruction interpreter, String aliase){
+    	instructionMap.put(aliase, interpreter);
     }
 
+    /**
+     * Set inputs and outputs streams to read and write character
+     * @param inputStreamReader the stream to read char
+     * @param outputStreamWriter the stream to write char
+     */
     public static void setInstructions(InputStreamReader inputStreamReader,
                                        OutputStreamWriter outputStreamWriter) {
         // Set interpretors
@@ -78,6 +89,10 @@ public enum Language {
         }
     }
 
+    /**
+     * Set the reader to current language
+     * @param executionReader
+     */
     public static void setExecutable(Executable executionReader) {
         ((JumpInstruction) Language.JUMP.getInterpreter()).setReader(executionReader);
         ((BackInstruction) Language.BACK.getInterpreter()).setReader(executionReader);
@@ -88,7 +103,7 @@ public enum Language {
         ((BackInstruction) Language.BACK.getInterpreter()).setReader(executionReader);
     }
 
-    public static Executable getExecutable() {
+    public static Executable getExecutable(){
         return ((JumpBackInstruction) JUMP.getInterpreter()).getExecutable();
     }
 
@@ -137,8 +152,8 @@ public enum Language {
         return aliases[2];
     }
 
-    public String getCSyntax() {
-        return aliases[3];
-    }
+	public String getCSyntax() {
+		return aliases[3];
+	}
 
 }
