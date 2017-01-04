@@ -1,12 +1,11 @@
 package net.brainfuck.interpreter;
 
 import net.brainfuck.common.executable.Executable;
-import net.brainfuck.common.executable.ExecutionReader;
-import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.instruction.intoutinsruction.InInstruction;
 import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpBackInstruction;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 import net.brainfuck.interpreter.instruction.moveinstruction.LeftInstruction;
 import net.brainfuck.interpreter.instruction.moveinstruction.RightInstruction;
@@ -16,7 +15,6 @@ import net.brainfuck.interpreter.instruction.operationinstruction.IncrementInstr
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -80,9 +78,18 @@ public enum Language {
         }
     }
 
+    public static void setExecutable(Executable executionReader) {
+        ((JumpInstruction) Language.JUMP.getInterpreter()).setReader(executionReader);
+        ((BackInstruction) Language.BACK.getInterpreter()).setReader(executionReader);
+    }
+
     public static void setJumpTable(Executable executionReader) {
         ((JumpInstruction) Language.JUMP.getInterpreter()).setReader(executionReader);
         ((BackInstruction) Language.BACK.getInterpreter()).setReader(executionReader);
+    }
+
+    public static Executable getExecutable(){
+        return ((JumpBackInstruction) JUMP.getInterpreter()).getExecutable();
     }
 
     /**

@@ -8,7 +8,6 @@ import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +27,7 @@ public abstract class Executable extends AbstractInstruction {
     protected int index = -1;
     protected Stack<Integer> marks;
     protected JumpTable jumpTable;
-    protected JumpTable parentJumpTable;
+    protected Executable parent;
     protected Logger logger = Logger.getInstance();
     protected List<String> argument;
 
@@ -170,13 +169,13 @@ public abstract class Executable extends AbstractInstruction {
 
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
-        parentJumpTable = Interpreter.getCurrentJumpTable();
-        Interpreter.setCurrentJumpTable(jumpTable);
+        parent = Language.getExecutable();
+        Language.setExecutable(this);
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {
             instruction.execute(memory);
         }
-        Interpreter.setCurrentJumpTable(parentJumpTable);
+        Language.setExecutable(parent);
     }
 
     @Override
@@ -228,14 +227,14 @@ public abstract class Executable extends AbstractInstruction {
      */
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
-        parentJumpTable = Interpreter.getCurrentJumpTable();
-        Interpreter.setCurrentJumpTable(jumpTable);
+        parent = Language.getExecutable();
+        Language.setExecutable(this);
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {
             instruction.execute(memory);
             logger.write(reader.getExecutionPointer(), memory);
         }
-        Interpreter.setCurrentJumpTable(parentJumpTable);
+        Language.setExecutable(parent);
     }
 
     public JumpTable getJumpTable() {

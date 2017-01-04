@@ -23,7 +23,6 @@ public class Interpreter {
 	private Executer executer;
 	private Executable reader;
 	private Logger logger;
-	private static JumpTable currentJumpTable;
 
 	/**
 	 * Constructor which initialize attribute.
@@ -36,7 +35,6 @@ public class Interpreter {
 	public Interpreter(Executer executer, Executable reader) throws  IOException {
 		this.executer = executer;
 		this.reader = reader;
-		currentJumpTable = reader.getJumpTable();
 		this.logger = Logger.getInstance();
 	}
 
@@ -86,12 +84,5 @@ public class Interpreter {
 		reader.reset();
 	}
 
-	public static JumpTable getCurrentJumpTable() {
-		return currentJumpTable;
-	}
-
-	public static void setCurrentJumpTable(JumpTable currentJumpTable) {
-		Interpreter.currentJumpTable = currentJumpTable;
-	}
 }
 

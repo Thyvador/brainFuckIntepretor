@@ -26,4 +26,8 @@ public abstract class JumpBackInstruction extends AbstractInstruction {
     }
 
     abstract public void execute(Memory memory) throws MemoryOutOfBoundsException, IOException, BracketsParseException;
+
+    public Executable getExecutable() {
+        return reader;
+    }
 }
