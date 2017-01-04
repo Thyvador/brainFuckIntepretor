@@ -4,8 +4,10 @@ import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
-import net.brainfuck.exception.*;
-import net.brainfuck.exception.Exception;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
 
 /**
  * The <code>Memory</code> class represents the memory of the BrainFuck interpreter.

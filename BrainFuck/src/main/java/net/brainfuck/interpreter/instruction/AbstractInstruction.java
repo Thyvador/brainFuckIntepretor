@@ -3,8 +3,12 @@ package net.brainfuck.interpreter.instruction;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.executable.Executable;
-import net.brainfuck.common.executable.ExecutionReader;
-import net.brainfuck.exception.*;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.FileNotFoundIn;
+import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
 import net.brainfuck.interpreter.Language;
 
 /**

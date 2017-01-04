@@ -1,15 +1,17 @@
 
 package net.brainfuck.interpreter;
 
-import net.brainfuck.common.Logger;
 import net.brainfuck.common.executable.Executable;
-import net.brainfuck.common.executable.ExecutionReader;
-import net.brainfuck.exception.*;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.FileNotFoundIn;
+import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
+import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The interpretor of brainfuck.
@@ -19,10 +21,8 @@ import java.util.Map;
  */
 
 public class Interpreter {
-	private Map<String, Language> interpretorExecuter = new HashMap<>();
 	private Executer executer;
 	private Executable reader;
-	private Logger logger;
 
 	/**
 	 * Constructor which initialize attribute.
@@ -35,7 +35,6 @@ public class Interpreter {
 	public Interpreter(Executer executer, Executable reader) throws  IOException {
 		this.executer = executer;
 		this.reader = reader;
-		this.logger = Logger.getInstance();
 	}
 
 

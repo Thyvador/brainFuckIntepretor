@@ -90,10 +90,11 @@ public class BfImageWriter implements Writer {
 	}
 
 	private void writeLongChain(String hexaChain) throws IOException {
-		while(hexaChain.length() > 6){
+		String tmp = hexaChain;
+		while(tmp.length() > 6){
 			try {
-				String hexa = hexaChain.substring(0,6);
-				hexaChain = hexaChain.substring(6);
+				String hexa = tmp.substring(0,6);
+				tmp = tmp.substring(6);
 				tmpOs.writeInt(Integer.parseInt(hexa, 16));
 				tmpOs.flush();
 			} catch (NumberFormatException e) {

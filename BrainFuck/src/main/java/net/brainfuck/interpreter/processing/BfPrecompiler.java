@@ -1,5 +1,8 @@
 package net.brainfuck.interpreter.processing;
 
+import java.util.List;
+import java.util.Map;
+
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
@@ -10,16 +13,12 @@ import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.SyntaxErrorException;
-import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.io.BfReader;
 import net.brainfuck.io.Reader;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author davidLANG

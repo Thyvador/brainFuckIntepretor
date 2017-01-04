@@ -11,7 +11,6 @@ import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.exception.SegmentationFaultException;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
-import net.brainfuck.io.BfImageWriter;
 
 public class GenerateExecuter implements ContextExecuter {
 

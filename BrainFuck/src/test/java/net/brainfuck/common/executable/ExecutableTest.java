@@ -1,22 +1,25 @@
 package net.brainfuck.common.executable;
 
+import static net.brainfuck.interpreter.Language.BACK;
+import static net.brainfuck.interpreter.Language.DECR;
+import static net.brainfuck.interpreter.Language.INCR;
+import static net.brainfuck.interpreter.Language.JUMP;
+import static net.brainfuck.interpreter.Language.LEFT;
+import static net.brainfuck.interpreter.Language.RIGHT;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static net.brainfuck.interpreter.Language.*;
-import static net.brainfuck.interpreter.Language.BACK;
-import static net.brainfuck.interpreter.Language.JUMP;
-import static org.junit.Assert.*;
 
 /**
  * Created by alexh on 29/12/2016.

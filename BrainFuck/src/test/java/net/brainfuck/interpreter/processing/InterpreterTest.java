@@ -1,5 +1,15 @@
 package net.brainfuck.interpreter.processing;
 
+import static net.brainfuck.interpreter.Language.INCR;
+import static net.brainfuck.interpreter.Language.LEFT;
+import static net.brainfuck.interpreter.Language.RIGHT;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
+
 import net.brainfuck.common.ArgumentAnalyzer;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
@@ -7,20 +17,10 @@ import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
-import net.brainfuck.executer.TraceExecuter;
 import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpBackInstruction;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static net.brainfuck.interpreter.Language.*;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by thyvador on 22/12/16.

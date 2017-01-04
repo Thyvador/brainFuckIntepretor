@@ -1,15 +1,14 @@
 package net.brainfuck.io;
 
-import net.brainfuck.exception.BracketsParseException;
-import net.brainfuck.exception.FileNotFoundException;
-import net.brainfuck.exception.IOException;
-
 import java.io.RandomAccessFile;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
+
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.IOException;
 
 /**
  * Read file with long and short syntax blended.

@@ -1,11 +1,10 @@
 package net.brainfuck.common.executable;
 
-import net.brainfuck.interpreter.JumpTable;
-import net.brainfuck.interpreter.Language;
-import net.brainfuck.interpreter.instruction.AbstractInstruction;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
  * The ExecutionReader represents the main program to be executed.

@@ -73,26 +73,26 @@ public class ProcedureFunctionParserTest {
 
     @Test(expected = SyntaxErrorException.class)
     public void parseArgumentError() throws SyntaxErrorException {
-        List<String> res0 = procedureFunctionParser.parseArgument("!procedure toto(titi toto)");
+        procedureFunctionParser.parseArgument("!procedure toto(titi toto)");
     }
 
     @Test(expected = SyntaxErrorException.class)
     public void parseArgumentError1() throws SyntaxErrorException {
-        List<String> res0 = procedureFunctionParser.parseArgument("!procedure toto(titi^toto)");
+        procedureFunctionParser.parseArgument("!procedure toto(titi^toto)");
     }
 
     @Test(expected = SyntaxErrorException.class)
     public void parseArgumentError2() throws SyntaxErrorException {
-        List<String> res0 = procedureFunctionParser.parseArgument("!procedure toto(titi/toto)");
+        procedureFunctionParser.parseArgument("!procedure toto(titi/toto)");
     }
 
     @Test(expected = SyntaxErrorException.class)
     public void parseArgumentError3() throws SyntaxErrorException {
-        List<String> res0 = procedureFunctionParser.parseArgument("!procedure toto(titi;toto)");
+        procedureFunctionParser.parseArgument("!procedure toto(titi;toto)");
     }
 
     @Test(expected = SyntaxErrorException.class)
     public void parseArgumentError4() throws SyntaxErrorException {
-        List<String> res0 = procedureFunctionParser.parseArgument("!procedure toto(titi())");
+        procedureFunctionParser.parseArgument("!procedure toto(titi())");
     }
 }

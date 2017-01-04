@@ -4,7 +4,6 @@ import java.io.Writer;
 
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.executable.Executable;
-import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;

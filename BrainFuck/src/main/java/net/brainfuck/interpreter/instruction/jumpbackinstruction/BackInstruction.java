@@ -33,6 +33,7 @@ public class BackInstruction extends JumpBackInstruction {
 		nonLinearExecute(memory, reader);
 	}
 
+	@SuppressWarnings("unused")
 	private void linearExecute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
 		if (memory.get() != 0) {
 			reader.reset();

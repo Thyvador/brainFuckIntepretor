@@ -1,19 +1,15 @@
 package net.brainfuck.interpreter.instruction;
 
-import net.brainfuck.common.*;
-import net.brainfuck.common.executable.ExecutionReader;
-import net.brainfuck.exception.Exception;
-import net.brainfuck.interpreter.JumpTable;
-import net.brainfuck.interpreter.Language;
-import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.*;
-import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
+import net.brainfuck.common.Memory;
+import net.brainfuck.common.executable.ExecutionReader;
+import net.brainfuck.exception.Exception;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 // TODO : mettre à jour les tests sur les JUMP
 /**
  * @author Alexandre Hiltcher,François Melkonian

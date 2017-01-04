@@ -1,25 +1,18 @@
 package net.brainfuck.interpreter.processing;
 
-import net.brainfuck.exception.BracketsParseException;
-import net.brainfuck.exception.FileNotFoundException;
-import net.brainfuck.exception.IncorrectArgumentException;
-import net.brainfuck.exception.SyntaxErrorException;
-import net.brainfuck.interpreter.processing.BfCompiler;
-import net.brainfuck.io.BfReader;
-
-import org.junit.Before;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.junit.Before;
+
 /**
  * The Class BfCompilerTest.
  */
 public class BfCompilerTest {
-
+	
 	/**
 	 * Sets the up.
 	 *
@@ -41,8 +34,6 @@ public class BfCompilerTest {
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
 		}
-		// TODO construction Bfcompiler(reader) utilisé uniquement ici ! Pertinence du test ?
-		BfCompiler compiler = new BfCompiler(new BfReader(filename));
 	}
 
 

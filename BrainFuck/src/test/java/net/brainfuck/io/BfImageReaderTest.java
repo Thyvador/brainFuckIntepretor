@@ -123,7 +123,7 @@ public class BfImageReaderTest {
 	public void reset() throws Exception {
 		for (int i = 0; i < instructions.size(); i++) {
 			reader.mark();
-			String instruction = reader.getNext();
+			reader.getNext();
 			reader.reset();
 			assertEquals(i+1,reader.getMarks().size());
 		}
@@ -153,6 +153,7 @@ public class BfImageReaderTest {
 	 * @throws Exception
 	 *             the exception
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void unmark() throws Exception {
 		for (String instruction: instructions ) {
@@ -168,6 +169,7 @@ public class BfImageReaderTest {
 	 * @throws Exception
 	 *             the exception
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void unmark2() throws Exception {
 		for (String instruction: instructions ) {

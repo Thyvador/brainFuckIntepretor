@@ -1,22 +1,21 @@
 package net.brainfuck.interpreter.instruction;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * The Class BackInstructionTest.
