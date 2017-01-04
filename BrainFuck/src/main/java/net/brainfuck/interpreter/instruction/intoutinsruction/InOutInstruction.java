@@ -6,9 +6,12 @@ import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
- * Created by davidLANG on 14/12/2016.
+ * The class InOutInstruction is the mother class of the InInstruction and OutInstruction.
+ *
+ * @author Alexandre HILTCHER
  */
 abstract public class InOutInstruction extends AbstractInstruction {
+
 
     public InOutInstruction(Language language) {
         super(language);

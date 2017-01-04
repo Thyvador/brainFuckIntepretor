@@ -3,7 +3,6 @@ package net.brainfuck.interpreter.instruction;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.executable.Executable;
-import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.*;
 import net.brainfuck.interpreter.Language;
 
@@ -65,7 +64,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	@Override
 	public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
 		execute(memory);
-		logger.write(reader.getExecutionPointer(), memory);
+		logger.write(reader.getName(), reader.getExecutionPointer(), memory);
 	}
 
 	@Override

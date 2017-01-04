@@ -2,7 +2,6 @@ package net.brainfuck.exception;
 
 /**
  * Signal when a argument pass through the JVM is not correct.
- * This exception will be thrown by <code>ArgumentAnalyser</code>.
  *
  * @author Alexandre HILTCHER
  */

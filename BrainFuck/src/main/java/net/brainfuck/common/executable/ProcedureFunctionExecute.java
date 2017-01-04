@@ -39,7 +39,7 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
         memory.lock();
         memory.setArguments(values);
-        super.trace(memory, reader);
+        compositeInstruction.trace(memory, reader);
     }
 
     @Override

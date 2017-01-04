@@ -2,7 +2,6 @@ package net.brainfuck.exception;
 
 /**
  * Signal when bracket has no corresponding bracket.
- * This exception will be thrown by <code>Reader</code>.
  *
  * @author Jeremy JUNAC
  * @author Alexandre HILTCHER

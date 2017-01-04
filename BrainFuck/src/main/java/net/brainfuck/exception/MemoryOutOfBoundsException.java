@@ -2,7 +2,7 @@ package net.brainfuck.exception;
 
 
 /**
- * Signal when a bound excess error is detected in the file.
+ * Signal when a bound exceeds error is detected in the file.
  * This exception will be thrown by <code>Memory</code>.
  *
  * @author Alexandre Hiltcher
