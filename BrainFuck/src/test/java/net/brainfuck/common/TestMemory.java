@@ -3,6 +3,7 @@ package net.brainfuck.common;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.brainfuck.exception.MemoryOutOfBoundsException;
@@ -157,15 +158,23 @@ public class TestMemory {
 		assertSame(memory.get(), (short) 3);
 	}
 	
+
+	@Ignore
 	@Test
-	public void testSetArguments2() throws Exception {
-		for (int i = 0; i < 3; i++) 
-			memory.right();
-		memory.lock().setArguments(1, 256);
+	public void testSetArgumentsCoupleProcedure() throws Exception {
+		memory.right();
+		for (int i=0; i<3; i++)
+			memory.incr();
+		memory.right();
+		for (int i=0; i<4; i++)
+			memory.incr();
+		memory.lock().setArguments(1, 2);
+		memory.right();
+		memory.lock().setArguments(0, 1);
 		memory.left();
-		assertSame(memory.get(), (short) 0);
+		assertSame(memory.get(), (short) 4);
 		memory.left();
-		assertSame(memory.get(), (short) 0);
+		assertSame(memory.get(), (short) 3);
 	}
 	
 	@Test(expected=MemoryOutOfBoundsException.class)
@@ -175,8 +184,19 @@ public class TestMemory {
 		memory.lock().setArguments(1, 30000);
 	}
 	
-	@Test(expected=MemoryOutOfBoundsException.class)
-	public void testSetArgumentsOverflow2() throws Exception {
+	@Test(expected=SegmentationFaultException.class)
+	public void testSetArgumentsSegFault() throws Exception {
+		for (int i = 0; i < 3; i++) 
+			memory.right();
+		memory.lock().setArguments(1, 256);
+		memory.left();
+		assertSame(memory.get(), (short) 0);
+		memory.left();
+		assertSame(memory.get(), (short) 0);
+	}
+	
+	@Test(expected=SegmentationFaultException.class)
+	public void testSetArgumentsSegFault2() throws Exception {
 		for (int i = 0; i < 3; i++) 
 			memory.right();
 		memory.lock().setArguments(1, -1);
