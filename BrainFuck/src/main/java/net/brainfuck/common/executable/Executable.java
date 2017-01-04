@@ -4,6 +4,7 @@ import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
 import net.brainfuck.exception.*;
+import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
@@ -26,6 +27,7 @@ public abstract class Executable extends AbstractInstruction {
     protected int index = -1;
     protected Stack<Integer> marks;
     protected JumpTable jumpTable;
+    protected Executable parent;
     protected Logger logger = Logger.getInstance();
     protected List<String> argument;
 
@@ -167,10 +169,13 @@ public abstract class Executable extends AbstractInstruction {
 
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+        parent = Language.getExecutable();
+        Language.setExecutable(this);
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {
             instruction.execute(memory);
         }
+        Language.setExecutable(parent);
     }
 
     @Override
@@ -222,11 +227,17 @@ public abstract class Executable extends AbstractInstruction {
      */
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
+        parent = Language.getExecutable();
+        Language.setExecutable(this);
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {
             instruction.execute(memory);
             logger.write(reader.getExecutionPointer(), memory);
         }
+        Language.setExecutable(parent);
     }
 
+    public JumpTable getJumpTable() {
+        return jumpTable;
+    }
 }

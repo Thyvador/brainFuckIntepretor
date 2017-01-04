@@ -4,12 +4,14 @@ import net.brainfuck.common.*;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 // TODO : mettre à jour les tests sur les JUMP
@@ -26,18 +28,7 @@ public class JumpInstructionTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-//		Charset charset = Charset.forName("UTF-8");
-//		filename = "filename.bf";
-//		data = ">+[++]--[]";
-//		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-//			writer.write(data, 0, data.length());
-//		} catch (IOException x) {
-//
-//			System.err.format("IOException: %s%n", x);
-//		}
-//		reader = new BfReader(filename);
-//		memory = new Memory();
-//		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
+		memory = new Memory();
 		instruction = new JumpInstruction(reader);
 	}
 
@@ -49,7 +40,7 @@ public class JumpInstructionTest {
 	@Ignore
 	public void jump() throws Exception {
 		reader.seek();
-		instruction.execute(memory);
+		instruction.execute(new Memory());
 		assertEquals(6, reader.getExecutionPointer());
 	}
 

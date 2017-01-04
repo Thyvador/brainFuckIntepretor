@@ -175,7 +175,7 @@ public class Initialyzer {
                 JumpTable jumpTable = readerAndJump.getSecond();
                 List<AbstractInstruction> instructions = readerAndJump.getFirst();
                 executionReader = new ExecutionReader(instructions, jumpTable);
-                Language.setJumpTable(executionReader);
+                Language.setExecutable(executionReader);
             }
 
             if (argumentAnalyzer.getFlags().contains(Context.GENERATE.getSyntax())) {
@@ -198,7 +198,8 @@ public class Initialyzer {
     private BfCompiler initCompiler(Memory memory) throws IOException, SyntaxErrorException, BracketsParseException, MemoryOutOfBoundsException {
         try {
             BfPrecompiler bfPrecompiler = new BfPrecompiler(reader);
-            Map<String, Macro> macros = bfPrecompiler.analyzeMacro();
+            Map<String, Macro> macros = bfPrecompiler.
+                    analyzeMacro();
             bfPrecompiler.analyzeProcedure(executer.getContextExecuters(), macros, memory);
             return new BfCompiler(reader, executer.getContextExecuters(), macros);
         } catch (java.io.IOException e) {
@@ -226,6 +227,5 @@ public class Initialyzer {
             Logger.getInstance().setWriter(argAnalizer.getArgument(PATH));
         }
     }
-
 
 }

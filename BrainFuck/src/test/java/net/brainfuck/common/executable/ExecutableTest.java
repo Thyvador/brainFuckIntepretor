@@ -65,7 +65,7 @@ public class ExecutableTest {
 				return null;
 			}
         };
-        Language.setJumpTable(executable);
+        Language.setExecutable(executable);
 
     }
 
