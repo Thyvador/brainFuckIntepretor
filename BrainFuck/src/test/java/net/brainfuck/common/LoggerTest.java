@@ -85,11 +85,9 @@ public class LoggerTest {
 		long temps = System.currentTimeMillis();
 		logger.startExecTime();
 		int randomTimeExec = new Random().nextInt(500);
-		while (System.currentTimeMillis() - temps<randomTimeExec){
+		while (System.currentTimeMillis() - temps - 10<randomTimeExec ){
 		}
-
-		String str = logger.showResume(mem);
-		int time = Integer.parseInt(str.split("EXEC_TIME : ")[1].split(" ms")[0]);
+		int time = Integer.parseInt(logger.showResume(mem).split("EXEC_TIME : ")[1].split(" ms")[0]);
 		assertEquals(randomTimeExec,time,50);
 	}
 
