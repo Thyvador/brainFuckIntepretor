@@ -17,13 +17,27 @@ public final class StringParser {
         return str.matches("^\\d+$");
     }
 
+    /**
+     * Split string when space is encountered
+     * @param str the line to split
+     * @return an array with text
+     */
     public static String[] splitSpace(String str) {return str.split("\\s+"); }
 
+    /**
+     * Check if the string contains a space
+     * @param str the string to check
+     * @return true if str contains a space
+     */
     public static boolean containsSpace(String str) {
         return str.indexOf(' ') != -1 || str.indexOf('\t') != -1;
     }
 
-
+    /**
+     * Get all arguments between parenthesis
+     * @param str the string with arguments
+     * @return an array of arguments
+     */
     public static String[] getArguments(String str) {
         String[] res = null;
         if (isCorrectParentheses(str) && containsParenthesis(str)) {
@@ -35,10 +49,14 @@ public final class StringParser {
                 }
             }
         }
-
         return res;
     }
 
+    /**
+     * check if a string has correct parenthesis
+     * @param str
+     * @return
+     */
     public static boolean isCorrectParentheses(String str) {
         long leftParenthesis  = str.chars().filter(num -> num == '(').count();
         long rightParenthesis= str.chars().filter(num -> num == ')').count();
@@ -46,7 +64,11 @@ public final class StringParser {
                 (leftParenthesis == rightParenthesis  && str.indexOf('(') < str.indexOf(')'));
     }
 
-
+    /**
+     * Check if a string contains a parenthesis open and close
+     * @param str the string to check
+     * @return true if it contains
+     */
     public static boolean containsParenthesis(String str) {
         return str.contains("(")  && str.contains(")");
     }
