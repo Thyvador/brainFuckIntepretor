@@ -4,7 +4,6 @@ import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
 import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.Interpreter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
@@ -24,10 +23,10 @@ public abstract class Executable extends AbstractInstruction {
 
     protected final String name;
     protected List<AbstractInstruction> instructions;
-    protected int index = -1;
-    protected Stack<Integer> marks;
-    protected JumpTable jumpTable;
-    protected Executable parent;
+    private int index = -1;
+    private Stack<Integer> marks;
+    private JumpTable jumpTable;
+    private Executable parent;
     protected Logger logger = Logger.getInstance();
     protected List<String> argument;
 
@@ -87,7 +86,7 @@ public abstract class Executable extends AbstractInstruction {
      *
      * @return the string containing the list of arguments.
      */
-    public String getArgumentString() {
+    String getArgumentString() {
         StringBuilder res = new StringBuilder().append("(int *ptr");
         for (String arg : argument) {
             res.append(", int ").append(arg);
@@ -188,7 +187,7 @@ public abstract class Executable extends AbstractInstruction {
      * @throws SegmentationFaultException
      */
     @Override
-    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, SegmentationFaultException, BracketsParseException {
         parent = Language.getExecutable();
         Language.setExecutable(this);
         AbstractInstruction instruction;
