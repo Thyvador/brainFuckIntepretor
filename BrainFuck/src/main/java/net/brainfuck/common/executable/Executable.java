@@ -3,8 +3,12 @@ package net.brainfuck.common.executable;
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
-import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.Interpreter;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.FileNotFoundIn;
+import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
@@ -46,8 +50,8 @@ public abstract class Executable extends AbstractInstruction {
     /**
      * Constructs a default Executable.
      *
-     * @param instructions
-     * @param jumpTable
+     * @param instructions the list of instructions of the executable
+     * @param jumpTable    the jump table of the executable
      */
     public Executable(String name, List<AbstractInstruction> instructions, JumpTable jumpTable, List<String> argument) {
         this(name, argument);
@@ -55,6 +59,11 @@ public abstract class Executable extends AbstractInstruction {
         this.instructions = instructions;
     }
 
+    /**
+     * Set the jump table and the list of instructions.
+     *
+     * @param pair a pair containing the list of instruction and the jump table.
+     */
     public void addPair(Pair<List<AbstractInstruction>, JumpTable> pair) {
         this.jumpTable = pair.getSecond();
         this.instructions = pair.getFirst();
@@ -105,7 +114,7 @@ public abstract class Executable extends AbstractInstruction {
     /**
      * CLose the reader and check the brackets.
      *
-     * @throws BracketsParseException
+     * @throws BracketsParseException throw if the marks stack is not empty.
      */
     public void closeReader() throws BracketsParseException, MemoryOutOfBoundsException {
         if (!marks.isEmpty())
@@ -122,10 +131,9 @@ public abstract class Executable extends AbstractInstruction {
     /**
      * Set the index to the value on top of the stack representing the brackets.
      *
-     * @throws IOException
-     * @throws BracketsParseException
+     * @throws BracketsParseException throw if the stack of marks is empty.
      */
-    public void reset() throws IOException, BracketsParseException {
+    public void reset() throws BracketsParseException {
         if (marks.isEmpty())
             throw new BracketsParseException("[");
         seek(marks.peek());
@@ -134,7 +142,7 @@ public abstract class Executable extends AbstractInstruction {
     /**
      * Remove the element on top of the stack representing the brackets.
      *
-     * @throws BracketsParseException
+     * @throws BracketsParseException throw if the stack of marks is empty.
      */
     public void unmark() throws BracketsParseException {
         if (marks.isEmpty())
@@ -180,15 +188,15 @@ public abstract class Executable extends AbstractInstruction {
      * Execute the list of instructions representing the executable.
      *
      * @param memory the memory
-     * @throws MemoryOutOfBoundsException
-     * @throws MemoryOverFlowException
-     * @throws IOException
-     * @throws FileNotFoundIn
-     * @throws BracketsParseException
-     * @throws SegmentationFaultException
+     * @throws BracketsParseException     throw by the instruction
+     * @throws IOException                throw by the instruction
+     * @throws MemoryOverFlowException    throw by the instruction
+     * @throws FileNotFoundIn             throw by the instruction
+     * @throws SegmentationFaultException throw by the instruction
+     * @throws MemoryOutOfBoundsException throw by the instruction
      */
     @Override
-    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+    public void execute(Memory memory) throws BracketsParseException, IOException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException, MemoryOutOfBoundsException {
         parent = Language.getExecutable();
         Language.setExecutable(this);
         AbstractInstruction instruction;
@@ -253,7 +261,7 @@ public abstract class Executable extends AbstractInstruction {
      * @throws BracketsParseException     throw by interpreter
      * @throws MemoryOverFlowException    throw by memory
      * @throws FileNotFoundIn             throw by writer
-     * @throws SegmentationFaultException
+     * @throws SegmentationFaultException throw by the memory
      */
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
@@ -275,6 +283,11 @@ public abstract class Executable extends AbstractInstruction {
         return jumpTable;
     }
 
+    /**
+     * Return the name of the executable.
+     *
+     * @return the name of the executable.
+     */
     public String getName() {
         return name;
     }

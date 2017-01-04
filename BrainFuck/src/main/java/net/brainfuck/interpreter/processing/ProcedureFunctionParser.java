@@ -5,13 +5,9 @@ import net.brainfuck.common.StringParser;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.SyntaxErrorException;
-import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
-import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-import net.brainfuck.interpreter.processing.BfCompiler;
-import net.brainfuck.interpreter.processing.Macro;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,14 +53,14 @@ public class ProcedureFunctionParser {
 
 
     private void checkSyntax(String definition) throws SyntaxErrorException {
-        if ( !definition.matches("^![\\w\\d]+\\s+[\\w\\d]+\\(.*\\)\\s*")) {
+        if (!definition.matches("^![\\w\\d]+\\s+[\\w\\d]+\\(.*\\)\\s*")) {
             throw new SyntaxErrorException("Bad definition of procedure");
         }
     }
 
     public Pair<List<AbstractInstruction>, JumpTable> parse(List<String> instructions) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException {
         BfCompiler bfCompiler = new BfCompiler(contextExecuters, macros);
-        
+
         return bfCompiler.compile(contextExecuters, instructions);
     }
 

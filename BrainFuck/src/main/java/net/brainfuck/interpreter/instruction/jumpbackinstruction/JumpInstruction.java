@@ -13,57 +13,55 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
  * Representation of JUMP instruction "[" "JUMP".
  */
 public class JumpInstruction extends JumpBackInstruction {
-	/**
-	 * Instantiates a new jump instruction.
-	 * @param executionReader
-	 */
-	public JumpInstruction(Executable executionReader) {
-		super(Language.JUMP, executionReader);
-	}
+    /**
+     * Instantiates a new jump instruction.
+     *
+     * @param executionReader
+     */
+    public JumpInstruction(Executable executionReader) {
+        super(Language.JUMP, executionReader);
+    }
 
-	/**
-	 * Execute the nonLinear approch of JUMP instruction.
-	 *
-	 * @param memory
-	 *            the memory
-	 * @throws MemoryOutOfBoundsException
-	 *             throw by memory
-	 * @throws IOException
-	 *             throw by memory
-	 * @throws BracketsParseException 
-	 */
-	@Override
-	public void execute(Memory memory) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
-		nonLinearExecute(memory);
-	}
+    /**
+     * Execute the nonLinear approch of JUMP instruction.
+     *
+     * @param memory the memory
+     * @throws MemoryOutOfBoundsException throw by memory
+     * @throws IOException                throw by memory
+     * @throws BracketsParseException
+     */
+    @Override
+    public void execute(Memory memory) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+        nonLinearExecute(memory);
+    }
 
-	private void linearExecute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
-		if (memory.get() != 0) {
-			reader.mark();
-		} else {
-			int cpt = 1;
-			AbstractInstruction instruction;
-			while (cpt > 0) {
-				instruction = reader.getNext();
-				if (instruction == null) {
-					throw new BracketsParseException("]");
-				}
-				if (instruction.equals(Language.JUMP.getInterpreter())) {
-					cpt++;
-				} else if (instruction.equals(Language.BACK.getInterpreter())) {
-					cpt--;
-				}
-			}
-			// Reach corresponding closing bracket
-		}
-	}
+    private void linearExecute(Memory memory, ExecutionReader reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
+        if (memory.get() != 0) {
+            reader.mark();
+        } else {
+            int cpt = 1;
+            AbstractInstruction instruction;
+            while (cpt > 0) {
+                instruction = reader.getNext();
+                if (instruction == null) {
+                    throw new BracketsParseException("]");
+                }
+                if (instruction.equals(Language.JUMP.getInterpreter())) {
+                    cpt++;
+                } else if (instruction.equals(Language.BACK.getInterpreter())) {
+                    cpt--;
+                }
+            }
+            // Reach corresponding closing bracket
+        }
+    }
 
-	private void nonLinearExecute(Memory memory)
-			throws MemoryOutOfBoundsException, IOException {
-		// Reach corresponding closing bracket
-		if (memory.get() == 0) {
-			reader.seek();
-		}
-	}
+    private void nonLinearExecute(Memory memory)
+            throws MemoryOutOfBoundsException, IOException {
+        // Reach corresponding closing bracket
+        if (memory.get() == 0) {
+            reader.seek();
+        }
+    }
 
 }

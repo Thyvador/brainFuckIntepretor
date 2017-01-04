@@ -51,8 +51,8 @@ public enum Language {
         this.aliases = aliases;
     }
 
-    public static void addInstruction(AbstractInstruction interpreter, String aliase){
-    	instructionMap.put(aliase, interpreter);
+    public static void addInstruction(AbstractInstruction interpreter, String aliase) {
+        instructionMap.put(aliase, interpreter);
     }
 
     public static void setInstructions(InputStreamReader inputStreamReader,
@@ -88,7 +88,7 @@ public enum Language {
         ((BackInstruction) Language.BACK.getInterpreter()).setReader(executionReader);
     }
 
-    public static Executable getExecutable(){
+    public static Executable getExecutable() {
         return ((JumpBackInstruction) JUMP.getInterpreter()).getExecutable();
     }
 
@@ -137,8 +137,8 @@ public enum Language {
         return aliases[2];
     }
 
-	public String getCSyntax() {
-		return aliases[3];
-	}
+    public String getCSyntax() {
+        return aliases[3];
+    }
 
 }

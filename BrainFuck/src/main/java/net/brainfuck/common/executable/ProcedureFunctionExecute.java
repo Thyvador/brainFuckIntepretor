@@ -1,10 +1,15 @@
 package net.brainfuck.common.executable;
 
 import net.brainfuck.common.Memory;
-import net.brainfuck.exception.*;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.FileNotFoundIn;
+import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
+import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,22 +52,22 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
         return compositeInstruction.rewrite();
     }
 
-	@Override
-	public String translate() {
-		return compositeInstruction.translate();
-	}
+    @Override
+    public String translate() {
+        return compositeInstruction.translate();
+    }
 
-	@Override
-	public String generate() {
-		StringBuilder res = new StringBuilder("ptr++;");
-		if (compositeInstruction.getClass() == Function.class)
-			res.append("(*ptr) = ");
-		res.append(compositeInstruction.name).append("(");
-		res.append("ptr");
-		for (Integer v : values) {
-			res.append(String.format(", memory[%d]", v));
-		}
-	    return res.append(");").toString();
-	}
+    @Override
+    public String generate() {
+        StringBuilder res = new StringBuilder("ptr++;");
+        if (compositeInstruction.getClass() == Function.class)
+            res.append("(*ptr) = ");
+        res.append(compositeInstruction.name).append("(");
+        res.append("ptr");
+        for (Integer v : values) {
+            res.append(String.format(", memory[%d]", v));
+        }
+        return res.append(");").toString();
+    }
 
 }

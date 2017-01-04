@@ -17,157 +17,156 @@ import java.util.Stack;
  * @author Alexandre Hiltcher
  */
 public class BfImageReader implements Reader {
-	/**
-	 * The offset of the pixel being read.
-	 */
-	private int offX, offY;
-	/**
-	 * The width and height of the image.
-	 */
-	private int width, height;
-	/**
-	 * The bufferedImage that contains the data from the bitmap file.
-	 */
-	private BufferedImage bufferedImage;
-	/**
-	 * The stack that contains all the points corresponding to the JUMP instructions.
-	 */
-	private Stack<Integer> marks;
-	/**
-	 * Is the reader open.
-	 */
-	private boolean open = false;
+    /**
+     * The offset of the pixel being read.
+     */
+    private int offX, offY;
+    /**
+     * The width and height of the image.
+     */
+    private int width, height;
+    /**
+     * The bufferedImage that contains the data from the bitmap file.
+     */
+    private BufferedImage bufferedImage;
+    /**
+     * The stack that contains all the points corresponding to the JUMP instructions.
+     */
+    private Stack<Integer> marks;
+    /**
+     * Is the reader open.
+     */
+    private boolean open = false;
 
-	/**
-	 * Constructs argumentAnalyzer BfImageReader from the path of argumentAnalyzer file.
-	 *
-	 * @param path the path of the file to read.
-	 * @throws FileNotFoundException {@link FileNotFoundException} if the file does not exit or cannot be read.
-	 */
-	public BfImageReader(String path) throws FileNotFoundException {
-		marks = new Stack<>();
-		try {
-			bufferedImage = ImageIO.read(new File(path));
-		} catch (java.io.IOException e) {
-			throw new FileNotFoundException(path);
-		}
-		offX = 0;
-		offY = 0;
-		width = bufferedImage.getWidth();
-		height = bufferedImage.getHeight();
-		open = true;
-	}
+    /**
+     * Constructs argumentAnalyzer BfImageReader from the path of argumentAnalyzer file.
+     *
+     * @param path the path of the file to read.
+     * @throws FileNotFoundException {@link FileNotFoundException} if the file does not exit or cannot be read.
+     */
+    public BfImageReader(String path) throws FileNotFoundException {
+        marks = new Stack<>();
+        try {
+            bufferedImage = ImageIO.read(new File(path));
+        } catch (java.io.IOException e) {
+            throw new FileNotFoundException(path);
+        }
+        offX = 0;
+        offY = 0;
+        width = bufferedImage.getWidth();
+        height = bufferedImage.getHeight();
+        open = true;
+    }
 
-	/**
-	 * Return the color of the next instruction.
-	 *
-	 * @return the hexadecimal value of the next color as argumentAnalyzer String.
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	@Override
-	public String getNext() throws IOException {
-		if (!open) throw new IOException("The reader is not set.");
-		if (offX >= width) {
-			offX = 0;
-			offY += 3;
-		}
-		if (offY >= height) {
-			return null;
-		}
-		int rgb = bufferedImage.getRGB(offX, offY);
+    /**
+     * Return the color of the next instruction.
+     *
+     * @return the hexadecimal value of the next color as argumentAnalyzer String.
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    @Override
+    public String getNext() throws IOException {
+        if (!open) throw new IOException("The reader is not set.");
+        if (offX >= width) {
+            offX = 0;
+            offY += 3;
+        }
+        if (offY >= height) {
+            return null;
+        }
+        int rgb = bufferedImage.getRGB(offX, offY);
 
-		for (int x = 0; x < 3; x++) {
-			for (int y = 0; y < 3; y++) {
-				if (rgb != bufferedImage.getRGB(offX + x, offY + y)) {
-					return "Error at pixel (" + (offX + x) + ", " + (offY + y) + ")";
-				}
-			}
-		}
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if (rgb != bufferedImage.getRGB(offX + x, offY + y)) {
+                    return "Error at pixel (" + (offX + x) + ", " + (offY + y) + ")";
+                }
+            }
+        }
 
-		int b = rgb & 0xFF;
-		int g = (rgb >> 8) & 0xFF;
-		int r = (rgb >> 16) & 0xFF;
-		offX += 3;
+        int b = rgb & 0xFF;
+        int g = (rgb >> 8) & 0xFF;
+        int r = (rgb >> 16) & 0xFF;
+        offX += 3;
 
-		if (r == 0 && g == 0 && b == 0) {
-			return null;
-		}
+        if (r == 0 && g == 0 && b == 0) {
+            return null;
+        }
 
-		return String.format("%02x%02x%02x", r, g, b);
+        return String.format("%02x%02x%02x", r, g, b);
 
-	}
+    }
 
-	/* (non-Javadoc)
-	 * @see net.brainfuck.common.Reader#getExecutionPointer()
-	 */
-	@Override
-	public int getExecutionPointer() {
-		return ((offX / 3) + (offY * width) / 9);
-	}
+    /* (non-Javadoc)
+     * @see net.brainfuck.common.Reader#getExecutionPointer()
+     */
+    @Override
+    public int getExecutionPointer() {
+        return ((offX / 3) + (offY * width) / 9);
+    }
 
-	/**
-	 * Close the reader once the file is read.
-	 *
-	 * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
-	 */
-	@Override
-	public void closeReader() throws BracketsParseException {
-		if (!marks.isEmpty()) {
-			open = false;
-			throw new BracketsParseException("]");
-		}
-	}
+    /**
+     * Close the reader once the file is read.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
+     */
+    @Override
+    public void closeReader() throws BracketsParseException {
+        if (!marks.isEmpty()) {
+            open = false;
+            throw new BracketsParseException("]");
+        }
+    }
 
-	/**
-	 * Mark the current instruction by adding it into the stack.
-	 */
-	@Override
-	public void mark() {
-		marks.push(getExecutionPointer());
-	}
+    /**
+     * Mark the current instruction by adding it into the stack.
+     */
+    @Override
+    public void mark() {
+        marks.push(getExecutionPointer());
+    }
 
-	/**
-	 * Set the index of the next pixel to the last mark.
-	 *
-	 * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
-	 */
-	@Override
-	public void reset() throws BracketsParseException {
-		if (marks.isEmpty()) {
-			throw new BracketsParseException("[");
-		}
-		seek(marks.peek());
-	}
+    /**
+     * Set the index of the next pixel to the last mark.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
+     */
+    @Override
+    public void reset() throws BracketsParseException {
+        if (marks.isEmpty()) {
+            throw new BracketsParseException("[");
+        }
+        seek(marks.peek());
+    }
 
-	/**
-	 * Unmark the last marked instructions by remove it from the stack.
-	 *
-	 * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
-	 */
-	@Override
-	public void unmark() throws BracketsParseException {
-		if (marks.isEmpty()) {
-			throw new BracketsParseException("[");
-		}
-		marks.pop();
-	}
+    /**
+     * Unmark the last marked instructions by remove it from the stack.
+     *
+     * @throws BracketsParseException {@link BracketsParseException} if the mark stack is empty.
+     */
+    @Override
+    public void unmark() throws BracketsParseException {
+        if (marks.isEmpty()) {
+            throw new BracketsParseException("[");
+        }
+        marks.pop();
+    }
 
-	/* (non-Javadoc)
-	 * @see net.brainfuck.common.Reader#seek(long)
-	 */
-	@Override
-	public void seek(int pos) {
-		offX = (pos * 3) % width;
-		offY = (pos * 9) / width;
-	}
+    /* (non-Javadoc)
+     * @see net.brainfuck.common.Reader#seek(long)
+     */
+    @Override
+    public void seek(int pos) {
+        offX = (pos * 3) % width;
+        offY = (pos * 9) / width;
+    }
 
-	/**
-	 * Gets the marked positions.
-	 *
-	 * @return the marks
-	 */
-	public Stack<Integer> getMarks() {
-		return marks;
-	}
+    /**
+     * Gets the marked positions.
+     *
+     * @return the marks
+     */
+    public Stack<Integer> getMarks() {
+        return marks;
+    }
 }

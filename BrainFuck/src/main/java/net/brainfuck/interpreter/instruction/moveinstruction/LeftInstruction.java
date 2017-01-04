@@ -12,23 +12,23 @@ import net.brainfuck.interpreter.Language;
  */
 public class LeftInstruction extends MoveInstruction {
 
-	/**
-	 * Instantiates a new left instruction.
-	 */
-	public LeftInstruction() {
-		super(Language.LEFT);
-	}
+    /**
+     * Instantiates a new left instruction.
+     */
+    public LeftInstruction() {
+        super(Language.LEFT);
+    }
 
-	/**
-	 * Execute the "left" method of Memory Class.
-	 *
-	 * @param memory the memory
-	 * @throws MemoryOutOfBoundsException the memory out of bounds exception
-	 * @throws SegmentationFaultException 
-	 */
-	@Override
-	public void execute(Memory memory) throws MemoryOutOfBoundsException, SegmentationFaultException {
-		memory.left();
-	}
+    /**
+     * Execute the "left" method of Memory Class.
+     *
+     * @param memory the memory
+     * @throws MemoryOutOfBoundsException the memory out of bounds exception
+     * @throws SegmentationFaultException
+     */
+    @Override
+    public void execute(Memory memory) throws MemoryOutOfBoundsException, SegmentationFaultException {
+        memory.left();
+    }
 
 }

@@ -2,7 +2,7 @@ package net.brainfuck.exception;
 
 public class SegmentationFaultException extends Exception {
 
-	private static final long serialVersionUID = 3989494324978994414L;
+    private static final long serialVersionUID = 3989494324978994414L;
 
     public SegmentationFaultException() {
         super("Core dumped.");
@@ -11,5 +11,5 @@ public class SegmentationFaultException extends Exception {
     public SegmentationFaultException(String message) {
         super("Core dumped : " + message);
     }
-	
+
 }

@@ -11,81 +11,81 @@ import net.brainfuck.interpreter.Language;
  */
 public abstract class AbstractInstruction implements InstructionInterface {
 
-	private Language languageInstr;
-	private Logger logger;
+    private Language languageInstr;
+    private Logger logger;
 
-	/**
-	 * Instantiates a new abstract execute.
-	 *
-	 * @param languageInstr the language instr
-	 */
-	protected AbstractInstruction(Language languageInstr) {
-		this.languageInstr = languageInstr;
-		logger = Logger.getInstance();
-	}
+    /**
+     * Instantiates a new abstract execute.
+     *
+     * @param languageInstr the language instr
+     */
+    protected AbstractInstruction(Language languageInstr) {
+        this.languageInstr = languageInstr;
+        logger = Logger.getInstance();
+    }
 
     public AbstractInstruction() {
     }
 
-	/**
-	 * Print the short syntax of the command which implement this interface.
-	 */
-	@Override
-	public String rewrite() {
-		return languageInstr.getShortSyntax();
-	}
+    /**
+     * Print the short syntax of the command which implement this interface.
+     */
+    @Override
+    public String rewrite() {
+        return languageInstr.getShortSyntax();
+    }
 
-	/**
-	 * Return the color (in hexa) which represent the instruction
-	 *
-	 * @return String hexa wich represent the color of the current instruction
-	 */
-	@Override
-	public String translate() {
-		return languageInstr.getColorSyntax();
-	}
-	
-	@Override
-	public String generate() {
-		return languageInstr.getCSyntax();
-	}
+    /**
+     * Return the color (in hexa) which represent the instruction
+     *
+     * @return String hexa which represent the color of the current instruction
+     */
+    @Override
+    public String translate() {
+        return languageInstr.getColorSyntax();
+    }
 
-	/**
-	 * Execute the instruction and write the trace.
-	 *
-	 * @param memory the memory
-	 * @throws IOException                throw by inReader
-	 * @throws MemoryOutOfBoundsException throw by memory
-	 * @throws BracketsParseException     throw by interpreter
-	 * @throws MemoryOverFlowException    throw by memory
-	 * @throws FileNotFoundIn             throw by writer
-	 * @throws SegmentationFaultException 
-	 */
-	@Override
-	public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
-		execute(memory);
-		logger.write(reader.getName(), reader.getExecutionPointer(), memory);
-	}
+    @Override
+    public String generate() {
+        return languageInstr.getCSyntax();
+    }
 
-	@Override
-	public abstract void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
+    /**
+     * Execute the instruction and write the trace.
+     *
+     * @param memory the memory
+     * @throws IOException                throw by inReader
+     * @throws MemoryOutOfBoundsException throw by memory
+     * @throws BracketsParseException     throw by interpreter
+     * @throws MemoryOverFlowException    throw by memory
+     * @throws FileNotFoundIn             throw by writer
+     * @throws SegmentationFaultException throw by memory
+     */
+    @Override
+    public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
+        execute(memory);
+        logger.write(reader.getName(), reader.getExecutionPointer(), memory);
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof AbstractInstruction)) return false;
+    @Override
+    public abstract void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
 
-		AbstractInstruction that = (AbstractInstruction) o;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractInstruction)) return false;
 
-		if (languageInstr != that.languageInstr) return false;
-		return logger != null ? logger.equals(that.logger) : that.logger == null;
+        AbstractInstruction that = (AbstractInstruction) o;
 
-	}
+        if (languageInstr != that.languageInstr) return false;
+        return logger != null ? logger.equals(that.logger) : that.logger == null;
 
-	@Override
-	public int hashCode() {
-		int result = languageInstr != null ? languageInstr.hashCode() : 0;
-		result = 31 * result + (logger != null ? logger.hashCode() : 0);
-		return result;
-	}
+    }
+
+    @Override
+    public int hashCode() {
+        int result = languageInstr != null ? languageInstr.hashCode() : 0;
+        result = 31 * result + (logger != null ? logger.hashCode() : 0);
+        return result;
+    }
 }

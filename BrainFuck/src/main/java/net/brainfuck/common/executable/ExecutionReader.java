@@ -1,7 +1,6 @@
 package net.brainfuck.common.executable;
 
 import net.brainfuck.interpreter.JumpTable;
-import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 import java.util.ArrayList;
@@ -24,20 +23,20 @@ public class ExecutionReader extends Executable {
         super("main", instructions, jumpTable, new ArrayList<>());
     }
 
-	/**
-	 * Return the string representing the C suite of instruction of the procedure.
-	 *
-	 * @return the string representing the instructions of the executable.
-	 */
-	@Override
-	public String generate() {
-		StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s () {\n",
-				name));
-		stringBuilder.append("int *ptr = memory;\n\n");
-		for (AbstractInstruction instr: instructions)
-			stringBuilder.append(instr.generate());
-		return stringBuilder.append("\nreturn 0;\n}\n\n").toString();
-	}
+    /**
+     * Return the string representing the C suite of instruction of the procedure.
+     *
+     * @return the string representing the instructions of the executable.
+     */
+    @Override
+    public String generate() {
+        StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s () {\n",
+                name));
+        stringBuilder.append("int *ptr = memory;\n\n");
+        for (AbstractInstruction instr : instructions)
+            stringBuilder.append(instr.generate());
+        return stringBuilder.append("\nreturn 0;\n}\n\n").toString();
+    }
 
 
 }

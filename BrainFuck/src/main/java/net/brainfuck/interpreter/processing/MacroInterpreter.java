@@ -55,7 +55,7 @@ class MacroInterpreter {
         // Récupération de ce qui se trouve derrière la macro (ex: macro 2 => 2  ou macro(2,3) 3 => 3)
         String[] definitions = StringParser.containsParenthesis(str) ? str.split("\\)") : StringParser.splitSpace(str);
         int length = definitions.length;
-        if (length > 2 ) throw new SyntaxErrorException("Bad definition of macro " + str);
+        if (length > 2) throw new SyntaxErrorException("Bad definition of macro " + str);
 
         // Cas ou la ligne contient un multiplicateur de macro (ex: macroname 2 ou macroname(2,3) 3)
         if (length == 2) {
@@ -76,7 +76,7 @@ class MacroInterpreter {
      *
      * @param instruction the instruction
      * @return true, if successful
-     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws IOException            Signals that an I/O exception has occurred.
      * @throws BracketsParseException the brackets parse exception
      */
     List<Language> writeMacro(String instruction) throws IOException, BracketsParseException, SyntaxErrorException {
