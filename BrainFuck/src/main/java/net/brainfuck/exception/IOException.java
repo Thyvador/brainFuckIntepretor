@@ -2,7 +2,6 @@ package net.brainfuck.exception;
 
 /**
  * Signal when an error input or output is detected in the file.
- * This exception will be thrown by <code>BfReader</code>,<code>Logger</code>,<code>BfImageReader</code>.
  *
  * @author Alexandre Hiltcher
  */

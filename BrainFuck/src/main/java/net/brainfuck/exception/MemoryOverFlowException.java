@@ -2,7 +2,6 @@ package net.brainfuck.exception;
 
 /**
  * Signal when an memory overflow is detected in the file.
- * This exception will be thrown by <code>Memory</code>.
  *
  * @author Alexandre Hiltcher
  */

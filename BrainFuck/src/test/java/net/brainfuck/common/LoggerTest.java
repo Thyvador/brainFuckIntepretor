@@ -177,11 +177,11 @@ public class LoggerTest {
 	@Test
 	public void write1() throws Exception {
 		logger.setWriter(filename);
-		logger.write(0, new Memory());
+		logger.write("test", 0, new Memory());
 		List<String> str = Arrays.asList(
 				"============",
 				"Execution Step 1 : ",
-				"Execution pointer : 0.",
+				"Execution pointer : 0 in : test.",
 				"Data pointer  : C0.",
 				"Memory : ",
 				"");

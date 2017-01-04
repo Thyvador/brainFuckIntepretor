@@ -23,22 +23,21 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
  * @author Alexandre HILTCHER
  */
 public abstract class Executable extends AbstractInstruction {
-	
-	private static List<Executable> executableRegistry = new LinkedList<>();
-	
+
+    private static List<Executable> executableRegistry = new LinkedList<>();
+
     protected final String name;
     protected List<AbstractInstruction> instructions;
-    protected int index = -1;
-    protected Stack<Integer> marks;
-    protected JumpTable jumpTable;
-    protected Executable parent;
+    private int index = -1;
+    private Stack<Integer> marks;
+    private JumpTable jumpTable;
+    private Executable parent;
     protected Logger logger = Logger.getInstance();
     protected List<String> argument;
 
 
     /**
      * Constructs a default Executable.
-     *
      */
     public Executable(String name, List<String> argument) {
         super();
@@ -78,26 +77,36 @@ public abstract class Executable extends AbstractInstruction {
         return instruction;
     }
 
+    /**
+     * Return the list of arguments.
+     *
+     * @return the arguments
+     */
     public List<String> getArgument() {
-	    return argument;
-	}
-    
-    public String getArgumentString() {
-	    StringBuilder res = new StringBuilder().append("(int *ptr");
-	    for (String arg : argument) {
-	    	res.append(", int ").append(arg);
-		}
-	    return res.append(")").toString();
-	}
+        return argument;
+    }
 
-	/**
-	 * @return the executableRegistry
-	 */
-	public static List<Executable> getExecutableRegistry() {
-		return executableRegistry;
-	}
+    /**
+     * Return a string containing the list of arguments.
+     *
+     * @return the string containing the list of arguments.
+     */
+    String getArgumentString() {
+        StringBuilder res = new StringBuilder().append("(int *ptr");
+        for (String arg : argument) {
+            res.append(", int ").append(arg);
+        }
+        return res.append(")").toString();
+    }
 
-	/**
+    /**
+     * @return the executableRegistry
+     */
+    public static List<Executable> getExecutableRegistry() {
+        return executableRegistry;
+    }
+
+    /**
      * CLose the reader and check the brackets.
      *
      * @throws BracketsParseException
@@ -171,8 +180,19 @@ public abstract class Executable extends AbstractInstruction {
         return marks;
     }
 
+    /**
+     * Execute the list of instructions representing the executable.
+     *
+     * @param memory the memory
+     * @throws MemoryOutOfBoundsException
+     * @throws MemoryOverFlowException
+     * @throws IOException
+     * @throws FileNotFoundIn
+     * @throws BracketsParseException
+     * @throws SegmentationFaultException
+     */
     @Override
-    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
+    public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, SegmentationFaultException, BracketsParseException {
         parent = Language.getExecutable();
         Language.setExecutable(this);
         AbstractInstruction instruction;
@@ -182,8 +202,13 @@ public abstract class Executable extends AbstractInstruction {
         Language.setExecutable(parent);
     }
 
+    /**
+     * Print the list of short syntax of the commands .
+     *
+     * @return the list of instructions of the executable.
+     */
     @Override
-	public String rewrite() {
+    public String rewrite() {
         StringBuilder stringBuilder = new StringBuilder();
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {
@@ -193,7 +218,7 @@ public abstract class Executable extends AbstractInstruction {
     }
 
     /**
-     * Return the color (in hexa) which represent the instruction
+     * Return the list of colors (in hexa) which represent the instructions.
      *
      * @return String hexa wich represent the color of the current instruction
      */
@@ -207,15 +232,20 @@ public abstract class Executable extends AbstractInstruction {
         return stringBuilder.toString();
     }
 
+    /**
+     * Return the string representing the C suite of instruction of the executable.
+     *
+     * @return the string representing the instructions of the executable.
+     */
     @Override
     public String generate() {
-    	StringBuilder stringBuilder = new StringBuilder();
-		for (String arg: argument)
-			stringBuilder.append(String.format("(*(ptr++)) = %s;", arg));
-		stringBuilder.append("\n");
-		for (AbstractInstruction instr: instructions)
-			stringBuilder.append(instr.generate());
-		return stringBuilder.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String arg : argument)
+            stringBuilder.append(String.format("(*(ptr++)) = %s;", arg));
+        stringBuilder.append("\n");
+        for (AbstractInstruction instr : instructions)
+            stringBuilder.append(instr.generate());
+        return stringBuilder.toString();
     }
 
     /**
@@ -235,13 +265,21 @@ public abstract class Executable extends AbstractInstruction {
         Language.setExecutable(this);
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {
-            instruction.execute(memory);
-            logger.write(reader.getExecutionPointer(), memory);
+            instruction.trace(memory, reader);
         }
         Language.setExecutable(parent);
     }
 
+    /**
+     * Return the jump table of the current executable.
+     *
+     * @return the jump table.
+     */
     public JumpTable getJumpTable() {
         return jumpTable;
+    }
+
+    public String getName() {
+        return name;
     }
 }

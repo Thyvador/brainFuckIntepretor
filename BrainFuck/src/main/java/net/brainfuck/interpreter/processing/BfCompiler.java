@@ -47,6 +47,10 @@ public class BfCompiler {
 		this.reader = r;
 	}
 
+	/**
+	 * Initialize the BfCompiler Object
+	 * @param contextExecuters List of context get by ArgumentAnalyzer
+	 */
 	public BfCompiler(List<ContextExecuter> contextExecuters, Map<String, Macro> macros) {
 		this.logger = Logger.getInstance();
 		this.macroInterpreter = new MacroInterpreter(macros);

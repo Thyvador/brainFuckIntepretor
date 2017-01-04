@@ -3,7 +3,6 @@ package net.brainfuck.exception;
 
 /**
  * Signal when a file to read is not found.
- * This exception will be thrown by <code>BfCompiler</code> and <code>BfImageWriter</code>.
  *
  * @author Alexandre Hiltcher
  */

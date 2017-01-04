@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 /**
  * Representation of IN instruction "." "IN".
  *
- * @author François Melkonian IN_PATH
+ * @author François Melkonian
  */
 public class InInstruction extends InOutInstruction {
 	InputStreamReader inReader;

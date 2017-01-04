@@ -23,6 +23,11 @@ public class ExecutionReader extends Executable {
         super("main", instructions, jumpTable, new ArrayList<>());
     }
 
+	/**
+	 * Return the string representing the C suite of instruction of the procedure.
+	 *
+	 * @return the string representing the instructions of the executable.
+	 */
 	@Override
 	public String generate() {
 		StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s () {\n",

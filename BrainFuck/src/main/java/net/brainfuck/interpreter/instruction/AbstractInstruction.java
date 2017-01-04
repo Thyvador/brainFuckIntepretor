@@ -69,7 +69,7 @@ public abstract class AbstractInstruction implements InstructionInterface {
 	@Override
 	public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
 		execute(memory);
-		logger.write(reader.getExecutionPointer(), memory);
+		logger.write(reader.getName(), reader.getExecutionPointer(), memory);
 	}
 
 	@Override

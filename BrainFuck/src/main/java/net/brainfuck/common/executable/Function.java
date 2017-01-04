@@ -20,6 +20,7 @@ public class Function extends Executable {
 
     /**
      * Constructs a default function.
+     *
      * @param memory the memory of the program.
      */
     public Function(String functionName, Memory memory, List<String> argument) {
@@ -28,13 +29,35 @@ public class Function extends Executable {
     }
 
 
-
+    /**
+     * Execute the instructions corresponding to the function.
+     *
+     * @param memory the memory
+     * @throws MemoryOutOfBoundsException
+     * @throws MemoryOverFlowException
+     * @throws IOException
+     * @throws FileNotFoundIn
+     * @throws BracketsParseException
+     * @throws SegmentationFaultException
+     */
     @Override
     public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException {
         super.execute(memory);
         closeReader();
     }
 
+    /**
+     * Execute the instructions of the function and trace the logs.
+     *
+     * @param memory the memory
+     * @param reader the current execution reader.
+     * @throws IOException
+     * @throws MemoryOutOfBoundsException
+     * @throws BracketsParseException
+     * @throws MemoryOverFlowException
+     * @throws FileNotFoundIn
+     * @throws SegmentationFaultException
+     */
     @Override
     public void trace(Memory memory, Executable reader) throws IOException, MemoryOutOfBoundsException, BracketsParseException, MemoryOverFlowException, FileNotFoundIn, SegmentationFaultException {
         super.trace(memory, reader);
@@ -42,8 +65,8 @@ public class Function extends Executable {
     }
 
     /**
-     * @see Executable
      * @throws BracketsParseException
+     * @see Executable
      */
     @Override
     public void closeReader() throws BracketsParseException, MemoryOutOfBoundsException {
@@ -51,11 +74,16 @@ public class Function extends Executable {
         memory.unlock(true);
     }
 
-	@Override
-	public String generate() {
-		StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s %s {\n",
-				name, getArgumentString()));
-		stringBuilder.append(super.generate());
-		return stringBuilder.append("\nreturn *ptr;\n}\n\n").toString();
-	}
+    /**
+     * Generate the string representing the suite of C instructions representing the function.
+     *
+     * @return the string representing the suite of C instruction.
+     */
+    @Override
+    public String generate() {
+        StringBuilder stringBuilder = new StringBuilder().append(String.format("int %s %s {\n",
+                name, getArgumentString()));
+        stringBuilder.append(super.generate());
+        return stringBuilder.append("\nreturn *ptr;\n}\n\n").toString();
+    }
 }
