@@ -148,9 +148,14 @@ public abstract class Executable extends AbstractInstruction {
 
     /**
      * Set the index to the value corresponding to the current index in the jumpTable.
+     * @throws BracketsParseException 
      */
-    public void seek() {
-        seek(jumpTable.getAssociated(index));
+    public void seek() throws BracketsParseException {
+		try {
+			seek(jumpTable.getAssociated(index));
+		} catch (NullPointerException e) {
+			throw new BracketsParseException("}");
+		}
     }
 
     /**

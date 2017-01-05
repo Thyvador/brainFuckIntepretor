@@ -42,7 +42,7 @@ public class BackInstruction extends JumpBackInstruction {
 		}
 	}
 
-	private void nonLinearExecute(Memory memory, Executable reader) throws MemoryOutOfBoundsException, IOException {
+	private void nonLinearExecute(Memory memory, Executable reader) throws MemoryOutOfBoundsException, IOException, BracketsParseException {
 		if (memory.get() != 0) {
 			reader.seek();
 		}

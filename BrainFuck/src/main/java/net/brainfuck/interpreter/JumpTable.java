@@ -66,6 +66,7 @@ public class JumpTable {
 	 * @return the associated
 	 */
 	public int getAssociated(int pos) {
+		System.out.println(this);
 		return table.get(pos);
 	}
 

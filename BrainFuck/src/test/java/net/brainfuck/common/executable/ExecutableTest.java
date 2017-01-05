@@ -59,7 +59,7 @@ public class ExecutableTest {
             }
 
             @Override
-            public void seek() {
+            public void seek() throws BracketsParseException {
                 super.seek();
             }
 

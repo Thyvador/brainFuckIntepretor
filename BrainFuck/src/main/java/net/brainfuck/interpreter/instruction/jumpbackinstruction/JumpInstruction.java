@@ -60,7 +60,7 @@ public class JumpInstruction extends JumpBackInstruction {
 	}
 
 	private void nonLinearExecute(Memory memory)
-			throws MemoryOutOfBoundsException, IOException {
+			throws MemoryOutOfBoundsException, IOException, BracketsParseException {
 		// Reach corresponding closing bracket
 		if (memory.get() == 0) {
 			reader.seek();
