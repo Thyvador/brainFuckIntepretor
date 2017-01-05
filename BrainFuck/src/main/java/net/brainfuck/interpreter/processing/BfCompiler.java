@@ -208,7 +208,7 @@ public class BfCompiler {
 	 */
 	private void write(AbstractInstruction currentInstruction) throws IOException, BracketsParseException {
 		programme.add(currentInstruction);
-		jumpTable.addInstruction(currentInstruction, ++pos);
+		jumpTable.addInstruction(currentInstruction, pos++);
 	}
 
 

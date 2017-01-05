@@ -3,15 +3,24 @@
 # Utiliser par les tests #
 ##########################
 
-!function titi(arg1, arg2, arg3)
-++
+!function titi(arg1)
++++++[ # position 6
+>+++[ #position 11
+>++<- # position 16
+] #position 17
+<-
+] # position 20
+>>
 !end
 
 !procedure da(arg)
-<
-OUT
++++++[ # position 6
+>+++[ #position 11
+>++<- # position 16
+] #position 17
+<-
+] # position 20
 !end
 
-#titi(42,42,42)
-toto(33)
-da(0)
+[++>++>]
+titi(0)
