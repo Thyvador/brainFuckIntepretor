@@ -154,7 +154,7 @@ public abstract class Executable extends AbstractInstruction {
 		try {
 			seek(jumpTable.getAssociated(index));
 		} catch (NullPointerException e) {
-			throw new BracketsParseException("}");
+			throw new BracketsParseException("]");
 		}
     }
 
