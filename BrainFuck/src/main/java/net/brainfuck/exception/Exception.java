@@ -22,7 +22,7 @@ public class Exception extends java.lang.Exception{
      * @param message the detailed message.
      */
     public Exception(String message){
-        super("");
+        super(message);
     }
 
     /**
