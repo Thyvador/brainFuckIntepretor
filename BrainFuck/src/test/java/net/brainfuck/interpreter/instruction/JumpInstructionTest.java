@@ -2,6 +2,9 @@ package net.brainfuck.interpreter.instruction;
 
 import static org.junit.Assert.assertEquals;
 
+import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -10,6 +13,9 @@ import net.brainfuck.common.Memory;
 import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction;
+
+import java.util.Arrays;
+import java.util.List;
 // TODO : mettre à jour les tests sur les JUMP
 /**
  * @author Alexandre Hiltcher,François Melkonian
@@ -20,10 +26,17 @@ public class JumpInstructionTest {
 	private JumpInstruction instruction;
 
 	/**
-	 * Sets the up.
+	 * Create a.
 	 */
 	@Before
 	public void setUp() throws Exception {
+		Language.setInstructions(null, null);
+		List<AbstractInstruction> langage = Arrays.asList(Language.JUMP.getInterpreter(), Language.BACK.getInterpreter());
+		JumpTable jumpTable = new JumpTable(false);
+		jumpTable.addInstruction(langage.get(0), 1);
+		jumpTable.addInstruction(langage.get(1), 0);
+		reader = new ExecutionReader(langage, jumpTable);
+		Language.setExecutable(reader);
 		memory = new Memory();
 		instruction = new JumpInstruction(reader);
 	}
@@ -33,23 +46,20 @@ public class JumpInstructionTest {
 	 * La case mémoire est à 0.
 	 */
 	@Test
-	@Ignore
 	public void jump() throws Exception {
-		reader.seek();
-		instruction.execute(new Memory());
-		assertEquals(6, reader.getExecutionPointer());
+		memory.set(0);
+		reader.getNext().execute(new Memory());
+		assertEquals(1, reader.getExecutionPointer());
 	}
 
 	/**
 	 * Do not jump.
 	 */
 	@Test
-	@Ignore
 	public void doNotJump() throws Exception {
 		memory.set(3);
-		reader.seek();
-		instruction.execute(memory);
-		assertEquals(3, reader.getExecutionPointer());
+		reader.getNext().execute(memory);
+		assertEquals(0, reader.getExecutionPointer());
 	}
 
 	/**
@@ -65,6 +75,11 @@ public class JumpInstructionTest {
 	@Test
 	public void testGenerate() throws Exception {
 		assertEquals("while(*ptr) {",instruction.generate() );
+	}
+
+	@Test
+	public void rewrite(){
+		assertEquals("[", instruction.rewrite());
 	}
 
 }

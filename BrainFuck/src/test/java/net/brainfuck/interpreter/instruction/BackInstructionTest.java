@@ -1,21 +1,21 @@
 package net.brainfuck.interpreter.instruction;
 
-import static org.junit.Assert.assertEquals;
+import net.brainfuck.common.Memory;
+import net.brainfuck.common.executable.ExecutionReader;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.Exception;
+import net.brainfuck.interpreter.JumpTable;
+import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import net.brainfuck.common.Memory;
-import net.brainfuck.common.executable.ExecutionReader;
-import net.brainfuck.exception.BracketsParseException;
-import net.brainfuck.exception.Exception;
-import net.brainfuck.interpreter.Language;
-import net.brainfuck.interpreter.instruction.jumpbackinstruction.BackInstruction;
+import static org.junit.Assert.assertEquals;
 
 /**
  * The Class BackInstructionTest.
@@ -33,9 +33,13 @@ public class BackInstructionTest {
      */
     @Before
     public void setUp() throws Exception {
-
-        List<AbstractInstruction> langage = Arrays.asList(Language.RIGHT.getInterpreter(), Language.RIGHT.getInterpreter());
-        reader = new ExecutionReader(langage, null);
+        Language.setInstructions(null, null);
+        List<AbstractInstruction> langage = Arrays.asList(Language.JUMP.getInterpreter(), Language.BACK.getInterpreter());
+        JumpTable jumpTable = new JumpTable(false);
+        jumpTable.addInstruction(langage.get(0), 1);
+        jumpTable.addInstruction(langage.get(1), 0);
+        reader = new ExecutionReader(langage, jumpTable);
+        Language.setExecutable(reader);
         memory = new Memory();
         instruction = new BackInstruction(reader);
     }
@@ -45,23 +49,24 @@ public class BackInstructionTest {
      */
     //La case mémoire et à 0, ca passe.
     @Test
-    @Ignore
     public void back() throws Exception {
-        reader.seek();
+        memory.set(2);
+        reader.getNext();
+        AbstractInstruction instruction = reader.getNext();
         instruction.execute(memory);
-        assertEquals(6, reader.getExecutionPointer());
+        assertEquals(0, reader.getExecutionPointer());
     }
 
     /**
      * Do not back.
      */
     @Test
-    @Ignore
     public void doNotBack() throws Exception {
-        memory.set(2);
-        reader.seek();
+        memory.set(0);
+        reader.getNext();
+        AbstractInstruction instruction = reader.getNext();
         instruction.execute(memory);
-        assertEquals(3, reader.getExecutionPointer());
+        assertEquals(1, reader.getExecutionPointer());
     }
 
 
@@ -71,19 +76,7 @@ public class BackInstructionTest {
     @Ignore
     @Test(expected = BracketsParseException.class)
     public void parenthizingError() throws Exception {
-//		Charset charset = Charset.forName("UTF-8");
-//		filename = "filename.bf";
-//		String data = "]";
-//		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename), charset)) {
-//			writer.write(data, 0, data.length());
-//		} catch (IOException x) {
-//			System.err.format("IOException: %s%n", x);
-//		}
-//		reader = new BfReader(filename);
-//		memory = new Memory();
-//		argumentInstruction = new ArgumentInstruction(memory, reader, new JumpTable(reader));
-//		instruction = new BackInstruction();
-//		instruction.execute(argumentInstruction);
+
         // TODO: 21/12/16 A refaire
     }
 
@@ -98,10 +91,15 @@ public class BackInstructionTest {
         instruction = new BackInstruction(reader);
         assertEquals("ff0000", instruction.translate());
     }
-    
-	@Test
-	public void testGenerate() throws Exception {
-		assertEquals("}",instruction.generate() );
-	}
+
+    @Test
+    public void testGenerate() throws Exception {
+        assertEquals("}", instruction.generate());
+    }
+
+    @Test
+    public void rewrite(){
+        assertEquals("]", instruction.rewrite());
+    }
 
 }
