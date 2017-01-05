@@ -20,7 +20,7 @@ public class FileNotFoundExceptionTest {
 	 */
 	@Test(expected = net.brainfuck.exception.FileNotFoundException.class)
 	public void noFile() throws java.lang.Exception{
-		new BfReader("notAFile.void");
+		BfReader reader = new BfReader("notAFile.void");
 	}
 
 }

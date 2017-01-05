@@ -14,6 +14,5 @@ abstract public class MoveInstruction extends AbstractInstruction {
         super(language);
     }
 
-    @Override
-	abstract public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
+    abstract public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException, SegmentationFaultException;
 }

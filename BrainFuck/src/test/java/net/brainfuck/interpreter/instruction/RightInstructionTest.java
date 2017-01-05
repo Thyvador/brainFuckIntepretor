@@ -1,14 +1,19 @@
 package net.brainfuck.interpreter.instruction;
 
-import static org.junit.Assert.assertEquals;
-
+import net.brainfuck.common.*;
+import net.brainfuck.common.executable.ExecutionReader;
+import net.brainfuck.exception.Exception;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.moveinstruction.RightInstruction;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.brainfuck.common.Memory;
-import net.brainfuck.exception.Exception;
-import net.brainfuck.exception.MemoryOutOfBoundsException;
-import net.brainfuck.interpreter.instruction.moveinstruction.RightInstruction;
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Alexandre Hiltcher, Francois Melkonian

@@ -1,13 +1,13 @@
 package net.brainfuck.interpreter.processing;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
+import net.brainfuck.exception.SyntaxErrorException;
+import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.moveinstruction.RightInstruction;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.brainfuck.exception.SyntaxErrorException;
-import net.brainfuck.interpreter.Language;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test macros

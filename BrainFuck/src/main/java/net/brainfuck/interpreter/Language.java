@@ -57,11 +57,6 @@ public enum Language {
         this.aliases = aliases;
     }
 
-    /**
-     * Add an instruction to the language
-     * @param interpreter the instruction
-     * @param aliase the name of the instruction
-     */
     public static void addInstruction(AbstractInstruction interpreter, String aliase){
     	instructionMap.put(aliase, interpreter);
     }
@@ -102,6 +97,7 @@ public enum Language {
         ((JumpInstruction) Language.JUMP.getInterpreter()).setReader(executionReader);
         ((BackInstruction) Language.BACK.getInterpreter()).setReader(executionReader);
     }
+
     public static void setJumpTable(Executable executionReader) {
         ((JumpInstruction) Language.JUMP.getInterpreter()).setReader(executionReader);
         ((BackInstruction) Language.BACK.getInterpreter()).setReader(executionReader);
@@ -156,10 +152,6 @@ public enum Language {
         return aliases[2];
     }
 
-    /**
-     * Gets the syntax on C language
-     * @return
-     */
 	public String getCSyntax() {
 		return aliases[3];
 	}

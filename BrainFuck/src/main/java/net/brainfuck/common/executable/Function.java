@@ -1,7 +1,5 @@
 package net.brainfuck.common.executable;
 
-import java.util.List;
-
 import net.brainfuck.common.Memory;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundIn;
@@ -9,6 +7,8 @@ import net.brainfuck.exception.IOException;
 import net.brainfuck.exception.MemoryOutOfBoundsException;
 import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.exception.SegmentationFaultException;
+
+import java.util.List;
 
 /**
  * The Function class represents the functions that the can use.

@@ -1,19 +1,19 @@
 package net.brainfuck.interpreter.instruction;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.List;
-
+import net.brainfuck.common.*;
+import net.brainfuck.common.executable.ExecutionReader;
+import net.brainfuck.exception.Exception;
+import net.brainfuck.interpreter.Language;
+import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.brainfuck.common.Memory;
-import net.brainfuck.exception.Exception;
-import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Alexandre Hiltcher, Francois Melkonian
@@ -21,7 +21,7 @@ import net.brainfuck.interpreter.instruction.intoutinsruction.OutInstruction;
 public class OutInstructionTest {
 	private Memory memory;
 	private OutInstruction instruction;
-	static List<Integer>out = new ArrayList<>();
+	static List<Integer>out = new ArrayList();
 
 	/**
 	 * Sets the up.

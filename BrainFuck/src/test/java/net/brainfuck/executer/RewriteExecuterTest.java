@@ -1,14 +1,21 @@
 package net.brainfuck.executer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.interpreter.instruction.moveinstruction.LeftInstruction;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Check if rewrite instruction works and return it translation

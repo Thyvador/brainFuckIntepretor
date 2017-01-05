@@ -50,7 +50,6 @@ public class ArgumentAnalyzerTest {
 	 *
 	 * @throws Exception the exception
 	 */
-	@SuppressWarnings("unused")
 	@Test
 	public void testArgument2() throws IncorrectArgumentException {
 		String[] args = {"-p", "filename", "-i", "-o"};
@@ -74,7 +73,6 @@ public class ArgumentAnalyzerTest {
 	 *
 	 * @throws Exception the exception
 	 */
-	@SuppressWarnings("unused")
 	@Test(expected = net.brainfuck.exception.IncorrectArgumentException.class)
 	public void badArguments() throws Exception {
 		String[] args = {"-pio", "filename", "pasca", "--rewrite", "--check"};

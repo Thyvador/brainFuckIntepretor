@@ -1,13 +1,11 @@
 package net.brainfuck.interpreter.processing;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Pair;
 import net.brainfuck.common.StringParser;
 import net.brainfuck.common.executable.Executable;
+import net.brainfuck.common.executable.Function;
+import net.brainfuck.common.executable.Procedure;
 import net.brainfuck.common.executable.ProcedureFunctionExecute;
 import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
@@ -20,6 +18,10 @@ import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 import net.brainfuck.io.Reader;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * The Class BfCompiler. Analyze the brainfuck syntax.
  */
@@ -27,6 +29,7 @@ public class BfCompiler {
 
 	private Logger logger;
 	private MacroInterpreter macroInterpreter;
+	private String lastInstruction;
 	private List<AbstractInstruction> programme = new ArrayList<>();
 	private Reader reader;
 	private JumpTable jumpTable;

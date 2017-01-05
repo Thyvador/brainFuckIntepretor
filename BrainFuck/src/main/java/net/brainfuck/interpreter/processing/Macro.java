@@ -109,32 +109,14 @@ public class Macro {
 
 	}
 
-	/**
-	 * Add an list of instruction to be execute by the macro
-	 * @param instructions the list of instruction
-	 */
 	void addInstructions(List<Language> instructions) {
 		currentList.add(new Pair<>(instructions, null));
 	}
 
-	/**
-	 * Write the macro to an list of language corresponding
-	 * to the call of macro without argument
-	 *
-	 * @return the list of language representating the call of the macro without argument
-	 * @throws SyntaxErrorException {@link SyntaxErrorException SyntaxErrorException}
-	 */
 	public List<Language> write() throws SyntaxErrorException {
 		return write(null);
 	}
 
-	/**
-	 * Write the macro to an list of language corresponding
-	 * to the call of the macro with a argument
-	 * @param values
-	 * @return the list of language representating the call of the macro with argument
-	 * @throws SyntaxErrorException {@link  SyntaxErrorException SyntaxErrorException }
-	 */
 	public List<Language> write(List<Integer> values) throws SyntaxErrorException {
 		List<Language> macroExecution = new ArrayList<>();
 		int  nbExecuteInstructions;
@@ -151,11 +133,6 @@ public class Macro {
 		return macroExecution;
 	}
 
-	/**
-	 * Check if the number of values in the list correspondd to the number of argument
-	 * @param values the arguments values
-	 * @throws SyntaxErrorException {@link SyntaxErrorException SyntaxErrorException}
-	 */
 	private void checkArgument(List<Integer> values) throws SyntaxErrorException {
 		//TODO Potential null
 		if ((values == null && nbArgument != 0) || values.size() != nbArgument) {
@@ -164,13 +141,6 @@ public class Macro {
 		}
 	}
 
-	/**
-	 * Write a list of pairs (transform it in a List of language)
-	 *
-	 * @param pairs List of pairs
-	 * @param values List of argument values
-	 * @return List of language
-	 */
 	private List<Language> writePairs(List<Pair<List<Language>, String>> list, List<Integer> values) {
 		int nbExecute;
 		List<Language> instructions = new ArrayList<>();
@@ -184,24 +154,11 @@ public class Macro {
 		return instructions;
 	}
 
-	/**
-	 * Get the value (integer) of the correspond argument String
-	 *
-	 * @param values the list of argument value
-	 * @param argument the argument to get the value
-	 * @return the value of the argument
-	 */
 	private int getArgumentValue(List<Integer> values, String argument) {
 		return values.get(argumentsName.indexOf(argument));
 	}
 
 
-	/**
-	 * Return true if the macro contain the argument in parameter
-	 *
-	 * @param argument an argument
-	 * @return true or false
-	 */
 	boolean containsArgument(String argument) {
 		return argumentsName.contains(argument);
 	}

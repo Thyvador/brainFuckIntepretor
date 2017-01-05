@@ -1,24 +1,28 @@
 package net.brainfuck.interpreter.instruction;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import net.brainfuck.common.Memory;
+import net.brainfuck.common.executable.ExecutionReader;
 import net.brainfuck.exception.Exception;
 import net.brainfuck.exception.FileNotFoundIn;
+import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.intoutinsruction.InInstruction;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Alexandre Hiltcher,François Melkonian
  */
 public class InInstructionTest {
 	private Memory memory;
+	private String filename;
+	private ExecutionReader reader;
 	private InInstruction instruction;
 
 	/**
@@ -29,7 +33,9 @@ public class InInstructionTest {
 	public void setUp() throws Exception {
 
 
+		List<AbstractInstruction> langage = Arrays.asList(Language.RIGHT.getInterpreter(),Language.RIGHT.getInterpreter());
 
+		reader = new ExecutionReader(langage, null);
 		memory = new Memory();
 		InputStreamReader inStream = new InputStreamReader(new InputStream() {
 			int i = 0;

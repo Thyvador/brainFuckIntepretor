@@ -17,6 +17,5 @@ abstract public class InOutInstruction extends AbstractInstruction {
         super(language);
     }
 
-    @Override
-	abstract public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
+    abstract public void execute(Memory memory) throws MemoryOutOfBoundsException, MemoryOverFlowException, IOException, FileNotFoundIn, BracketsParseException;
 }

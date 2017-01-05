@@ -5,7 +5,8 @@ package net.brainfuck.common;
  */
 public final class StringParser {
 
-    private StringParser(){}
+    private StringParser() {
+    }
 
     /**
      * Checks if is numeric.
@@ -41,14 +42,15 @@ public final class StringParser {
     public static String[] getArguments(String str) {
         String[] res = null;
         if (isCorrectParentheses(str) && containsParenthesis(str)) {
-            String tmp = str.substring(str.indexOf("(")+1,str.indexOf(")"));
+            String tmp = str.substring(str.indexOf("(") + 1, str.indexOf(")"));
             if (!tmp.isEmpty()) {
                 res = tmp.split("\\s*,\\s*");
-                for (int i=0; i < res.length; i++) {
+                for (int i = 0; i < res.length; i++) {
                     res[i] = res[i].trim();
                 }
             }
         }
+
         return res;
     }
 
@@ -58,10 +60,10 @@ public final class StringParser {
      * @return
      */
     public static boolean isCorrectParentheses(String str) {
-        long leftParenthesis  = str.chars().filter(num -> num == '(').count();
-        long rightParenthesis= str.chars().filter(num -> num == ')').count();
+        long leftParenthesis = str.chars().filter(num -> num == '(').count();
+        long rightParenthesis = str.chars().filter(num -> num == ')').count();
         return (leftParenthesis == 0 && rightParenthesis == 0) ||
-                (leftParenthesis == rightParenthesis  && str.indexOf('(') < str.indexOf(')'));
+                (leftParenthesis == rightParenthesis && str.indexOf('(') < str.indexOf(')'));
     }
 
     /**
@@ -70,6 +72,6 @@ public final class StringParser {
      * @return true if it contains
      */
     public static boolean containsParenthesis(String str) {
-        return str.contains("(")  && str.contains(")");
+        return str.contains("(") && str.contains(")");
     }
 }
