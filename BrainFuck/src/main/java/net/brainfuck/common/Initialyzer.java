@@ -1,12 +1,31 @@
 package net.brainfuck.common;
 
+import static net.brainfuck.common.ArgumentConstante.PATH;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.List;
+import java.util.Map;
+
 import net.brainfuck.Main;
 import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.ExecutionReader;
-import net.brainfuck.exception.*;
-import net.brainfuck.exception.Exception;
+import net.brainfuck.exception.BracketsParseException;
 import net.brainfuck.exception.FileNotFoundException;
+import net.brainfuck.exception.FileNotFoundIn;
 import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.IncorrectArgumentException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
+import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.Executer;
 import net.brainfuck.interpreter.Interpreter;
@@ -20,12 +39,6 @@ import net.brainfuck.io.BfImageReader;
 import net.brainfuck.io.BfImageWriter;
 import net.brainfuck.io.BfReader;
 import net.brainfuck.io.Reader;
-
-import java.io.*;
-import java.util.List;
-import java.util.Map;
-
-import static net.brainfuck.common.ArgumentConstante.PATH;
 
 /**
  * @author Francois Melkonian
@@ -81,8 +94,9 @@ public class Initialyzer {
         } catch (BracketsParseException e) {
             System.err.println(e.getMessage());
             System.exit(4);
-        } catch (Exception e) {
-            System.err.println("An unknown error occured.");
+        } catch (RuntimeException e) {
+            //System.err.println("An unknown error occured.");
+        	e.printStackTrace();
             System.exit(6);
         }
         System.exit(0);

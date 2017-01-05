@@ -7,9 +7,9 @@ package net.brainfuck.exception;
  */
 public class IOException extends Exception {
 
-    private static final long serialVersionUID = 5444607441404760156L;
+	private static final long serialVersionUID = 5444607441404760156L;
 
-    /**
+	/**
      * Constructs a IOException with a default message.
      */
     public IOException() {

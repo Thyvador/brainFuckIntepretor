@@ -1,5 +1,9 @@
 package net.brainfuck.common.executable;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
 import net.brainfuck.common.Logger;
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
@@ -13,10 +17,6 @@ import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
-
 /**
  * The Executable class represents all the element in a program that can be executed.
  *
@@ -28,10 +28,10 @@ public abstract class Executable extends AbstractInstruction {
 
     protected final String name;
     protected List<AbstractInstruction> instructions;
-    protected int index = -1;
-    protected Stack<Integer> marks;
-    protected JumpTable jumpTable;
-    protected Executable parent;
+    private int index = -1;
+    private Stack<Integer> marks;
+    private JumpTable jumpTable;
+    private Executable parent;
     protected Logger logger = Logger.getInstance();
     protected List<String> argument;
 
@@ -59,11 +59,6 @@ public abstract class Executable extends AbstractInstruction {
         this.instructions = instructions;
     }
 
-    /**
-     * Set the jump table and the list of instructions.
-     *
-     * @param pair a pair containing the list of instruction and the jump table.
-     */
     public void addPair(Pair<List<AbstractInstruction>, JumpTable> pair) {
         this.jumpTable = pair.getSecond();
         this.instructions = pair.getFirst();
@@ -96,7 +91,7 @@ public abstract class Executable extends AbstractInstruction {
      *
      * @return the string containing the list of arguments.
      */
-    public String getArgumentString() {
+    String getArgumentString() {
         StringBuilder res = new StringBuilder().append("(int *ptr");
         for (String arg : argument) {
             res.append(", int ").append(arg);

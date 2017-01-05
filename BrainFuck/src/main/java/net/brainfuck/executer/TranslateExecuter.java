@@ -14,24 +14,24 @@ import net.brainfuck.io.BfImageWriter;
  * @author davidLANG
  */
 class TranslateExecuter implements ContextExecuter {
-    private BfImageWriter writer;
+	private BfImageWriter writer;
 
-    public TranslateExecuter(BfImageWriter writer) {
-        this.writer = writer;
-    }
+	public TranslateExecuter(BfImageWriter writer) {
+		this.writer = writer;
+	}
 
-    /**
-     * Execute the AbstractInstruction command according to the "--translate" context.
-     *
-     * @param i      the AbstractCommand to execute
-     * @param memory the argument executer
-     * @throws MemoryOverFlowException    throw by memory
-     * @throws IOException                throw by reader
-     * @throws MemoryOutOfBoundsException throw by memory
-     */
-    @Override
-    public void execute(InstructionInterface i, Memory memory, Executable reader) throws MemoryOverFlowException,
-            IOException, MemoryOutOfBoundsException {
-        writer.write(i.translate());
-    }
+	/**
+	 * Execute the AbstractInstruction command according to the "--translate" context.
+	 *
+	 * @param i      the AbstractCommand to execute
+	 * @param memory the argument executer
+	 * @throws MemoryOverFlowException    throw by memory
+	 * @throws IOException                throw by reader
+	 * @throws MemoryOutOfBoundsException throw by memory
+	 */
+	@Override
+	public void execute(InstructionInterface i, Memory memory, Executable reader) throws MemoryOverFlowException,
+			IOException, MemoryOutOfBoundsException {
+		writer.write(i.translate());
+	}
 }

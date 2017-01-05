@@ -1,29 +1,35 @@
 package net.brainfuck.interpreter.processing;
 
-import net.brainfuck.common.ArgumentAnalyzer;
+import static net.brainfuck.interpreter.Language.INCR;
+import static net.brainfuck.interpreter.Language.RIGHT;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 import net.brainfuck.common.Memory;
 import net.brainfuck.common.Pair;
 import net.brainfuck.common.executable.Executable;
 import net.brainfuck.common.executable.Function;
 import net.brainfuck.common.executable.Procedure;
-import net.brainfuck.exception.*;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.IncorrectArgumentException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.SyntaxErrorException;
 import net.brainfuck.executer.Context;
 import net.brainfuck.executer.ContextExecuter;
 import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
-import net.brainfuck.interpreter.processing.BfPrecompiler;
 import net.brainfuck.io.BfReader;
 import net.brainfuck.io.Reader;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.*;
-
-import static net.brainfuck.interpreter.Language.INCR;
-import static net.brainfuck.interpreter.Language.RIGHT;
 
 
 /**

@@ -8,9 +8,9 @@ package net.brainfuck.exception;
  */
 public class SyntaxErrorException extends Exception {
 
-    private static final long serialVersionUID = 3281162005406034048L;
+	private static final long serialVersionUID = 3281162005406034048L;
 
-    /**
+	/**
      * Constructs a SyntaxErrorException with a default message.
      */
     public SyntaxErrorException() {

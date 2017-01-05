@@ -1,11 +1,16 @@
 package net.brainfuck.common.executable;
 
-import net.brainfuck.common.Memory;
-import net.brainfuck.exception.*;
-import net.brainfuck.interpreter.instruction.AbstractInstruction;
-
 import java.util.List;
 
+import net.brainfuck.common.Memory;
+import net.brainfuck.exception.BracketsParseException;
+import net.brainfuck.exception.FileNotFoundIn;
+import net.brainfuck.exception.IOException;
+import net.brainfuck.exception.MemoryOutOfBoundsException;
+import net.brainfuck.exception.MemoryOverFlowException;
+import net.brainfuck.exception.SegmentationFaultException;
+import net.brainfuck.exception.SyntaxErrorException;
+import net.brainfuck.interpreter.instruction.AbstractInstruction;
 /**
  * Class wich execute a procedure or a function with his argument.
  *

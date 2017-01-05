@@ -17,6 +17,7 @@ class MacroParser {
     }
 
 
+
     private String getMacroNameInArgument(String str) {
         if (StringParser.containsParenthesis(str) && StringParser.isCorrectParentheses(str)) {
             return str.substring(0, str.indexOf("(")).trim();
@@ -29,7 +30,7 @@ class MacroParser {
 
         if (StringParser.containsParenthesis(str) &&
                 !StringParser.containsSpace(str.substring(0, str.indexOf("(")))) {
-            name = str.substring(0, str.indexOf('('));
+            name =  str.substring(0, str.indexOf('('));
         } else {
             name = str.substring(0, str.indexOf(" "));
         }
@@ -40,7 +41,7 @@ class MacroParser {
         return name;
     }
 
-    private String[] getArguments(String instruction) {
+    private  String[] getArguments(String instruction) {
         if (StringParser.containsParenthesis(instruction) &&
                 instruction.indexOf(' ') > instruction.indexOf('(')) {
             return StringParser.getArguments(instruction);
@@ -49,7 +50,7 @@ class MacroParser {
     }
 
     private void addArguments(Macro macro, String[] arguments) throws SyntaxErrorException {
-        for (String argument : arguments) {
+        for (String argument :  arguments) {
             argument = argument.trim();
             if (StringParser.containsSpace(argument)) {
                 throw new SyntaxErrorException("Argument macro countain space(s) '" + argument + "'");
@@ -102,7 +103,7 @@ class MacroParser {
                 i = addMacroInstructions(definitions, macro, length, i);
             } else if (macros.containsKey(this.getMacroNameInArgument(definitions[i]))) {
                 i = addMacroArgumentInstruction(definitions, macro, length, i);
-            } else {
+            }else {
                 i = addInstruction(definitions, macro, length, i);
             }
         }
@@ -110,12 +111,13 @@ class MacroParser {
     }
 
 
+
     private String getDefinition(String instruction) throws SyntaxErrorException {
         String definition;
 
         if (StringParser.containsParenthesis(instruction) &&
                 !StringParser.containsSpace(instruction.substring(0, instruction.indexOf("(")))) {
-            definition = instruction.substring(instruction.indexOf(')') + 1);
+                definition =  instruction.substring(instruction.indexOf(')') + 1);
         } else {
             definition = instruction.substring(instruction.indexOf(" "));
         }
@@ -129,8 +131,8 @@ class MacroParser {
     private int addInstruction(String[] definitions, Macro macro, int length, int i) throws SyntaxErrorException {
         List<Language> instructions = this.getListOfInstruction(definitions[i]);
 
-        if (i + 1 < length && macro.containsArgument(definitions[i + 1])) {
-            macro.addInstructionsArgument(instructions, definitions[i + 1]);
+        if (i + 1 < length && macro.containsArgument(definitions[i+1])) {
+            macro.addInstructionsArgument(instructions, definitions[i+1]);
             i += 1;
         } else {
             macro.addInstructions(instructions);
@@ -140,11 +142,10 @@ class MacroParser {
 
     /**
      * Add macro Instructions to a macro
-     *
      * @param definitions the definitions of current macro
-     * @param macro       the macro to update
-     * @param length      the length of definition
-     * @param i           the current index loop
+     * @param macro the macro to update
+     * @param length the length of definition
+     * @param i the current index loop
      * @return the new index loop
      */
     private int addMacroArgumentInstruction(String[] definitions, Macro macro, int length, int i) throws SyntaxErrorException {
@@ -160,7 +161,7 @@ class MacroParser {
             i += 1;
         } else if (i + 1 < length && macro.containsArgument(definitions[i + 1])) {
             macro.addMacroInstruction(macros.get(name), Arrays.asList(arguments), definitions[i + 1]);
-            i = +1;
+            i =+ 1;
         } else {
             macro.addMacroInstruction(macros.get(name), Arrays.asList(arguments), 1);
         }
@@ -172,11 +173,10 @@ class MacroParser {
 
     /**
      * Add macro Instructions to a macro
-     *
      * @param definitions the definitions of current macro
-     * @param macro       the macro to update
-     * @param length      the length of definition
-     * @param i           the current index loop
+     * @param macro the macro to update
+     * @param length the length of definition
+     * @param i the current index loop
      * @return the new index loop
      */
     private int addMacroInstructions(String[] definitions, Macro macro, int length, int i) throws SyntaxErrorException {
@@ -219,7 +219,7 @@ class MacroParser {
      * Get list of instruction of a macro.
      *
      * @param definitions definition of a macro "++++"
-     * @param nb          the number of time the macro is call
+     * @param nb the number of time the macro is call
      * @return List of instruction : N * List of intruction of a macro
      */
     private List<Language> getMacroInstructions(String definitions, int nb) throws SyntaxErrorException {
