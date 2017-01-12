@@ -253,6 +253,7 @@ public abstract class Executable extends AbstractInstruction {
     @Override
     public String generate() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("const int *start_scope = ptr;\n");
         for (String arg : argument)
             stringBuilder.append(String.format("(*(ptr++)) = %s;", arg));
         stringBuilder.append("\n");

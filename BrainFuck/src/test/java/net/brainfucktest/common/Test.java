@@ -13,7 +13,7 @@ public class Test {
      * @param args the arguments
      */
     public static void main(String[] args) {
-        String[] args2 = {"-p", "BrainFuck/src/test/resources/assets/brainfucktest/common/recur.bf", "--trace"
+        String[] args2 = {"-p", "BrainFuck/src/test/resources/assets/brainfucktest/common/recur.bf", "--generate"
                 };
         Main.main(args2); // On lance sur un fichier au hasard
     }

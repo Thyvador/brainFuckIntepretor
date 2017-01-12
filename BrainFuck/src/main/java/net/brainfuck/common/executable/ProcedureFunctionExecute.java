@@ -120,7 +120,7 @@ public class ProcedureFunctionExecute extends AbstractInstruction {
 		res.append(compositeInstruction.name).append("(");
 		res.append("ptr");
 		for (Integer v : values) {
-			res.append(String.format(", memory[%d]", v));
+			res.append(String.format(", *(start_scope+%d)", v));
 		}
 	    return res.append(");").toString();
 	}
