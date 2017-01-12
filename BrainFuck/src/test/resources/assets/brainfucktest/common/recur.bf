@@ -3,16 +3,18 @@
 !procedure decompte(nb)
 
     <
-    OUT
+    #OUT
     [
-#        MULTI_INCR 48
+      MULTI_INCR 48
         OUT
- #       MULTI_DECR 48
+      MULTI_DECR 48
         -
-        OUT
+       # OUT
         decompte(0)
+        >
     ]
 !end
 
-MULTI_INCR 50
+MULTI_INCR 3
 decompte(0)
+++

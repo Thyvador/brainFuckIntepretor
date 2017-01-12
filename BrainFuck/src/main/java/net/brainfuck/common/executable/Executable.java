@@ -202,7 +202,15 @@ public abstract class Executable extends AbstractInstruction {
         Language.setExecutable(this);
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {
-            instruction.execute(memory);
+            if (instruction.equals(this)) {
+                int save = index;
+                index = -1;
+                instruction.execute(memory);
+                index = save;
+            } else {
+                instruction.execute(memory);
+            }
+
         }
         Language.setExecutable(parent);
     }
@@ -270,7 +278,15 @@ public abstract class Executable extends AbstractInstruction {
         Language.setExecutable(this);
         AbstractInstruction instruction;
         while ((instruction = getNext()) != null) {
-            instruction.trace(memory, reader);
+            if (instruction.equals(this)) {
+                int save = index;
+                index = -1;
+                instruction.trace(memory, this);
+                index = save;
+            } else {
+                instruction.trace(memory, this);
+            }
+
         }
         Language.setExecutable(parent);
     }

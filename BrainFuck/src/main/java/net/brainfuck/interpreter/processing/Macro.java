@@ -167,7 +167,7 @@ public class Macro {
 	/**
 	 * Write a list of pairs (transform it in a List of language)
 	 *
-	 * @param pairs List of pairs
+	 * @param list List of pairs
 	 * @param values List of argument values
 	 * @return List of language
 	 */
