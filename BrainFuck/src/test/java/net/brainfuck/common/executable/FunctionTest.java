@@ -37,7 +37,8 @@ public class FunctionTest {
 		Function function = new Function("test",  null, new ArrayList<String>());
 		Pair<List<AbstractInstruction>, JumpTable> pair = new Pair<>(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		function.addPair(pair);
-		assertEquals("int test (int *ptr) {\n\n"
+		assertEquals("int test (int *ptr) {\n"
+				+ "const int *start_scope = ptr;\n\n"
 				+ "(*ptr)++;(*ptr)++;\n"
 				+ "return *ptr;\n"
 				+ "}\n\n", function.generate());
@@ -49,6 +50,7 @@ public class FunctionTest {
 		Pair<List<AbstractInstruction>, JumpTable> pair = new Pair<>(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		function.addPair(pair);
 		assertEquals("int test (int *ptr, int arg1, int arg2) {\n"
+				+ "const int *start_scope = ptr;\n"
 				+ "(*(ptr++)) = arg1;(*(ptr++)) = arg2;\n"
 				+ "(*ptr)++;(*ptr)++;\n"
 				+ "return *ptr;\n"
