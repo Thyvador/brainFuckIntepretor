@@ -3,8 +3,7 @@ package net.brainfuck.exception;
 /**
  * Signal when bracket has no corresponding bracket.
  *
- * @author Jeremy JUNAC
- * @author Alexandre HILTCHER
+ * @author FoobarTeam
  */
 public class BracketsParseException extends Exception {
 

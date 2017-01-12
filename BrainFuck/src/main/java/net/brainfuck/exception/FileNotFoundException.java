@@ -4,7 +4,7 @@ package net.brainfuck.exception;
 /**
  * Signal when a file to read is not found.
  *
- * @author Alexandre Hiltcher
+ * @author FoobarTeam
  */
 public class FileNotFoundException extends IOException {
 

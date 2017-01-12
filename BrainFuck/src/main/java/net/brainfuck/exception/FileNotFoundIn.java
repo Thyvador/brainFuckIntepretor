@@ -4,8 +4,7 @@ package net.brainfuck.exception;
 /**
  * Signal when a file to read is not found is detected in the file.
  *
- * @author Alexandre Hiltcher
- * @author Francois Melkonian
+ * @author FoobarTeam
  */
 public class FileNotFoundIn extends Exception {
 

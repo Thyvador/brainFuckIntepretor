@@ -3,7 +3,7 @@ package net.brainfuck.exception;
 /**
  * Signal when an error input or output is detected in the file.
  *
- * @author Alexandre Hiltcher
+ * @author FoobarTeam
  */
 public class IOException extends Exception {
 

@@ -3,7 +3,7 @@ package net.brainfuck.exception;
 /**
  * Signal when a argument pass through the JVM is not correct.
  *
- * @author Alexandre HILTCHER
+ * @author FoobarTeam
  */
 public class IncorrectArgumentException extends Exception {
 
