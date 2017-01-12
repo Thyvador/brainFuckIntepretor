@@ -13,7 +13,7 @@ import net.brainfuck.interpreter.instruction.InstructionInterface;
 /**
  * Execute the AbstractInstruction command according to the "--trace" context.
  *
- * @author Alexandre
+ * @author FoBar Team
  */
 public class TraceExecuter implements ContextExecuter {
 

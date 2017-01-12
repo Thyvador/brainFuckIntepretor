@@ -13,6 +13,7 @@ import net.brainfuck.interpreter.Language;
 
 /**
  * Abstraction of a instruction
+ * @author FoBar Team
  */
 public abstract class AbstractInstruction implements InstructionInterface {
 

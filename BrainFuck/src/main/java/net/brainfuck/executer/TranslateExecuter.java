@@ -11,7 +11,7 @@ import net.brainfuck.io.BfImageWriter;
 /**
  * Execute the AbstractInstruction command according to the "--translate" context.
  *
- * @author davidLANG
+ * @author FoBar Team
  */
 class TranslateExecuter implements ContextExecuter {
 	private BfImageWriter writer;

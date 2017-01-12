@@ -12,6 +12,9 @@ import net.brainfuck.exception.MemoryOverFlowException;
 import net.brainfuck.exception.SegmentationFaultException;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
 
+/**
+ * @author FoBar Team
+ */
 public class GenerateExecuter implements ContextExecuter {
 
 	private Writer writer;

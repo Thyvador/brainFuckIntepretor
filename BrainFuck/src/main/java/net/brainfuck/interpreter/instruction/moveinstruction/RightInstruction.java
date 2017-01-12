@@ -7,7 +7,7 @@ import net.brainfuck.interpreter.Language;
 /**
  * Representation of RIGHT instruction ">" "RIGHT".
  *
- * @author davidLANG
+ * @author FoBar Team
  */
 public class RightInstruction extends MoveInstruction {
 	

@@ -9,7 +9,7 @@ import net.brainfuck.io.BfImageWriter;
 /**
  * The Enum Context.
  *
- * @author davidLANG
+ * @author FoBar Team
  */
 public enum Context {
 	

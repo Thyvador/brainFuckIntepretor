@@ -21,7 +21,7 @@ import java.util.Map;
  * Represent the language with his syntax and his corresponding InstructionInterface (wich implements the corresponding method to the
  * syntax).
  *
- * @author davidLANG
+ * @author FoBar Team
  */
 public enum Language {
     // Declaration de l'enum

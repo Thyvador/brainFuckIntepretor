@@ -6,8 +6,7 @@ import net.brainfuck.exception.IOException;
  *
  * Reader interface used to read bf instruction in "short" , "long" and picture format.
  *
- * @author Francois MELKONIAN
- * @author Alexandre HILTCHER
+ * @author FoBar Team
  */
 public interface Reader {
 

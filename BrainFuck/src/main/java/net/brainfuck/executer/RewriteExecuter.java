@@ -15,7 +15,7 @@ import net.brainfuck.interpreter.instruction.InstructionInterface;
 /**
  * Execute the AbstractInstruction command according to the "--rewrite" context.
  *
- * @author davidLANG
+ * @author FoBar Team
  */
 class RewriteExecuter implements ContextExecuter {
 

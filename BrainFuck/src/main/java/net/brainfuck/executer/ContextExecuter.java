@@ -13,7 +13,7 @@ import net.brainfuck.interpreter.instruction.InstructionInterface;
 /**
  * The Interface ContextExecuter.
  *
- * @author davidLANG
+ * @author FoBar Team
  */
 public interface ContextExecuter {
 

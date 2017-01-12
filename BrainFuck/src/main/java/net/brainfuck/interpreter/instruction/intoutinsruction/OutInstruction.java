@@ -12,7 +12,7 @@ import java.io.OutputStreamWriter;
 /**
  * Representation of OUT instruction "." "OUT".
  *
- * @author François Melkonian
+ * @author FoBar Team
  */
 public class OutInstruction extends InOutInstruction {
 	OutputStreamWriter writer;

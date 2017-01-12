@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author davidLANG
+ * @author FoBar Team
  */
 class MacroInterpreter {
     private Map<String, Macro> macros = new HashMap<>();
