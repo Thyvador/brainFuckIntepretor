@@ -14,7 +14,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
 /**
  * Class wich execute a procedure or a function with his argument.
  *
- * @author davidLANG
+ * @author FoobarTeam
  */
 public class ProcedureFunctionExecute extends AbstractInstruction {
     private List<Integer> values;

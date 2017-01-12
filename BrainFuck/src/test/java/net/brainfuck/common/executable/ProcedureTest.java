@@ -36,7 +36,8 @@ public class ProcedureTest {
 		Procedure procedure = new Procedure("test",  null, new ArrayList<String>());
 		Pair<List<AbstractInstruction>, JumpTable> pair = new Pair<>(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		procedure.addPair(pair);
-		assertEquals("void test (int *ptr) {\n\n\n"
+		assertEquals("void test (int *ptr) {\n\n"
+				+ "const int *start_scope = ptr;\n\n"
 				+ "(*ptr)++;(*ptr)++;\n"
 				+ "}\n\n", procedure.generate());
 	}
@@ -47,6 +48,7 @@ public class ProcedureTest {
 		Pair<List<AbstractInstruction>, JumpTable> pair = new Pair<>(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		procedure.addPair(pair);
 		assertEquals("void test (int *ptr, int arg1, int arg2) {\n\n"
+				+ "const int *start_scope = ptr;\n"
 				+ "(*(ptr++)) = arg1;(*(ptr++)) = arg2;\n"
 				+ "(*ptr)++;(*ptr)++;\n"
 				+ "}\n\n", procedure.generate());

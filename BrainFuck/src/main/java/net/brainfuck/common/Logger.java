@@ -8,7 +8,7 @@ import java.io.FileWriter;
 /**
  * Count and group metrics about the execution
  *
- * @author Francois Melkonian,Alexandre Hiltcher
+ * @author FoobarTeam
  */
 public class Logger {
 

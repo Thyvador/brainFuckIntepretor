@@ -20,7 +20,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
 /**
  * The Executable class represents all the element in a program that can be executed.
  *
- * @author Alexandre HILTCHER
+ * @author FoobarTeam
  */
 public abstract class Executable extends AbstractInstruction {
 
@@ -267,7 +267,7 @@ public abstract class Executable extends AbstractInstruction {
      *
      * @param memory the memory
      * @throws IOException                throw by inReader
-     * @throws MemoryOutOfBoundsException throw by memory
+     * @throws MemryOutOfBoundsException throw by memory
      * @throws BracketsParseException     throw by interpreter
      * @throws MemoryOverFlowException    throw by memory
      * @throws FileNotFoundIn             throw by writer

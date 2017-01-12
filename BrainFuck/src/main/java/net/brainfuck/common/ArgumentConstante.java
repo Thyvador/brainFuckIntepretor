@@ -4,7 +4,7 @@ package net.brainfuck.common;
 /**
  * Useful constant for argumentAnalyzer.
  *
- * @author davidLANG
+ * @author FoobarTeam
  */
 class ArgumentConstante {
 	static final String PATH_SYNTAX = "-p";

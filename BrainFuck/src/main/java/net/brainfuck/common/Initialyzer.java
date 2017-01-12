@@ -41,7 +41,7 @@ import net.brainfuck.io.BfReader;
 import net.brainfuck.io.Reader;
 
 /**
- * @author Francois Melkonian
+ * @author FoobarTeam
  */
 public class Initialyzer {
     private Memory memory;

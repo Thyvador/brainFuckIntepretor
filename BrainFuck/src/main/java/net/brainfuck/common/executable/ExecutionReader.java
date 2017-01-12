@@ -9,7 +9,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
 /**
  * The ExecutionReader represents the main program to be executed.
  *
- * @author ALexandre HILTCHER
+ * @author FoobarTeam
  */
 public class ExecutionReader extends Executable {
 

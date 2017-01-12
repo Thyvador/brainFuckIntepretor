@@ -22,7 +22,8 @@ public class ExecutionReaderTest {
 	public void testGenerate() {
 		main = new ExecutionReader(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		assertEquals("int main () {\n"
-				+ "int *ptr = memory;\n\n"
+				+ "int *ptr = memory;\n"
+				+ "const int *start_scope=ptr;\n\n"
 				+ "(*ptr)++;(*ptr)++;\n"
 				+ "return 0;\n"
 				+ "}\n\n", main.generate());

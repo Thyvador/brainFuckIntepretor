@@ -12,7 +12,7 @@ import net.brainfuck.exception.SegmentationFaultException;
 /**
  * The <code>Memory</code> class represents the memory of the BrainFuck interpreter.
  *
- * @author Jeremy Junac
+ * @author FoobarTeam
  */
 public class Memory {
 
