@@ -51,8 +51,7 @@ public class ProcedureFunctionExecuteTest {
 		Pair<List<AbstractInstruction>, JumpTable> pair = new Pair<>( Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		procedure.addPair(pair);
 		pfe = new ProcedureFunctionExecute(Arrays.asList(new Integer[]{1, 2}), procedure);
-		System.out.println(pfe.generate());
-		assertEquals("ptr++;test(ptr, memory[1], memory[2]);", pfe.generate());
+		assertEquals("ptr++;test(ptr, *(start_scope+1), *(start_scope+2));", pfe.generate());
 	}
 	
 	@Test
@@ -71,8 +70,7 @@ public class ProcedureFunctionExecuteTest {
 		Pair<List<AbstractInstruction>, JumpTable> pair = new Pair<>(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		function.addPair(pair);
 		pfe = new ProcedureFunctionExecute(Arrays.asList(new Integer[]{1, 2}), function);
-		System.out.println(pfe.generate());
-		assertEquals("ptr++;(*ptr) = test(ptr, memory[1], memory[2]);", pfe.generate());
+		assertEquals("ptr++;(*ptr) = test(ptr, *(start_scope+1), *(start_scope+2));", pfe.generate());
 	}
 
 	@Ignore
