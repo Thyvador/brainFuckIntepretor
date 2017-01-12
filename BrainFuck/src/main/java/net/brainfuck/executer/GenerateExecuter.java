@@ -13,7 +13,7 @@ import net.brainfuck.exception.SegmentationFaultException;
 import net.brainfuck.interpreter.instruction.InstructionInterface;
 
 /**
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class GenerateExecuter implements ContextExecuter {
 

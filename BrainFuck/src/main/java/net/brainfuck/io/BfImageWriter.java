@@ -18,7 +18,7 @@ import net.brainfuck.exception.IOException;
  * 
  * The BfImageWriter class represents argumentAnalyzer class that write argumentAnalyzer brainfuck program as argumentAnalyzer BMP image.
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class BfImageWriter implements Writer {
 	

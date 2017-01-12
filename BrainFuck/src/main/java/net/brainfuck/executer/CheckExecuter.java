@@ -14,7 +14,7 @@ import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction
 /**
  * Execute the AbstractInstruction command according to the "--trace" context.
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 class CheckExecuter implements ContextExecuter {
 

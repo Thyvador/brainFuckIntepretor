@@ -22,7 +22,7 @@ import net.brainfuck.io.Reader;
 
 /**
  * The Class BfCompiler. Analyze the brainfuck syntax.
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class BfCompiler {
 

@@ -9,7 +9,7 @@ import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
- * @author FoBar Team
+ * @author FooBar Team
  */
 public abstract class JumpBackInstruction extends AbstractInstruction {
     protected Executable reader;

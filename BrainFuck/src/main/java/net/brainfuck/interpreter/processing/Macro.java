@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * The representation of a Macro
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class Macro {
 

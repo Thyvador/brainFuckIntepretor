@@ -10,7 +10,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
 /**
  * Representation of Decrement instruction "-" "DECR".
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class DecrementInstruction extends AbstractInstruction {
 

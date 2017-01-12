@@ -13,7 +13,7 @@ import net.brainfuck.interpreter.instruction.InstructionInterface;
 /**
  * Execute the AbstractInstruction command according to a context without "--rewrite" and "--check".
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 class UncheckExecuter implements ContextExecuter {
 

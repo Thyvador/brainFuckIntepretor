@@ -17,7 +17,7 @@ import net.brainfuck.exception.SegmentationFaultException;
 /**
  *  The interface of instruction.
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 public interface InstructionInterface {
     

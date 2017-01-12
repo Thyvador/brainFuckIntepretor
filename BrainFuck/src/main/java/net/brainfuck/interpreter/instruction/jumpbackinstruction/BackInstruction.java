@@ -9,7 +9,7 @@ import net.brainfuck.interpreter.Language;
 
 /**
  * Representation of Back instruction "]" "BACK".
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class BackInstruction extends JumpBackInstruction {
 

@@ -8,7 +8,7 @@ import net.brainfuck.interpreter.Language;
 /**
  * Representation of LEFT instruction "<" "LEFT".
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class LeftInstruction extends MoveInstruction {
 

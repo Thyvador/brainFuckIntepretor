@@ -6,7 +6,7 @@ import net.brainfuck.interpreter.Language;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
- * @author FoBar Team
+ * @author FooBar Team
  */
 abstract public class MoveInstruction extends AbstractInstruction {
 

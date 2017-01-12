@@ -7,7 +7,7 @@ import net.brainfuck.exception.IOException;
 /**
  * The Writer interface represents a writer.
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 public interface Writer {
 

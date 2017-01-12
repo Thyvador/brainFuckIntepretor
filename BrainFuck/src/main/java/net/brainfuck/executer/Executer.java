@@ -21,7 +21,7 @@ import net.brainfuck.io.BfImageWriter;
 /**
  * The Class Executer.
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class Executer {
 	private List<ContextExecuter> contextExecuters = new ArrayList<>();

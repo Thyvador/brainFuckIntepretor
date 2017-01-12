@@ -9,7 +9,7 @@ import net.brainfuck.interpreter.Language;
 /**
  *  Representation of Back instruction "+" "INCR".
  *
- * @author FoBar Team
+ * @author FooBar Team
  */
 public class IncrementInstruction extends DecrementIncrementInstruction {
 
