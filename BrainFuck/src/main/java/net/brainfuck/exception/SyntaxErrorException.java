@@ -4,7 +4,7 @@ package net.brainfuck.exception;
 /**
  * Signal when an error of syntax is detected in the file.
  *
- * @author Alexandre Hiltcher
+ * @author FoobarTeam
  */
 public class SyntaxErrorException extends Exception {
 

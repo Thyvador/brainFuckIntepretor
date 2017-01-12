@@ -5,7 +5,7 @@ package net.brainfuck.exception;
  * Signal when a bound exceeds error is detected in the file.
  * This exception will be thrown by <code>Memory</code>.
  *
- * @author Alexandre Hiltcher
+ * @author FoobarTeam
  */
 public class MemoryOutOfBoundsException extends Exception {
 

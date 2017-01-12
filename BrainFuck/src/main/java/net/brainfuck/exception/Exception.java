@@ -3,7 +3,7 @@ package net.brainfuck.exception;
 /**
  * Signal when an error occurs.
  *
- * @author Alexandre Hiltcher
+ * @author FoobarTeam
  */
 public class Exception extends java.lang.Exception{
 

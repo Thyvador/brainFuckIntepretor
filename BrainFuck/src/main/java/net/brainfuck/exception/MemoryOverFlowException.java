@@ -3,7 +3,7 @@ package net.brainfuck.exception;
 /**
  * Signal when an memory overflow is detected in the file.
  *
- * @author Alexandre Hiltcher
+ * @author FoobarTeam
  */
 public class MemoryOverFlowException extends Exception {
 
