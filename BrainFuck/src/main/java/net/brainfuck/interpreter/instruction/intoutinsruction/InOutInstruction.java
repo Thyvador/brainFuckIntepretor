@@ -8,7 +8,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
 /**
  * The class InOutInstruction is the mother class of the InInstruction and OutInstruction.
  *
- * @author Alexandre HILTCHER
+ * @author FoBar Team
  */
 abstract public class InOutInstruction extends AbstractInstruction {
 

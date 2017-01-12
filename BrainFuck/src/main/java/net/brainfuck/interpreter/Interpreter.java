@@ -17,7 +17,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
  * The interpretor of brainfuck.
  * Execute the assiocate instruction to the syntax
  *
- * @author davidLANG
+ * @author FoBar Team
  */
 
 public class Interpreter {

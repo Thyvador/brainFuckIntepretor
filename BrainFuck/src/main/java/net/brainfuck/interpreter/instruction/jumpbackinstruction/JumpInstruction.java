@@ -11,6 +11,7 @@ import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
  * Representation of JUMP instruction "[" "JUMP".
+ * @author FoBar Team
  */
 public class JumpInstruction extends JumpBackInstruction {
 	/**

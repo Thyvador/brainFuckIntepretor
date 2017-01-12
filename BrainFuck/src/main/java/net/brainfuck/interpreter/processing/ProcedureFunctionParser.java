@@ -15,7 +15,7 @@ import net.brainfuck.interpreter.JumpTable;
 import net.brainfuck.interpreter.instruction.AbstractInstruction;
 
 /**
- * @author davidLANG
+ * @author FoBar Team
  */
 public class ProcedureFunctionParser {
     List<ContextExecuter> contextExecuters;

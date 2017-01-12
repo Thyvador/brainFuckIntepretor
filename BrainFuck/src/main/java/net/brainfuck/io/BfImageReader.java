@@ -14,7 +14,7 @@ import java.util.Stack;
  * The <code>BfImageReader</code> class is used to read brainfuck files encoded as BitMap files.
  * This class implements the <code>Reader</code> Interface.
  *
- * @author Alexandre Hiltcher
+ * @author FoBar Team
  */
 public class BfImageReader implements Reader {
 	/**

@@ -21,7 +21,7 @@ import net.brainfuck.io.BfReader;
 import net.brainfuck.io.Reader;
 
 /**
- * @author davidLANG
+ * @author FoBar Team
  */
 public class BfPrecompiler {
 

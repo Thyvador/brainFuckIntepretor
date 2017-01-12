@@ -13,7 +13,7 @@ import net.brainfuck.exception.IOException;
 /**
  * Read file with long and short syntax blended.
  *
- * @author : Francois Melkonian
+ * @author FoBar Team
  */
 public class BfReader implements Reader {
 

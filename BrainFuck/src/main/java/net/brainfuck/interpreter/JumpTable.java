@@ -11,6 +11,7 @@ import java.util.Stack;
 
 /**
  * The Class JumpTable.
+ * @author FoBar Team
  */
 public class JumpTable {
 

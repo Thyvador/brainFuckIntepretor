@@ -4,6 +4,7 @@ import net.brainfuck.common.Initialyzer;
 
 /**
  * The Class Main.
+ * @author FoBar Team
  */
 public class Main {
 

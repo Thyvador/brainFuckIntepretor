@@ -7,7 +7,7 @@ import net.brainfuck.interpreter.Language;
 import java.util.*;
 
 /**
- * @author davidLANG
+ * @author FoBar Team
  */
 class MacroParser {
     private Map<String, Macro> macros = new HashMap<>();
