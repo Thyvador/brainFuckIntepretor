@@ -18,10 +18,10 @@
  
  ## Syntaxe d'un code Brainf*ck
   ### Syntaxe d'une macro
-   ```!macro(arg1, arg2) groupe_instrucktion arg groupe_instrucktion arg  ...7
+   ```!macro(arg1, arg2) groupe_instrucktion arg groupe_instrucktion arg  ...
    ```
-   <p>Une macro est définie sur 1 ligne, chaque d\'instruction peut être suivie par un argument. Le groupe d\'instruction sera répeter autant de fois que l\'argument l\'indique, s\'il n\'y a pas d'argument le groupe d\'instruction sera exécuté une seule fois.</p>
-   <p>Un groupe d\'instruction peut être une instruction longue, plusiers instruction (ne contenant pas d\'espace) ou une macrod définie précédement.</p>
+   Une macro est définie sur 1 ligne, chaque d\'instruction peut être suivie par un argument. Le groupe d\'instruction sera répeter autant de fois que l\'argument l\'indique, s\'il n\'y a pas d'argument le groupe d\'instruction sera exécuté une seule fois.
+   Un groupe d\'instruction peut être une instruction longue, plusiers instruction (ne contenant pas d\'espace) ou une macrod définie précédement.
   
   ### Syntaxe d'une procedure
    ```!procedure(arg1, arg2){
@@ -29,7 +29,7 @@
       instructions
    !end
    ```
-   <p>Une procedure peut être définie avec ou sans arguments. </p>
+   Une procedure peut être définie avec ou sans arguments.
  
   ### Syntaxe d'une fonction
    ```!fonction(arg1, arg2){
@@ -37,4 +37,4 @@
       instructions
    !end
    ```
-   <p>Une fonction peut être définie avec ou sans arguments. </p>
+   Une fonction peut être définie avec ou sans arguments.
