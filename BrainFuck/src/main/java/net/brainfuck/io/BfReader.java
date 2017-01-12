@@ -189,10 +189,15 @@ public class BfReader implements Reader {
 	}
 
 
+	/**
+	 * Return the next procedure
+	 *
+	 * @return List<String> The next procedure
+	 * @throws IOException if reader throw an exception
+	 */
 	public List<String> getNextProcedure() throws IOException {
 		try {
 			List<String> instructions = new ArrayList<>();
-			//StringBuilder stringBuilder = new StringBuilder();
 			int pos = (int)reader.getFilePointer();
 			int nextVal = reader.read();
 			nextVal = ignore(nextVal);
@@ -213,6 +218,13 @@ public class BfReader implements Reader {
 		}
 	}
 
+	/**
+	 * Return true if it's the end of a procedure or a function
+	 *
+	 * @param nextVal the current character
+	 * @return true if it's the end of a procedure or a function
+	 * @throws java.io.IOException throw by reader
+	 */
 	private boolean isEnd(String nextVal) throws java.io.IOException {
 		if (Character.toString((char)PREPROCESSING).equals(nextVal)) {
 			int pos = (int) reader.getFilePointer();
@@ -225,6 +237,13 @@ public class BfReader implements Reader {
 
 	}
 
+	/**
+	 * Return true if it's a procedure or a function
+	 *
+	 * @param nextVal the current charecter
+	 * @return true if it's a procedure or a function
+	 * @throws java.io.IOException throw by reader
+	 */
 	private boolean isProcedureFunction(int nextVal) throws java.io.IOException {
 		if (nextVal == PREPROCESSING) {
 			int pos = (int) reader.getFilePointer();
@@ -258,6 +277,14 @@ public class BfReader implements Reader {
 		}
 	}
 
+	/**
+	 * Return true if it's a macro definition
+	 *
+	 * @param nextVal the current character
+	 * @return true if it's a macro definition
+	 * @throws java.io.IOException throw by reader
+	 * @throws IOException throw by reader
+	 */
 	private boolean isMacro(int nextVal) throws java.io.IOException, IOException {
 		if (nextVal == PREPROCESSING) {
 			int pos = (int) reader.getFilePointer();

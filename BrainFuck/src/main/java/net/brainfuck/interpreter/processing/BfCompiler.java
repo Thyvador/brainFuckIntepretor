@@ -146,6 +146,14 @@ public class BfCompiler {
 		}
 	}
 
+	/**
+	 * Execute {@link BfCompiler:writeInstructionAndMacro writeInstructionAndMacro} for all instruction in the list
+	 *
+	 * @param instructions
+	 * @throws SyntaxErrorException
+	 * @throws IOException
+	 * @throws BracketsParseException
+	 */
 	public void writeAll(List<String> instructions) throws SyntaxErrorException, IOException, BracketsParseException {
 
 		for (String instruction : instructions) {
@@ -175,7 +183,14 @@ public class BfCompiler {
 		}
 	}
 
-	private void writeProcedureFunction(String instruction) throws SyntaxErrorException, IOException, BracketsParseException {
+	/**
+	 * Write all instruction in the procedure or the function represent by the String.
+	 *
+	 * @param instruction the String which represent the procedure or the function
+	 * @throws SyntaxErrorException if the current instruction contains an error of syntax
+	 * @throws BracketsParseException if the current instruction is not well parenthesis
+	 */
+	private void writeProcedureFunction(String instruction) throws SyntaxErrorException, BracketsParseException {
 		String[] arguments = StringParser.getArguments(instruction);
 		String name = instruction.substring(0, instruction.indexOf('('));
 
@@ -203,16 +218,22 @@ public class BfCompiler {
 	 * Write.
 	 *
 	 * @param currentInstruction the current instruction
-	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws BracketsParseException the brackets parse exception
 	 */
-	private void write(AbstractInstruction currentInstruction) throws IOException, BracketsParseException {
+	private void write(AbstractInstruction currentInstruction) throws  BracketsParseException {
 		programme.add(currentInstruction);
 		jumpTable.addInstruction(currentInstruction, pos++);
 	}
 
 
-	private void writeMacro(String str) throws IOException, BracketsParseException, SyntaxErrorException {
+	/**
+	 * Write all instruction in the macro represented by str
+	 *
+	 * @param str the string representation of the macro
+	 * @throws BracketsParseException if the string is not well parenthesis
+	 * @throws SyntaxErrorException if the macro contain error of syntaxe
+	 */
+	private void writeMacro(String str) throws  BracketsParseException, SyntaxErrorException {
 		List<Language> instructions = macroInterpreter.writeMacro(str);
 
 		for (Language instruction : instructions) {
@@ -220,7 +241,14 @@ public class BfCompiler {
 		}
 	}
 
-	private void writeInstruction(String str) throws IOException, BracketsParseException, SyntaxErrorException {
+	/**
+	 * Write the current instruction
+	 *
+	 * @param str the string representation of the instruction
+	 * @throws BracketsParseException if the jumptable throw an exception
+	 * @throws SyntaxErrorException if the instruction is in fact an function or an procedure not parenthesis
+	 */
+	private void writeInstruction(String str) throws  BracketsParseException, SyntaxErrorException {
 		AbstractInstruction currentInstruction = Language.instructionMap.get(str);
 		if (currentInstruction instanceof Executable)
 			throw new SyntaxErrorException("not parentheses to function " + str);

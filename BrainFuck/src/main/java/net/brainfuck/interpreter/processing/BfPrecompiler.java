@@ -55,6 +55,18 @@ public class BfPrecompiler {
         return macroParser.getMacros();
     }
 
+    /**
+     * Analyze a Procedure or Function and compile it and add it to the language
+     *
+     * @param contextExecuters List of the context of the program
+     * @param macros List of macro of the program
+     * @param memory memory of the program
+     * @throws IOException if the reader throw an exception
+     * @throws SyntaxErrorException if an error of syntax is encounter while the analyze
+     * @throws java.io.IOException  if the reader throw an exception
+     * @throws BracketsParseException if an error of bracket is encounter while the analyze
+     * @throws MemoryOutOfBoundsException throw by memory
+     */
     public void analyzeProcedure(List<ContextExecuter> contextExecuters, Map<String, Macro> macros, Memory memory) throws IOException, SyntaxErrorException, java.io.IOException, BracketsParseException, MemoryOutOfBoundsException {
         List<String> instructions;
         String definition;
@@ -66,8 +78,6 @@ public class BfPrecompiler {
         while ((instructions = ((BfReader) reader).getNextProcedure()) != null)  {
             definition = instructions.remove(0);
 
-            // TODO ALEX
-            // ICI ICI ICI
             procedureName = procedureParser.parseName(definition);
             procedureArgument = procedureParser.parseArgument(definition);
             Executable executable;
