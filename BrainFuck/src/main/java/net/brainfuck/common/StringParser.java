@@ -1,7 +1,7 @@
 package net.brainfuck.common;
 
 /**
- * @author davidLANG
+ * @author FoobarTeam
  */
 public final class StringParser {
 

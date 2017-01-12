@@ -13,7 +13,7 @@ import net.brainfuck.exception.SegmentationFaultException;
 /**
  * The Function class represents the functions that the can use.
  *
- * @author Alexandre HILTCHER
+ * @author FoobarTeam
  */
 public class Procedure extends Executable {
     private Memory memory;

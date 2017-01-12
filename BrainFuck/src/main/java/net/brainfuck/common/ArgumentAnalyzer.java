@@ -13,8 +13,7 @@ import static net.brainfuck.common.ArgumentConstante.*;
 /**
  * Analyze the JVM arguments and stock the analyze result.
  *
- * @author davidLANG
- * @author Alexandre HILTCHER
+ * @author FoobarTeam
  */
 public class ArgumentAnalyzer {
     private String[] arguments = new String[3];
