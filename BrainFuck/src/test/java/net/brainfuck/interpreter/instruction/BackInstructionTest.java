@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
  *
  * @author Alexandre, Francois Melkonian
  */
-// TODO: La création des exécutables a cassé les test sur Back
 public class BackInstructionTest {
     private Memory memory;
     private ExecutionReader reader;

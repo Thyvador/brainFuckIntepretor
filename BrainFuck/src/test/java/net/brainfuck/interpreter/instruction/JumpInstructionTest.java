@@ -16,7 +16,6 @@ import net.brainfuck.interpreter.instruction.jumpbackinstruction.JumpInstruction
 
 import java.util.Arrays;
 import java.util.List;
-// TODO : mettre à jour les tests sur les JUMP
 /**
  * @author Alexandre Hiltcher,François Melkonian
  */
