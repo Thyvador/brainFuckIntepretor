@@ -25,7 +25,7 @@ Un groupe d'instruction peut être une instruction longue, plusiers instruction 
   
 ### Syntaxe d'une procedure
 ```
-!procedure(arg1, arg2){
+!procedure test(arg1, arg2){
  instructions
  instructions
 !end
@@ -34,9 +34,21 @@ Une procedure peut être définie avec ou sans arguments.
  
 ### Syntaxe d'une fonction
 ```
-!fonction(arg1, arg2){
+!function test(arg1, arg2){
  instructions
  instructions
 !end
 ```
 Une fonction peut être définie avec ou sans arguments.
+
+#### Exemple de procedure/fonction
+
+```
+!procedure testProcedure(){
+ +++
+!end
+
+!function testFunction(arg1, arg2){
+ <-->+++
+!end
+```
