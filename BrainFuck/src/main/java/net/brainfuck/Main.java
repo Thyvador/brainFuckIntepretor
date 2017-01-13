@@ -27,7 +27,7 @@ public class Main {
 	 * Print the usage.
 	 */
 	public static void printUsage() {
-		System.out.println("Usage : bfck.sh -p FILE [--rewrite] [--translate] [--check] [-o output_file] [-i input_file]");
+		System.out.println("Usage : bfck.sh -p FILE [--rewrite] [--translate] [--check] [--generate] [--trace] [-o output_file] [-i input_file]");
 	}
 
 	/**
