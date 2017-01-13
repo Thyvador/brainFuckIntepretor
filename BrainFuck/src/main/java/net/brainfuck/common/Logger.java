@@ -199,7 +199,6 @@ public class Logger {
      * Write.
      *
      * @param message the message
-     * @throws IOException 
      */
     public void write(String message) {
         try {
@@ -208,12 +207,8 @@ public class Logger {
                             "Error: \n" + message);
             writer.flush();
         } catch (java.io.IOException e) {
-            try {
-				throw new IOException();
-			} catch (IOException e1) {
-				System.err.println(e1.getMessage());
-			}
-            
+            e.printStackTrace();
+            System.exit(5);
         }
     }
 

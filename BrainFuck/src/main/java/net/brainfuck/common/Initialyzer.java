@@ -84,27 +84,22 @@ public class Initialyzer {
         } catch (IOException | SyntaxErrorException | IncorrectArgumentException | SegmentationFaultException e) {
             // Exit code not set
             System.err.println(e.getMessage());
-            logger.write(e.getMessage());
             System.exit(5);
         } catch (MemoryOutOfBoundsException e) {
             System.err.println(e.getMessage());
-            logger.write(e.getMessage());
             System.exit(1);
         } catch (MemoryOverFlowException e) {
             System.err.println(e.getMessage());
-            logger.write(e.getMessage());
             System.exit(2);
         } catch (FileNotFoundIn e) {
             System.err.println(e.getMessage());
-            logger.write(e.getMessage());
             System.exit(3);
         } catch (BracketsParseException e) {
             System.err.println(e.getMessage());
-            logger.write(e.getMessage());
             System.exit(4);
         } catch (RuntimeException e) {
-            System.err.println("An unknown error occured.");
-            logger.write("An unknown error occured.");
+            //System.err.println("An unknown error occured.");
+        	e.printStackTrace();
             System.exit(6);
         }
         System.exit(0);
