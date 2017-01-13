@@ -22,18 +22,6 @@ public class ProcedureFunctionExecuteTest {
 	@Before
 	public void setUp() throws Exception {
 	}
-
-	@Ignore
-	@Test
-	public void testRewrite() {
-		fail("Not yet implemented");
-	}
-
-	@Ignore
-	@Test
-	public void testTranslate() {
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	public void testGenerateProcedureWithoutArgs() throws Exception {
@@ -71,18 +59,6 @@ public class ProcedureFunctionExecuteTest {
 		function.addPair(pair);
 		pfe = new ProcedureFunctionExecute(Arrays.asList(new Integer[]{1, 2}), function);
 		assertEquals("ptr++;(*ptr) = test(ptr, *(start_scope+1), *(start_scope+2));", pfe.generate());
-	}
-
-	@Ignore
-	@Test
-	public void testTrace() {
-		fail("Not yet implemented");
-	}
-
-	@Ignore
-	@Test
-	public void testExecute() {
-		fail("Not yet implemented");
 	}
 
 }

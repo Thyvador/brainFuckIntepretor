@@ -72,7 +72,6 @@ public class BackInstructionTest {
     /**
      * Parenthizing error.
      */
-    @Ignore
     @Test(expected = BracketsParseException.class)
     public void parenthizingError() throws Exception {
         Language.setInstructions(null, null);

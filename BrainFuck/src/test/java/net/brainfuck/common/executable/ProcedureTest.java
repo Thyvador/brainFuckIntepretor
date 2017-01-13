@@ -55,12 +55,6 @@ public class ProcedureTest {
 	}
 
 
-	@Ignore
-	@Test
-	public void testTrace() {
-		fail("Not yet implemented");
-	}
-
 	@Test
 	public void testExecute() throws MemoryOutOfBoundsException, BracketsParseException, SegmentationFaultException, MemoryOverFlowException, FileNotFoundIn, IOException {
 		Memory memory = new Memory();

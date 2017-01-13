@@ -159,7 +159,6 @@ public class TestMemory {
 	}
 	
 
-	@Ignore
 	@Test
 	public void testSetArgumentsCoupleProcedure() throws Exception {
 		memory.right();
