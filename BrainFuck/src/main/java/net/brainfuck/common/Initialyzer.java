@@ -44,6 +44,9 @@ import net.brainfuck.io.Reader;
  * @author FoobarTeam
  */
 public class Initialyzer {
+	
+	private final Logger logger = Logger.getInstance();
+	
     private Memory memory;
     private Reader reader;
     private Interpreter interpreter;
@@ -63,7 +66,7 @@ public class Initialyzer {
             argumentAnalyzer = new ArgumentAnalyzer(args);
             init(argumentAnalyzer);
 
-            Logger.getInstance().startExecTime();
+            logger.startExecTime();
             interpreter.interprate();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             try {
@@ -81,22 +84,27 @@ public class Initialyzer {
         } catch (IOException | SyntaxErrorException | IncorrectArgumentException | SegmentationFaultException e) {
             // Exit code not set
             System.err.println(e.getMessage());
+            logger.write(e.getMessage());
             System.exit(5);
         } catch (MemoryOutOfBoundsException e) {
             System.err.println(e.getMessage());
+            logger.write(e.getMessage());
             System.exit(1);
         } catch (MemoryOverFlowException e) {
             System.err.println(e.getMessage());
+            logger.write(e.getMessage());
             System.exit(2);
         } catch (FileNotFoundIn e) {
             System.err.println(e.getMessage());
+            logger.write(e.getMessage());
             System.exit(3);
         } catch (BracketsParseException e) {
             System.err.println(e.getMessage());
+            logger.write(e.getMessage());
             System.exit(4);
         } catch (RuntimeException e) {
-            //System.err.println("An unknown error occured.");
-        	e.printStackTrace();
+            System.err.println("An unknown error occured.");
+            logger.write("An unknown error occured.");
             System.exit(6);
         }
         System.exit(0);
