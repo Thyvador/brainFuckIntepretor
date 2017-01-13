@@ -157,7 +157,7 @@ public class Macro {
 	 * @throws SyntaxErrorException {@link SyntaxErrorException SyntaxErrorException}
 	 */
 	private void checkArgument(List<Integer> values) throws SyntaxErrorException {
-		//Potential null
+		// Potential null on values
 		if ((values == null && nbArgument != 0) || values.size() != nbArgument) {
 			String error = (values == null || values.size() > nbArgument) ? "too much argument" : "not enought argument";
 			throw new SyntaxErrorException(error);

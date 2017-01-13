@@ -68,7 +68,8 @@ public class BfCompiler {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @throws FileNotFoundException the file not found exception
 	 */
-	public BfCompiler(Reader reader) throws IOException {
+	public BfCompiler(Reader reader) throws IOException, FileNotFoundException {
+		// TODO ce constructeur n'est plus utilisé mais il y a toujours une test l'utilisant
 		this.reader = reader;
 		jumpTable = new JumpTable(true);
 	}
