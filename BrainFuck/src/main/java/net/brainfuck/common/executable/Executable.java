@@ -37,7 +37,9 @@ public abstract class Executable extends AbstractInstruction {
 
 
     /**
-     * Constructs a default Executable.
+     * Construct an Executable
+     * @param name the name of the executable
+     * @param argument arguments name of the executable
      */
     public Executable(String name, List<String> argument) {
         super();
@@ -50,8 +52,8 @@ public abstract class Executable extends AbstractInstruction {
     /**
      * Constructs a default Executable.
      *
-     * @param instructions
-     * @param jumpTable
+     * @param instructions List of instructions to execute
+     * @param jumpTable the jumptable associated with the Executable
      */
     public Executable(String name, List<AbstractInstruction> instructions, JumpTable jumpTable, List<String> argument) {
         this(name, argument);
@@ -59,6 +61,10 @@ public abstract class Executable extends AbstractInstruction {
         this.instructions = instructions;
     }
 
+    /**
+     * Use a pair to take instruction
+     * @param pair contains the instruction list and the jumptable
+     */
     public void addPair(Pair<List<AbstractInstruction>, JumpTable> pair) {
         this.jumpTable = pair.getSecond();
         this.instructions = pair.getFirst();
