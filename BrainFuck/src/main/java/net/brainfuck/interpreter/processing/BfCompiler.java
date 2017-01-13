@@ -124,7 +124,7 @@ public class BfCompiler {
 
 
 	private boolean isInstruction(String instruction) {
-		return Language.instructionMap.containsKey(instruction);
+		return Language.getInstructionMap().containsKey(instruction);
 	}
 
 	private boolean isMacro(String str) {
@@ -196,7 +196,7 @@ public class BfCompiler {
 		String name = instruction.substring(0, instruction.indexOf('('));
 
 
-		if (!Language.instructionMap.containsKey(name)) {
+		if (!Language.getInstructionMap().containsKey(name)) {
 			throw new SyntaxErrorException("Unknow function or procedure : " + name);
 		}
 		List<Integer> values = new ArrayList<>();
@@ -210,7 +210,7 @@ public class BfCompiler {
 
 		ProcedureFunctionExecute procedureFunctionExecute = new ProcedureFunctionExecute(
 				values,
-				(Executable)Language.instructionMap.get(name)
+				(Executable)Language.getInstructionMap().get(name)
 		);
 		write(procedureFunctionExecute);
 	}
@@ -250,7 +250,7 @@ public class BfCompiler {
 	 * @throws SyntaxErrorException if the instruction is in fact an function or an procedure not parenthesis
 	 */
 	private void writeInstruction(String str) throws  BracketsParseException, SyntaxErrorException {
-		AbstractInstruction currentInstruction = Language.instructionMap.get(str);
+		AbstractInstruction currentInstruction = Language.getInstructionMap().get(str);
 		if (currentInstruction instanceof Executable)
 			throw new SyntaxErrorException("not parentheses to function " + str);
 		write(currentInstruction);

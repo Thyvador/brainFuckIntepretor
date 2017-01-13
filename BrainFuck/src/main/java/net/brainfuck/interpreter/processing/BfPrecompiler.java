@@ -47,7 +47,7 @@ public class BfPrecompiler {
         String instruction;
 
         while ((instruction = ((BfReader) reader).getNextMacro()) != null) {
-            if (Language.instructionMap.get(instruction) == null && instruction.charAt(0) == BfReader.PREPROCESSING) {
+            if (Language.getInstructionMap().get(instruction) == null && instruction.charAt(0) == BfReader.PREPROCESSING) {
                 macroParser.saveMacro(instruction);
                 logger.incrInstruction();
             }

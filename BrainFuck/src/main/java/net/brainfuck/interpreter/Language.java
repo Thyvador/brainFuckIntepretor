@@ -41,12 +41,26 @@ public enum Language {
     /**
      * Map of instructions, procedure and functions
      */
-    public static final Map<String, AbstractInstruction> instructionMap = new HashMap<>();
+    private static Map<String, AbstractInstruction> instructionMap = new HashMap<>();
 
     private AbstractInstruction interpreter;
     private String[] aliases;
 
     /**
+	 * @return the instructionMap
+	 */
+	public static Map<String, AbstractInstruction> getInstructionMap() {
+		return instructionMap;
+	}
+
+	/**
+	 * @param instructionMap the instructionMap to set
+	 */
+	public static void setInstructionMap(Map<String, AbstractInstruction> instructionMap) {
+		Language.instructionMap = instructionMap;
+	}
+
+	/**
      * Instantiates a new language.
      *
      * @param interpreter InstructionInterface corresponding to syntax

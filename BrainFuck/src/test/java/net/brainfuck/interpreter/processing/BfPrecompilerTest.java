@@ -62,9 +62,9 @@ public class BfPrecompilerTest {
         this.function.addPair(pair);
         this.procedure.addPair(pair);
 
-        Language.instructionMap = new HashMap<>();
+        Language.setInstructionMap(new HashMap<>());
         Language.setInstructions(null, null);
-        instructionMap = new HashMap<>(Language.instructionMap);
+        instructionMap = new HashMap<>(Language.getInstructionMap());
     }
 
     @Test
@@ -74,11 +74,11 @@ public class BfPrecompilerTest {
         contextExecuters.add(Context.contextMap.get(Context.UNCHECK.getSyntax()));
         this.bfPrecompiler = new BfPrecompiler(reader);
 
-        Assert.assertEquals(Language.instructionMap, instructionMap);
+        Assert.assertEquals(Language.getInstructionMap(), instructionMap);
         bfPrecompiler.analyzeProcedure(contextExecuters, new HashMap<>(), memory);
-        Assert.assertNotEquals(Language.instructionMap, instructionMap);
+        Assert.assertNotEquals(Language.getInstructionMap(), instructionMap);
         instructionMap.put("test", function);
-        Assert.assertEquals(Language.instructionMap, instructionMap);
+        Assert.assertEquals(Language.getInstructionMap(), instructionMap);
     }
 
     @Test
@@ -89,11 +89,11 @@ public class BfPrecompilerTest {
         this.bfPrecompiler = new BfPrecompiler(reader);
 
 
-        Assert.assertEquals(Language.instructionMap, instructionMap);
+        Assert.assertEquals(Language.getInstructionMap(), instructionMap);
         bfPrecompiler.analyzeProcedure(contextExecuters, new HashMap<>(), memory);
-        Assert.assertNotEquals(Language.instructionMap, instructionMap);
+        Assert.assertNotEquals(Language.getInstructionMap(), instructionMap);
         instructionMap.put("test", procedure);
-        Assert.assertEquals(Language.instructionMap, instructionMap);
+        Assert.assertEquals(Language.getInstructionMap(), instructionMap);
     }
 
     @Test
@@ -104,12 +104,12 @@ public class BfPrecompilerTest {
         this.bfPrecompiler = new BfPrecompiler(reader);
 
 
-        Assert.assertEquals(Language.instructionMap, instructionMap);
+        Assert.assertEquals(Language.getInstructionMap(), instructionMap);
         bfPrecompiler.analyzeProcedure(contextExecuters, new HashMap<>(), memory);
-        Assert.assertNotEquals(Language.instructionMap, instructionMap);
+        Assert.assertNotEquals(Language.getInstructionMap(), instructionMap);
         instructionMap.put("test", procedure);
         instructionMap.put("test2", function);
-        Assert.assertEquals(Language.instructionMap, instructionMap);
+        Assert.assertEquals(Language.getInstructionMap(), instructionMap);
     }
 
     @Test
@@ -120,9 +120,9 @@ public class BfPrecompilerTest {
         this.bfPrecompiler = new BfPrecompiler(reader);
 
 
-        Assert.assertEquals(Language.instructionMap, instructionMap);
+        Assert.assertEquals(Language.getInstructionMap(), instructionMap);
         bfPrecompiler.analyzeProcedure(contextExecuters, new HashMap<>(), memory);
-        Assert.assertEquals(Language.instructionMap, instructionMap);
+        Assert.assertEquals(Language.getInstructionMap(), instructionMap);
 
     }
 
