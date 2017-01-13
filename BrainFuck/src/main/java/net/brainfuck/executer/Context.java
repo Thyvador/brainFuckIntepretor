@@ -21,7 +21,7 @@ public enum Context {
     TRACE("--trace"),
     GENERATE("--generate");
 
-    public static Map<String, ContextExecuter> contextMap = new HashMap<>();
+    public static final Map<String, ContextExecuter> contextMap = new HashMap<>();
 
 
 

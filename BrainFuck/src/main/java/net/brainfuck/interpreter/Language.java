@@ -37,11 +37,11 @@ public enum Language {
     /**
      * Map of language
      */
-    public static Map<String, Language> languageMap = new HashMap<>();
+    public static final Map<String, Language> languageMap = new HashMap<>();
     /**
      * Map of instructions, procedure and functions
      */
-    public static Map<String, AbstractInstruction> instructionMap = new HashMap<>();
+    public static final Map<String, AbstractInstruction> instructionMap = new HashMap<>();
 
     private AbstractInstruction interpreter;
     private String[] aliases;
