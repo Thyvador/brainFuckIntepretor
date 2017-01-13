@@ -6,7 +6,7 @@ package net.brainfuck.common;
  *
  * @author FoobarTeam
  */
-class ArgumentConstante {
+final class ArgumentConstante {
 	static final String PATH_SYNTAX = "-p";
 	static final String IN_SYNTAX = "-i";
 	static final String OUT_SYNTAX = "-o";
