@@ -29,7 +29,6 @@ public class ProcedureFunctionExecuteTest {
 		Pair<List<AbstractInstruction>, JumpTable> pair = new Pair<>(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		procedure.addPair(pair);
 		pfe = new ProcedureFunctionExecute(new ArrayList<Integer>(), procedure);
-		System.out.println(pfe.generate());
 		assertEquals("ptr++;test(ptr);", pfe.generate());
 	}
 
@@ -48,7 +47,6 @@ public class ProcedureFunctionExecuteTest {
 		Pair<List<AbstractInstruction>, JumpTable> pair = new Pair<>(Arrays.asList(new AbstractInstruction[] {new IncrementInstruction(), new IncrementInstruction()}), null);
 		function.addPair(pair);
 		pfe = new ProcedureFunctionExecute(new ArrayList<Integer>(), function);
-		System.out.println(pfe.generate());
 		assertEquals("ptr++;(*ptr) = test(ptr);", pfe.generate());
 	}
 
