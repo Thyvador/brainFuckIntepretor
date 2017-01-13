@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
  *
  * @author Alexandre, Francois Melkonian
  */
-// TODO: La création des exécutables a cassé les test sur Back
 public class BackInstructionTest {
     private Memory memory;
     private ExecutionReader reader;
@@ -76,8 +75,18 @@ public class BackInstructionTest {
     @Ignore
     @Test(expected = BracketsParseException.class)
     public void parenthizingError() throws Exception {
-
-        // TODO: 21/12/16 A refaire
+        Language.setInstructions(null, null);
+        List<AbstractInstruction> langage = Arrays.asList(Language.IN.getInterpreter(), Language.BACK.getInterpreter());
+        JumpTable jumpTable = new JumpTable(false);
+        jumpTable.addInstruction(langage.get(1), 0);
+        reader = new ExecutionReader(langage, jumpTable);
+        Language.setExecutable(reader);
+        memory = new Memory();
+        instruction = new BackInstruction(reader);
+        memory.set(2);
+        reader.getNext();
+        AbstractInstruction instruction = reader.getNext();
+        instruction.execute(memory);
     }
 
     /**
